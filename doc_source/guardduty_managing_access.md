@@ -115,9 +115,9 @@ AWS addresses many common use cases by providing standalone IAM policies that ar
 
 The following AWS managed policies, which you can attach to users in your account, are specific to GuardDuty:
 
-+ **AmazonGuardDutyFullAccess ** – Provides access to all of GuardDuty functionality, except the ability to upload and manage trusted IP lists and threat lists\. 
++ **AmazonGuardDutyFullAccess ** – provides access to all of GuardDuty functionality\. However, when it comes to working with trusted IP lists and threat lists in GuardDuty, this managed policy provides identities with only limited access\. More specifically, an identity with the **AmazonGuardDutyFullAccess** managed policy attached can only rename and deactivate uploaded trusted IP lists and threat lists\.
 
-  To provide various identities with the ability to upload and manage trusted IP lists and threat lists, make sure that the following actions are present in the permissions policy attached to an IAM user, group, or role:
+   To grant various identities full access to working with trusted IP lists and threat lists \(in addition to renaming and deactivating, this includes uploading, activating, deleting, and updating the location of the lists\), make sure that the following actions are present in the permissions policy attached to an IAM user, group, or role: 
 
   ```
           {
@@ -327,6 +327,8 @@ The following examples show how to create policies using some of the preceding o
   ```
 
 + This policy allows a user to run the `guardduty:UpdateIPSet` operation, using the detector ID of 1234567 and the IPSet ID of 000000 in the us\-east\-1 region:
+**Note**  
+Make sure that the user has the permissions required to access trusted IP lists and threat lists in GuardDuty\. For more information, see [Permissions Required to Upload Trusted IP Lists and Threat Lists](guardduty_upload_lists.md#upload-permissions)\.
 
   ```
   {
@@ -344,6 +346,8 @@ The following examples show how to create policies using some of the preceding o
   ```
 
 + This policy allows a user to run the `guardduty:UpdateIPSet` operation, using any detector ID and the IPSet ID of 000000 in the us\-east\-1 region:
+**Note**  
+Make sure that the user has the permissions required to access trusted IP lists and threat lists in GuardDuty\. For more information, see [Permissions Required to Upload Trusted IP Lists and Threat Lists](guardduty_upload_lists.md#upload-permissions)\.
 
   ```
   {
@@ -361,6 +365,8 @@ The following examples show how to create policies using some of the preceding o
   ```
 
 + This policy allows a user to run the `guardduty:UpdateIPSet` operation, using the detector ID of 1234567 and any IPSet ID in the us\-east\-1 region:
+**Note**  
+Make sure that the user has the permissions required to access trusted IP lists and threat lists in GuardDuty\. For more information, see [Permissions Required to Upload Trusted IP Lists and Threat Lists](guardduty_upload_lists.md#upload-permissions)\.
 
   ```
   {

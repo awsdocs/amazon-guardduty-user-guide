@@ -2,7 +2,8 @@
 
 
 + [Finding Type Format](#type-format)
-+ [Complete List of GuardDuty Finding Types](#actual-types)
++ [Complete List of GuardDuty Active Finding Types](#actual-types)
++ [Complete List of GuardDuty Retired Finding Types](#retired-types)
 
 ## Finding Type Format<a name="type-format"></a>
 
@@ -42,7 +43,7 @@ This is what each part of the format represents:
 
 + **Artifact** \- describes a specific resource that is owned by a tool that is used in the attack\. For example, **DNS** in the finding type *CryptoCurrency:EC2/BitcoinTool\.B\!DNS* indicates that an EC2 instance is communicating with a known Bitcoin\-related domain\.
 
-## Complete List of GuardDuty Finding Types<a name="actual-types"></a>
+## Complete List of GuardDuty Active Finding Types<a name="actual-types"></a>
 
 The following are various finding types that GuardDuty generates: 
 
@@ -53,7 +54,6 @@ The following are various finding types that GuardDuty generates:
 + [Behavior:IAMUser/InstanceLaunchUnusual](#behavior1)
 + [Behavior:EC2/NetworkPortUnusual](#behavior3)
 + [Behavior:EC2/TrafficVolumeUnusual](#behavior4)
-+ [CryptoCurrency:EC2/BitcoinTool\.A](#crypto1)
 + [CryptoCurrency:EC2/BitcoinTool\.B\!DNS](#crypto3)
 + [PenTest:IAMUser/KaliLinux](#pentest1)
 + [Recon:EC2/PortProbeUnprotectedPort](#recon6)
@@ -69,7 +69,9 @@ The following are various finding types that GuardDuty generates:
 + [Trojan:EC2/DriveBySourceTraffic\!DNS](#trojan7)
 + [Trojan:EC2/DropPoint\!DNS](#trojan8)
 + [Trojan:EC2/DGADomainRequest\.B](#trojan9)
++ [Trojan:EC2/DGADomainRequest\.C\!DNS](#trojan95)
 + [Trojan:EC2/DNSDataExfiltration](#trojan10)
++ [Trojan:EC2/PhishingDomainRequest\!DNS](#trojan11)
 + [UnauthorizedAccess:IAMUser/TorIPCaller](#unauthorized1)
 + [UnauthorizedAccess:IAMUser/MaliciousIPCaller\.Custom](#unauthorized2)
 + [UnauthorizedAccess:IAMUser/ConsoleLoginSuccess\.B](#unauthorized4)
@@ -101,9 +103,9 @@ This finding informs you that an EC2 instance in your AWS environment is communi
 
 #### Finding description<a name="backdoor7_description"></a>
 
-**EC2 instance is communicating outbound with a domain that is hosted by a known command and control server\.**
+**EC2 instance is querying a domain name that is hosted by a known command and control server\.**
 
-This finding informs you that there is an EC2 instance in your AWS environment that is communicating outbound with a domain associated with a known command and control \(C&C\) server\. Your EC2 instance might be compromised\. C&C servers are computers that issue commands to members of a botnet\. A botnet is a collection of internet\-connected devices \(which might include PCs, servers, mobile devices, and internet of things devices\) that are infected and controlled by a common type of malware\. Botnets are often used to distribute malware and gather misappropriated information, such as credit card numbers\. Depending on the purpose and structure of the botnet, the C&C server might also issue commands to begin a distributed denial of service \(DDoS\) attack\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+This finding informs you that there is an EC2 instance in your AWS environment that is querying a domain name associated with a known command and control \(C&C\) server\. Your EC2 instance might be compromised\. C&C servers are computers that issue commands to members of a botnet\. A botnet is a collection of internet\-connected devices \(which might include PCs, servers, mobile devices, and internet of things devices\) that are infected and controlled by a common type of malware\. Botnets are often used to distribute malware and gather misappropriated information, such as credit card numbers\. Depending on the purpose and structure of the botnet, the C&C server might also issue commands to begin a distributed denial of service \(DDoS\) attack\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ### Behavior:IAMUser/InstanceLaunchUnusual<a name="behavior1"></a>
 
@@ -129,21 +131,13 @@ This finding informs you that an EC2 instance in your AWS environment is behavin
 
 This finding informs you that an EC2 instance in your AWS environment is behaving in a way that deviates from the established baseline\. This EC2 instance has no prior history of sending this much traffic to this remote host\. Your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
-### CryptoCurrency:EC2/BitcoinTool\.A<a name="crypto1"></a>
-
-#### Finding description<a name="crypto1_description"></a>
-
-**EC2 instance is communicating with Bitcoin mining pools\.**
-
-This finding informs you that an EC2 instance in your AWS environment is communicating with Bitcoin mining pools\. In the field of cryptocurrency mining, a mining pool is the pooling of resources by miners who share their processing power over a network to split the reward according to the amount of work they contributed to solving a block\. Unless you use this EC2 instance for Bitcoin mining, your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
-
 ### CryptoCurrency:EC2/BitcoinTool\.B\!DNS<a name="crypto3"></a>
 
 #### Finding description<a name="crypto3_description"></a>
 
-**EC2 instance is communicating with a known Bitcoin\-related domain\.**
+**EC2 instance is querying a domain name that is associated with Bitcoin\-related activity\.**
 
-This finding informs you that an EC2 instance in your AWS environment is communicating with a known Bitcoin\-related domain\. Bitcoin is a worldwide cryptocurrency and digital payment system\. Besides being created as a reward for Bitcoin mining, bitcoin can be exchanged for other currencies, products, and services\. Unless you use this EC2 instance to mine or manage cryptocurrency, your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+This finding informs you that an EC2 instance in your AWS environment is querying a domain name that is associated with Bitcoin\-related activity\. Bitcoin is a worldwide cryptocurrency and digital payment system\. Besides being created as a reward for Bitcoin mining, bitcoin can be exchanged for other currencies, products, and services\. Unless you use this EC2 instance to mine or manage cryptocurrency, your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ### PenTest:IAMUser/KaliLinux<a name="pentest1"></a>
 
@@ -159,7 +153,7 @@ This finding informs you that a machine running Kali Linux is making API calls u
 
 **EC2 instance has an unprotected port that is being probed by a known malicious host\. **
 
-This finding informs you that a port on an EC2 instance in your AWS environment is not blocked by a security group, access control list \(ACL\), or an on\-host firewall \(for example, Linux IPChains\), and known scanners on the internet are actively probing it\. If the identified unprotected port is 22 or 3389 and you often use connect to this EC2 instance by using SSH/RDP and therefore can't block access to either of these ports, you can still limit exposure by allowing access to these ports only to the IP addresses from your corporate network IP address space\. To restrict access to port 22 on Linux, see [http://docs\.aws\.amazon\.com/AWSEC2/latest/UserGuide/authorizing\-access\-to\-an\-instance\.html](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html)\. To restrict access to port 3389 on Windows, see [http://docs\.aws\.amazon\.com/AWSEC2/latest/WindowsGuide/authorizing\-access\-to\-an\-instance\.html](http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/authorizing-access-to-an-instance.html)\.
+This finding informs you that a port on an EC2 instance in your AWS environment is not blocked by a security group, access control list \(ACL\), or an on\-host firewall \(for example, Linux IPChains\), and known scanners on the internet are actively probing it\. If the identified unprotected port is 22 or 3389 and you often connect to this EC2 instance by using SSH/RDP and therefore can't block access to either of these ports, you can still limit exposure by allowing access to these ports only to the IP addresses from your corporate network IP address space\. To restrict access to port 22 on Linux, see [http://docs\.aws\.amazon\.com/AWSEC2/latest/UserGuide/authorizing\-access\-to\-an\-instance\.html](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html)\. To restrict access to port 3389 on Windows, see [http://docs\.aws\.amazon\.com/AWSEC2/latest/WindowsGuide/authorizing\-access\-to\-an\-instance\.html](http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/authorizing-access-to-an-instance.html)\.
 
 For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
@@ -199,7 +193,7 @@ This finding informs you that there is an EC2 instance in your AWS environment t
 
 #### Finding description<a name="stealth1_description"></a>
 
-**ccount password policy was weakened\.**
+**Account password policy was weakened\.**
 
 Your AWS account password policy was weakened\. For example, it was deleted or updated to require fewer characters, not require symbols and numbers, or required to extend the password expiration period\. This finding can also be triggered by an attempt to update or delete your AWS account password policy from an unusual location, time of day, or by an unusual user\. The AWS account password policy defines the rules that govern what kinds of passwords can be set for your IAM users\. A weaker password policy permits the creation of passwords that are easy to remember and potentially easier to guess, thereby creating a security risk\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\. 
 
@@ -209,23 +203,23 @@ Your AWS account password policy was weakened\. For example, it was deleted or u
 
 **AWS CloudTrail trail was disabled\.**
 
-This finding informs you that a CloudTrail trail within your AWS environment was disabled\. This can be an attacker's attempt to disable logging to cover their tracks by eliminating any trace of their activity while gaining access to your AWS resources for malicious purposes\. This finding can be triggered by an attempt to delete or update a trail from an unusual location, time of day, or by an unusual user\. This finding can also be triggered by an attempt to delete an S3 bucket that stores the logs from a trail that is associated with GuardDuty\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\. 
+This finding informs you that a CloudTrail trail within your AWS environment was disabled\. This can be an attacker's attempt to disable logging to cover their tracks by eliminating any trace of their activity while gaining access to your AWS resources for malicious purposes\. This finding can be triggered by a successful deletion or update of a trail from an unusual location, time of day, or by an unusual user\. This finding can also be triggered by a successful deletion of an S3 bucket that stores the logs from a trail that is associated with GuardDuty\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\. 
 
 ### Trojan:EC2/BlackholeTraffic<a name="trojan4"></a>
 
 #### Finding description<a name="trojan4_description"></a>
 
-**EC2 instance is connecting to a black hole IP address\.**
+**EC2 instance is querying a domain name of a black hole domain\.**
 
-This finding informs you that an EC2 instance in your AWS environment might be compromised because it is communicating with a black hole IP address\. Black holes refer to places in the network where incoming or outgoing traffic is silently discarded without informing the source that the data didn't reach its intended recipient\. A black hole IP address specifies a host machine that is not running or an address to which no host has been assigned\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+This finding informs you that an EC2 instance in your AWS environment might be compromised because it is querying a domain name of a black hole domain\. Black holes refer to places in the network where incoming or outgoing traffic is silently discarded without informing the source that the data didn't reach its intended recipient\. A black hole IP address specifies a host machine that is not running or an address to which no host has been assigned\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ### Trojan:EC2/DropPoint<a name="trojan5"></a>
 
 #### Finding description<a name="trojan5_description"></a>
 
-**An EC2 instance is communicating with a remote IP address that is known to retain credentials and other data stolen by malware\. **
+**An EC2 instance is querying a domain name of a remote host that is known to hold credentials and other stolen data captured by malware\. **
 
-This finding informs you that an EC2 instance in your AWS environment is communicating with an IP address that is associated with a storage location for credentials and other data that could have been stolen by malware\. Your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+This finding informs you that an EC2 instance in your AWS environment is querying a domain name of a remote host that is known to hold credentials and other stolen data captured by malware\. Your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ### Trojan:EC2/BlackholeTraffic\!DNS<a name="trojan6"></a>
 
@@ -239,9 +233,9 @@ This finding informs you that an EC2 instance in your AWS environment might be c
 
 #### Finding description<a name="trojan7_description"></a>
 
-**EC2 instance is communicating with a domain that is known to host drive\-by malware\-distributing downloads or potentially unwanted downloads\.**
+**EC2 instance is querying a domain name of a remote host that is a known source of Drive\-By download attacks\.**
 
-This finding informs you that an EC2 instance in your AWS environment might be compromised because it is communicating with a domain that hosts drive\-by malware\-distributing downloads\. These are unintended downloads of computer software from the internet that can trigger an automatic install of a virus, spyware, or malware\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+This finding informs you that an EC2 instance in your AWS environment might be compromised because it is querying a domain name of a remote host that is a known source of Drive\-By download attacks\. These are unintended downloads of computer software from the internet that can trigger an automatic install of a virus, spyware, or malware\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ### Trojan:EC2/DropPoint\!DNS<a name="trojan8"></a>
 
@@ -255,7 +249,15 @@ This finding informs you that there is an EC2 instance in your AWS environment t
 
 #### Finding description<a name="trojan9_description"></a>
 
-**EC2 instance has attempted to query DGA domains\.**
+**EC2 instance is querying algorithmically generated domains\. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance\.**
+
+This finding informs you that there is an EC2 instance in your AWS environment that is trying to query domain generation algorithms \(DGA\) domains\. Your EC2 instance might be compromised\. DGAs are used to periodically generate a large number of domain names that can be used as rendezvous points with their command and control \(C&C\) servers\. C&C servers are computers that issue commands to members of a botnet, which is a collection of internet\-connected devices that are infected and controlled by a common type of malware\. The large number of potential rendezvous points makes it difficult to effectively shut down botnets because infected computers attempt to contact some of these domain names every day to receive updates or commands\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+
+### Trojan:EC2/DGADomainRequest\.C\!DNS<a name="trojan95"></a>
+
+#### Finding description<a name="trojan95_description"></a>
+
+**EC2 instance is querying algorithmically generated domains\. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance\.**
 
 This finding informs you that there is an EC2 instance in your AWS environment that is trying to query domain generation algorithms \(DGA\) domains\. Your EC2 instance might be compromised\. DGAs are used to periodically generate a large number of domain names that can be used as rendezvous points with their command and control \(C&C\) servers\. C&C servers are computers that issue commands to members of a botnet, which is a collection of internet\-connected devices that are infected and controlled by a common type of malware\. The large number of potential rendezvous points makes it difficult to effectively shut down botnets because infected computers attempt to contact some of these domain names every day to receive updates or commands\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
@@ -266,6 +268,14 @@ This finding informs you that there is an EC2 instance in your AWS environment t
 **EC2 instance is exfiltrating data through DNS queries\.**
 
 This finding informs you that there is an EC2 instance in your AWS environment with malware that uses DNS queries for outbound data transfers\. The result is the exfiltration of data\. Your EC2 instance might be compromised\. DNS traffic is not typically blocked by firewalls\. For example, malware in a compromised EC2 instance can encode data, \(such as your credit card number\), into a DSN query and send it to a remote DNS server that is controlled by an attacker\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+
+### Trojan:EC2/PhishingDomainRequest\!DNS<a name="trojan11"></a>
+
+#### Finding description<a name="trojan11_description"></a>
+
+**EC2 instance is querying domains involved in phishing attacks\. Your EC2 instance might be compromised\.**
+
+This finding informs you that there is an EC2 instance in your AWS environment that is trying to query a domain involved in phishing attacks\. Phishing domains are set up by someone posing as a legitimate institution in order to induce individuals into providing sensitive data such as personally identifiable information, banking and credit card details, and passwords\. Your EC2 instance is potentially trying to retrieve sensitive data stored on a phishing website\. Or your EC2 instance is attempting to setup a phishing website\. Your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ### UnauthorizedAccess:IAMUser/TorIPCaller<a name="unauthorized1"></a>
 
@@ -311,9 +321,9 @@ This finding informs you that an API operation \(for example, an attempt to laun
 
 #### Finding description<a name="unauthorized7_description"></a>
 
-**EC2 instance is communicating with an IP address on a Tor network\.**
+**EC2 instance is receiving inbound connections from a Tor exit node\.**
 
-This finding informs you that an EC2 instance in your AWS environment is communicating with an IP address on a Tor network\. Tor is software for enabling anonymous communication\. It encrypts and randomly bounces communications through relays between a series of network nodes\. This can indicate unauthorized access to your AWS resources with the intent of hiding the attacker’s true identity\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+This finding informs you that an EC2 instance in your AWS environment is receiving inbound connections from a Tor exit node\. Tor is software for enabling anonymous communication\. It encrypts and randomly bounces communications through relays between a series of network nodes\. This can indicate unauthorized access to your AWS resources with the intent of hiding the attacker’s true identity\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ### UnauthorizedAccess:EC2/MaliciousIPCaller\.Custom<a name="unauthorized8"></a>
 
@@ -346,3 +356,23 @@ This finding informs you that an EC2 instance in your AWS environment was involv
 **Credentials that were created exclusively for an EC2 instance through an instance launch role are being used from an external IP address\.**
 
 This finding informs you of attempts to run AWS API operations from a host outside of EC2, using temporary AWS credentials that were created on an EC2 instance in your AWS account\. Your EC2 instance might be compromised, and the temporary credentials from this instance might have been exfiltrated to a remote host outside of AWS\. AWS does not recommend redistributing temporary credentials outside of the entity that created them \(for example, AWS applications, EC2, or Lambda\)\. However, authorized users can export credentials from their EC2 instances to make legitimate API calls\. To rule out a potential attack and verify the legitimacy of the activity, contact the IAM user to whom these credentials are assigned\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\. 
+
+This finding is commonly triggered in AWS Direct Connect scenarios where all traffic from EC2 instances is routed into your on\-premises network and out your own firewall, thus appearing to originate from an IP address that is external to EC2\. If it's common practice in your AWS production environment to exfiltrate temporary AWS credentials created on EC2 instances, you can whitelist this finding by adding the IP address listed in the **service\.action\.awsApiCallAction\.remoteIpDetails\.ipAddressV4** field in the finding's JSON to your active trusted IP list\. \(You can view the finding's complete JSON, by selecting the finding in the console, and then choosing **Actions/Export**, or by running the [GetFindings](get-findings.md) API operation\)\. A GuardDuty trusted IP list consists of IP addresses that you have whitelisted for secure communication with your AWS infrastructure and applications\. GuardDuty does not generate findings for IP addresses on trusted IP lists\. For more information, see [Uploading Trusted IP Lists and Threat Lists](guardduty_upload_lists.md)
+
+## Complete List of GuardDuty Retired Finding Types<a name="retired-types"></a>
+
+The following are finding types that have been retired \(no longer generated\) in GuardDuty: 
+
+**Important**  
+You cannot reactivate retired GuardDuty findings types\.
+
+
++ [CryptoCurrency:EC2/BitcoinTool\.A](#crypto1)
+
+### CryptoCurrency:EC2/BitcoinTool\.A<a name="crypto1"></a>
+
+#### Finding description<a name="crypto1_description"></a>
+
+**EC2 instance is communicating with Bitcoin mining pools\.**
+
+This finding informs you that an EC2 instance in your AWS environment is communicating with Bitcoin mining pools\. In the field of cryptocurrency mining, a mining pool is the pooling of resources by miners who share their processing power over a network to split the reward according to the amount of work they contributed to solving a block\. Unless you use this EC2 instance for Bitcoin mining, your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.

@@ -2,12 +2,13 @@
 
 Amazon GuardDuty generates findings when it detects unexpected and potentially malicious activity in your AWS environment\. You can view and manage your GuardDuty findings on the **Findings** page in the GuardDuty console or by using the GuardDuty CLI or API operations\. You can also view your GuardDuty findings through Amazon CloudWatch events\. For more information, see [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
 
-This section describes the following information:
+This topic describes the following information:
 
 
 + [Working with GuardDuty Findings](#guardduty_working-with-findings)
 + [Severity Levels for GuardDuty Findings](#guardduty_findings-severity)
 + [Generating GuardDuty Sample Findings](#guardduty_sample-findings)
++ [Proof of Concept \- Automatically Generating Several Common GuardDuty Findings](#guardduty_findings-scripts)
 + [Amazon GuardDuty Finding Types](guardduty_finding-types.md)
 + [Remediating Security Issues Discovered by Amazon GuardDuty](guardduty_remediate.md)
 
@@ -95,13 +96,20 @@ For more information about supported regions, see [Amazon GuardDuty Supported Re
 
      + **Unusual protocol **– the network connection protocol involved in the activity that prompted GuardDuty to generate the finding\.
 
-1. To archive or export the finding that you're analyzing, choose the **Actions** menu\. 
+1. To archive or export the finding that you're analyzing, choose the **Actions** menu, and then choose **Archive** or **Export**\. 
+**Note**  
+Currently in GuardDuty, users from GuardDuty member accounts CANNOT archive findings\.
 
 1. To provide feedback by marking the finding useful or not useful, choose the thumbs up or thumbs down icons\. 
 
 ## Severity Levels for GuardDuty Findings<a name="guardduty_findings-severity"></a>
 
-Each GuardDuty finding has an assigned severity level and value that reduces the need to prioritize one finding over another and can help you determine your response to a potential security issue that is highlighted by a finding\. The value of the severity can fall anywhere within the 0\.0 to 10\.0 range\. The following are the currently defined severity levels and values for the GuardDuty findings:
+Each GuardDuty finding has an assigned severity level and value that reduces the need to prioritize one finding over another and can help you determine your response to a potential security issue that is highlighted by a finding\. The value of the severity can fall anywhere within the 0\.1 to 8\.9 range\. 
+
+**Note**  
+Values 0 and 9\.0 to 10\.0 are currently reserved for future use\.
+
+The following are the currently defined severity levels and values for the GuardDuty findings:
 
 + **High** \(the value of the **severity** parameter in the [GetFindings](get-findings.md) response falls within the 7\.0 to 8\.9 range\) – indicates that the resource in question \(an EC2 instance or a set of IAM user credentials\) is compromised and is actively being used for unauthorized purposes\. We recommend that you treat this security issue as a priority and take immediate remediation steps\. For example, clean up your EC2 instance or terminate it, or rotate the IAM credentials\.
 
@@ -132,3 +140,37 @@ Use the following procedure to generate sample findings\.
 1. On the **Settings** page, under **Sample findings**, choose **Generate sample findings**\.
 
 1. In the navigation pane, under **Findings**, choose **Current**\. The sample findings are displayed on the **Current findings** page\. The title of sample findings always begins with **\[SAMPLE\]**\. Choose a specific sample finding to view its details\.
+
+## Proof of Concept \- Automatically Generating Several Common GuardDuty Findings<a name="guardduty_findings-scripts"></a>
+
+You can use the following [scripts](https://github.com/awslabs/amazon-guardduty-tester) to automatically generate several common Amazon GuardDuty findings\. **guardduty\-tester\.template** uses AWS CloudFormation to create an isolated environment with a bastion host, a tester EC2 instance that you can ssh into, and two target EC2 instances\. Then you can run **guardduty\_tester\.sh** that starts interaction between the tester EC2 instance and the target Windows EC2 instance and the target Linux EC2 instance to simulate five types of common attacks that GuardDuty is built to detect and notify you about with generated findings\.
+
+1. As a prerequisite, you must enable GuardDuty in the same account and region where you want to run the **guardduty\-tester\.template** and **guardduty\_tester\.sh**\. For more information about enabling GuardDuty, see [Setting Up Amazon GuardDuty](guardduty_settingup.md)\.
+
+   You must also generate a new or use an existing EC2 key pair in each region where you want to run these scripts\. This EC2 key pair is used as a parameter in the **guardduty\-tester\.template** script that you use to create a new CloudFormation stack\. For more information about generating EC2 key pairs, see [https://docs\.aws\.amazon\.com/AWSEC2/latest/UserGuide/ec2\-key\-pairs\.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)\.
+
+1. Create a new CloudFormation stack using **guardduty\-tester\.template**\. For detailed instructions about creating a stack, see [https://docs\.aws\.amazon\.com/AWSCloudFormation/latest/UserGuide/cfn\-console\-create\-stack\.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html)\. Before you run **guardduty\-tester\.template**, modify it with values for the following parameters: Stack Name to identify your new stack, Availability Zone where you want to run the stack, and Key Pair that you can use to launch the EC2 instances\. Then you can use the corresponding private key to SSH into the EC2 instances\.
+
+   **guardduty\-tester\.template** takes around 10 minutes to run and complete\. It creates your environment and copies **guardduty\_tester\.sh** onto your tester EC2 instance\.
+
+1. In the AWS CloudFormation console, choose the checkbox next to your new running CloudFormation stack\. In the displayed set of tabs, select the **Output** tab\. Note the IP addresses assigned to the bastion host and the tester EC2 instance\. You need both of these IP addresses in order to ssh into the tester EC2 instance\.
+
+1. Create the following entry in your \~/\.ssh/config file to login to your instance through the bastion host:
+
+   ```
+   Host bastion
+       HostName {Elastic IP Address of Bastion}
+       User ec2-user
+       IdentityFile ~/.ssh/{your-ssh-key.pem}
+   Host tester
+       ForwardAgent yes
+       HostName {Local IP Address of RedTeam Instance}
+       User ec2-user
+       IdentityFile ~/.ssh/{your-ssh-key.pem
+       ProxyCommand ssh bastion nc %h %p
+       ServerAliveInterval 240
+   ```
+
+   Now you can call $ ssh tester to login to your target EC2 instance\. For more information about configuring and connecting to EC2 instances through bastion hosts, see [https://aws\.amazon\.com/blogs/security/securely\-connect\-to\-linux\-instances\-running\-in\-a\-private\-amazon\-vpc/](https://aws.amazon.com/blogs/security/securely-connect-to-linux-instances-running-in-a-private-amazon-vpc/)\. 
+
+1. Once connected to the tester EC2 instance, run **guardduty\_tester\.sh** to initiate interaction between your tester and target EC2 instances, simulate attacks, and generate GuardDuty Findings\.

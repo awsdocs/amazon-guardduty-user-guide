@@ -1,6 +1,6 @@
 # Managing AWS Accounts in Amazon GuardDuty<a name="guardduty_accounts"></a>
 
-You can invite other accounts to enable GuardDuty and become associated with your AWS account\. If your invitations are accepted, your account is designated as the **master** GuardDuty account, and the associated accounts become your **member** accounts\. You can then view and manage their GuardDuty findings on their behalf\. In GuardDuty, a master account can have up to 100 member accounts\. 
+You can invite other accounts to enable GuardDuty and become associated with your AWS account\. If your invitations are accepted, your account is designated as the **master** GuardDuty account, and the associated accounts become your **member** accounts\. You can then view and manage their GuardDuty findings on their behalf\. In GuardDuty, a master account \(per region\) can have up to 1000 member accounts\. 
 
 **Important**  
 An AWS account cannot be a GuardDuty master and member account at the same time\. An AWS account can accept only one membership invitation\. Accepting a membership invitation is optional\.
@@ -10,6 +10,7 @@ An AWS account cannot be a GuardDuty master and member account at the same time\
 + [GuardDuty Member Accounts](#guardduty_member)
 + [Designating Master and Member Accounts Through GuardDuty Console](#guardduty_become_console)
 + [Designating Master and Member Accounts Through the GuardDuty API Operations](#guardduty_become_api)
++ [Enable GuardDuty in Multiple Accounts Simultaneously](#guardduty_become_scripts)
 
 ## GuardDuty Master Accounts<a name="guardduty_master"></a>
 
@@ -19,9 +20,11 @@ The following is how a master account can configure GuardDuty:
 
 + Users from master accounts can generate sample findings\.
 
++ Users from master accounts can archive findings in their own accounts and in all member accounts\.
+
 + Users from master accounts can upload and further manage trusted IP lists and threat lists in their own account\. 
-**Note**  
-Trusted IP lists and threat lists that are uploaded by the master account are NOT imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty still generates findings based on activity that involves IP addresses from the master's trusted IP lists and does not generate findings based on activity that involves known malicious IP addresses from the master's threat lists\.
+**Important**  
+Trusted IP lists and threat lists that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty does not generate findings based on activity that involves IP addresses from the master's trusted IP lists and generates findings based on activity that involves known malicious IP addresses from the master's threat lists\.
 
 + Users from master accounts can suspend GuardDuty for its own \(master\) account and all member accounts\.
 
@@ -35,9 +38,13 @@ The following is how a member account can configure GuardDuty:
 
 + Users from member accounts can generate sample findings\.
 
-+ Users from member accounts can upload and further manage trusted IP lists and threat lists in their own account\. 
++ Users from member accounts CANNOT archive findings either in their own accounts or in their master's account, or in other member accounts\.
+
++ Users from member accounts CANNOT upload and further manage trusted IP lists and threat lists\. 
+
+  Trusted IP lists and threat lists that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty does not generate findings based on activity that involves IP addresses from the master's trusted IP lists and generates findings based on activity that involves known malicious IP addresses from the master's threat lists\.
 **Note**  
-Trusted IP lists and threat lists that are uploaded by the master account are NOT imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty still generates findings based on activity that involves IP addresses from the master's trusted IP lists and does not generate findings based on activity that involves known malicious IP addresses from the master's threat lists\.
+When a GuardDuty account becomes a GuardDuty member account, all of its trusted IP lists and threat lists \(uploaded prior to becoming a GuardDuty member account\) are disabled\. If a GuardDuty member account disassociates from its GuardDuty master account, all of its trusted IP lists and threat lists \(uploaded prior to becoming a GuardDuty member account\) are re\-enabled\. Once no longer a GuardDuty member account, this account's users can upload and further manage trusted IP lists and threat lists in this account\. 
 
 + Users from member accounts can suspend GuardDuty for their own account, but not for the master account or other member accounts\.
 
@@ -118,11 +125,23 @@ Complete the following procedure using the credentials of the AWS account that y
 
     You must specify the detector ID of the current AWS account and the account details \(account ID and email address\) of the account\(s\) of the accounts that you want to become GuardDuty members \(you can create one or more members with this API operation\)\.
 
+   You can also do this by using AWS Command Line Tools\. You can run the following CLI command \(make sure to use your own valid detector ID, account ID, and email: 
+
+   ```
+   aws guardduty create-members --detector-id 12abc34d567e8fa901bc2d34e56789f0 --account-details AccountId=123456789012,Email=guarddutymember@amazon.com
+   ```
+
 1. Run the [InviteMembers](invite-members.md) API operation using the credentials of the AWS account that has GuardDuty enabled \(this is the account that you want to be the master GuardDuty account\.
 
     You must specify the detector ID of the current AWS account and the account IDs \(you can invite one or more members with this API operation\) of the accounts that you want to become GuardDuty members\.
 **Note**  
 You can also specify an optional invitation message using the `message` request parameter\.
+
+   You can also do this by using AWS Command Line Tools\. You can run the following CLI command \(make sure to use your own valid detector ID and account IDs: 
+
+   ```
+   aws guardduty invite-members --detector-id 12abc34d567e8fa901bc2d34e56789f0 --account-ids 123456789012
+   ```
 
 Complete the following procedure using the credentials of each AWS account that you want to designate as the GuardDuty member account\.
 
@@ -132,6 +151,42 @@ Complete the following procedure using the credentials of each AWS account that 
 
    You must specify if the detector resource is to be enabled using the GuardDuty service\. A detector must be created and enabled in order for GuardDuty to become operational\. You must first enable GuardDuty before accepting an invitation\.
 
+   You can also do this by using AWS Command Line Tools\. You can run the following CLI command: 
+
+   ```
+   aws guardduty create-detector --enable
+   ```
+
 1. Run the [AcceptInvitation](accept-invitation.md) API operation for each AWS account where you want to accept the membership invitation using that account's credentials\. 
 
    You must specify the detector ID of this AWS account \(member account\), the master ID of the AWS account that sent the invitation that you are accepting \(you can get this value either from the invitation email or by running the [ListInvitations](list-invitations.md) API operation\. It is the value of the `accountID` response parameter\), and the invitation ID of the invitation that you are accepting\. 
+
+   You can also do this by using AWS Command Line Tools\. You can run the following CLI command \(make sure to use valide detector ID, master account ID, and invitation ID: 
+
+   ```
+   aws guardduty accept-invitation --detector-id 12abc34d567e8fa901bc2d34e56789f0 --master-id 012345678901 --invitation-id 84b097800250d17d1872b34c4daadcf5 
+   ```
+
+## Enable GuardDuty in Multiple Accounts Simultaneously<a name="guardduty_become_scripts"></a>
+
+To enable GuardDuty in multiple accounts at the same time, you can run enableguardduty\.py and disableguardduty\.py, which you can download from the following page: [https://github\.com/aws\-samples/amazon\-guardduty\-multiaccount\-scripts](https://github.com/aws-samples/amazon-guardduty-multiaccount-scripts)\.
+
+enableguardduty\.py enables GuardDuty, sends invitations from the master account and accepts invitations in all member accounts\. The result is a master GuardDuty account that contains all security findings for all member accounts\. Since GuardDuty is regionally isolated, findings for each member account roll up to the corresponding region in the master account\. For example, the us\-east\-1 region in your GuardDuty master account contains the security findings for all us\-east\-1 findings from all associated member accounts\.
+
+The scripts are modelled with the StackSets service in mind and are therefore dependent on having the IAM role called **AWSCloudFormationStackSetExecutionRole** in each account where you want to enable GuardDuty\. This role provides StackSets with access to GuardDuty\. If you already use StackSets, the scripts can leverage your existing roles\. If not, you can use the instructions in [https://docs\.aws\.amazon\.com/AWSCloudFormation/latest/UserGuide/stacksets\-prereqs\.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html) to setup the **AWSCloudFormationStackSetExecutionRole** in each account where you want to enable GuardDuty\. 
+
+Launch a new Amazon Linux instance with a role that has administrative permissions\. Login to this instance and run the following commands:
+
+```
+sudo yum install git python 
+sudo pip install boto3 
+aws configure 
+git clone https://github.com/aws-samples/amazon-guardduty-multiaccount-scripts.git
+cd amazon-guardduty-multiaccount-scripts 
+sudo chmod +x disableguardduty.py enableguardduty.py
+```
+
+**Note**  
+When prompted, set the region to us\-east\-1 or whatever default region you want\.
+
+The scripts have one parameter \- the account ID of your GuardDuty master account\. Before you execute enableguardduty\.py or disableguardduty\.py, update either script’s global variables to map to your AWS accounts\. You can create a list of the accounts and their associated email addresses\. Specify the master GuardDuty account and \(optionally\) customize the invite message that is sent to member accounts\. 

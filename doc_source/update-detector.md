@@ -1,6 +1,6 @@
 # UpdateDetector<a name="update-detector"></a>
 
-Updates the Amazon GuardDuty detector specified by the detectorId\.
+Updates the Amazon GuardDuty detector that is specified by the detector ID\.
 
 ## Request Syntax<a name="update-detector-request-syntax"></a>
 
@@ -16,17 +16,19 @@ POST https://<endpoint>/detector/{detectorId}
 }
 ```
 
-## Request Parameters<a name="update-detector-request-parameters"></a>
-
-The request accepts the following data in JSON format\.
+## Path Parameters<a name="update-detector-path-parameters"></a>
 
 **detectorID**  
 The unique ID of the detector that you want to update\.  
 Type: String  
 Required: Yes
 
+## Request Parameters<a name="update-detector-request-parameters"></a>
+
+The request accepts the following data in JSON format\.
+
 **enable**  
-Updated boolean value for the detector that specifies whether the detector is enabled\.   
+Specifies whether the detector is enabled\.   
 Type: Boolean  
 Required: No
 
@@ -36,41 +38,41 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 ## Errors<a name="update-detector-errors"></a>
 
-If the action is not successful, the service sends back and HTTP error response code along with detailed error information\.
+If the action is not successful, the service sends back an HTTP error response code along with detailed error information\.
 
 **InvalidInputException**
 
-The request is rejected because an invalid or out\-of\-range value is specified as an input parameter\.
+The request is rejected\. An invalid or out\-of\-range value is specified as an input parameter\.
 
 HTTP Status Code: 400 
 
 **InvalidInputException**
 
-The request is rejected because required query or path parameters are not specified\.
+The request is rejected\. The required query or path parameters are not specified\.
 
 HTTP Status Code: 400 
 
 **InvalidInputException**
 
-The request is rejected because one or more input parameters have invalid values\.
+The request is rejected\. One or more input parameters have invalid values\.
 
 HTTP Status Code: 400 
 
 **InvalidInputException**
 
-The request is rejected because the parameter detectorId has an invalid value\.
+The request is rejected\. The parameter `detectorId` has an invalid value\.
 
 HTTP Status Code: 400 
 
 **AccessDeniedException**
 
-The request was rejected because you do not have the required iam:CreateServiceLinkedRole permission\.
+The request is rejected\. You do not have the required `iam:CreateServiceLinkedRole` permission\.
 
 HTTP Status Code: 400 
 
 **NoSuchEntityException**
 
-The request is rejected because the input detectorId is not owned by the current account\.
+The request is rejected\. The input `detectorId` is not owned by the current account\.
 
 HTTP Status Code: 400 
 
@@ -79,3 +81,35 @@ HTTP Status Code: 400
 Internal server error\.
 
 HTTP Status Code: 500 
+
+## Example<a name="update-detector-example"></a>
+
+**Sample Request**
+
+```
+POST /detector/12abc34d567e8fa901bc2d34e56789f0 HTTP/1.1
+Host: guardduty.us-west-2.amazonaws.com
+Accept-Encoding: identity
+Content-Length: 16
+Authorization: AUTHPARAMS
+X-Amz-Date: 20180123T231356Z
+User-Agent: aws-cli/1.14.29 Python/2.7.9 Windows/8 botocore/1.8.33
+{  
+   "enable":true
+}
+```
+
+**Sample Response**
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 0
+Date: Tue, 23 Jan 2018 23:13:57 GMT
+x-amzn-RequestId: 16c23992-0093-11e8-a33d-67e86e7cc0b9
+X-Amzn-Trace-Id: sampled=0;root=1-5a67c1b5-f8ce3625e119d47f2531e4ac
+X-Cache: Miss from cloudfront
+Via: 1.1 b7b35e3be0ac217c56fb0eb4da9b75bb.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: _y_e0gjS2U1RcJ8yknRPGjYB5coSSyeG1vkV9-IKaHGUUBs03-900A==
+Connection: Keep-alive
+```

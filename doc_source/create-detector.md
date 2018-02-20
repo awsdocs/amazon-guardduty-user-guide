@@ -1,9 +1,9 @@
 # CreateDetector<a name="create-detector"></a>
 
-Creates a single Amazon GuardDuty detector\. A detector is an object that represents the GuardDuty service\. A detector must be created in order for GuardDuty to become operational\.
+Creates a single Amazon GuardDuty detector\. A detector is an object that represents the GuardDuty service\. You must create a detector to enable GuardDuty\.
 
 **Important**  
-Currently, GuardDuty only supports one detector resource per AWS account\.
+Currently, GuardDuty supports only one detector resource per AWS account per region\.
 
 ## Request Syntax<a name="create-detector-request-syntax"></a>
 
@@ -24,7 +24,7 @@ POST https://<endpoint>/detector
 The request accepts the following data in JSON format\.
 
 **enable**  
-A boolean value that specifies whether the detector is to be enabled\.  
+Specifies whether the detector is to be enabled\.  
 Type: Boolean  
 Required: Yes
 
@@ -50,35 +50,35 @@ Type: String
 
 ## Errors<a name="create-detector-errors"></a>
 
-If the action is not successful, the service sends back and HTTP error response code along with detailed error information\.
+If the action is not successful, the service sends back an HTTP error response code along with detailed error information\.
 
 **InvalidInputException**
 
-The request is rejected because an invalid or out\-of\-range value is specified as an input parameter\.
+The request is rejected\. An invalid or out\-of\-range value is specified as an input parameter\.
 
 HTTP Status Code: 400 
 
 **InvalidInputException**
 
-The request is rejected because required query or path parameters are not specified\.
+The request is rejected\. The required query or path parameters are not specified\.
 
 HTTP Status Code: 400 
 
 **InvalidInputException**
 
-The request is rejected because one or more input parameters have invalid values\.
+The request is rejected\. One or more input parameters have invalid values\.
 
 HTTP Status Code: 400 
 
 **AccessDeniedException**
 
-The request was rejected because you do not have the required iam:CreateServiceLinkedRole permission\.
+The request is rejected\. You do not have the required `iam:CreateServiceLinkedRole` permission\.
 
 HTTP Status Code: 400 
 
 **LimitExceededException**
 
-The request is rejected because a detector already exists for the current account\.
+The request is rejected\. A detector already exists for the current account\.
 
 HTTP Status Code: 400 
 
@@ -87,3 +87,35 @@ HTTP Status Code: 400
 Internal server error\.
 
 HTTP Status Code: 500 
+
+## Example<a name="create-detector-example"></a>
+
+**Sample Request**
+
+```
+POST /detector HTTP/1.1
+Host: guardduty.us-west-2.amazonaws.com
+Accept-Encoding: identity
+Content-Length: 0
+Authorization: AUTHPARAMS
+X-Amz-Date: 20180123T215330Z
+User-Agent: aws-cli/1.14.29 Python/2.7.9 Windows/8 botocore/1.8.33
+```
+
+**Sample Response**
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 49
+Date: Tue, 23 Jan 2018 21:53:32 GMT
+x-amzn-RequestId: da9e1c5b-0087-11e8-8012-7985c94ad5ec
+X-Amzn-Trace-Id: sampled=0;root=1-5a67aedc-76d97a5c367f2eac94d40825
+X-Cache: Miss from cloudfront
+Via: 1.1 08df71188a92655a7dcd1bb872797741.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: kYGX5j6wkW7fneZ8ee602vqpr3JCuQqBHyyMdpTwG9JV3u0ybcdaNQ==
+Connection: Keep-alive
+{  
+   "detectorId":"12abc34d567e8fa901bc2d34e56789f0"
+}
+```

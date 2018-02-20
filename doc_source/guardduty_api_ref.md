@@ -1,6 +1,6 @@
 # Amazon GuardDuty API Reference<a name="guardduty_api_ref"></a>
 
-GuardDuty monitors the security of your AWS environment by analyzing and processing VPC Flow Logs and AWS CloudTrail event logs\. This guide describes Amazon GuardDuty API operations\.
+Amazon GuardDuty monitors the security of your AWS environment by analyzing and processing VPC Flow Logs and AWS CloudTrail event logs\. This guide describes GuardDuty API operations\.
 
 
 + [AcceptInvitation](accept-invitation.md)
