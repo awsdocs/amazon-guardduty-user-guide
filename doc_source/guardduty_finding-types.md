@@ -267,7 +267,7 @@ This finding informs you that there is an EC2 instance in your AWS environment t
 
 **EC2 instance is exfiltrating data through DNS queries\.**
 
-This finding informs you that there is an EC2 instance in your AWS environment with malware that uses DNS queries for outbound data transfers\. The result is the exfiltration of data\. Your EC2 instance might be compromised\. DNS traffic is not typically blocked by firewalls\. For example, malware in a compromised EC2 instance can encode data, \(such as your credit card number\), into a DSN query and send it to a remote DNS server that is controlled by an attacker\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+This finding informs you that there is an EC2 instance in your AWS environment with malware that uses DNS queries for outbound data transfers\. The result is the exfiltration of data\. Your EC2 instance might be compromised\. DNS traffic is not typically blocked by firewalls\. For example, malware in a compromised EC2 instance can encode data, \(such as your credit card number\), into a DNS query and send it to a remote DNS server that is controlled by an attacker\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ### Trojan:EC2/PhishingDomainRequest\!DNS<a name="trojan11"></a>
 
