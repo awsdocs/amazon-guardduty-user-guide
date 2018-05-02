@@ -40,7 +40,7 @@ Required: Yes
 
 **format**  
 The format of the file that contains the IPSet\.  
-Type: String\. Valid values: `TXT` | `STIX` | `OTX_CSV` | `ALIEN_VAULT` | `PROOF_POINT` | `FIRE_EYE`  
+Type: String\. Valid values: `TXT` \| `STIX` \| `OTX_CSV` \| `ALIEN_VAULT` \| `PROOF_POINT` \| `FIRE_EYE`  
 In your trusted IP lists and threat lists, IP addresses and CIDR ranges must appear one per line\.  
 The following is a sample list in Plaintext format:  
 
@@ -48,7 +48,7 @@ The following is a sample list in Plaintext format:
 54.20.175.217
 205.0.0.0/8
 ```
-For more information, see [Uploading Trusted IP Lists and Threat Lists](guardduty_upload_lists.md)
+For more information, see [Working with Trusted IP Lists and Threat Lists](guardduty_upload_lists.md)
 Required: Yes
 
 **location**  

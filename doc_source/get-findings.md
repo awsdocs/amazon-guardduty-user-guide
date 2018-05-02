@@ -43,44 +43,31 @@ Required: No
 **attributeName**  
 An attribute in a finding that can be queried\.  
 You can only use the following attributes to sort findings:  
-
 + accountId
-
 + severity
-
 + confidence
-
 + type
-
 + service\.eventFirstSeen
-
 + service\.eventLastSeen
-
 + createdAt
 
+  Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.
 + updatedAt
 
+  Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.
 + service\.action\.networkConnectionAction\.remoteIpDetails\.ipAddressV4
-
 + resource\.instanceDetails\.instanceId
-
 + service\.action\.networkConnectionAction\.localPortDetails\.port
-
 + service\.action\.networkConnectionAction\.remotePortDetails\.port
-
 + service\.action\.networkConnectionAction\.remoteIpDetails\.country\.countryName
-
 + service\.action\.networkConnectionAction\.protocol, service\.action\.awsApiCallAction\.api
-
 + service\.action\.awsApiCallAction\.serviceName
-
 + service\.action\.networkConnectionAction\.blocked
-
 + service\.count
 Type: String  
 **orderBy**  
 The order of the sorting request\.  
-Type: String\. Valid values: \[`ASC` | `DESC`\]
+Type: String\. Valid values: \[`ASC` \| `DESC`\]
 
 ## Response Syntax<a name="get-findings-response-syntax"></a>
 
@@ -553,10 +540,10 @@ Type: String
 The list of additional information for this finding\.  
 **eventFirstSeen**  
 The first seen timestamp of the activity that prompted GuardDuty to generate this finding\.  
-Type: String  
+Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.  
 **eventLastSeen**  
 The last seen timestamp of the activity that prompted GuardDuty to generate this finding\.  
-Type: String  
+Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.  
 **userFeedback**  
 Feedback provided by a user about the finding\.  
 Type: String  
@@ -580,10 +567,10 @@ The confidence level of a finding\.
 Type: float  
 **createdAt**  
 The time stamp at which a finding was generated\.  
-Type: string  
+Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.  
 **updatedAt**  
 The time stamp at which a finding was last updated\.  
-Type: string
+Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.
 
 ## Errors<a name="get-findings-errors"></a>
 

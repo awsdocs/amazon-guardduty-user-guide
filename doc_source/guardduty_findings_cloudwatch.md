@@ -1,6 +1,10 @@
 # Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events<a name="guardduty_findings_cloudwatch"></a>
 
-Amazon GuardDuty sends notifications based on [Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) when any change in the findings takes place\. This includes newly generated findings and updates to existing findings\. GuardDuty aggregates all changes to findings that take place in five\-minute intervals into a single event\. For the newly generated findings, GuardDuty sends notifications based on CloudWatch events every 5 minutes\. For the updates to the existing findings, GuardDuty sends notifications based on CloudWatch events every 6 hours\. 
+Amazon GuardDuty sends notifications based on [Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) when any change in the findings takes place\. An event indicates a change in your AWS environment\. In the context of GuardDuty, such changes include newly generated findings and all subsequent occurrences of these existing findings\. All subsequent occurrences of an existing finding are always assigned a finding ID that is identical to the ID of the original finding\.
+
+Every GuardDuty finding is assigned a finding ID\. GuardDuty creates a CloudWatch event for every finding with a unique finding ID\. For a newly generated finding with a unique finding ID, GuardDuty sends a notification based on its CloudWatch event within 5 minutes of the finding\. This event \(and this notification\) also includes all subsequent occurrences of this finding that take place in the first 5 minutes since this finding with a unique ID is generated\. 
+
+ For every finding with a unique finding ID, GuardDuty aggregates all subsequent occurrences of a particular finding that take place in six\-hour intervals into a single event\. GuardDuty then sends a notification about these subsequent occurrences based on this event\. In other words, for the subsequent occurrences of the existing findings, GuardDuty sends notifications based on CloudWatch events every 6 hours\.
 
 The CloudWatch [event](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html) for GuardDuty has the following format:
 
@@ -17,6 +21,8 @@ The CloudWatch [event](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events
          "detail": {COMPLETE_GUARDDUTY_FINDING_JSON}
         }
 ```
+
+For the complete list of all the parameters included in the COMPLETE\_GUARDDUTY\_FINDING\_JSON, see [Response Syntax](get-findings.md#get-findings-response-syntax)\. The id parameter that appears in the COMPLETE\_GUARDDUTY\_FINDING\_JSON is the finding ID described above\.
 
 ## Creating a CloudWatch Events Rule and Target for GuardDuty<a name="guardduty_cloudwatch_example"></a>
 

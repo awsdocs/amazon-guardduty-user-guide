@@ -2,10 +2,14 @@
 
 You can invite other accounts to enable GuardDuty and become associated with your AWS account\. If your invitations are accepted, your account is designated as the **master** GuardDuty account, and the associated accounts become your **member** accounts\. You can then view and manage their GuardDuty findings on their behalf\. In GuardDuty, a master account \(per region\) can have up to 1000 member accounts\. 
 
-**Important**  
-An AWS account cannot be a GuardDuty master and member account at the same time\. An AWS account can accept only one membership invitation\. Accepting a membership invitation is optional\.
+An AWS account cannot be a GuardDuty master and member account at the same time\. An AWS account can accept only one GuardDuty membership invitation\. Accepting a membership invitation is optional\.
 
+The sections below describe how you can create master and member accounts using the GuardDuty console, CLI, and APIs\. You can also create master and member accounts through AWS CloudFormation\. For more information, see [AWS::GuardDuty::Master](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-master.html) and [AWS::GuardDuty::Member](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-member.html)\.
 
+**Note**  
+Cross\-regional data transfer can occur when GuardDuty member accounts are created\. In order to verify member accounts' email addresses, GuardDuty uses a non\-AWS account information verification service that operates only in the AWS US East \(N\. Virginia\) region\.
+
+**Topics**
 + [GuardDuty Master Accounts](#guardduty_master)
 + [GuardDuty Member Accounts](#guardduty_member)
 + [Designating Master and Member Accounts Through GuardDuty Console](#guardduty_become_console)
@@ -16,39 +20,32 @@ An AWS account cannot be a GuardDuty master and member account at the same time\
 
 Users from the master account can configure GuardDuty as well as view and manage GuardDuty findings for their own account and all of their member accounts\. 
 
-The following is how a master account can configure GuardDuty:
-
-+ Users from master accounts can generate sample findings\.
-
-+ Users from master accounts can archive findings in their own accounts and in all member accounts\.
-
-+ Users from master accounts can upload and further manage trusted IP lists and threat lists in their own account\. 
+The following is how users from a master account can configure GuardDuty:
++ Users from a master account can generate sample findings in their own account\. Users from a master account CANNOT generate sample findings in members' accounts\.
++ Users from a master account can archive findings in their own accounts and in all member accounts\. 
++ Users from a master account can upload and further manage trusted IP lists and threat lists in their own account\. 
 **Important**  
-Trusted IP lists and threat lists that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty does not generate findings based on activity that involves IP addresses from the master's trusted IP lists and generates findings based on activity that involves known malicious IP addresses from the master's threat lists\.
-
-+ Users from master accounts can suspend GuardDuty for its own \(master\) account and all member accounts\.
-
-+ Users from master accounts can disable GuardDuty in its own \(master\) account\. However, all member accounts must first be removed to disable GuardDuty in the master account\. A master account CANNOT disable GuardDuty for member accounts\.
+Trusted IP lists and threat lists that are uploaded by the master account and in the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the master's threat lists and does not generate findings based on activity that involves IP addresses from the master's trusted IP lists\.
++ Users from a master account can suspend GuardDuty for its own \(master\) account\. Users from a master account can also suspend GuardDuty in its member accounts\.
+**Note**  
+If a master account user suspends GuardDuty in the master account, this suspension is NOT automatically imposed on the member accounts\. To suspend GuardDuty for member accounts, a user from a master account must select these member accounts and suspend GuardDuty through the console or specify their account IDs when running the [StopMonitoringMembers](stop-monitoring-members.md) API\.  
+A master account user can also re\-enable GuardDuty in member accounts either through the console or by running the [StartMonitoringMembers](start-monitoring-members.md) API\.
++ Users from a master account can disable GuardDuty in its own \(master\) account\. However, all member accounts must first be removed to disable GuardDuty in the master account\. Users from a master account CANNOT disable GuardDuty for member accounts\.
 
 ## GuardDuty Member Accounts<a name="guardduty_member"></a>
 
-Users from member accounts can configure GuardDuty as well as view and manage GuardDuty findings in their account\. Member account users can't configure GuardDuty or view or manage findings in the master or other member accounts\. 
+Users from member accounts can configure GuardDuty as well as view and manage GuardDuty findings in their account\. Member account users CANNOT configure GuardDuty or view or manage findings in the master or other member accounts\. 
 
-The following is how a member account can configure GuardDuty:
+The following is how users from a member account can configure GuardDuty:
++ Users from a member account can generate sample findings in their own member account\. Users from a member account CANNOT generate sample findings in the master or other member accounts\.
++ Users from a member account CANNOT archive findings either in their own account or in their master's account, or in other member accounts\.
++ Users from a member account CANNOT upload and further manage trusted IP lists and threat lists\. 
 
-+ Users from member accounts can generate sample findings\.
-
-+ Users from member accounts CANNOT archive findings either in their own accounts or in their master's account, or in other member accounts\.
-
-+ Users from member accounts CANNOT upload and further manage trusted IP lists and threat lists\. 
-
-  Trusted IP lists and threat lists that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty does not generate findings based on activity that involves IP addresses from the master's trusted IP lists and generates findings based on activity that involves known malicious IP addresses from the master's threat lists\.
+  Trusted IP lists and threat lists that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the master's threat lists and does not generate findings based on activity that involves IP addresses from the master's trusted IP lists\.
 **Note**  
 When a GuardDuty account becomes a GuardDuty member account, all of its trusted IP lists and threat lists \(uploaded prior to becoming a GuardDuty member account\) are disabled\. If a GuardDuty member account disassociates from its GuardDuty master account, all of its trusted IP lists and threat lists \(uploaded prior to becoming a GuardDuty member account\) are re\-enabled\. Once no longer a GuardDuty member account, this account's users can upload and further manage trusted IP lists and threat lists in this account\. 
-
-+ Users from member accounts can suspend GuardDuty for their own account, but not for the master account or other member accounts\.
-
-+ Users from member accounts can disable GuardDuty for their own account, but not for the master account or other member accounts\.
++ Users from a member account can suspend GuardDuty for their own account\. Users from a member account CANNOT suspend GuardDuty for the master account or other member accounts\.
++ Users from member accounts can disable GuardDuty for their own account\. Users from a member account CANNOT disable GuardDuty for the master account or other member accounts\.
 
 ## Designating Master and Member Accounts Through GuardDuty Console<a name="guardduty_become_console"></a>
 
@@ -57,11 +54,8 @@ In GuardDuty, your account is designated a master account when you add another A
 If your account is a non\-master account, you can accept an invitation from another account\. When you accept, your account becomes a member account\. 
 
 Use the following procedures to add an account, invite an account, or accept an invitation from another account\.
-
 + Step 1 \- Add an account
-
 + Step 2 \- Invite an account
-
 + Step 3 \- Accept an invitation
 
 **Step 1 \- Add an account**
@@ -104,11 +98,9 @@ In your \.csv list, accounts must appear one per line\. For each account in your
 1. Open the GuardDuty console at [https://console\.aws\.amazon\.com/guardduty](https://console.aws.amazon.com/guardduty)\.
 
 1. Do one of the following:
-
    + If you don't have GuardDuty enabled, on the **Enable GuardDuty** page, choose **Enable GuardDuty**\. Then use the **Accept** widget and the **Accept invitation** button to accept the membership invitation\.
 **Important**  
 You must enable GuardDuty before you can accept a membership invitation\.
-
    + If you already have GuardDuty enabled, use the **Accept** widget and the **Accept invitation** button to accept the membership invitation\.
 
    After you accept the invitation, your account becomes a GuardDuty member account\. The account whose user sent the invitation becomes the GuardDuty master account\. The master account user can see that the value in the **Status** column for your member account changes to **Monitored**\. The master account user can now view and manage GuardDuty findings for your member account\.

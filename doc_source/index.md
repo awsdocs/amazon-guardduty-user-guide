@@ -15,6 +15,7 @@ Amazon's trademarks and trade dress may not be used in
 -----
 ## Contents
 + [What Is Amazon GuardDuty?](what-is-guardduty.md)
++ [How Amazon GuardDuty Uses Its Data Sources](guardduty_data-sources.md)
 + [Amazon GuardDuty Terminology and Concepts](guardduty_concepts.md)
 + [Amazon GuardDuty Service Limits](guardduty_limits.md)
 + [Amazon GuardDuty Supported Regions](guardduty_regions.md)
@@ -23,7 +24,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Amazon GuardDuty Findings](guardduty_findings.md)
    + [Amazon GuardDuty Finding Types](guardduty_finding-types.md)
    + [Remediating Security Issues Discovered by Amazon GuardDuty](guardduty_remediate.md)
-+ [Uploading Trusted IP Lists and Threat Lists](guardduty_upload_lists.md)
++ [Working with Trusted IP Lists and Threat Lists](guardduty_upload_lists.md)
 + [Managing AWS Accounts in Amazon GuardDuty](guardduty_accounts.md)
 + [Suspending or Disabling Amazon GuardDuty](guardduty_suspend-disable.md)
 + [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)

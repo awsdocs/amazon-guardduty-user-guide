@@ -58,12 +58,12 @@ Type: String
 **format**  
 The format of the file that contains the ThreatIntelSet\.  
 Type: String  
-Valid values: `TXT` | `STIX` | `OTX_CSV` | `ALIEN_VAULT` | `PROOF_POINT` | `FIRE_EYE`
+Valid values: `TXT` \| `STIX` \| `OTX_CSV` \| `ALIEN_VAULT` \| `PROOF_POINT` \| `FIRE_EYE`
 
 **status**  
 The current status of the `ThreatIntelSet`\.  
 Type: String  
-Valid values: `INACTIVE` | `ACTIVATING` | `ACTIVE` | `DEACTIVATING` | `ERROR` | `DELETE_PENDING` | `DELETED`
+Valid values: `INACTIVE` \| `ACTIVATING` \| `ACTIVE` \| `DEACTIVATING` \| `ERROR` \| `DELETE_PENDING` \| `DELETED`
 
 ## Errors<a name="get-threat-intel-errors"></a>
 

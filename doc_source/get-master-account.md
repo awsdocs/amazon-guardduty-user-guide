@@ -57,7 +57,7 @@ Type: String
 The time stamp at which the invitation was sent to the member by the GuardDuty master account\.  
 Type: String  
 **relationshipStatus**  
-The status of the relationship between the master account and the member account\. Valid values: `STAGED` | `PENDING` | `DISABLED` | `ENABLED` | `REMOVED` | `RESIGNED`  
+The status of the relationship between the master account and the member account\. Valid values: `STAGED` \| `PENDING` \| `DISABLED` \| `ENABLED` \| `REMOVED` \| `RESIGNED` \| `EMAILVERIFICATIONINPROGRESS` \| `EMAILVERIFICATIONFAILED`  
 Type: String
 
 ## Errors<a name="get-master-account-errors"></a>

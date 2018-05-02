@@ -16,7 +16,8 @@ POST https://<endpoint>/detector/{detectorId}/member/invite
         {
             "accountId": "string"
         },
-        "message": "string"
+        "message": "string",
+        "disableEmailNotification": "boolean"
      ]
 }
 ```
@@ -41,8 +42,13 @@ The AWS account ID\.
 Type: String
 
 **message**  
-The invitation message that you want to send to the accounts that you invite to GuardDuty as members\.  
+The invitation message that gets sent to the accounts that you want to invite to GuardDuty as members\.  
 Type: String  
+Required: No
+
+**disableEmailNotification**  
+Specifies whether an email notification is sent to the accounts that you want to invite to GuardDuty as members\. When set to 'True', email notification is not sent to the invitees\.  
+Type: Boolean  
 Required: No
 
 ## Response Syntax<a name="invite-members-response-syntax"></a>

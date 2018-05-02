@@ -85,14 +85,14 @@ Type: String
 The account ID of the master GuardDuty for a member account\.  
 Type: String  
 **relationshipStatus**  
-The status of the relationship between the member account and its master account\. Valid values: `CREATED` | `INVITED` | `DISABLED` | `ENABLED` | `REMOVED` | `RESIGNED`  
+The status of the relationship between the member account and its master account\. Valid values: `CREATED` \| `INVITED` \| `DISABLED` \| `ENABLED` \| `REMOVED` \| `RESIGNED` \| `EMAILVERIFICATIONINPROGRESS` \| `EMAILVERIFICATIONFAILED`  
 Type: String  
 **invitedAt**  
 Time stamp at which the member account was invited to GuardDuty\.  
-Type: String  
+Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.  
 **updatedAt**  
 Time stamp at which this member account was updated\.  
-Type: String
+Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.
 
 **unprocessedAccounts**  
 A list of account ID and email address pairs of the AWS accounts that could not be processed\.  

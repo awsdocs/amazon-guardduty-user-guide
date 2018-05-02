@@ -68,7 +68,7 @@ Type: String
 The time stamp at which the invitation was sent\.  
 Type: String  
 **relationshipStatus**  
-The current relationship status between the inviter and invitee accounts\. Valid values: `CREATED` | `INVITED` | `DISABLED` | `ENABLED` | `REMOVED` | `RESIGNED`  
+The current relationship status between the inviter and invitee accounts\. Valid values: `CREATED` \| `INVITED` \| `DISABLED` \| `ENABLED` \| `REMOVED` \| `RESIGNED` \| `EMAILVERIFICATIONINPROGRESS` \| `EMAILVERIFICATIONFAILED`  
 Type: String
 
 **nextToken**  

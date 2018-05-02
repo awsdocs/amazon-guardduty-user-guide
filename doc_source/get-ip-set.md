@@ -60,11 +60,11 @@ Type: String
 **format**  
 The format of the file that contains the IPSet\.  
 Type: String  
-Values : TXT | STIX | OTX\_CSV | ALIEN\_VAULT | PROOF\_POINT | FIRE\_EYE
+Values : TXT \| STIX \| OTX\_CSV \| ALIEN\_VAULT \| PROOF\_POINT \| FIRE\_EYE
 
 **status**  
 The current status of the IPSet\.  
-Valid values : INACTIVE | ACTIVATING | ACTIVE | DEACTIVATING | ERROR | DELETE\_PENDING | DELETED  
+Valid values : INACTIVE \| ACTIVATING \| ACTIVE \| DEACTIVATING \| ERROR \| DELETE\_PENDING \| DELETED  
 Type: String
 
 ## Errors<a name="get-ip-set-errors"></a>

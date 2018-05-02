@@ -88,14 +88,14 @@ Type: String
 The account ID of the master GuardDuty for a member account\.  
 Type: String  
 **relationshipStatus**  
-The status of the relationship between the member account and its master account\. Valid values: `CREATED` | `INVITED` | `DISABLED` | `ENABLED` | `REMOVED` | `RESIGNED`  
+The status of the relationship between the member account and its master account\. Valid values: `CREATED` \| `INVITED` \| `DISABLED` \| `ENABLED` \| `REMOVED` \| `RESIGNED` \| `EMAILVERIFICATIONINPROGRESS` \| `EMAILVERIFICATIONFAILED`  
 Type: String  
 **invitedAt**  
 Time stamp at which the member account was invited to GuardDuty\.  
-Type: String  
+Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.  
 **updatedAt**  
 Time stamp at which this member account was updated\.  
-Type: String
+Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.
 
 **nextToken**  
 The token that is required for pagination\. When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the `nextToken` parameter in a subsequent pagination request\. If there is no more data to be listed, this parameter is set to NULL\.  

@@ -38,15 +38,15 @@ Type: String
 
 **status**  
 The current status of the detector\.  
-Type: String\. Valid Values: `ENABLED` | `DISABLED`
+Type: String\. Valid Values: `ENABLED` \| `DISABLED`
 
 **createdAt**  
 The time at which the detector was created\.  
-Type: String
+Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.
 
 **updatedAt**  
 The time at which detector was last updated\.  
-Type: String
+Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.
 
 ## Errors<a name="get-detector-errors"></a>
 

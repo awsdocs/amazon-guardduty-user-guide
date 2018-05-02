@@ -38,7 +38,7 @@ Required: Yes
 **feedback**  
 Type: String  
 Required: Yes  
-Valid values: `USEFUL` | `NOT_USEFUL`
+Valid values: `USEFUL` \| `NOT_USEFUL`
 
 **comments**  
 Additional feedback about the GuardDuty findings\.  
