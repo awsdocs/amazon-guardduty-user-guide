@@ -5,18 +5,20 @@ Amazon GuardDuty generates findings when it detects unexpected and potentially m
 This topic describes the following information:
 
 **Topics**
-+ [Working with GuardDuty Findings](#guardduty_working-with-findings)
++ [Locating and Analyzing GuardDuty Findings](#guardduty_working-with-findings)
++ [Archiving GuardDuty Findings and Providing Feedback](#guardduty_archive-findings)
++ [Filtering Through GuardDuty Findings](#guardduty_filter-findings)
 + [Severity Levels for GuardDuty Findings](#guardduty_findings-severity)
 + [Generating GuardDuty Sample Findings](#guardduty_sample-findings)
 + [Proof of Concept \- Automatically Generating Several Common GuardDuty Findings](#guardduty_findings-scripts)
 + [Amazon GuardDuty Finding Types](guardduty_finding-types.md)
 + [Remediating Security Issues Discovered by Amazon GuardDuty](guardduty_remediate.md)
 
-## Working with GuardDuty Findings<a name="guardduty_working-with-findings"></a>
+## Locating and Analyzing GuardDuty Findings<a name="guardduty_working-with-findings"></a>
 
-Use the following procedure to view and manage your GuardDuty findings\.
+Use the following procedure to view and analyze your GuardDuty findings\.
 
-**To locate, analyze, and manage GuardDuty findings \(console\)**
+****
 
 1. Open the GuardDuty console at [https://console\.aws\.amazon\.com/guardduty](https://console.aws.amazon.com/guardduty), and then choose **Findings**\.
 
@@ -63,11 +65,35 @@ Findings' time stamps in the GuardDuty console appear in your local time zone, w
      + **Unusual** – activity details that were not observed historically\. These can include an unusual \(previously not observed\) user, or location, or time\. 
      + **Unusual protocol **– the network connection protocol involved in the activity that prompted GuardDuty to generate the finding\.
 
-1. To archive or export the finding that you're analyzing, choose the **Actions** menu, and then choose **Archive** or **Export**\. 
+## Archiving GuardDuty Findings and Providing Feedback<a name="guardduty_archive-findings"></a>
+
+Use the following procedure to archive your findings or mark them as current and to provide feedback for your GuardDuty findings
+
+****
+
+1. To archive or export a finding, choose it from the list of your findings and then choose the **Actions** menu\. Then choose **Archive** or **Export**\. 
 **Note**  
 Currently in GuardDuty, users from GuardDuty member accounts CANNOT archive findings\.
 
-1. To provide feedback by marking the finding useful or not useful, choose the thumbs up or thumbs down icons\. 
+1. To provide feedback by marking the finding useful or not useful, choose it from the list of your findings and then choose the thumbs up or thumbs down icons\. 
+
+## Filtering Through GuardDuty Findings<a name="guardduty_filter-findings"></a>
+
+Use the following procedure to create filters for your GuardDuty findings\.
+
+****
+
+1. Choose the **Add filter criteria** bar above the displayed list of your GuardDuty findings\.
+
+1. In the expanded list of attributes, select the attributes that you want to specify as the criteria for your filter\. For example, **Account ID** and/or **Action type**\. You can specify one attribute or a maximum of 50 attributes as the criteria for a particular filter\. 
+
+   For the complete list of attributes that you can specify as filter criteria, see the details of the filterCriteria property in [CreateFilter](create-filter.md)\.
+
+1. In the displayed text field, specify a value for each selected attribute and then select **Apply**\.
+**Note**  
+In a particular filter, for the attributes where you're using the 'equal to' or 'not equal to' condition to be applied to the attribute value, \(for example, Account ID\), you can specify up to a maximum of 50 values\. 
+
+1. To save the specified attributes and their values \(filter criteria\) as a filter, select **Save**\. Provide the filter name and description, and use the **Auto\-archive** checkbox to specify whether the findings that match this filter are to be automatically archived\. Then select **Done**\.
 
 ## Severity Levels for GuardDuty Findings<a name="guardduty_findings-severity"></a>
 
