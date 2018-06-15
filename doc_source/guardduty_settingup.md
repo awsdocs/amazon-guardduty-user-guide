@@ -47,14 +47,7 @@ Replace the sample account ID in the example below with your actual AWS account 
                    }
                }
            },
-           {
-               "Effect": "Allow",
-               "Action": [
-                   "iam:PutRolePolicy",
-                   "iam:DeleteRolePolicy"
-               ],
-               "Resource": "arn:aws:iam::123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
-           }
+   
        ]
    }
    ```

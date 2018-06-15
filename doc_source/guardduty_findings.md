@@ -6,8 +6,8 @@ This topic describes the following information:
 
 **Topics**
 + [Locating and Analyzing GuardDuty Findings](#guardduty_working-with-findings)
-+ [Archiving GuardDuty Findings and Providing Feedback](#guardduty_archive-findings)
-+ [Filtering Through GuardDuty Findings](#guardduty_filter-findings)
++ [Archiving, Exporting, and Providing Feedback on GuardDuty Findings](#guardduty_archive-findings)
++ [Filtering and Auto\-Archiving GuardDuty Findings](#guardduty_filter-findings)
 + [Severity Levels for GuardDuty Findings](#guardduty_findings-severity)
 + [Generating GuardDuty Sample Findings](#guardduty_sample-findings)
 + [Proof of Concept \- Automatically Generating Several Common GuardDuty Findings](#guardduty_findings-scripts)
@@ -65,19 +65,21 @@ Findings' time stamps in the GuardDuty console appear in your local time zone, w
      + **Unusual** – activity details that were not observed historically\. These can include an unusual \(previously not observed\) user, or location, or time\. 
      + **Unusual protocol **– the network connection protocol involved in the activity that prompted GuardDuty to generate the finding\.
 
-## Archiving GuardDuty Findings and Providing Feedback<a name="guardduty_archive-findings"></a>
+## Archiving, Exporting, and Providing Feedback on GuardDuty Findings<a name="guardduty_archive-findings"></a>
 
 Use the following procedure to archive your findings or mark them as current and to provide feedback for your GuardDuty findings
 
 ****
 
-1. To archive or export a finding, choose it from the list of your findings and then choose the **Actions** menu\. Then choose **Archive** or **Export**\. 
+1. To archive or export a finding, choose it from the list of your findings and then choose the **Actions** menu\. Then choose **Archive** or **Export**\. When you **Export** a finding, you can see its full JSON document\.
 **Note**  
 Currently in GuardDuty, users from GuardDuty member accounts CANNOT archive findings\.
+**Note**  
+If and only if the confidence level of a GuardDuty finding is set to 0, you the **Confidence** field is displayed in the full finding JSON\. The presence of the **Confidence** field set to 0 indicates that this GuardDuty finding is a false positive\.
 
 1. To provide feedback by marking the finding useful or not useful, choose it from the list of your findings and then choose the thumbs up or thumbs down icons\. 
 
-## Filtering Through GuardDuty Findings<a name="guardduty_filter-findings"></a>
+## Filtering and Auto\-Archiving GuardDuty Findings<a name="guardduty_filter-findings"></a>
 
 Use the following procedure to create filters for your GuardDuty findings\.
 
@@ -93,7 +95,7 @@ Use the following procedure to create filters for your GuardDuty findings\.
 **Note**  
 In a particular filter, for the attributes where you're using the 'equal to' or 'not equal to' condition to be applied to the attribute value, \(for example, Account ID\), you can specify up to a maximum of 50 values\. 
 
-1. To save the specified attributes and their values \(filter criteria\) as a filter, select **Save**\. Provide the filter name and description, and use the **Auto\-archive** checkbox to specify whether the findings that match this filter are to be automatically archived\. Then select **Done**\.
+1. To save the specified attributes and their values \(filter criteria\) as a filter, select **Save**\. Provide the filter name and description, and use the **Auto\-archive** checkbox to specify whether the findings that match this filter are to be automatically archived\. Then select **Done**\. For more information, see [Auto\-archive](guardduty_concepts.md#gd-auto-archive)\.
 
 ## Severity Levels for GuardDuty Findings<a name="guardduty_findings-severity"></a>
 
