@@ -46,7 +46,7 @@ Replace the sample account ID in the example below with your actual AWS account 
                        "iam:AWSServiceName": "guardduty.amazonaws.com"
                    }
                }
-           },
+           }
    
        ]
    }

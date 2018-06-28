@@ -14,7 +14,7 @@ Cross\-regional data transfer can occur when GuardDuty member accounts are creat
 + [GuardDuty Member Accounts](#guardduty_member)
 + [Designating Master and Member Accounts Through GuardDuty Console](#guardduty_become_console)
 + [Designating Master and Member Accounts Through the GuardDuty API Operations](#guardduty_become_api)
-+ [Enable GuardDuty in Multiple Accounts Simultaneously](#guardduty_become_scripts)
++ [Enable GuardDuty in Multiple Accounts Simultaneously](#guardduty_become_multiple)
 
 ## GuardDuty Master Accounts<a name="guardduty_master"></a>
 
@@ -67,6 +67,8 @@ Use the following procedures to add an account, invite an account, or accept an 
 1. Choose **Add accounts**\.
 
 1. On the **Add member** accounts page, under **Enter accounts**, type the AWS account ID and email address of the account that you want to add\. Then choose **Add account**\.
+**Important**  
+The email address that you specify in this step MUST be identical to the email address associated with the AWS account that you want to add as GuardDuty member account\.
 
    You can add more accounts, one at a time, by specifying their IDs and email addresses\. You can also choose **Upload list \(\.csv\)** to bulk add accounts\. This can be useful if you want to invite some of these accounts to enable GuardDuty right away but want to delay for others\.
 **Important**  
@@ -159,9 +161,13 @@ Complete the following procedure using the credentials of each AWS account that 
    aws guardduty accept-invitation --detector-id 12abc34d567e8fa901bc2d34e56789f0 --master-id 012345678901 --invitation-id 84b097800250d17d1872b34c4daadcf5 
    ```
 
-## Enable GuardDuty in Multiple Accounts Simultaneously<a name="guardduty_become_scripts"></a>
+## Enable GuardDuty in Multiple Accounts Simultaneously<a name="guardduty_become_multiple"></a>
 
-To enable GuardDuty in multiple accounts at the same time, you can run enableguardduty\.py and disableguardduty\.py, which you can download from the following page: [https://github\.com/aws\-samples/amazon\-guardduty\-multiaccount\-scripts](https://github.com/aws-samples/amazon-guardduty-multiaccount-scripts)\.
+Use either of the methods below to enable GuardDuty in multiple accounts at the same time:
+
+### Use Python Scripts to Enable GuardDuty in Multiple Accounts Simultaneously<a name="guardduty_become_scripts"></a>
+
+You can run `enableguardduty.py` and `disableguardduty.py`, which you can download from the following page: [https://github\.com/aws\-samples/amazon\-guardduty\-multiaccount\-scripts](https://github.com/aws-samples/amazon-guardduty-multiaccount-scripts)\.
 
 enableguardduty\.py enables GuardDuty, sends invitations from the master account and accepts invitations in all member accounts\. The result is a master GuardDuty account that contains all security findings for all member accounts\. Since GuardDuty is regionally isolated, findings for each member account roll up to the corresponding region in the master account\. For example, the us\-east\-1 region in your GuardDuty master account contains the security findings for all us\-east\-1 findings from all associated member accounts\.
 
@@ -182,3 +188,39 @@ sudo chmod +x disableguardduty.py enableguardduty.py
 When prompted, set the region to us\-east\-1 or whatever default region you want\.
 
 The scripts have one parameter \- the account ID of your GuardDuty master account\. Before you execute enableguardduty\.py or disableguardduty\.py, update either script’s global variables to map to your AWS accounts\. You can create a list of the accounts and their associated email addresses\. Specify the master GuardDuty account and \(optionally\) customize the invite message that is sent to member accounts\. 
+
+### Use AWS CloudFormation StackSets to Enable GuardDuty in Multiple Accounts Simultaneously<a name="guardduty_become_stackset"></a>
+
+AWS CloudFormation stack sets enable you to create stacks in AWS accounts across regions by using a single AWS CloudFormation template\. All the resources included in each stack are defined by the stack set's AWS CloudFormation template\. As you create the stack set, you specify the template to use, as well as any parameters and capabilities that template requires\. 
+
+You can use the **Enable AWS GuardDuty** template to enable GuardDuty simultaneously in multiple accounts\. 
+
+**Important**  
+Before performing the procedure below, complete the prerequisite steps of granting permissions for stack set operations within your AWS accounts\. For more information, see [Prerequisites: Granting Permissions for Stack Set Operations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html)\.
+
+1. Open the AWS CloudFormation console at [https://console\.aws\.amazon\.com/cloudformation](https://console.aws.amazon.com/cloudformation)\. 
+
+1. At the top of the page, choose **StackSets**, and then choose **Create stack set**\. 
+
+1. On the **Select template** page of the** Create stack set** wizard, choose **Select a sample template from the following templates**\. 
+
+1. Choose the **Enable AWS GuardDuty** sample template, and then choose **Next**\. 
+
+1. On the **Specify details** page of the wizard, provide the following information\. 
+   + Provide a name for the stack set\. Stack set names must begin with an alphabetical character, and contain only letters, numbers, and hyphens\.
+   + Optional: provide the GuardDuty master account ID\.
+**Important**  
+If you specify the master account ID, this stack set creates a GuardDuty detector in each specified account and accepts the GuardDuty membership invitation sent to each of the specified accounts by this master account\. If this value is specified, before you can create this stack set, all accounts in all regions to which **Enable AWS GuardDuty** stack set template is to be applied must already have an invitation from this master GuardDuty account and must NOT have a detector already created\. In other words, specify this value only if you want to use this stack set to enable GuardDuty in multiple member accounts and regions simultaneously and designate a particular account as the master GuardDuty account for all of these members\.  
+If you do not specify the master account ID, this stack set simply creates a GuardDuty detector in each specified account\. In other words, do not specify this value if you want to use this stack set to enable GuardDuty in multiple unrelated \(with no member/master relationship\) accounts simultaneously\.
+
+1. On the **Set deployment options** page, provide the accounts and regions into which you want stacks in your stack set deployed\. AWS CloudFormation deploys stacks in the specified accounts within the first region, then moves on to the next, and so on, as long as a region's deployment failures do not exceed a specified failure tolerance\. 
+**Note**  
+If you specify the master account ID on the previous page, this stack set creates a GuardDuty detector in each account listed in the **Specify accounts** section and accepts the GuardDuty membership invitation sent to each of these accounts by the master account\. Therefore, if you specified a GuardDuty master account, do not include this master account ID in the **Specify accounts** section and include only those accounts that you want to designate as members to this GuardDuty master account\. 
+
+1. On the **Options** page, in the **Tags** section, you can add tags by specifying a key and value pair for the resources in your stack\.
+
+   In the **Permissions** section, choose an IAM role that StackSets can use to manage your target accounts\. For detailed instructions on how to set up the IAM service roles for your administrator and all target accounts, see [Set Up Basic Permissions for Stack Sets Operations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html#stacksets-prereqs-accountsetup)\.
+
+1. On the **Review** page, review your choices and your stack set's properties\. When you are ready to create your stack set, choose **Create**\. 
+
+For more information, see [Working with AWS CloudFormation StackSets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html)\.
