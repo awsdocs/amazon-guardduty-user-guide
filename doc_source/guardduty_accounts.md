@@ -193,7 +193,7 @@ The scripts have one parameter \- the account ID of your GuardDuty master accoun
 
 AWS CloudFormation stack sets enable you to create stacks in AWS accounts across regions by using a single AWS CloudFormation template\. All the resources included in each stack are defined by the stack set's AWS CloudFormation template\. As you create the stack set, you specify the template to use, as well as any parameters and capabilities that template requires\. 
 
-You can use the **Enable AWS GuardDuty** template to enable GuardDuty simultaneously in multiple accounts\. 
+You can use the **Enable Amazon GuardDuty** template to enable GuardDuty simultaneously in multiple accounts\. 
 
 **Important**  
 Before performing the procedure below, complete the prerequisite steps of granting permissions for stack set operations within your AWS accounts\. For more information, see [Prerequisites: Granting Permissions for Stack Set Operations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html)\.
@@ -204,13 +204,13 @@ Before performing the procedure below, complete the prerequisite steps of granti
 
 1. On the **Select template** page of the** Create stack set** wizard, choose **Select a sample template from the following templates**\. 
 
-1. Choose the **Enable AWS GuardDuty** sample template, and then choose **Next**\. 
+1. Choose the **Enable Amazon GuardDuty** sample template, and then choose **Next**\. 
 
 1. On the **Specify details** page of the wizard, provide the following information\. 
    + Provide a name for the stack set\. Stack set names must begin with an alphabetical character, and contain only letters, numbers, and hyphens\.
    + Optional: provide the GuardDuty master account ID\.
 **Important**  
-If you specify the master account ID, this stack set creates a GuardDuty detector in each specified account and accepts the GuardDuty membership invitation sent to each of the specified accounts by this master account\. If this value is specified, before you can create this stack set, all accounts in all regions to which **Enable AWS GuardDuty** stack set template is to be applied must already have an invitation from this master GuardDuty account and must NOT have a detector already created\. In other words, specify this value only if you want to use this stack set to enable GuardDuty in multiple member accounts and regions simultaneously and designate a particular account as the master GuardDuty account for all of these members\.  
+If you specify the master account ID, this stack set creates a GuardDuty detector in each specified account and accepts the GuardDuty membership invitation sent to each of the specified accounts by this master account\. If this value is specified, before you can create this stack set, all accounts in all regions to which **Enable Amazon GuardDuty** stack set template is to be applied must already have an invitation from this master GuardDuty account and must NOT have a detector already created\. In other words, specify this value only if you want to use this stack set to enable GuardDuty in multiple member accounts and regions simultaneously and designate a particular account as the master GuardDuty account for all of these members\.  
 If you do not specify the master account ID, this stack set simply creates a GuardDuty detector in each specified account\. In other words, do not specify this value if you want to use this stack set to enable GuardDuty in multiple unrelated \(with no member/master relationship\) accounts simultaneously\.
 
 1. On the **Set deployment options** page, provide the accounts and regions into which you want stacks in your stack set deployed\. AWS CloudFormation deploys stacks in the specified accounts within the first region, then moves on to the next, and so on, as long as a region's deployment failures do not exceed a specified failure tolerance\. 

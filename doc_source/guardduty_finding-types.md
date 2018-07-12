@@ -398,9 +398,9 @@ This finding informs you that an API operation \(for example, an attempt to laun
 
 #### Finding description<a name="unauthorized6_description"></a>
 
-**An API was invoked from an IP address of an unusual ISP\.**
+**An API was invoked from an IP address of an unusual network\.**
 
-This finding informs you that certain activity was invoked from an IP address of an unusual ISP\. This ISP was never observed throughout your AWS usage history\. This activity can include a console login, an attempt to launch an EC2 instance, create a new IAM user, modify your AWS privileges, etc\. This can indicate unauthorized access to your AWS resources\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
+This finding informs you that certain activity was invoked from an IP address of an unusual network\. This network was never observed throughout the AWS usage history of the described user\. This activity can include a console login, an attempt to launch an EC2 instance, create a new IAM user, modify your AWS privileges, etc\. This can indicate unauthorized access to your AWS resources\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
 
 ### UnauthorizedAccess:EC2/TorIPCaller<a name="unauthorized7"></a>
 
