@@ -39,8 +39,8 @@ You can also create a CloudWatch Events rule and target for GuardDuty through th
 
    `aws events put-rule --name Test --event-pattern "{\"source\":[\"aws.guardduty\"]}"`
 **Important**  
-You can further customize your rule so that it instructs CloudWatch to send events only for a subset of the GuardDuty\-generated findings\. This subset is based on the finding attribute\(s\) that are specified in the rule\. For example, use the following CLI command to create a rule that enables CloudWatch to only send events for the GuardDuty findings with the severity of either 5\.0 or 8\.0:   
-`aws events put-rule --name Test --event-pattern "{\"source\":[\"aws.guardduty\"],\"detail-type\":[\"GuardDuty Finding\"],\"detail\":{\"severity\":[5.0,8.0]}}"`  
+You can further customize your rule so that it instructs CloudWatch to send events only for a subset of the GuardDuty\-generated findings\. This subset is based on the finding attribute\(s\) that are specified in the rule\. For example, use the following CLI command to create a rule that enables CloudWatch to only send events for the GuardDuty findings with the severity of either 5 or 8:   
+`aws events put-rule --name Test --event-pattern "{\"source\":[\"aws.guardduty\"],\"detail-type\":[\"GuardDuty Finding\"],\"detail\":{\"severity\":[5,8]}}"`  
 For this purpose, you can use any of the GuardDuty attributes that are supported for sorting findings\. For more information, see [GetFindings](get-findings.md)\.
 
 1. To attach a Lambda function as a target for the rule that you created in step 1, run the following CloudWatch CLI command:
@@ -54,3 +54,5 @@ Make sure to replace <your\_function> in the command above with your actual Lamb
    `aws lambda add-permission --function-name <your_function> --statement-id 1 --action 'lambda:InvokeFunction' --principal events.amazonaws.com`
 **Note**  
 Make sure to replace <your\_function> in the command above with your actual Lambda function for the GuardDuty events\.
+**Note**  
+In the procedure above, we're using a Lambda function as the target for the rule that triggers CloudWatch events\. You can also configure other AWS resources as targets to trigger CloudWatch Events\. For more information, see [PutTargets](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html)\.

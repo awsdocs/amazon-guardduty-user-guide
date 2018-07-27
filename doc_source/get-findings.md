@@ -462,7 +462,7 @@ Type: String
 The network connection protocol\.  
 Type: String  
 **blocked**  
-The network connection blocked information\.  
+The network connection blocked information\. For more information, see [Flow Log Records](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html#flow-log-records)\.  
 Type: Boolean  
 **awsApiCallAction**  
 Information about the `AWS_API_CALL` action that is described in this finding\.  

@@ -20,8 +20,11 @@ Note the following when creating trusted IP lists and threat lists that you plan
   54.20.175.217
   205.0.0.0/8
   ```
-+ GuardDuty doesn't generate findings for any non\-routable or internal IP addresses in your threat lists\.
++ GuardDuty doesn't generate findings for any non\-routable or internal \(or private\) IP addresses in your threat lists\.
 + GuardDuty doesn't generate findings based on activity that involves domain names that are included in your threat lists\. GuardDuty only generates findings based on activity that involves IP addresses and CIDR ranges in your threat lists\.
++ The maximum size of the file that hosts your trusted IP list or threat list is 35MB\.
++ You can include a maximum of 2000 IP addresses and CIDR ranges in a single trusted IP list\.
++ You can include a maximum of 250,000 IP addresses and CIDR ranges in a single threat list\.
 
 **Topics**
 + [Permissions Required to Upload Trusted IP Lists and Threat Lists](#upload-permissions)

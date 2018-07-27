@@ -50,6 +50,8 @@ Findings' time stamps in the GuardDuty console appear in your local time zone, w
    + A finding's **Action** section that can include the following information:
      + **Action type** – the finding activity type\. This value can be one of the following: NETWORK\_CONNECTION, AWS\_API\_CALL, PORT\_PROBE, or DNS\_REQUEST\. NETWORK\_CONNECTION indicates that network traffic was exchanged between the identified EC2 instance and the remote host\. AWS\_API\_CALL indicates that an AWS API was invoked\. DNS\_REQUEST indicates that the identified EC2 instance queried a domain name\. PORT\_PROBE indicates that a remote host probed the identified EC2 instance on multiple open ports\. 
      + **API** – the name of the API operation that was invoked and thus prompted GuardDuty to generate this finding\. 
+**Note**  
+These operations can also include non\-API events captured by CloudTrail\. For more information, see [Non\-API Events Captured by CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-non-api-events.html)\.
      + **Service name** – the name of the AWS service \(GuardDuty\) that generated the finding\. 
      + **Connection direction** – the network connection direction observed in the activity that prompted GuardDuty to generate the finding\. The values can be INBOUND, OUTBOUND, and UNKNOWN\. INBOUND indicates that a remote host initiated a connection to a local port on the identified EC2 instance in your account\. OUTBOUND indicates that the identified EC2 instance initiated a connection to a remote host\. UNKNOWN indicates that GuardDuty could not determine the direction of the connection\.
      + **Protocol** – the network connection protocol observed in the activity that prompted GuardDuty to generate the finding\. 
@@ -78,6 +80,8 @@ Currently in GuardDuty, users from GuardDuty member accounts CANNOT archive find
 If and only if the confidence level of a GuardDuty finding is set to 0, you the **Confidence** field is displayed in the full finding JSON\. The presence of the **Confidence** field set to 0 indicates that this GuardDuty finding is a false positive\.
 
 1. To provide feedback by marking the finding useful or not useful, choose it from the list of your findings and then choose the thumbs up or thumbs down icons\. 
+
+1. To view your archived or current findings, choose the filter icon above the list of findings and then check either the **Archived** or the **Current** checkbox\.
 
 ## Filtering and Auto\-Archiving GuardDuty Findings<a name="guardduty_filter-findings"></a>
 

@@ -57,7 +57,7 @@ Type: String
 The time stamp at which the invitation was sent to the member by the GuardDuty master account\.  
 Type: String  
 **relationshipStatus**  
-The status of the relationship between the master account and the member account\. Valid values: `STAGED` \| `PENDING` \| `DISABLED` \| `ENABLED` \| `REMOVED` \| `RESIGNED` \| `EMAILVERIFICATIONINPROGRESS` \| `EMAILVERIFICATIONFAILED`  
+The status of the relationship between the master account and the member account\. Valid values: `CREATED` \| `INVITED` \| `DISABLED` \| `ENABLED` \| `REMOVED` \| `RESIGNED` \| `EMAILVERIFICATIONINPROGRESS` \| `EMAILVERIFICATIONFAILED`  
 Type: String
 
 ## Errors<a name="get-master-account-errors"></a>
@@ -131,7 +131,7 @@ Connection: Keep-alive
       "accountId":"012345678901",
       "invitationId":"84b097800250d17d1872b34c4daadcf5",
       "invitedAt":"2018-01-25T20:26:25.825Z",
-      "relationshipStatus":"Monitored"
+      "relationshipStatus":"Enabled"
    }
 }
 ```
