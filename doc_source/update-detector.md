@@ -12,7 +12,7 @@ POST https://<endpoint>/detector/{detectorId}
 
 ```
 {    
-    "enable" : "boolean"
+    "enable" : "boolean" 
 }
 ```
 

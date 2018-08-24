@@ -120,3 +120,38 @@ HTTP Status Code: 400
 Internal server error\.
 
 HTTP Status Code: 500 
+
+## Example<a name="list-filters-example"></a>
+
+**Sample Request**
+
+```
+GET /detector/c6b0be64463ff852400d8ae5b2353866/filter HTTP/1.1
+Host: guardduty.us-west-2.amazonaws.com
+Accept-Encoding: identity
+Authorization:AUTHPARAMS
+X-Amz-Date: 20180824T211912Z
+User-Agent: aws-cli/1.15.85 Python/2.7.9 Windows/8 botocore/1.10.84
+```
+
+**Sample Response**
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 50
+Date: Fri, 24 Aug 2018 21:19:14 GMT
+x-amzn-RequestId: 59eab962-a7e3-11e8-8f26-cd857361cad4
+x-amz-apigw-id: MJds2FlzvHcF_PA=
+X-Amzn-Trace-Id: Root=1-5b807652-7d859257708b3a4004b4dfb9;Sampled=0
+X-Cache: Miss from cloudfront
+Via: 1.1 fb1574d5a6ba2d77d2a656aba08aa3c3.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: cyWCPu_9N3l_pyxqCpGYhCCDcod2Eu71PU6TroKzPPqhKNVtMeh33w==
+Connection: keep-alive
+{
+   "filterNames": [
+      "ExampleFilter"
+   ],
+   "nextToken": null
+}
+```

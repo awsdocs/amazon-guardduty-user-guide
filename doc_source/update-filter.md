@@ -183,20 +183,19 @@ Internal server error\.
 
 HTTP Status Code: 500 
 
-## Example<a name="update-detector-example"></a>
+## Example<a name="update-filter-example"></a>
 
 **Sample Request**
 
 ```
-POST /detector/12abc34d567e8fa901bc2d34e56789f0 HTTP/1.1
+POST /detector/12abc34d567e8fa901bc2d34e56789f0/filter/Mine HTTP/1.1
 Host: guardduty.us-west-2.amazonaws.com
 Accept-Encoding: identity
-Content-Length: 16
-Authorization: AUTHPARAMS
-X-Amz-Date: 20180123T231356Z
-User-Agent: aws-cli/1.14.29 Python/2.7.9 Windows/8 botocore/1.8.33
-{  
-   "enable":true
+Content-Length: 11
+Authorization: AUTHPARAMSX-Amz-Date: 20180824T213118Z
+User-Agent: aws-cli/1.15.85 Python/2.7.9 Windows/8 botocore/1.10.84
+{
+   "rank": 2
 }
 ```
 
@@ -205,12 +204,16 @@ User-Agent: aws-cli/1.14.29 Python/2.7.9 Windows/8 botocore/1.8.33
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 0
-Date: Tue, 23 Jan 2018 23:13:57 GMT
-x-amzn-RequestId: 16c23992-0093-11e8-a33d-67e86e7cc0b9
-X-Amzn-Trace-Id: sampled=0;root=1-5a67c1b5-f8ce3625e119d47f2531e4ac
+Content-Length: 15
+Date: Fri, 24 Aug 2018 21:31:19 GMT
+x-amzn-RequestId: 09e2d517-a7e5-11e8-a517-bf71f53debc8
+x-amz-apigw-id: MJfeGEQbPHcFQaQ=
+X-Amzn-Trace-Id: Root=1-5b807927-024e2312ffbfa2e2e5a15c68;Sampled=0
 X-Cache: Miss from cloudfront
-Via: 1.1 b7b35e3be0ac217c56fb0eb4da9b75bb.cloudfront.net (CloudFront)
-X-Amz-Cf-Id: _y_e0gjS2U1RcJ8yknRPGjYB5coSSyeG1vkV9-IKaHGUUBs03-900A==
-Connection: Keep-alive
+Via: 1.1 2dc84924ce70e874a873764fe1415858.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: zyyYOrZUDaCshcl3m7JcNJQAPb8gWBKz9QBGFjqMoWTr0cuhFe3y-A==
+Connection: keep-alive
+{
+   "name": "ExampleFilter"
+}
 ```

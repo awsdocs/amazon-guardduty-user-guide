@@ -193,3 +193,55 @@ HTTP Status Code: 400
 Internal server error\.
 
 HTTP Status Code: 500 
+
+## Example<a name="create-filter-example"></a>
+
+**Sample Request**
+
+```
+GET /detector/12abc34d567e8fa901bc2d34e56789f0 HTTP/1.1
+Host: guardduty.us-west-2.amazonaws.com
+Accept-Encoding: identity
+Authorization: AUTHPARAMS
+X-Amz-Date: 20180123T220712Z
+User-Agent: aws-cli/1.14.29 Python/2.7.9 Windows/8 botocore/1.8.33
+
+POST /detector/12abc34d567e8fa901bc2d34e56789f0/filter HTTP/1.1
+Host: guardduty.us-west-2.amazonaws.com
+Accept-Encoding: identity
+Content-Length: 179
+Authorization: AUTHPARAMS
+X-Amz-Date: 20180824T205429Z
+User-Agent: aws-cli/1.15.85 Python/2.7.9 Windows/8 botocore/1.10.84
+{
+   "findingCriteria": {
+      "criterion": {
+         "resource.instanceDetails.instanceId": {
+            "eq": [
+               "i-49113b93"
+            ]
+         }
+      }
+   },
+   "name": "ExampleFilter"
+}
+```
+
+**Sample Response**
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 24
+Date: Fri, 24 Aug 2018 20:54:31 GMT
+x-amzn-RequestId: e5cd1bbc-a7df-11e8-9be9-751fcb56efc9
+x-amz-apigw-id: MJaFFEoJPHcFrrQ=
+X-Amzn-Trace-Id: Root=1-5b807086-aa465aeb2b382d7254eb28b5;Sampled=0
+X-Cache: Miss from cloudfront
+Via: 1.1 88eb066576c1b47cd896ab0019b9f25f.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: BtfJWcoxlH6ZblhQncoPu7ozBJU7etV8RO8veE8l3vBYOUM22SsyrQ==
+Connection: keep-alive
+{
+   "name": "ExampleFilter"
+}
+```

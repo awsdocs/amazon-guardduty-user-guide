@@ -83,6 +83,9 @@ If and only if the confidence level of a GuardDuty finding is set to 0, you the 
 
 1. To view your archived or current findings, choose the filter icon above the list of findings and then check either the **Archived** or the **Current** checkbox\.
 
+**Important**  
+If you archive a finding manually using the procedure above, all subsequent occurrences of this finding \(generated after the archiving is complete\) are added to the list of your current findings\. To never see this finding in your current list, you can auto\-archive it\. For more information, see [Filtering and Auto\-Archiving GuardDuty Findings](#guardduty_filter-findings)\.
+
 ## Filtering and Auto\-Archiving GuardDuty Findings<a name="guardduty_filter-findings"></a>
 
 Use the following procedure to create filters for your GuardDuty findings\.
@@ -100,6 +103,9 @@ Use the following procedure to create filters for your GuardDuty findings\.
 In a particular filter, for the attributes where you're using the 'equal to' or 'not equal to' condition to be applied to the attribute value, \(for example, Account ID\), you can specify up to a maximum of 50 values\. 
 
 1. To save the specified attributes and their values \(filter criteria\) as a filter, select **Save**\. Provide the filter name and description, and use the **Auto\-archive** checkbox to specify whether the findings that match this filter are to be automatically archived\. Then select **Done**\. For more information, see [Auto\-archive](guardduty_concepts.md#gd-auto-archive)\.
+
+**Important**  
+If a finding is auto\-archived \(see step 4 above\), all subsequent occurrences of this finding \(generated after the archiving is complete\) are added to the list of your archived findings\.
 
 ## Severity Levels for GuardDuty Findings<a name="guardduty_findings-severity"></a>
 

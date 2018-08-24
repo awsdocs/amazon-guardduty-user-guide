@@ -22,7 +22,7 @@ Required: Yes
     "serviceRole": "string",
     "status": "string",
     "createdAt": "string",
-    "updatedAt": "string"
+    "updatedAt": "string" 
 }
 ```
 

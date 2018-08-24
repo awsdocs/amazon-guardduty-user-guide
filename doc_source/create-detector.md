@@ -15,7 +15,7 @@ POST https://<endpoint>/detector
 
 ```
 {
-    "enable" : "boolean"
+    "enable" : "boolean" 
 }
 ```
 
