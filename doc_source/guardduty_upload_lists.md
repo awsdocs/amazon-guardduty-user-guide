@@ -118,3 +118,9 @@ If you make changes to a trusted IP list or a threat list that is already upload
 1. In the **Update list** pop up window, verify all specified list information, choose **I agree**, and then choose **Update list**\.
 
 1. On the **List management** page, locate the trusted IP set or a threat list that you want to activate again, and then choose the radio button under the **Active** column\.
+
+The threat intelligence feeds can also be programaticlly imported into GuardDuty\.
+
+Click **[here](https://aws.amazon.com/blogs/security/how-to-automate-import-third-party-threat-intelligence-feeds-into-amazon-guardduty/)** to learn how to automate the import of third-party threat intelligence feeds into Amazon GuardDuty.
+
+**[The code is available on GitHub.](https://github.com/aws-samples/amazon-guardduty-threat-feed)** 
