@@ -126,7 +126,7 @@ HTTP Status Code: 500
 **Sample Request**
 
 ```
-GET /detector/c6b0be64463ff852400d8ae5b2353866/filter HTTP/1.1
+GET /detector/12abc34d567e8fa901bc2d34e56789f0/filter HTTP/1.1
 Host: guardduty.us-west-2.amazonaws.com
 Accept-Encoding: identity
 Authorization:AUTHPARAMS

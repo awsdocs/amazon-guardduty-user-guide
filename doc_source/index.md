@@ -20,6 +20,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Amazon GuardDuty Service Limits](guardduty_limits.md)
 + [Amazon GuardDuty Supported Regions](guardduty_regions.md)
 + [Setting Up Amazon GuardDuty](guardduty_settingup.md)
+   + [Using Service-Linked Roles for Amazon GuardDuty](using-service-linked-roles.md)
 + [Managing Access to Amazon GuardDuty](guardduty_managing_access.md)
 + [Amazon GuardDuty Findings](guardduty_findings.md)
    + [Amazon GuardDuty Finding Types](guardduty_finding-types.md)

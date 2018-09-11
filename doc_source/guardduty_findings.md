@@ -164,7 +164,7 @@ You can use the following [scripts](https://github.com/awslabs/amazon-guardduty-
        ForwardAgent yes
        HostName {Local IP Address of RedTeam Instance}
        User ec2-user
-       IdentityFile ~/.ssh/{your-ssh-key.pem
+       IdentityFile ~/.ssh/{your-ssh-key.pem}
        ProxyCommand ssh bastion nc %h %p
        ServerAliveInterval 240
    ```

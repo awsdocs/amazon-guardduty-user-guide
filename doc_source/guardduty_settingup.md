@@ -15,6 +15,7 @@ This might be unavailable in your browser if you previously signed into the AWS 
 **Topics**
 + [Enable Amazon GuardDuty](#guardduty_enable-gd)
 + [Amazon GuardDuty Free Trial](#guardduty_free-trial)
++ [Using Service\-Linked Roles for Amazon GuardDuty](using-service-linked-roles.md)
 
 ## Enable Amazon GuardDuty<a name="guardduty_enable-gd"></a>
 
