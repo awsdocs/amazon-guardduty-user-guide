@@ -10,7 +10,7 @@ Every GuardDuty finding is assigned a finding ID\. GuardDuty creates a CloudWatc
 
 **Important**  
 If you archive a finding manually, the initial and all subsequent occurrences of this finding \(generated after the archiving is complete\) are sent to CloudWatch Events per frequency previously described\.  
-If a finding is auto\-archived, the initial and all subsequent occurrences of this finding \(generated after the archiving is complete\) are *not* sent to CloudWatch Wvents\.
+If a finding is auto\-archived, the initial and all subsequent occurrences of this finding \(generated after the archiving is complete\) are *not* sent to CloudWatch Events\.
 
 The CloudWatch [event](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html) for GuardDuty has the following format\.
 
