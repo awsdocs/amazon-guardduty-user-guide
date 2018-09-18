@@ -1,18 +1,32 @@
 # Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events<a name="guardduty_findings_cloudwatch"></a>
 
-Amazon GuardDuty sends notifications based on [Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) when any change in the findings takes place\. An event indicates a change in your AWS environment\. In the context of GuardDuty, such changes include newly generated findings and all subsequent occurrences of these existing findings\. All subsequent occurrences of an existing finding are always assigned a finding ID that is identical to the ID of the original finding\.
+Amazon GuardDuty can send notifications based on [Amazon CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) when any changes in the findings takes place\. These changes include newly generated findings or subsequent occurrences of existing findings\.
 
-Every GuardDuty finding is assigned a finding ID\. GuardDuty creates a CloudWatch event for every finding with a unique finding ID\.
+Every GuardDuty finding is assigned a finding ID\. GuardDuty creates a CloudWatch event for every finding with a unique finding ID\. All subsequent occurrences of an existing finding are always assigned a finding ID that is identical to the ID of the original finding\.
+
+In order to receive notifications about GuardDuty findings based on CloudWatch Events, you must create a CloudWatch Events rule and a target for GuardDuty\. This rule enables CloudWatch to send events for all findings that GuardDuty generates to the target that is specified in the rule\. For more information, see [Creating a CloudWatch Events Rule and Target for GuardDuty](#guardduty_cloudwatch_example)\.
+
+**Topics**
++ [CloudWatch Events Notification Frequency for GuardDuty](#guardduty_findings_cloudwatch_notification_frequency)
++ [Monitoring Archived GuardDuty Findings with CloudWatch Events](#guardduty_findings_cloudwatch_archived)
++ [CloudWatch Event Format for GuardDuty](#guardduty_findings_cloudwatch_format)
++ [Creating a CloudWatch Events Rule and Target for GuardDuty](#guardduty_cloudwatch_example)
+
+## CloudWatch Events Notification Frequency for GuardDuty<a name="guardduty_findings_cloudwatch_notification_frequency"></a>
 
 **Notifications for newly generated findings with a unique finding ID** – GuardDuty sends a notification based on its CloudWatch event within 5 minutes of the finding\. This event \(and this notification\) also includes all subsequent occurrences of this finding that take place in the first 5 minutes since this finding with a unique ID is generated\.
 
 **Notifications for subsequent finding occurrences** – By default, for every finding with a unique finding ID, GuardDuty aggregates all subsequent occurrences of a particular finding that take place in 6\-hour intervals into a single event\. GuardDuty then sends a notification about these subsequent occurrences based on this event\. In other words, by default, for the subsequent occurrences of the existing findings, GuardDuty sends notifications based on CloudWatch events every 6 hours\.
 
-**Important**  
-If you archive a finding manually, the initial and all subsequent occurrences of this finding \(generated after the archiving is complete\) are sent to CloudWatch Events per frequency previously described\.  
-If a finding is auto\-archived, the initial and all subsequent occurrences of this finding \(generated after the archiving is complete\) are *not* sent to CloudWatch Wvents\.
+## Monitoring Archived GuardDuty Findings with CloudWatch Events<a name="guardduty_findings_cloudwatch_archived"></a>
 
-The CloudWatch [event](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html) for GuardDuty has the following format\.
+For the manually archived findings, the initial and all subsequent occurrences of these finding \(generated after the archiving is complete\) are sent to CloudWatch Events per frequency described above\.
+
+For the auto\-archived findings, the initial and all subsequent occurrences of these findings \(generated after the archiving is complete\) are *not* sent to CloudWatch Events\.
+
+## CloudWatch Event Format for GuardDuty<a name="guardduty_findings_cloudwatch_format"></a>
+
+The CloudWatch [event](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html) for GuardDuty has the following format\.
 
 ```
         {
@@ -37,7 +51,7 @@ The following procedure shows how to use AWS CLI commands to create a CloudWatch
 **Note**  
 In addition to Lambda functions, GuardDuty and CloudWatch support the following target types: Amazon EC2 instances, Amazon Kinesis streams, Amazon ECS tasks, AWS Step Functions state machines, the `run` command, and built\-in targets\.
 
-You can also create a CloudWatch Events rule and target for GuardDuty through the CloudWatch Events console\. For more information and detailed steps, see [Creating a CloudWatch Events Rule That Triggers on an Event](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html)\. In the **Event Source** section, select **GuardDuty** for **Service name** and **GuardDuty Finding** for **Event Type**\. 
+You can also create a CloudWatch Events rule and target for GuardDuty through the CloudWatch Events console\. For more information and detailed steps, see [Creating a CloudWatch Events Rule That Triggers on an Event](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html)\. In the **Event Source** section, select **GuardDuty** for **Service name** and **GuardDuty Finding** for **Event Type**\. 
 
 **To create a rule and target**
 
@@ -61,4 +75,4 @@ Make sure to replace <your\_function> in the command above with your actual Lamb
 **Note**  
 Make sure to replace <your\_function> in the command above with your actual Lambda function for the GuardDuty events\.
 **Note**  
-In the procedure above, we're using a Lambda function as the target for the rule that triggers CloudWatch Events\. You can also configure other AWS resources as targets to trigger CloudWatch Events\. For more information, see [PutTargets](http://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html)\.
+In the procedure above, we're using a Lambda function as the target for the rule that triggers CloudWatch Events\. You can also configure other AWS resources as targets to trigger CloudWatch Events\. For more information, see [PutTargets](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html)\.

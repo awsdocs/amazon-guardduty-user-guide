@@ -23,8 +23,7 @@ GuardDuty processes all events that come into a region, including global events 
 
 **Important**  
 It is highly recommended that you enable GuardDuty in all supported AWS regions\. This allows GuardDuty to generate findings about unauthorized or unusual activity even in regions that you are not actively using\. This also allows GuardDuty to monitor AWS CloudTrail events for global AWS services\.   
-If GuardDuty is not enabled in all supported regions, its ability to detect activity that involves global services is reduced\.   
-There is little to no additional cost for GuardDuty to monitor a region where you do not have active workloads deployed\.
+If GuardDuty is not enabled in all supported regions, its ability to detect activity that involves global services is reduced\. 
 
 ## VPC Flow Logs<a name="guardduty_vpc"></a>
 

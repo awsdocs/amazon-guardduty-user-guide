@@ -111,7 +111,7 @@ By default, access to the GuardDuty resources \(detector, trusted IP lists, thre
 
 ### AWS Managed \(Predefined\) Policies for GuardDuty<a name="guardduty_managedpolicies"></a>
 
-AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. These *managed policies* grant necessary permissions for common use cases so that you can avoid having to investigate which permissions are needed\. For more information, see [AWS Managed Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
+AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. These *managed policies* grant necessary permissions for common use cases so that you can avoid having to investigate which permissions are needed\. For more information, see [AWS Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
 
 The following AWS managed policies, which you can attach to users in your account, are specific to GuardDuty:
 + **AmazonGuardDutyFullAccess ** – provides access to all of GuardDuty functionality\. However, when it comes to working with trusted IP lists and threat lists in GuardDuty, this managed policy provides identities with only limited access\. More specifically, an identity with the **AmazonGuardDutyFullAccess** managed policy attached can only rename and deactivate uploaded trusted IP lists and threat lists\.

@@ -1,12 +1,14 @@
 # Using Service\-Linked Roles for Amazon GuardDuty<a name="using-service-linked-roles"></a>
 
-Amazon GuardDuty uses AWS Identity and Access Management \(IAM\)[ service\-linked roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role)\. A service\-linked role is a unique type of IAM role that is linked directly to GuardDuty\. Service\-linked roles are predefined by GuardDuty and include all the permissions that GuardDuty requires to call other AWS services on your behalf\. 
+Amazon GuardDuty uses AWS Identity and Access Management \(IAM\)[ service\-linked roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role)\. A service\-linked role is a unique type of IAM role that is linked directly to GuardDuty\. Service\-linked roles are predefined by GuardDuty and include all the permissions that GuardDuty requires to call other AWS services on your behalf\. 
 
 A service\-linked role makes setting up GuardDuty easier because you don't have to manually add the necessary permissions\. GuardDuty defines the permissions of its service\-linked role, and unless the permissions are defined otherwise, only GuardDuty can assume the role\. The defined permissions include the trust policy and the permissions policy, and that permissions policy can't be attached to any other IAM entity\.
 
+GuardDuty supports using service\-linked roles in all of the regions where GuardDuty is available\. For more information, see [Amazon GuardDuty Supported Regions](guardduty_regions.md)\.
+
 You can delete the GuardDuty service\-linked role only after first disabling GuardDuty in all regions where it is enabled\. This protects your GuardDuty resources because you can't inadvertently remove permission to access them\.
 
-For information about other services that support service\-linked roles, see [AWS Services That Work with IAM](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html) in the *IAM User Guide* and look for the services that have **Yes **in the **Service\-Linked Role** column\. Choose a **Yes** with a link to view the service\-linked role documentation for that service\.
+For information about other services that support service\-linked roles, see [AWS Services That Work with IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html) in the *IAM User Guide* and look for the services that have **Yes **in the **Service\-Linked Role** column\. Choose a **Yes** with a link to view the service\-linked role documentation for that service\.
 
 ## Service\-Linked Role Permissions for GuardDuty<a name="slr-permissions"></a>
 
@@ -67,11 +69,11 @@ The `AWSServiceRoleForAmazonGuardDuty` service\-linked role is automatically cre
 **Important**  
 The service\-linked role that is created for the master GuardDuty account doesn't apply to the member GuardDuty accounts\.
 
-For more information about creating the role manually, see [Creating a Service\-Linked Role](http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#create-service-linked-role) in the *IAM User Guide*\.
+For more information about creating the role manually, see [Creating a Service\-Linked Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#create-service-linked-role) in the *IAM User Guide*\.
 
 ## Editing a Service\-Linked Role for GuardDuty<a name="edit-slr"></a>
 
-GuardDuty doesn't allow you to edit the `AWSServiceRoleForAmazonGuardDuty` service\-linked role\. After you create a service\-linked role, you can't change the name of the role because various entities might reference the role\. However, you can edit the description of the role using IAM\. For more information, see [Editing a Service\-Linked Role](http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#edit-service-linked-role) in the *IAM User Guide*\.
+GuardDuty doesn't allow you to edit the `AWSServiceRoleForAmazonGuardDuty` service\-linked role\. After you create a service\-linked role, you can't change the name of the role because various entities might reference the role\. However, you can edit the description of the role using IAM\. For more information, see [Editing a Service\-Linked Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#edit-service-linked-role) in the *IAM User Guide*\.
 
 ## Deleting a Service\-Linked Role for GuardDuty<a name="delete-slr"></a>
 
@@ -85,4 +87,4 @@ When you disable GuardDuty, the `AWSServiceRoleForAmazonGuardDuty` is NOT automa
 
 **To manually delete the service\-linked role using IAM**
 
-Use the IAM console, the IAM CLI, or the IAM API to delete the `AWSServiceRoleForAmazonGuardDuty` service\-linked role\. For more information, see [Deleting a Service\-Linked Role](http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#delete-service-linked-role) in the *IAM User Guide*\.
+Use the IAM console, the IAM CLI, or the IAM API to delete the `AWSServiceRoleForAmazonGuardDuty` service\-linked role\. For more information, see [Deleting a Service\-Linked Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#delete-service-linked-role) in the *IAM User Guide*\.
