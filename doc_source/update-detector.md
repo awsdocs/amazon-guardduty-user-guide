@@ -12,7 +12,8 @@ POST https://<endpoint>/detector/{detectorId}
 
 ```
 {    
-    "enable" : "boolean" 
+    "enable" : "boolean",
+    "findingPublishingFrequency": "[FIFTEEN_MINUTES|ONE_HOUR|SIX_HOURS]"
 }
 ```
 
@@ -31,6 +32,13 @@ The request accepts the following data in JSON format\.
 Specifies whether the detector is enabled\.   
 Type: Boolean  
 Required: No
+
+**findingPublishingFrequency**  
+Specifies the frequency of notifications sent about the subsequent finding occurrences\. For more information, see [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.  
+Type: Enum  
+Required: No  
+Valid values: FIFTEEN\_MINUTES \| ONE\_HOUR \| SIX\_HOURS  
+Default value: SIX\_HOURS
 
 ## Response Elements<a name="update-detector-response-parameters"></a>
 

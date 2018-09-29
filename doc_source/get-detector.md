@@ -22,7 +22,8 @@ Required: Yes
     "serviceRole": "string",
     "status": "string",
     "createdAt": "string",
-    "updatedAt": "string" 
+    "updatedAt": "string",
+    "findingPublishingFrequency": "enum"
 }
 ```
 
@@ -47,6 +48,9 @@ Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:
 **updatedAt**  
 The time at which detector was last updated\.  
 Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.
+
+**findingPublishingFrequency**  
+Specifies the frequency of notifications sent about the subsequent finding occurrences\. For more information, see [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
 
 ## Errors<a name="get-detector-errors"></a>
 

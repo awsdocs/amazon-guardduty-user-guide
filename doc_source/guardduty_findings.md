@@ -11,8 +11,10 @@ This topic describes the following information:
 + [Severity Levels for GuardDuty Findings](#guardduty_findings-severity)
 + [Generating GuardDuty Sample Findings](#guardduty_sample-findings)
 + [Proof of Concept \- Automatically Generating Several Common GuardDuty Findings](#guardduty_findings-scripts)
-+ [Amazon GuardDuty Finding Types](guardduty_finding-types.md)
-+ [Remediating Security Issues Discovered by Amazon GuardDuty](guardduty_remediate.md)
++ [GuardDuty Finding Types Format](guardduty_finding-format.md)
++ [GuardDuty Active Finding Types](guardduty_finding-types-active.md)
++ [GuardDuty Retired Finding Types](guardduty_finding-types-retired.md)
++ [Remediating Security Issues Discovered by GuardDuty](guardduty_remediate.md)
 
 ## Locating and Analyzing GuardDuty Findings<a name="guardduty_working-with-findings"></a>
 
@@ -26,7 +28,7 @@ Use the following procedure to view and analyze your GuardDuty findings\.
 
    A details pane appears where you can view the following information:
    + A finding's summary section that includes the following information: 
-     + **Finding type** – a concise yet readable description of the potential security issue\. For more information, see [Amazon GuardDuty Finding Types](guardduty_finding-types.md)\.
+     + **Finding type** – a concise yet readable description of the potential security issue\. For more information, see [GuardDuty Finding Types Format](guardduty_finding-format.md)\.
      + **Severity** – a finding's assigned severity level of either High, Medium, or Low\. For more information, see [Severity Levels for GuardDuty Findings](#guardduty_findings-severity)\.
      + **Region** – the AWS region in which the finding was generated\.
 **Note**  
@@ -40,7 +42,7 @@ For more information about supported regions, see [Amazon GuardDuty Supported Re
 Findings' time stamps in the GuardDuty console appear in your local time zone, while JSON exports and CLI outputs display timestamps in UTC\.
    + A finding's **Resource affected** section that includes the following information:
      + **Resource role** – a value that usually is set to **Target ** because the affected resource can be a potential target of an attack\.
-     + **Resource type** – the type of the affected resource\. This value is either **AccessKey** or **Instance**\. Currently, supported finding types highlight potentially malicious activity against either EC2 instances or AWS credentials\. For more information, see [Remediating Security Issues Discovered by Amazon GuardDuty](guardduty_remediate.md)\.
+     + **Resource type** – the type of the affected resource\. This value is either **AccessKey** or **Instance**\. Currently, supported finding types highlight potentially malicious activity against either EC2 instances or AWS credentials\. For more information, see [Remediating Security Issues Discovered by GuardDuty](guardduty_remediate.md)\.
      + **Instance ID** – the ID of the EC2 instance involved in the activity that prompted GuardDuty to generate the finding\. 
      + **Port** – the port number for the connection used during the activity that prompted GuardDuty to generate the finding\.
      + **Access key ID** – access key ID of the user engaged in the activity that prompted GuardDuty to generate the finding\. 
@@ -125,7 +127,7 @@ The following are the currently defined severity levels and values for the Guard
 
 ## Generating GuardDuty Sample Findings<a name="guardduty_sample-findings"></a>
 
-Sample findings can help you visualize and analyze the various finding types that GuardDuty generates\. When you generate sample findings, GuardDuty populates your current findings list with one sample finding for each supported finding type\. For more information about GuardDuty finding types, see [Amazon GuardDuty Finding Types](guardduty_finding-types.md)\.
+Sample findings can help you visualize and analyze the various finding types that GuardDuty generates\. When you generate sample findings, GuardDuty populates your current findings list with one sample finding for each supported finding type\. For more information about GuardDuty finding types, see [GuardDuty Active Finding Types](guardduty_finding-types-active.md)\.
 
 Use the following procedure to generate sample findings\.
 

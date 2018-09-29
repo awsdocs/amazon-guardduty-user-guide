@@ -16,7 +16,13 @@ In order to receive notifications about GuardDuty findings based on CloudWatch E
 
 **Notifications for newly generated findings with a unique finding ID** – GuardDuty sends a notification based on its CloudWatch event within 5 minutes of the finding\. This event \(and this notification\) also includes all subsequent occurrences of this finding that take place in the first 5 minutes since this finding with a unique ID is generated\.
 
+**Important**  
+You CANNOT customize the default frequency \(5 minutes\) of notifications sent about the newly generated findings\.
+
 **Notifications for subsequent finding occurrences** – By default, for every finding with a unique finding ID, GuardDuty aggregates all subsequent occurrences of a particular finding that take place in 6\-hour intervals into a single event\. GuardDuty then sends a notification about these subsequent occurrences based on this event\. In other words, by default, for the subsequent occurrences of the existing findings, GuardDuty sends notifications based on CloudWatch events every 6 hours\.
+
+**Important**  
+You can customize the default frequency of notifications sent about the subsequent finding occurrences\. Possible values are 15 minutes, 1 hour, or the default 6 hours\. You can update this value using the [CreateDetector](create-detector.md) or the [UpdateDetector](update-detector.md) API operation\. You can also update this value through the GuardDuty console \- choose **Settings** and then under **CloudWatch Events**, choose one of the available values from the **Updated findings** pull\-down menu\.
 
 ## Monitoring Archived GuardDuty Findings with CloudWatch Events<a name="guardduty_findings_cloudwatch_archived"></a>
 

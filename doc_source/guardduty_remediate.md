@@ -1,4 +1,4 @@
-# Remediating Security Issues Discovered by Amazon GuardDuty<a name="guardduty_remediate"></a>
+# Remediating Security Issues Discovered by GuardDuty<a name="guardduty_remediate"></a>
 
 Amazon GuardDuty generates [findings](guardduty_findings.md) that indicate potential security issues\. In this release of GuardDuty, the potential security issues indicate either a compromised EC2 instance or a set of compromised credentials in your AWS environment\. The following sections describe the recommended remediation steps for either scenario\.
 
