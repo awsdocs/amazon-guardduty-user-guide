@@ -1,13 +1,17 @@
 # GuardDuty Behavior Finding Types<a name="guardduty_behavior"></a>
 
+This section covers the active Behavior threat purpose finding types\. For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\. 
+
 **Important**  
-For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\.
+The default severity value of a finding type is subject to change based on various criteria when the finding is generated\.
 
 **Topics**
 + [Behavior:EC2/NetworkPortUnusual](#behavior3)
 + [Behavior:EC2/TrafficVolumeUnusual](#behavior4)
 
 ## Behavior:EC2/NetworkPortUnusual<a name="behavior3"></a>
+
+### Default severity: Medium<a name="behavior3_severity"></a>
 
 ### Finding description<a name="behavior3_description"></a>
 
@@ -16,6 +20,8 @@ For information about important changes to the GuardDuty finding types, includin
 This finding informs you that an EC2 instance in your AWS environment is behaving in a way that deviates from the established baseline\. This EC2 instance has no prior history of communications on this remote port\. Your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Behavior:EC2/TrafficVolumeUnusual<a name="behavior4"></a>
+
+### Default severity: Medium<a name="behavior4_severity"></a>
 
 ### Finding description<a name="behavior4_description"></a>
 

@@ -1,7 +1,9 @@
 # GuardDuty Persistence Finding Types<a name="guardduty_persistence"></a>
 
+This section covers the active Persistence threat purpose finding types\. For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\. 
+
 **Important**  
-For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\.
+The default severity value of a finding type is subject to change based on various criteria when the finding is generated\.
 
 **Topics**
 + [Persistence:IAMUser/NetworkPermissions](#persistence1)
@@ -9,6 +11,8 @@ For information about important changes to the GuardDuty finding types, includin
 + [Persistence:IAMUser/UserPermissions](#persistence3)
 
 ## Persistence:IAMUser/NetworkPermissions<a name="persistence1"></a>
+
+### Default severity: Medium<a name="persistence1_severity"></a>
 
 ### Finding description<a name="persistence1_description"></a>
 
@@ -20,6 +24,8 @@ This finding is triggered when network configuration settings are changed under 
 
 ## Persistence:IAMUser/ResourcePermissions<a name="persistence2"></a>
 
+### Default severity: Medium<a name="persistence2_severity"></a>
+
 ### Finding description<a name="persistence2_description"></a>
 
 **An IAM user invoked an API commonly used to change the security access policies of various resources in your AWS account\.**
@@ -29,6 +35,8 @@ This finding informs you that a specific IAM user in your AWS environment is exh
 This finding is triggered when a change is detected to policies or permissions attached to AWS resources\. For example, if an IAM user in your AWS environment with no prior history of doing so, invoked the PutBucketPolicy API\. Some services, for example, Amazon S3, support resource\-attached permissions that grant one or more IAM principals access to the resource\. With stolen credentials, attackers can change the policies attached to a resource, granting themselves future access to that resource\.
 
 ## Persistence:IAMUser/UserPermissions<a name="persistence3"></a>
+
+### Default severity: Medium<a name="persistence3_severity"></a>
 
 ### Finding description<a name="persistence3_description"></a>
 

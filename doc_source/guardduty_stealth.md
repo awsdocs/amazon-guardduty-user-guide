@@ -1,7 +1,9 @@
 # GuardDuty Stealth Finding Types<a name="guardduty_stealth"></a>
 
+This section covers the active Stealth threat purpose finding types\. For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\. 
+
 **Important**  
-For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\.
+The default severity value of a finding type is subject to change based on various criteria when the finding is generated\.
 
 **Topics**
 + [Stealth:IAMUser/PasswordPolicyChange](#stealth1)
@@ -9,6 +11,8 @@ For information about important changes to the GuardDuty finding types, includin
 + [Stealth:IAMUser/LoggingConfigurationModified](#stealth3)
 
 ## Stealth:IAMUser/PasswordPolicyChange<a name="stealth1"></a>
+
+### Default severity: Low<a name="stealth1_severity"></a>
 
 ### Finding description<a name="stealth1_description"></a>
 
@@ -18,6 +22,8 @@ Your AWS account password policy was weakened\. For example, it was deleted or u
 
 ## Stealth:IAMUser/CloudTrailLoggingDisabled<a name="stealth2"></a>
 
+### Default severity: Low<a name="stealth2_severity"></a>
+
 ### Finding description<a name="stealth2_description"></a>
 
 **AWS CloudTrail trail was disabled\.**
@@ -25,6 +31,8 @@ Your AWS account password policy was weakened\. For example, it was deleted or u
 This finding informs you that a CloudTrail trail within your AWS environment was disabled\. This can be an attacker's attempt to disable logging to cover their tracks by eliminating any trace of their activity while gaining access to your AWS resources for malicious purposes\. This finding can be triggered by a successful deletion or update of a trail\. This finding can also be triggered by a successful deletion of an S3 bucket that stores the logs from a trail that is associated with GuardDuty\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\. 
 
 ## Stealth:IAMUser/LoggingConfigurationModified<a name="stealth3"></a>
+
+### Default severity: Medium<a name="stealth3_severity"></a>
 
 ### Finding description<a name="stealth3_description"></a>
 

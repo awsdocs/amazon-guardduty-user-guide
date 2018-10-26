@@ -1,7 +1,9 @@
 # GuardDuty Trojan Finding Types<a name="guardduty_trojan"></a>
 
+This section covers the active Trojan threat purpose finding types\. For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\. 
+
 **Important**  
-For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\.
+The default severity value of a finding type is subject to change based on various criteria when the finding is generated\.
 
 **Topics**
 + [Trojan:EC2/BlackholeTraffic](#trojan4)
@@ -16,6 +18,8 @@ For information about important changes to the GuardDuty finding types, includin
 
 ## Trojan:EC2/BlackholeTraffic<a name="trojan4"></a>
 
+### Default severity: Medium<a name="trojan4_severity"></a>
+
 ### Finding description<a name="trojan4_description"></a>
 
 **EC2 instance is attempting to communicate with an IP address of a remote host that is a known black hole\.**
@@ -23,6 +27,8 @@ For information about important changes to the GuardDuty finding types, includin
 This finding informs you that an EC2 instance in your AWS environment might be compromised because it is trying to communicate with an IP address of a black hole \(or sink hole\)\. Black holes refer to places in the network where incoming or outgoing traffic is silently discarded without informing the source that the data didn't reach its intended recipient\. A black hole IP address specifies a host machine that is not running or an address to which no host has been assigned\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Trojan:EC2/DropPoint<a name="trojan5"></a>
+
+### Default severity: Medium<a name="trojan5_severity"></a>
 
 ### Finding description<a name="trojan5_description"></a>
 
@@ -32,6 +38,8 @@ This finding informs you that an EC2 instance in your AWS environment is trying 
 
 ## Trojan:EC2/BlackholeTraffic\!DNS<a name="trojan6"></a>
 
+### Default severity: Medium<a name="trojan6_severity"></a>
+
 ### Finding description<a name="trojan6_description"></a>
 
 **EC2 instance is querying a domain name that is being redirected to a black hole IP address\.**
@@ -39,6 +47,8 @@ This finding informs you that an EC2 instance in your AWS environment is trying 
 This finding informs you that an EC2 instance in your AWS environment might be compromised because it is querying a domain name that is being redirected to a black hole IP address\. Black holes refer to places in the network where incoming or outgoing traffic is silently discarded without informing the source that the data didn't reach its intended recipient\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Trojan:EC2/DriveBySourceTraffic\!DNS<a name="trojan7"></a>
+
+### Default severity: High<a name="trojan7_severity"></a>
 
 ### Finding description<a name="trojan7_description"></a>
 
@@ -48,6 +58,8 @@ This finding informs you that an EC2 instance in your AWS environment might be c
 
 ## Trojan:EC2/DropPoint\!DNS<a name="trojan8"></a>
 
+### Default severity: High<a name="trojan8_severity"></a>
+
 ### Finding description<a name="trojan8_description"></a>
 
 **An EC2 instance is querying a domain name of a remote host that is known to hold credentials and other stolen data captured by malware\.**
@@ -55,6 +67,8 @@ This finding informs you that an EC2 instance in your AWS environment might be c
 This finding informs you that an EC2 instance in your AWS environment is querying a domain name of a remote host that is known to hold credentials and other stolen data captured by malware\. Your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Trojan:EC2/DGADomainRequest\.B<a name="trojan9"></a>
+
+### Default severity: High<a name="trojan9_severity"></a>
 
 ### Finding description<a name="trojan9_description"></a>
 
@@ -69,6 +83,8 @@ DGAs are used to periodically generate a large number of domain names that can b
 
 ## Trojan:EC2/DGADomainRequest\.C\!DNS<a name="trojan95"></a>
 
+### Default severity: High<a name="trojan95_severity"></a>
+
 ### Finding description<a name="trojan95_description"></a>
 
 **EC2 instance is querying algorithmically generated domains\. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance\.**
@@ -82,6 +98,8 @@ DGAs are used to periodically generate a large number of domain names that can b
 
 ## Trojan:EC2/DNSDataExfiltration<a name="trojan10"></a>
 
+### Default severity: High<a name="trojan10_severity"></a>
+
 ### Finding description<a name="trojan10_description"></a>
 
 **EC2 instance is exfiltrating data through DNS queries\.**
@@ -89,6 +107,8 @@ DGAs are used to periodically generate a large number of domain names that can b
 This finding informs you that there is an EC2 instance in your AWS environment with malware that uses DNS queries for outbound data transfers\. The result is the exfiltration of data\. Your EC2 instance might be compromised\. DNS traffic is not typically blocked by firewalls\. For example, malware in a compromised EC2 instance can encode data, \(such as your credit card number\), into a DNS query and send it to a remote DNS server that is controlled by an attacker\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Trojan:EC2/PhishingDomainRequest\!DNS<a name="trojan11"></a>
+
+### Default severity: High<a name="trojan11_severity"></a>
 
 ### Finding description<a name="trojan11_description"></a>
 

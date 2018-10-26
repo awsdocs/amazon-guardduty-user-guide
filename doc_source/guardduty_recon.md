@@ -1,7 +1,9 @@
 # GuardDuty Recon Finding Types<a name="guardduty_recon"></a>
 
+This section covers the active Recon threat purpose finding types\. For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\. 
+
 **Important**  
-For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\.
+The default severity value of a finding type is subject to change based on various criteria when the finding is generated\.
 
 **Topics**
 + [Recon:EC2/PortProbeUnprotectedPort](#recon6)
@@ -15,6 +17,8 @@ For information about important changes to the GuardDuty finding types, includin
 
 ## Recon:EC2/PortProbeUnprotectedPort<a name="recon6"></a>
 
+### Default severity: Low<a name="recon6_severity"></a>
+
 ### Finding description<a name="recon6_description"></a>
 
 **EC2 instance has an unprotected port that is being probed by a known malicious host\. **
@@ -25,6 +29,8 @@ For more information, see [Remediating a Compromised EC2 Instance](guardduty_rem
 
 ## Recon:IAMUser/TorIPCaller<a name="recon1"></a>
 
+### Default severity: Medium<a name="recon1_severity"></a>
+
 ### Finding description<a name="recon1_description"></a>
 
 **An API was invoked from a Tor exit node IP address\. **
@@ -32,6 +38,8 @@ For more information, see [Remediating a Compromised EC2 Instance](guardduty_rem
 This finding informs you that an API operation that can list or describe your AWS resources was invoked from a Tor exit node IP address\. Tor is software for enabling anonymous communication\. It encrypts and randomly bounces communications through relays between a series of network nodes\. The last Tor node is called the exit node\. This can be a reconnaissance attack: an anonymous user trying to gather information or gain access to your AWS resources for malicious purposes\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\. 
 
 ## Recon:IAMUser/MaliciousIPCaller\.Custom<a name="recon2"></a>
+
+### Default severity: Medium<a name="recon2_severity"></a>
 
 ### Finding description<a name="recon2_description"></a>
 
@@ -41,6 +49,8 @@ This finding informs you that an API operation that can list or describe your AW
 
 ## Recon:IAMUser/MaliciousIPCaller<a name="recon3"></a>
 
+### Default severity: Medium<a name="recon3_severity"></a>
+
 ### Finding description<a name="recon3_description"></a>
 
 **An API was invoked from a known malicious IP address\.**
@@ -49,6 +59,8 @@ This finding informs you that an API operation that can list or describe your AW
 
 ## Recon:EC2/Portscan<a name="recon5"></a>
 
+### Default severity: Medium<a name="recon5_severity"></a>
+
 ### Finding description<a name="recon5_description"></a>
 
 **EC2 instance is performing outbound port scans to a remote host\.**
@@ -56,6 +68,8 @@ This finding informs you that an API operation that can list or describe your AW
 This finding informs you that there is an EC2 instance in your AWS environment that is engaged in a possible port scan attack because it is trying to connect to multiple ports over a short period of time\. The purpose of a port scan attack is to locate open ports to discover what services the machine is running and to identify its operating system\. Your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Recon:IAMUser/NetworkPermissions<a name="recon7"></a>
+
+### Default severity: Medium<a name="recon7_severity"></a>
 
 ### Finding description<a name="recon7_description"></a>
 
@@ -67,6 +81,8 @@ This finding is triggered when network configuration settings in your AWS enviro
 
 ## Recon:IAMUser/ResourcePermissions<a name="recon8"></a>
 
+### Default severity: Medium<a name="recon8_severity"></a>
+
 ### Finding description<a name="recon8_description"></a>
 
 **An IAM user invoked an API commonly used to discover the permissions associated with various resources in your AWS account\.**
@@ -76,6 +92,8 @@ This finding informs you that a specific IAM user in your AWS environment is exh
 This finding is triggered when resource access permissions in your AWS account are probed under suspicious circumstances\. For example, if an IAM user with no prior history of doing so, invoked the DescribeInstances API\. An attacker might use stolen credentials to perform this reconnaissance of your AWS resources in order to find valuable information or determine the capabilities of the credentials they already have\.
 
 ## Recon:IAMUser/UserPermissions<a name="recon9"></a>
+
+### Default severity: Medium<a name="recon9_severity"></a>
 
 ### Finding description<a name="recon9_description"></a>
 

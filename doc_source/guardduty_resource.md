@@ -1,12 +1,16 @@
 # GuardDuty ResourceConsumption Finding Types<a name="guardduty_resource"></a>
 
+This section covers the active ResourceConsumption threat purpose finding types\. For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\. 
+
 **Important**  
-For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\.
+The default severity value of a finding type is subject to change based on various criteria when the finding is generated\.
 
 **Topics**
 + [ResourceConsumption:IAMUser/ComputeResources](#resourceconsumption)
 
 ## ResourceConsumption:IAMUser/ComputeResources<a name="resourceconsumption"></a>
+
+### Default severity: Medium<a name="resourceconsumption_severity"></a>
 
 ### Finding description<a name="resourceconsumption_description"></a>
 

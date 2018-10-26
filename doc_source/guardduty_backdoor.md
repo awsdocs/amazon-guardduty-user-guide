@@ -1,7 +1,9 @@
 # GuardDuty Backdoor Finding Types<a name="guardduty_backdoor"></a>
 
+This section covers the active Backdoor threat purpose finding types\. For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\. 
+
 **Important**  
-For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\.
+The default severity value of a finding type is subject to change based on various criteria when the finding is generated\.
 
 **Topics**
 + [Backdoor:EC2/XORDDOS](#backdoor2)
@@ -9,6 +11,8 @@ For information about important changes to the GuardDuty finding types, includin
 + [Backdoor:EC2/C&CActivity\.B\!DNS](#backdoor7)
 
 ## Backdoor:EC2/XORDDOS<a name="backdoor2"></a>
+
+### Default severity: High<a name="backdoor2_severity"></a>
 
 ### Finding description<a name="backdoor2_description"></a>
 
@@ -18,6 +22,8 @@ This finding informs you that an EC2 instance in your AWS environment is attempt
 
 ## Backdoor:EC2/Spambot<a name="backdoor6"></a>
 
+### Default severity: Medium<a name="backdoor6_severity"></a>
+
 ### Finding description<a name="backdoor6_description"></a>
 
 **EC2 instance is exhibiting unusual behavior by communicating with a remote host on port 25\. **
@@ -25,6 +31,8 @@ This finding informs you that an EC2 instance in your AWS environment is attempt
 This finding informs you that an EC2 instance in your AWS environment is communicating with a remote host on port 25\. This behavior is unusual because this EC2 instance has no prior history of communications on port 25\. Port 25 is traditionally used by mail servers for SMTP communications\. Your EC2 instance might be compromised and sending out spam\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\. 
 
 ## Backdoor:EC2/C&CActivity\.B\!DNS<a name="backdoor7"></a>
+
+### Default severity: High<a name="backdoor7_severity"></a>
 
 ### Finding description<a name="backdoor7_description"></a>
 
