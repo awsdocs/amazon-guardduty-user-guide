@@ -14,6 +14,6 @@ The default severity value of a finding type is subject to change based on vario
 
 ### Finding description<a name="crypto3_description"></a>
 
-**EC2 instance is querying a domain name that is associated with Bitcoin\-related activity\.**
+**EC2 instance is querying a domain name that is associated with cryptocurrency\-related activity\.**
 
-This finding informs you that an EC2 instance in your AWS environment is querying a domain name that is associated with Bitcoin\-related activity\. Bitcoin is a worldwide cryptocurrency and digital payment system\. Besides being created as a reward for Bitcoin mining, bitcoin can be exchanged for other currencies, products, and services\. Unless you use this EC2 instance to mine or manage cryptocurrency or your EC2 instance is involved in blockchain activity, your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+This finding informs you that an EC2 instance in your AWS environment is querying a domain name that is associated with Bitcoin, or other cryptocurrency\-related activity\. Bitcoin is a worldwide cryptocurrency and digital payment system\. Besides being created as a reward for Bitcoin mining, Bitcoin can be exchanged for other currencies, products, and services\. Unless you use this EC2 instance to mine or manage cryptocurrency or your EC2 instance is involved in blockchain activity, your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
