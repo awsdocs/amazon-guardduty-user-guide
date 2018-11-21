@@ -17,6 +17,8 @@ The default severity value of a finding type is subject to change based on vario
 + [UnauthorizedAccess:EC2/RDPBruteForce](#unauthorized10)
 + [UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration](#unauthorized11)
 + [UnauthorizedAccess:IAMUser/ConsoleLogin](#unauthorized12)
++ [UnauthorizedAccess:EC2/TorClient](#unauthorized13)
++ [UnauthorizedAccess:EC2/TorRelay](#unauthorized14)
 
 ## UnauthorizedAccess:IAMUser/TorIPCaller<a name="unauthorized1"></a>
 
@@ -139,3 +141,23 @@ This finding is commonly triggered in AWS Direct Connect scenarios where all tra
 This finding informs you that a specific IAM user in your AWS environment is exhibiting behavior that is different from the established baseline\. This IAM user has no prior history of login activity using this client application from this specific location\. Your IAM user credentials might be compromised\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
 
 This finding is triggered when a console login is detected under suspicious circumstances\. For example, if an IAM user with no prior history of doing so, invoked the ConsoleLogin API from a never\-before\-used client or an unusual location\. This could be an indication of stolen credentials being used to gain access to your AWS account, or a valid user accessing the account in an invalid or less secure manner \(for example, not over an approved VPN\)\.
+
+## UnauthorizedAccess:EC2/TorClient<a name="unauthorized13"></a>
+
+### Default severity: Medium<a name="unauthorized13_severity"></a>
+
+### Finding description<a name="unauthorized13_description"></a>
+
+**EC2 instance is making connections to a Tor Guard or an Authority node\.**
+
+This finding informs you that an EC2 instance in your AWS environment is making connections to a Tor Guard or an Authority node\. Tor is software for enabling anonymous communication\. Tor Guards and Authority nodes act as initial gateways into a Tor network\. This traffic can indicate that this EC2 instance is acting as a client on a Tor network\. A common use for a Tor client is to circumvent network monitoring and filter for access to unauthorized or illicit content\. Tor clients can also generate nefarious Internet traffic, including attacking SSH servers\. This activity can indicate that your EC2 instance is compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+
+## UnauthorizedAccess:EC2/TorRelay<a name="unauthorized14"></a>
+
+### Default severity: Medium<a name="unauthorized14_severity"></a>
+
+### Finding description<a name="unauthorized14_description"></a>
+
+**EC2 instance is making connections to a Tor network as a Tor relay\. **
+
+This finding informs you that an EC2 instance in your AWS environment is making connections to a Tor network in a manner that suggests that it's acting as a Tor relay\. Tor is software for enabling anonymous communication\. Tor relays increase anonymity of the communication by forwarding the client’s possibly illicit traffic from one Tor relay to another\. If this activity is unexpected, your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.

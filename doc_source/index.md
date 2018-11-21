@@ -42,6 +42,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Suspending or Disabling Amazon GuardDuty](guardduty_suspend-disable.md)
 + [Logging Amazon GuardDuty API Calls with AWS CloudTrail](logging-using-cloudtrail.md)
 + [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)
++ [Subscribing to Amazon GuardDuty Announcements SNS Topic](guardduty_sns.md)
 + [Amazon GuardDuty API Reference](guardduty_api_ref.md)
    + [AcceptInvitation](accept-invitation.md)
    + [ArchiveFindings](archive-findings.md)
