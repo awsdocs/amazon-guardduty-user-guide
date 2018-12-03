@@ -144,7 +144,7 @@ This finding is triggered when a console login is detected under suspicious circ
 
 ## UnauthorizedAccess:EC2/TorClient<a name="unauthorized13"></a>
 
-### Default severity: Medium<a name="unauthorized13_severity"></a>
+### Default severity: High<a name="unauthorized13_severity"></a>
 
 ### Finding description<a name="unauthorized13_description"></a>
 
@@ -154,7 +154,7 @@ This finding informs you that an EC2 instance in your AWS environment is making 
 
 ## UnauthorizedAccess:EC2/TorRelay<a name="unauthorized14"></a>
 
-### Default severity: Medium<a name="unauthorized14_severity"></a>
+### Default severity: High<a name="unauthorized14_severity"></a>
 
 ### Finding description<a name="unauthorized14_description"></a>
 

@@ -29,6 +29,7 @@ The Amazon SNS topic ARNs for each region are shown below\.
 | ap\-southeast\-2 | arn:aws:sns:ap\-southeast\-2:457615622431:GuardDutyAnnouncements | 
 | ap\-south\-1 | arn:aws:sns:ap\-south\-1:926826061926:GuardDutyAnnouncements | 
 | sa\-east\-1 | arn:aws:sns:sa\-east\-1:955633302743:GuardDutyAnnouncements | 
+| us\-gov\-west\-1 | arn:aws\-us\-gov:sns:us\-gov\-west\-1:430639793359:GuardDutyAnnouncements | 
 
 **To subscribe to the GuardDuty update notification email in the AWS Management Console**
 

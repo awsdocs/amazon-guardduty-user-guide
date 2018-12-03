@@ -21,7 +21,7 @@ This finding informs you that an EC2 instance in your AWS environment is queryin
 
 ## CryptoCurrency:EC2/BitcoinTool\.B<a name="crypto4"></a>
 
-### Default severity: Medium<a name="crypto4_severity"></a>
+### Default severity: High<a name="crypto4_severity"></a>
 
 ### Finding description<a name="crypto4_description"></a>
 
