@@ -121,3 +121,35 @@ The parsed Message value \(with escaped quotes removed\) is shown below:
                 }]
             }
 ```
+
+An example GuardDuty update notification message about updated findings is shown below:
+
+```
+            {
+            "version": "1",
+            "type": "UPDATED_FINDINGS",
+            "findingDetails": [
+              {
+                "link": "https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_unauthorized.html",
+                "findingType": "UnauthorizedAccess:EC2/TorClient",
+                "description": "Increased severity value from 5 to 8."
+              }
+             ]
+            }
+```
+
+The parsed Message value \(with escaped quotes removed\) is shown below:
+
+```
+           {
+            "Type": "Notification",
+            "MessageId": "9101dc6b-726f-4df0-8646-ec2f94e674bc",
+            "TopicArn": "arn:aws:sns:us-west-2:934957504740:GuardDutyAnnouncements",
+            "Message": "{\"version\":\"1\",\"type\":\"UPDATED_FINDINGS\",\"findingDetails\":[{\"link\":\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_unauthorized.html\",\"findingType\":\"UnauthorizedAccess:EC2/TorClient\",\"description\":\"Increased severity value from 5 to 8.\"}]}",
+            "Timestamp": "2018-03-09T00:25:43.483Z",
+            "SignatureVersion": "1",
+            "Signature": "XWox8GDGLRiCgDOXlo/fG9Lu/88P8S0FL6M6oQYOmUFzkucuhoblsdea3BjqdCHcWR7qdhMPQnLpN7y9iBrWVUqdAGJrukAI8athvAS+4AQD/V/QjrhsEnlj+GaiW+ozAu006X6GopOzFGnCtPMROjCMrMonjz7Hpv/8KRuMZR3pyQYm5d4wWB7xBPYhUMuLoZ1V8YFs55FMtgQV/YLhSYuEu0BP1GMtLQauxDkscOtPP/vjhGQLFx1Q9LTadcQiRHtNIBxWL87PSI+BVvkin6AL7PhksvdQ7FAgHfXsit+6p8GyOvKCqaeBG7HZhR1AbpyVka7JSNRO/6ssyrlj1g==",
+            "SigningCertURL": "https://sns.us-west-2.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+            "UnsubscribeURL": "https://sns.us-west-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-west-2:934957504740:GuardDutyAnnouncements:9225ed2b-7228-4665-8a01-c8a5db6859f4"
+          }
+```
