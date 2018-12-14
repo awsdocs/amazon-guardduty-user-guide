@@ -11,7 +11,7 @@ The default severity value of a finding type is subject to change based on vario
 
 ## CryptoCurrency:EC2/BitcoinTool\.B\!DNS<a name="crypto3"></a>
 
-### Default severity: Medium<a name="crypto3_severity"></a>
+### Default severity: High<a name="crypto3_severity"></a>
 
 ### Finding description<a name="crypto3_description"></a>
 

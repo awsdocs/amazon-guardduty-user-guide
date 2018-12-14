@@ -12,7 +12,7 @@ For information about other services that support service\-linked roles, see [AW
 
 ## Service\-Linked Role Permissions for GuardDuty<a name="slr-permissions"></a>
 
-GuardDuty uses the service\-linked role named `AWSServiceRoleForAmazonGuardDuty`\. It allows Amazon GuardDuty to consume and analyze events directly from AWS CloudTrail, VPC Flow Logs, and DNS logs and generate security findings\.
+GuardDuty uses the service\-linked role named `AWSServiceRoleForAmazonGuardDuty`\. This service\-linked role allows GuardDuty to retrieve metadata for the EC2 instances in your AWS environment that are involved in potentially suspicious activity\. It also allows GuardDuty to include the retrieved EC2 instance metadata in the findings that GuardDuty generates about potentially suspicious activity\.
 
 The `AWSServiceRoleForAmazonGuardDuty` service\-linked role trusts the following services to assume the role:
 + `guardduty.amazonaws.com`
