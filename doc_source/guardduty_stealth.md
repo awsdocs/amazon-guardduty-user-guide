@@ -36,8 +36,8 @@ This finding informs you that a CloudTrail trail within your AWS environment was
 
 ### Finding description<a name="stealth3_description"></a>
 
-**An IAM user invoked an API commonly used to stop CloudTrail logging, delete existing logs, and otherwise eliminate traces of activity in your AWS account\.**
+**A principal invoked an API commonly used to stop CloudTrail logging, delete existing logs, and otherwise eliminate traces of activity in your AWS account\.**
 
-This finding informs you that a specific IAM user in your AWS environment is exhibiting behavior that is different from the established baseline\. This IAM user has no prior history of invoking this API\. Your credentials might be compromised\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
+This finding informs you that a specific principal in your AWS environment is exhibiting behavior that is different from the established baseline\. This principal has no prior history of invoking this API\. Your credentials might be compromised\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
 
-This finding is triggered when the logging configuration in your AWS account is modified under suspicious circumstances\. For example, if an IAM user with no prior history of doing so, invoked the StopLogging API\. This can be an indication of an attacker trying to cover their tracks by eliminating any trace of their activity\. 
+This finding is triggered when the logging configuration in your AWS account is modified under suspicious circumstances\. For example, if a principal with no prior history of doing so, invoked the StopLogging API\. This can be an indication of an attacker trying to cover their tracks by eliminating any trace of their activity\. 

@@ -73,11 +73,11 @@ This finding informs you that there is an EC2 instance in your AWS environment t
 
 ### Finding description<a name="recon7_description"></a>
 
-**An IAM user invoked an API commonly used to discover the network access permissions of existing security groups, ACLs, and routes in your AWS account\.**
+**A principal invoked an API commonly used to discover the network access permissions of existing security groups, ACLs, and routes in your AWS account\.**
 
-This finding informs you that a specific IAM user in your AWS environment is exhibiting behavior that is different from the established baseline\. This IAM user has no prior history of invoking this API\. Your credentials might be compromised\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
+This finding informs you that a specific principal in your AWS environment is exhibiting behavior that is different from the established baseline\. This principal has no prior history of invoking this API\. Your credentials might be compromised\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
 
-This finding is triggered when network configuration settings in your AWS environment are probed under suspicious circumstances\. For example, if an IAM user in your AWS environment with no prior history of doing so, invoked the DescribeSecurityGroups API\. An attacker might use stolen credentials to perform this reconnaissance of network configuration settings before executing the next stage of their attack by changing network permissions or making use of existing openings in the network configuration\.
+This finding is triggered when network configuration settings in your AWS environment are probed under suspicious circumstances\. For example, if a principal in your AWS environment with no prior history of doing so, invoked the DescribeSecurityGroups API\. An attacker might use stolen credentials to perform this reconnaissance of network configuration settings before executing the next stage of their attack by changing network permissions or making use of existing openings in the network configuration\.
 
 ## Recon:IAMUser/ResourcePermissions<a name="recon8"></a>
 
@@ -85,11 +85,11 @@ This finding is triggered when network configuration settings in your AWS enviro
 
 ### Finding description<a name="recon8_description"></a>
 
-**An IAM user invoked an API commonly used to discover the permissions associated with various resources in your AWS account\.**
+**A principal invoked an API commonly used to discover the permissions associated with various resources in your AWS account\.**
 
-This finding informs you that a specific IAM user in your AWS environment is exhibiting behavior that is different from the established baseline\. This IAM user has no prior history of invoking this API\. Your credentials might be compromised\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
+This finding informs you that a specific principal in your AWS environment is exhibiting behavior that is different from the established baseline\. This principal has no prior history of invoking this API\. Your credentials might be compromised\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
 
-This finding is triggered when resource access permissions in your AWS account are probed under suspicious circumstances\. For example, if an IAM user with no prior history of doing so, invoked the DescribeInstances API\. An attacker might use stolen credentials to perform this reconnaissance of your AWS resources in order to find valuable information or determine the capabilities of the credentials they already have\.
+This finding is triggered when resource access permissions in your AWS account are probed under suspicious circumstances\. For example, if a principal with no prior history of doing so, invoked the DescribeInstances API\. An attacker might use stolen credentials to perform this reconnaissance of your AWS resources in order to find valuable information or determine the capabilities of the credentials they already have\.
 
 ## Recon:IAMUser/UserPermissions<a name="recon9"></a>
 
@@ -97,8 +97,8 @@ This finding is triggered when resource access permissions in your AWS account a
 
 ### Finding description<a name="recon9_description"></a>
 
-**An IAM user invoked an API commonly used to discover the users, groups, policies and permissions in your AWS account\.**
+**A principal invoked an API commonly used to discover the users, groups, policies and permissions in your AWS account\.**
 
-This finding informs you that a specific IAM user in your AWS environment is exhibiting behavior that is different from the established baseline\. This IAM user has no prior history of invoking this API\. Your credentials might be compromised\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
+This finding informs you that a specific principal in your AWS environment is exhibiting behavior that is different from the established baseline\. This principal has no prior history of invoking this API\. Your credentials might be compromised\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
 
-This finding is triggered when user permissions in your AWS environment are probed under suspicious circumstances\. For example, if an IAM user with no prior history of doing so, invoked the ListInstanceProfilesForRole API\. An attacker might use stolen credentials to perform this reconnaissance of your IAM users and roles in order to determine the capabilities of the credentials they already have or to find more permissive credentials that are vulnerable to lateral movement\.
+This finding is triggered when user permissions in your AWS environment are probed under suspicious circumstances\. For example, if a principal with no prior history of doing so, invoked the ListInstanceProfilesForRole API\. An attacker might use stolen credentials to perform this reconnaissance of your IAM users and roles in order to determine the capabilities of the credentials they already have or to find more permissive credentials that are vulnerable to lateral movement\.

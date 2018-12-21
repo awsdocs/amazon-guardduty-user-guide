@@ -10,7 +10,6 @@ The default severity value of a finding type is subject to change based on vario
 + [UnauthorizedAccess:IAMUser/MaliciousIPCaller\.Custom](#unauthorized2)
 + [UnauthorizedAccess:IAMUser/ConsoleLoginSuccess\.B](#unauthorized4)
 + [UnauthorizedAccess:IAMUser/MaliciousIPCaller](#unauthorized5)
-+ [UnauthorizedAccess:IAMUser/UnusualASNCaller](#unauthorized6)
 + [UnauthorizedAccess:EC2/TorIPCaller](#unauthorized7)
 + [UnauthorizedAccess:EC2/MaliciousIPCaller\.Custom](#unauthorized8)
 + [UnauthorizedAccess:EC2/SSHBruteForce](#unauthorized9)
@@ -62,16 +61,6 @@ This finding is only triggered by the activity of the following IAM identities: 
 **An API was invoked from a known malicious IP address\.**
 
 This finding informs you that an API operation \(for example, an attempt to launch an EC2 instance, create a new IAM user, modify your AWS privileges, and so on\) was invoked from a known malicious IP address\. This can indicate unauthorized access to your AWS resources\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
-
-## UnauthorizedAccess:IAMUser/UnusualASNCaller<a name="unauthorized6"></a>
-
-### Default severity: High<a name="unauthorized6_severity"></a>
-
-### Finding description<a name="unauthorized6_description"></a>
-
-**An API was invoked from an IP address of an unusual network\.**
-
-This finding informs you that certain activity was invoked from an IP address of an unusual network\. This network was never observed throughout the AWS usage history of the described user\. This activity can include a console login, an attempt to launch an EC2 instance, create a new IAM user, modify your AWS privileges, etc\. This can indicate unauthorized access to your AWS resources\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
 
 ## UnauthorizedAccess:EC2/TorIPCaller<a name="unauthorized7"></a>
 
@@ -136,11 +125,11 @@ This finding is commonly triggered in AWS Direct Connect scenarios where all tra
 
 ### Finding description<a name="unauthorized12_description"></a>
 
-**An unusual console login by an IAM user in your AWS account was observed\. **
+**An unusual console login by a principal in your AWS account was observed\. **
 
-This finding informs you that a specific IAM user in your AWS environment is exhibiting behavior that is different from the established baseline\. This IAM user has no prior history of login activity using this client application from this specific location\. Your IAM user credentials might be compromised\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
+This finding informs you that a specific principal in your AWS environment is exhibiting behavior that is different from the established baseline\. This principal has no prior history of login activity using this client application from this specific location\. Your credentials might be compromised\. For more information, see [Remediating Compromised AWS Credentials](guardduty_remediate.md#compromised-creds)\.
 
-This finding is triggered when a console login is detected under suspicious circumstances\. For example, if an IAM user with no prior history of doing so, invoked the ConsoleLogin API from a never\-before\-used client or an unusual location\. This could be an indication of stolen credentials being used to gain access to your AWS account, or a valid user accessing the account in an invalid or less secure manner \(for example, not over an approved VPN\)\.
+This finding is triggered when a console login is detected under suspicious circumstances\. For example, if a principal with no prior history of doing so, invoked the ConsoleLogin API from a never\-before\-used client or an unusual location\. This could be an indication of stolen credentials being used to gain access to your AWS account, or a valid user accessing the account in an invalid or less secure manner \(for example, not over an approved VPN\)\.
 
 ## UnauthorizedAccess:EC2/TorClient<a name="unauthorized13"></a>
 
