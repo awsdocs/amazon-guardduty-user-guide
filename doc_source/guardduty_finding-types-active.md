@@ -9,6 +9,7 @@ In the current release, GuardDuty generates finding types of the following threa
 + [CryptoCurrency](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_crypto.html)
 + [PenTest](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_pentest.html)
 + [Persistence](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_persistence.html)
++ [Policy](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_policy.html)
 + [Recon](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_recon.html)
 + [ResourceConsumption](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_resource.html)
 + [Stealth](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_stealth.html)

@@ -1,7 +1,7 @@
 # Amazon GuardDuty Amazon Guard Duty User Guide
 
 -----
-*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -30,6 +30,7 @@ Amazon's trademarks and trade dress may not be used in
       + [GuardDuty CryptoCurrency Finding Types](guardduty_crypto.md)
       + [GuardDuty PenTest Finding Types](guardduty_pentest.md)
       + [GuardDuty Persistence Finding Types](guardduty_persistence.md)
+      + [GuardDuty Policy Finding Types](guardduty_policy.md)
       + [GuardDuty Recon Finding Types](guardduty_recon.md)
       + [GuardDuty ResourceConsumption Finding Types](guardduty_resource.md)
       + [GuardDuty Stealth Finding Types](guardduty_stealth.md)
