@@ -87,5 +87,6 @@ Amazon's trademarks and trade dress may not be used in
    + [UpdateFindingsFeedback](update-findings-feedback.md)
    + [UpdateIPSet](update-ip-set.md)
    + [UpdateThreatIntelSet](update-threat-intel-set.md)
+   + [Common Errors](common-errors.md)
 + [Document History for Amazon GuardDuty](doc-history.md)
 + [AWS Glossary](glossary.md)

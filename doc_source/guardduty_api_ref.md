@@ -48,3 +48,4 @@ All GuardDuty actions are logged by Amazon CloudTrail\. For more information, se
 + [UpdateFindingsFeedback](update-findings-feedback.md)
 + [UpdateIPSet](update-ip-set.md)
 + [UpdateThreatIntelSet](update-threat-intel-set.md)
++ [Common Errors](common-errors.md)

@@ -92,6 +92,8 @@ This finding informs you that an EC2 instance in your AWS environment is communi
 
 This finding informs you that an EC2 instance in your AWS environment was involved in a brute force attack aimed at obtaining passwords to SSH services on Linux\-based systems\. This can indicate unauthorized access to your AWS resources\. 
 
+This finding’s severity is low if a brute force attack is aimed at one of your EC2 instances\. This finding’s severity is high if your EC2 instance is being used to perform the brute force attack\. 
+
 **Note**  
 This finding is generated only through GuardDuty monitoring traffic on port 22\. If your SSH services are configured to use other ports, this finding is not generated\.
 
@@ -105,7 +107,11 @@ For more information, see [Remediating a Compromised EC2 Instance](guardduty_rem
 
 **EC2 instance has been involved in RDP brute force attacks\.**
 
-This finding informs you that an EC2 instance in your AWS environment was involved in a brute force attack aimed at obtaining passwords to RDP services on Windows\-based systems\. This can indicate unauthorized access to your AWS resources\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+This finding informs you that an EC2 instance in your AWS environment was involved in a brute force attack aimed at obtaining passwords to RDP services on Windows\-based systems\. This can indicate unauthorized access to your AWS resources\.
+
+This finding’s severity is low if a brute force attack is aimed at one of your EC2 instances\. This finding’s severity is high if your EC2 instance is being used to perform the brute force attack\. 
+
+For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration<a name="unauthorized11"></a>
 
