@@ -1,4 +1,4 @@
-# GuardDuty Retired Finding Types<a name="guardduty_finding-types-retired"></a>
+# Retired Finding Types<a name="guardduty_finding-types-retired"></a>
 
 **Important**  
 For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\.
@@ -6,9 +6,20 @@ For information about important changes to the GuardDuty finding types, includin
 In the current release of GuardDuty, the following finding types are retired \(no longer generated\)\. You CANNOT reactivate retired GuardDuty findings types\. 
 
 **Topics**
++ [Backdoor:EC2/XORDDOS](#backdoor2)
 + [Behavior:IAMUser/InstanceLaunchUnusual](#behavior1)
 + [CryptoCurrency:EC2/BitcoinTool\.A](#crypto1)
 + [UnauthorizedAccess:IAMUser/UnusualASNCaller](#unauthorized6)
+
+## Backdoor:EC2/XORDDOS<a name="backdoor2"></a>
+
+### Default severity: High<a name="backdoor2_severity"></a>
+
+### Finding description<a name="backdoor2_description"></a>
+
+**An EC2 instance is attempting to communicate with an IP address that is associated with XorDDos malware\.**
+
+This finding informs you that an EC2 instance in your AWS environment is attempting to communicate with an IP address that is associated with XorDDos malware\. This EC2 instance might be compromised\. XOR DDoS is Trojan malware that hijacks Linux systems\. To gain access to the system, it launches a brute force attack in order to discover the password to Secure Shell \(SSH\) services on Linux\. After SSH credentials are acquired and the login is successful, it uses root privileges to run a script that downloads and installs XOR DDoS\. This malware is then used as part of a botnet to launch distributed denial of service \(DDoS\) attacks against other targets\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Behavior:IAMUser/InstanceLaunchUnusual<a name="behavior1"></a>
 

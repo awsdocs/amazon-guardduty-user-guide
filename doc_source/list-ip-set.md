@@ -3,7 +3,7 @@
 Lists the IPSet of the Amazon GuardDuty service that is specified by the detector ID\. 
 
 **Important**  
-If a user from a member account runs this API, the response contains the IPSets uploaded by the master account\. Currently in GuardDuty, users from member accounts CANNOT upload and further manage IPSets\. IPSets that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. For more information, see [Managing AWS Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
+If a user from a member account runs this API, the response contains the IPSets uploaded by the master account\. Currently in GuardDuty, users from member accounts CANNOT upload and further manage IPSets\. IPSets that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. For more information, see [Managing Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
 
 ## Request Syntax<a name="list-ip-set-request-syntax"></a>
 

@@ -16,7 +16,7 @@ Type: String
 Required: Yes
 
 **filterName**  
-The name of the filter whose details you want to get\.  
+The name of the filter to retrieve\.  
 Type: String  
 Required: Yes
 
@@ -24,26 +24,29 @@ Required: Yes
 
 ```
 {
-        "name": "string",
-        "description": "string",
-        "findingCriteria":  [
-            "criterion": {
-                "<field>": {
-                    "gt": "integer",
-                    "gte": "integer",
-                    "lt": "integer",
-                    "lte": "integer",
-                    "eq": [
-                        "string"
-                    ],
-                    "neq": [
-                        "string"
-                    ]
-                }
-            }
-        ],
-        "action": "[NOOP|ARCHIVE]",
-        "rank": "integer"    
+     "name": "string",
+     "description": "string",
+     "findingCriteria":  [
+         "criterion": {
+             "<field>": {
+                 "gt": "integer",
+                 "gte": "integer",
+                 "lt": "integer",
+                 "lte": "integer",
+                 "eq": [
+                     "string"
+                 ],
+                 "neq": [
+                     "string"
+                 ]
+             }
+         }
+     ],
+     "action": "[NOOP|ARCHIVE]",
+     "rank": "integer",    
+     "tags": {
+             "string": "string"
+     }
 }
 ```
 
@@ -109,7 +112,10 @@ Required: No
 Specifies the position of the filter in the list of current filters\. Also specifies the order in which this filter is applied to the findings\.  
 Type: Integer  
 **action**  
-Specifies the action that is to be applied to the findings that match the filter\.
+Specifies the action that is to be applied to the findings that match the filter\.  
+**tags**  
+The tags associated with the filter resource\. A tag consists of a key and a value that you define\.   
+Type: String to string map
 
 ## Errors<a name="get-filter-errors"></a>
 

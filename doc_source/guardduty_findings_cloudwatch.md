@@ -1,6 +1,6 @@
-# Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events<a name="guardduty_findings_cloudwatch"></a>
+# Monitoring GuardDuty Findings with Amazon CloudWatch Events<a name="guardduty_findings_cloudwatch"></a>
 
-Amazon GuardDuty can send notifications based on [Amazon CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) when any changes in the findings takes place\. These changes include newly generated findings or subsequent occurrences of existing findings\.
+GuardDuty can send notifications based on [Amazon CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) when any changes in the findings takes place\. These changes include newly generated findings or subsequent occurrences of existing findings\.
 
 Every GuardDuty finding is assigned a finding ID\. GuardDuty creates a CloudWatch event for every finding with a unique finding ID\. All subsequent occurrences of an existing finding are always assigned a finding ID that is identical to the ID of the original finding\.
 
@@ -23,7 +23,7 @@ You CANNOT customize the default frequency \(5 minutes\) of notifications sent a
 
 **Important**  
 You can customize the default frequency of notifications sent about the subsequent finding occurrences\. Possible values are 15 minutes, 1 hour, or the default 6 hours\. You can update this value using the [CreateDetector](create-detector.md) or the [UpdateDetector](update-detector.md) API operation\. You can also update this value through the GuardDuty console \- choose **Settings** and then under **CloudWatch Events**, choose one of the available values from the **Updated findings** pull\-down menu\.  
-Only users from a master account can customize the default frequency of notifications sent about the subsequent finding occurrences to CloudWatch Events\. Users from member accounts CANNOT customize this frequency value\. The frequency value set by the master account in its own account is imposed on GuardDuty functionality in all its member accounts\. In other words, if a user from a master account sets this frequency value to 1 hour, all member accounts will also have the 1 hour frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. For more information, see [Managing AWS Accounts in Amazon GuardDuty](guardduty_accounts.md)\. 
+Only users from a master account can customize the default frequency of notifications sent about the subsequent finding occurrences to CloudWatch Events\. Users from member accounts CANNOT customize this frequency value\. The frequency value set by the master account in its own account is imposed on GuardDuty functionality in all its member accounts\. In other words, if a user from a master account sets this frequency value to 1 hour, all member accounts will also have the 1 hour frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. For more information, see [Managing Accounts in Amazon GuardDuty](guardduty_accounts.md)\. 
 
 ## Monitoring Archived GuardDuty Findings with CloudWatch Events<a name="guardduty_findings_cloudwatch_archived"></a>
 

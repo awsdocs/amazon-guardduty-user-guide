@@ -12,25 +12,28 @@ POST https://<endpoint>/detector/{detectorId}/filter
 
 ```
 {
-	"name": "string",
-	"description": "string",
-	"findingCriteria": {
-	"criterion": [
-		"<field>": {
-			"gt": "integer",
-			"gte": "integer",
-			"lt": "integer",
-			"lte": "integer",
-			"eq": [
-				"string"
-			],
-			"neq": [
-				"string"
-			]
-		]
-	}
-	"action": "[NOOP|ARCHIVE]",
-	"rank": "integer"
+    "name": "string",
+    "description": "string",
+    "findingCriteria": {
+    "criterion": [
+        "<field>": {
+	        "gt": "integer",
+		    "gte": "integer",
+		    "lt": "integer",
+		    "lte": "integer",
+		    "eq": [
+			    "string"
+		    ],
+		    "neq": [
+    			"string"
+	    	]
+	    }
+    ],
+    "action": "[NOOP|ARCHIVE]",
+    "rank": "integer",
+    "tags": {
+            "string": "string"
+    }
 }
 ```
 
@@ -53,6 +56,11 @@ Required: Yes
 **description**  
 The description of the filter\.  
 Type: String  
+Required: No
+
+**tags**  
+The tags that you want to add to the Filter resource\. A tag consists of a key and a value that you define\.   
+Type: String to string map  
 Required: No
 
 **findingCriteria**  

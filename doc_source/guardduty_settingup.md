@@ -1,16 +1,14 @@
-# Setting Up Amazon GuardDuty<a name="guardduty_settingup"></a>
+# Setting Up GuardDuty<a name="guardduty_settingup"></a>
 
 You must have an AWS account in order to enable Amazon GuardDuty\. If you don't have an account, use the following procedure to create one\.
 
 **To sign up for AWS**
 
-1. Open [https://aws\.amazon\.com/](https://aws.amazon.com/), and then choose **Create an AWS Account**\.
-**Note**  
-If you previously signed in to the AWS Management Console using AWS account root user credentials, choose **Sign in to a different account**\. If you previously signed in to the console using IAM credentials, choose **Sign\-in using root account credentials**\. Then choose **Create a new AWS account**\.
+1. Open [https://portal\.aws\.amazon\.com/billing/signup](https://portal.aws.amazon.com/billing/signup)\.
 
 1. Follow the online instructions\.
 
-   Part of the sign\-up procedure involves receiving a phone call and entering a verification code using the phone keypad\.
+   Part of the sign\-up procedure involves receiving a phone call and entering a verification code on the phone keypad\.
 
 **Topics**
 + [Enable Amazon GuardDuty](#guardduty_enable-gd)
@@ -61,7 +59,7 @@ Replace the sample account ID in the example below with your actual AWS account 
 **Important**  
 It is highly recommended that you enable GuardDuty in all supported AWS regions\. This allows GuardDuty to generate findings about unauthorized or unusual activity even in regions that you are not actively using\. This also allows GuardDuty to monitor AWS CloudTrail events for global AWS services such as IAM\.   
 If GuardDuty is not enabled in all supported regions, its ability to detect activity that involves global services is reduced\. 
-   + You can disable GuardDuty at any time to stop it from processing and analyzing AWS CloudTrail events, VPC Flow Logs, and DNS logs\. For more information, see [Suspending or Disabling Amazon GuardDuty](guardduty_suspend-disable.md)\.
+   + You can disable GuardDuty at any time to stop it from processing and analyzing AWS CloudTrail events, VPC Flow Logs, and DNS logs\. For more information, see [Suspending or Disabling GuardDuty](guardduty_suspend-disable.md)\.
 
 ## Amazon GuardDuty Free Trial<a name="guardduty_free-trial"></a>
 

@@ -1,4 +1,4 @@
-# Suspending or Disabling Amazon GuardDuty<a name="guardduty_suspend-disable"></a>
+# Suspending or Disabling GuardDuty<a name="guardduty_suspend-disable"></a>
 
 You can use the GuardDuty console to suspend or disable GuardDuty\. 
 + If you suspend GuardDuty, it no longer monitors the security of your AWS environment or generates new findings\. Your existing findings remain intact and are not affected by the GuardDuty suspension\. You can choose to re\-enable GuardDuty later\. 

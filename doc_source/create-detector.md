@@ -16,7 +16,10 @@ POST https://<endpoint>/detector
 ```
 {
     "enable" : "boolean",
-    "findingPublishingFrequency": "[FIFTEEN_MINUTES|ONE_HOUR|SIX_HOURS]"
+    "findingPublishingFrequency": "[FIFTEEN_MINUTES|ONE_HOUR|SIX_HOURS]",
+    "tags": {
+            "string": "string"
+    }
 }
 ```
 
@@ -30,11 +33,16 @@ Type: Boolean
 Required: Yes
 
 **findingPublishingFrequency**  
-Specifies the frequency of notifications sent about the subsequent finding occurrences\. For more information, see [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.  
+Specifies the frequency of notifications sent about the subsequent finding occurrences\. For more information, see [Monitoring GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.  
 Type: Enum  
 Required: No  
 Valid values: FIFTEEN\_MINUTES \| ONE\_HOUR \| SIX\_HOURS  
 Default value: SIX\_HOURS
+
+**tags**  
+The tags that you want to add to the dectector resource\. A tag consists of a key and a value that you define\.   
+Type: List of strings  
+Required: No
 
 ## Response Syntax<a name="create-detector-response-syntax"></a>
 

@@ -204,7 +204,7 @@ User-Agent: aws-cli/1.14.29 Python/2.7.9 Windows/8 botocore/1.8.33
    "findingCriteria":{  
       "criterion":{  
          "updatedAt":{  
-            "gte":1486685375
+            "gte":1486685375000
          }
       }
    }

@@ -34,7 +34,7 @@ Type: Boolean
 Required: No
 
 **findingPublishingFrequency**  
-Specifies the frequency of notifications sent about the subsequent finding occurrences\. For more information, see [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.  
+Specifies the frequency of notifications sent about the subsequent finding occurrences\. For more information, see [Monitoring GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.  
 Type: Enum  
 Required: No  
 Valid values: FIFTEEN\_MINUTES \| ONE\_HOUR \| SIX\_HOURS  

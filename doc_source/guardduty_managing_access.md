@@ -1,4 +1,4 @@
-# Managing Access to Amazon GuardDuty<a name="guardduty_managing_access"></a>
+# Managing Access<a name="guardduty_managing_access"></a>
 
 **Topics**
 + [Permissions Required to Enable GuardDuty](#guardduty_enable-permissions)
@@ -108,6 +108,7 @@ By default, access to the GuardDuty resources \(detector, trusted IP lists, thre
 + [Using a Custom IAM Policy to Grant Read\-only Access to GuardDuty](#guardduty_read-only)
 + [Using a Custom IAM Policy to Deny Access to GuardDuty Findings](#guardduty_restrict_access_to_findings)
 + [Using a Custom IAM Policy to Limit Access to GuardDuty Resources](#guardduty_restrict_access_to_resources)
++ [Resources Defined by GuardDuty](#guardduty-resources)
 
 ### AWS Managed \(Predefined\) Policies for GuardDuty<a name="guardduty_managedpolicies"></a>
 
@@ -364,3 +365,13 @@ Make sure that the user has the permissions required to access trusted IP lists 
       ]
   }
   ```
+
+### Resources Defined by GuardDuty<a name="guardduty-resources"></a>
+
+
+| **Resource Type** | **ARN** | 
+| --- | --- | 
+| detector | arn:$\{Partition\}:guardduty:$\{Region\}:$\{Account\}:detector/$\{DetectorId\} | 
+| ipset | arn:$\{Partition\}:guardduty:$\{Region\}:$\{Account\}:detector/$\{DetectorId\}/ipset/$\{IPSetId\} | 
+| threatintelset | arn:$\{Partition\}:guardduty:$\{Region\}:$\{Account\}:detector/$\{DetectorId\}/threatintelset/$\{ThreatIntelSetId\} | 
+| filter | arn:$\{Partition\}:guardduty:$\{Region\}:$\{Account\}:detector/$\{DetectorId\}/filter/$\{FilterName\} | 

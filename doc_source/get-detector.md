@@ -23,7 +23,10 @@ Required: Yes
     "status": "string",
     "createdAt": "string",
     "updatedAt": "string",
-    "findingPublishingFrequency": "enum"
+    "findingPublishingFrequency": "enum",
+    "tags": {
+            "string": "string"
+    }
 }
 ```
 
@@ -50,7 +53,11 @@ The time at which detector was last updated\.
 Type: ISO 8601 string format: YYYY\-MM\-DDTHH:MM:SS\.SSSZ or YYYY\-MM\-DDTHH:MM:SSZ depending on whether the value contains milliseconds\.
 
 **findingPublishingFrequency**  
-Specifies the frequency of notifications sent about the subsequent finding occurrences\. For more information, see [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
+Specifies the frequency of notifications sent about the subsequent finding occurrences\. For more information, see [Monitoring GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
+
+**tags**  
+The tags associated with the dectector resource\. A tag consists of a key and a value that you define\.   
+Type: String to string map
 
 ## Errors<a name="get-detector-errors"></a>
 

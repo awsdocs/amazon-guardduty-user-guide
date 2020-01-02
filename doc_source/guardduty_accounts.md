@@ -1,13 +1,13 @@
-# Managing AWS Accounts in Amazon GuardDuty<a name="guardduty_accounts"></a>
+# Managing Accounts in Amazon GuardDuty<a name="guardduty_accounts"></a>
 
-You can invite other accounts to enable GuardDuty and become associated with your AWS account\. If your invitations are accepted, your account is designated as the **master** GuardDuty account, and the associated accounts become your **member** accounts\. You can then view and manage their GuardDuty findings on their behalf\. In GuardDuty, a master account \(per region\) can have up to 1000 member accounts\. 
+You can invite other accounts to enable GuardDuty and become associated with your AWS account\. When an invitation is accepted, your account is designated as the **master** GuardDuty account\. The account that accepts the invitation becomes a **member** account associated with your master account\. You can then view and manage the GuardDuty findings on behalf of the member account\. In GuardDuty, a master account \(per region\) can have up to 1000 member accounts\.
 
 An AWS account cannot be a GuardDuty master and member account at the same time\. An AWS account can accept only one GuardDuty membership invitation\. Accepting a membership invitation is optional\.
 
-The sections below describe how you can create master and member accounts using the GuardDuty console, CLI, and APIs\. You can also create master and member accounts through AWS CloudFormation\. For more information, see [AWS::GuardDuty::Master](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-master.html) and [AWS::GuardDuty::Member](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-member.html)\.
+The following sections describe how to create master and member accounts using the GuardDuty console, CLI, and APIs\. You can also create master and member accounts through AWS CloudFormation\. For more information, see [AWS::GuardDuty::Master](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-master.html) and [AWS::GuardDuty::Member](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-member.html)\.
 
 **Note**  
-Cross\-regional data transfer can occur when GuardDuty member accounts are created\. In order to verify member accounts' email addresses, GuardDuty uses a non\-AWS account information verification service that operates only in the AWS US East \(N\. Virginia\) region\.
+Cross\-regional data transfer can occur when GuardDuty member accounts are created\. In order to verify member accounts' email addresses, GuardDuty uses a non\-AWS account information verification service that operates only in the AWS US East \(N\. Virginia\) Region\.
 
 **Topics**
 + [GuardDuty Master Accounts](#guardduty_master)
@@ -18,7 +18,7 @@ Cross\-regional data transfer can occur when GuardDuty member accounts are creat
 
 ## GuardDuty Master Accounts<a name="guardduty_master"></a>
 
-Users from the master account can configure GuardDuty as well as view and manage GuardDuty findings for their own account and all of their member accounts\. 
+Users from the master account can configure GuardDuty as well as view and manage GuardDuty findings for their own account and all associated member accounts\.
 
 The following is how users from a master account can configure GuardDuty:
 + Users from a master account can generate sample findings in their own account\. Users from a master account CANNOT generate sample findings in members' accounts\.
@@ -26,7 +26,7 @@ The following is how users from a master account can configure GuardDuty:
 + Users from a master account can upload and further manage trusted IP lists and threat lists in their own account\. 
 **Important**  
 Trusted IP lists and threat lists that are uploaded by the master account and in the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the master's threat lists and does not generate findings based on activity that involves IP addresses from the master's trusted IP lists\.
-+ Users from a master account can customize the default frequency of notifications sent about the subsequent finding occurrences to CloudWatch Events\. Possible values are 15 minutes, 1 hour, or the default 6 hours\. For more information, see [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
++ Users from a master account can customize the default frequency of notifications sent about the subsequent finding occurrences to CloudWatch Events\. Possible values are 15 minutes, 1 hour, or the default 6 hours\. For more information, see [Monitoring GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
 
   The frequency value set by the master account in its own account is imposed on GuardDuty functionality in all its member accounts\. In other words, if a user from a master account sets this frequency value to 1 hour, all member accounts will also have the 1 hour frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. 
 + Users from a master account can suspend GuardDuty for its own \(master\) account\. Users from a master account can also suspend GuardDuty in its member accounts\.
@@ -37,19 +37,19 @@ A master account user can also re\-enable GuardDuty in member accounts either th
 
 ## GuardDuty Member Accounts<a name="guardduty_member"></a>
 
-Users from member accounts can configure GuardDuty as well as view and manage GuardDuty findings in their account\. Member account users CANNOT configure GuardDuty or view or manage findings in the master or other member accounts\. 
+Users from member accounts can configure GuardDuty as well as view and manage GuardDuty findings in their account\. Member account users can't configure GuardDuty or view or manage findings in the master or other member accounts\. 
 
 The following is how users from a member account can configure GuardDuty:
-+ Users from a member account can generate sample findings in their own member account\. Users from a member account CANNOT generate sample findings in the master or other member accounts\.
-+ Users from a member account CANNOT archive findings either in their own account or in their master's account, or in other member accounts\.
-+ Users from a member account CANNOT upload and further manage trusted IP lists and threat lists\. 
++ Users from a member account can generate sample findings in their own member account\. Users from a member account can't generate sample findings in the master or other member accounts\.
++ Users from a member account can't archive findings either in their own account or in their master's account, or in other member accounts\.
++ Users from a member account can't upload and further manage trusted IP lists and threat lists\. 
 
   Trusted IP lists and threat lists that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the master's threat lists and does not generate findings based on activity that involves IP addresses from the master's trusted IP lists\.
 **Note**  
 When a GuardDuty account becomes a GuardDuty member account, all of its trusted IP lists and threat lists \(uploaded prior to becoming a GuardDuty member account\) are disabled\. If a GuardDuty member account disassociates from its GuardDuty master account, all of its trusted IP lists and threat lists \(uploaded prior to becoming a GuardDuty member account\) are re\-enabled\. Once no longer a GuardDuty member account, this account's users can upload and further manage trusted IP lists and threat lists in this account\. 
-+ Users from member accounts CANNOT customize the frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. The frequency value set by the master account in its own account is imposed on GuardDuty functionality in all its member accounts\. In other words, if a user from a master account sets this frequency value to 1 hour, all member accounts will also have the 1 hour frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. For more information, see [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
-+ Users from a member account can suspend GuardDuty for their own account\. Users from a member account CANNOT suspend GuardDuty for the master account or other member accounts\.
-+ Users from member accounts can disable GuardDuty for their own account\. Users from a member account CANNOT disable GuardDuty for the master account or other member accounts\.
++ Users from member accounts can't customize the frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. The frequency value set by the master account in its own account is imposed on GuardDuty functionality in all its member accounts\. In other words, if a user from a master account sets this frequency value to 1 hour, all member accounts will also have the 1 hour frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. For more information, see [Monitoring GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
++ Users from a member account can suspend GuardDuty for their own account\. Users from a member account can't suspend GuardDuty for the master account or other member accounts\.
++ Users from member accounts can disable GuardDuty for their own account\. Users from a member account can't disable GuardDuty for the master account or other member accounts\.
 
 ## Designating Master and Member Accounts Through GuardDuty Console<a name="guardduty_become_console"></a>
 
@@ -157,9 +157,9 @@ Complete the following procedure using the credentials of each AWS account that 
 
 1. Run the [AcceptInvitation](accept-invitation.md) API operation for each AWS account where you want to accept the membership invitation using that account's credentials\. 
 
-   You must specify the detector ID of this AWS account \(member account\), the master ID of the AWS account that sent the invitation that you are accepting \(you can get this value either from the invitation email or by running the [ListInvitations](list-invitations.md) API operation\. It is the value of the `accountID` response parameter\), and the invitation ID of the invitation that you are accepting\. 
+   You must specify the detector ID of this AWS account \(member account\), the account ID of the master account that sent the invitation, and the invitation ID of the invitation that you are accepting\. You can find the account ID of the master account from the invitation email, or by using the [docs.aws.amazon.com/guardduty/latest/APIReference/API_ListInvitations.html](docs.aws.amazon.com/guardduty/latest/APIReference/API_ListInvitations.html) operation of the API\.
 
-   You can also do this by using AWS Command Line Tools\. You can run the following CLI command \(make sure to use valide detector ID, master account ID, and invitation ID: 
+   You can also do this by using AWS Command Line Tools\. You can run the following CLI command \(make sure to use valid detector ID, master account ID, and invitation ID: 
 
    ```
    aws guardduty accept-invitation --detector-id 12abc34d567e8fa901bc2d34e56789f0 --master-id 012345678901 --invitation-id 84b097800250d17d1872b34c4daadcf5 

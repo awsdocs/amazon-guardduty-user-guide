@@ -3,7 +3,7 @@
 Returns the properties of the ThreatIntelSet that is specified by the ThreatIntelSet ID\. 
 
 **Important**  
-If a user from a member account runs this API, the response contains the ThreatIntelSets uploaded by the master account\. Currently in GuardDuty, users from member accounts CANNOT upload and further manage ThreatIntelSets\. ThreatIntelSets that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. For more information, see [Managing AWS Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
+If a user from a member account runs this API, the response contains the ThreatIntelSets uploaded by the master account\. Currently in GuardDuty, users from member accounts CANNOT upload and further manage ThreatIntelSets\. ThreatIntelSets that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. For more information, see [Managing Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
 
 ## Request Syntax<a name="get-threat-intel-request-syntax"></a>
 
@@ -37,7 +37,10 @@ Required: Yes
     "name": "string",
     "location": "string",
     "format": "[TXT | STIX | OTX_CSV | ALIEN_VAULT | PROOF_POINT | FIRE_EYE]",
-    "status": "[INACTIVE | ACTIVATING | ACTIVE | DEACTIVATING | ERROR | DELETE_PENDING | DELETED]"
+    "status": "[INACTIVE | ACTIVATING | ACTIVE | DEACTIVATING | ERROR | DELETE_PENDING | DELETED]",
+    "tags": {
+            "string": "string"
+    }
 }
 ```
 
@@ -64,6 +67,10 @@ Valid values: `TXT` \| `STIX` \| `OTX_CSV` \| `ALIEN_VAULT` \| `PROOF_POINT` \| 
 The current status of the `ThreatIntelSet`\.  
 Type: String  
 Valid values: `INACTIVE` \| `ACTIVATING` \| `ACTIVE` \| `DEACTIVATING` \| `ERROR` \| `DELETE_PENDING` \| `DELETED`
+
+**tags**  
+The tags associated with the `ThreatIntelSet` resource\. A tag consists of a key and a value that you define\.   
+Type: String to string map
 
 ## Errors<a name="get-threat-intel-errors"></a>
 

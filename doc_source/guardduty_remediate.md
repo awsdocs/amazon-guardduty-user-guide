@@ -16,7 +16,7 @@ Follow these recommended steps to remediate a compromised EC2 instance in your A
   + [Tips for securing your EC2 instances \(Linux\)](https://aws.amazon.com/articles/tips-for-securing-your-ec2-instance/) and [Securing Windows EC2 Instances](https://aws.amazon.com/answers/security/aws-securing-windows-instances/)\.
   + [AWS Security Best Practices](https://d0.awsstatic.com/whitepapers/Security/AWS_Security_Best_Practices.pdf)
 + Browse for further assistance on the AWS developer forums: [https://forums\.aws\.amazon\.com/index\.jspa](https://forums.aws.amazon.com/index.jspa) 
-+ If you are a Premium Support package subscriber, you can request [one\-one\-one assistance](https://console.aws.amazon.com/support/home#/case/create?issueType=technical)\. 
++ If you are a Premium Support package subscriber, you can submit a [technical support](https://console.aws.amazon.com/support/home#/case/create?issueType=technical) request\. 
 
 ## Remediating Compromised AWS Credentials<a name="compromised-creds"></a>
 

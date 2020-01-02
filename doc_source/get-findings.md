@@ -463,6 +463,7 @@ The network connection protocol\.
 Type: String  
 **blocked**  
 The network connection blocked information\. For more information, see [Flow Log Records](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html#flow-log-records)\.  
+This value may not be set accurately if the Amazon EC2 instance that generated the finding is a classic Amazon EC2 instance\. This is because, in some cases, Amazon VPC Flow Logs do not accurately set this field for classic instances\.  
 Type: Boolean  
 **awsApiCallAction**  
 Information about the `AWS_API_CALL` action that is described in this finding\.  

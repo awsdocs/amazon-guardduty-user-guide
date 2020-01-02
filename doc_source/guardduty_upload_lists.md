@@ -6,7 +6,7 @@ Trusted IP lists consist of IP addresses that you have whitelisted for secure co
 
 Threat lists consist of known malicious IP addresses\. GuardDuty generates findings based on threat lists\. At any given time, you can have up to six uploaded threat lists per AWS account per region\.
 
-Users from master GuardDuty accounts can upload and manage trusted IP lists and threat lists\. Users from member GuardDuty accounts CANNOT upload and manage lists\. Trusted IP lists and threat lists that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the master's threat lists and does not generate findings based on activity that involves IP addresses from the master's trusted IP lists\. For more information, see [Managing AWS Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
+Users from master GuardDuty accounts can upload and manage trusted IP lists and threat lists\. Users from member GuardDuty accounts CANNOT upload and manage lists\. Trusted IP lists and threat lists that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the master's threat lists and does not generate findings based on activity that involves IP addresses from the master's trusted IP lists\. For more information, see [Managing Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
 
 **Important**  
 GuardDuty uses the same [`AWSServiceRoleForAmazonGuardDuty` service\-linked role](guardduty_managing_access.md#guardduty_service-access) that is automatically assigned to it when you enable GuardDuty for the permissions required to evaluate your trusted IP lists and threat lists\. 
@@ -20,7 +20,7 @@ Note the following when creating trusted IP lists and threat lists that you plan
   54.20.175.217
   205.0.0.0/8
   ```
-+ GuardDuty doesn't generate findings for any non\-routable or internal \(or private\) IP addresses in your threat lists\.
++ Trusted IP list and threat lists apply only to traffic destined for publicly routable IP addresses\.
 + GuardDuty doesn't generate findings based on activity that involves domain names that are included in your threat lists\. GuardDuty only generates findings based on activity that involves IP addresses and CIDR ranges in your threat lists\.
 + The maximum size of the file that hosts your trusted IP list or threat list is 35MB\.
 + You can include a maximum of 2000 IP addresses and CIDR ranges in a single trusted IP list\.
@@ -118,3 +118,5 @@ If you make changes to a trusted IP list or a threat list that is already upload
 1. In the **Update list** pop up window, verify all specified list information, choose **I agree**, and then choose **Update list**\.
 
 1. On the **List management** page, locate the trusted IP set or a threat list that you want to activate again, and then choose the radio button under the **Active** column\.
+
+To learn how to import threat intel feeds programatically, see the [How to automate the import of third\-party threat intelligence feeds](https://aws.amazon.com/blogs/security/how-to-automate-import-third-party-threat-intelligence-feeds-into-amazon-guardduty/) blog article\.

@@ -1,6 +1,6 @@
 # How Amazon GuardDuty Uses Its Data Sources<a name="guardduty_data-sources"></a>
 
-To detect unauthorized and unexpected activity in your AWS environment, GuardDuty analyzes and processes data from AWS CloudTrail event logs, VPC Flow Logs, and DNS logs\. The logs from these data sources are stored in the Amazon S3 buckets\. GuardDuty accesses them there using the HTTPS protocol\. While in transit from these data sources to GuardDuty, all of the log data is encrypted\. GuardDuty extracts various fields from these logs for profiling and anomaly detection, and then discards the logs\. 
+To detect unauthorized and unexpected activity in your AWS environment, GuardDuty analyzes and processes data from AWS CloudTrail event logs, VPC Flow Logs, and DNS logs\. While in transit from these data sources to GuardDuty, all of the log data is encrypted\. GuardDuty extracts various fields from these logs for profiling and anomaly detection, and then discards the logs\.
 
 The following sections describe the details of how GuardDuty uses each supported data source\.
 

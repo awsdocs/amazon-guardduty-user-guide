@@ -1,4 +1,4 @@
-# GuardDuty Behavior Finding Types<a name="guardduty_behavior"></a>
+# Behavior Finding Types<a name="guardduty_behavior"></a>
 
 This section covers the active Behavior threat purpose finding types\. For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\. 
 
@@ -11,20 +11,20 @@ The default severity value of a finding type is subject to change based on vario
 
 ## Behavior:EC2/NetworkPortUnusual<a name="behavior3"></a>
 
-### Default severity: Medium<a name="behavior3_severity"></a>
-
 ### Finding description<a name="behavior3_description"></a>
 
 **EC2 instance is communicating with a remote host on an unusual server port\.**
 
 This finding informs you that an EC2 instance in your AWS environment is behaving in a way that deviates from the established baseline\. This EC2 instance has no prior history of communications on this remote port\. Your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
 
-## Behavior:EC2/TrafficVolumeUnusual<a name="behavior4"></a>
+### Default severity: Medium<a name="behavior3_severity"></a>
 
-### Default severity: Medium<a name="behavior4_severity"></a>
+## Behavior:EC2/TrafficVolumeUnusual<a name="behavior4"></a>
 
 ### Finding description<a name="behavior4_description"></a>
 
 **EC2 instance is generating unusually large amounts of network traffic to a remote host\.**
 
 This finding informs you that an EC2 instance in your AWS environment is behaving in a way that deviates from the established baseline\. This EC2 instance has no prior history of sending this much traffic to this remote host\. Your EC2 instance might be compromised\. For more information, see [Remediating a Compromised EC2 Instance](guardduty_remediate.md#compromised-ec2)\.
+
+### Default severity: Medium<a name="behavior4_severity"></a>

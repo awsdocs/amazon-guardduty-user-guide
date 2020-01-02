@@ -3,7 +3,7 @@
 Returns the properties of the IPSet that is specified by the IPSet ID\.
 
 **Important**  
-If a user from a member account runs this API, the response contains the IPSets uploaded by the master account\. Currently in GuardDuty, users from member accounts CANNOT upload and further manage IPSets\. IPSets that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. For more information, see [Managing AWS Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
+If a user from a member account runs this API, the response contains the IPSets uploaded by the master account\. Currently in GuardDuty, users from member accounts CANNOT upload and further manage IPSets\. IPSets that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. For more information, see [Managing Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
 
 ## Request Syntax<a name="get-ip-set-request-syntax"></a>
 
@@ -39,7 +39,10 @@ Required: Yes
     "name": "string",
     "location": "string",
     "format": "[TXT|STIX|OTX_CSV|ALIEN_VAULT|PROOF_POINT|FIRE_EYE]",
-    "status": "[INACTIVE|ACTIVATING|ACTIVE|DEACTIVATING|ERROR|DELETE_PENDING|DELETED]"
+    "status": "[INACTIVE|ACTIVATING|ACTIVE|DEACTIVATING|ERROR|DELETE_PENDING|DELETED]",
+    "tags": {
+            "string": "string"
+     }
 }
 ```
 
@@ -66,6 +69,10 @@ Values : TXT \| STIX \| OTX\_CSV \| ALIEN\_VAULT \| PROOF\_POINT \| FIRE\_EYE
 The current status of the IPSet\.  
 Valid values : INACTIVE \| ACTIVATING \| ACTIVE \| DEACTIVATING \| ERROR \| DELETE\_PENDING \| DELETED  
 Type: String
+
+**tags**  
+The tags associated with the IPSet resource\. A tag consists of a key and a value that you define\.   
+Type: String to string map
 
 ## Errors<a name="get-ip-set-errors"></a>
 

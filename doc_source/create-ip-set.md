@@ -3,7 +3,7 @@
 Creates an IPSet, which is a list of trusted IP addresses that have been whitelisted for highly secure communication with your AWS environment\.
 
 **Important**  
-Users from GuardDuty member accounts cannot run this API\. Currently in GuardDuty, users from member accounts CANNOT upload and further manage IPSets\. IPSets that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. For more information, see [Managing AWS Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
+Users from GuardDuty member accounts cannot run this API\. Currently in GuardDuty, users from member accounts CANNOT upload and further manage IPSets\. IPSets that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. For more information, see [Managing Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
 
 ## Request Syntax<a name="create-ip-set-request-syntax"></a>
 
@@ -18,7 +18,10 @@ POST https://<endpoint>/detector/{detectorId}/ipset
     "name": "string",
     "location": "string",
     "format": "[TXT|STIX|OTX_CSV|ALIEN_VAULT|PROOF_POINT|FIRE_EYE]",
-    "activate": "boolean"
+    "activate": "boolean",
+    "tags": {
+            "string": "string"
+    }
 }
 ```
 
@@ -34,7 +37,7 @@ Required: Yes
 The request accepts the following data in JSON format\.
 
 **name**  
-The friendly name to identify the IPSet\. This name is displayed in all findings that are triggered by activity that involves IP addresses included in this IPSet\.  
+The friendly name to identify the IPSet\. The value of this field must be unique per detector, per account, and per region\. This name is displayed in all findings that are triggered by activity that involves IP addresses included in this IPSet\.  
 Type: String  
 Required: Yes
 
@@ -60,6 +63,11 @@ Required: Yes
 Specifies whether GuardDuty is to start using the uploaded IPSet\.  
 Type: Boolean  
 Required: Yes
+
+**tags**  
+The tags that you want to add to the IPSet resource\. A tag consists of a key and a value that you define\.   
+Type: String to string map  
+Required: No
 
 ## Response Syntax<a name="create-ip-set-response-syntax"></a>
 
