@@ -11,9 +11,9 @@ Amazon GuardDuty generates [findings](guardduty_findings.md) that indicate poten
 Follow these recommended steps to remediate a compromised EC2 instance in your AWS environment:
 + Investigate the potentially compromised instance for malware and remove any discovered malware\. You can also refer to the [AWS Marketplace](https://aws.amazon.com/marketplace) for partner products that might help to identify and remove malware\.
 + If you are unable to identify and stop unauthorized activity on your EC2 instance, we recommend that you terminate the compromised EC2 instance and replace it with a new instance as needed\. The following are additional resources for securing your EC2 instances:
-  + "Security and Network" section in [Best Practices for Amazon EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-best-practices.html)\.
+  + "Security and Network" section in [Best Practices for Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-best-practices.html)\.
   + [Amazon EC2 Security Groups for Linux Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) and [Amazon EC2 Security Groups for Windows Instances](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/using-network-security.html)\.
-  + [Tips for securing your EC2 instances \(Linux\)](https://aws.amazon.com/articles/tips-for-securing-your-ec2-instance/) and [Securing Windows EC2 Instances](https://aws.amazon.com/answers/security/aws-securing-windows-instances/)\.
+  + [Tips for securing your EC2 instances \(Linux\)](http://aws.amazon.com/articles/tips-for-securing-your-ec2-instance/)\.
   + [AWS Security Best Practices](https://d0.awsstatic.com/whitepapers/Security/AWS_Security_Best_Practices.pdf)
 + Browse for further assistance on the AWS developer forums: [https://forums\.aws\.amazon\.com/index\.jspa](https://forums.aws.amazon.com/index.jspa) 
 + If you are a Premium Support package subscriber, you can submit a [technical support](https://console.aws.amazon.com/support/home#/case/create?issueType=technical) request\. 
@@ -25,7 +25,7 @@ Follow these recommended steps to remediate compromised credentials in your AWS 
 
   If a GuardDuty finding informs you of a potential compromise to AWS credentials, you can locate the affected IAM user by their access keys or user name\.
 **Note**  
-Users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface \(AWS CLI\), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services\. To fill this need, you can create, modify, view, or rotate access keys \(access key IDs and secret access keys\) for IAM users\. For more information, see [Managing Access Keys for IAM Users](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)\.
+Users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface \(AWS CLI\), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services\. To fill this need, you can create, modify, view, or rotate access keys \(access key IDs and secret access keys\) for IAM users\. For more information, see [Managing Access Keys for IAM Users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)\.
 
   To find the access key ID or user name that belongs to a potentially compromised IAM user, open the console and view the details pane of the finding that you're analyzing\. For more information, see [Locating and Analyzing GuardDuty Findings](guardduty_findings.md#guardduty_working-with-findings)\. After you have the access key ID or user name, open the IAM console, choose the **Users** tab, and locate the affected user by typing the access key ID or user name in the **Find users by username or access key** search field\. 
 + **Determine whether the credentials were used by the IAM user legitimately\.**

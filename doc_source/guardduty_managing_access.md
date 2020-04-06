@@ -53,11 +53,11 @@ Replace the sample account ID in the example below with your actual AWS account 
 
 This section describes the permissions that the GuardDuty service itself requires to function and perform operations on your behalf, such as generating findings\.
 
-When you enable GuardDuty \(using the GuardDuty console or programmatically through the API operations or AWS CLI commands\), it is automatically assigned a service\-linked role called `AWSServiceRoleForAmazonGuardDuty`\. A service\-linked role is a unique type of IAM role that is linked directly to an AWS service \(in this case, GuardDuty\)\. Service\-linked roles are predefined by the service and include all the permissions that the service requires to call other AWS services on your behalf\. The linked service \(in this case, GuardDuty\) also defines how you create, modify, and delete a service\-linked role\. For more information about service\-linked roles, see [Using Service\-Linked Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)\. 
+When you enable GuardDuty \(using the GuardDuty console or programmatically through the API operations or AWS CLI commands\), it is automatically assigned a service\-linked role called `AWSServiceRoleForAmazonGuardDuty`\. A service\-linked role is a unique type of IAM role that is linked directly to an AWS service \(in this case, GuardDuty\)\. Service\-linked roles are predefined by the service and include all the permissions that the service requires to call other AWS services on your behalf\. The linked service \(in this case, GuardDuty\) also defines how you create, modify, and delete a service\-linked role\. For more information about service\-linked roles, see [Using Service\-Linked Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)\. 
 
 The `AWSServiceRoleForAmazonGuardDuty` service\-linked role is created automatically when GuardDuty is enabled\. It includes the permissions and the trust policies that GuardDuty requires to consume and analyze events directly from AWS CloudTrail, VPC Flow Logs, and DNS logs and generate security findings\.
 
-You cannot edit the `AWSServiceRoleForAmazonGuardDuty` service\-linked role\. You can view its permissions or delete this service\-linked role via the IAM console\. To delete the `AWSServiceRoleForAmazonGuardDuty` service\-linked role, you must first [disable GuardDuty](guardduty_suspend-disable.md) in all regions in that AWS account\. 
+You cannot edit the `AWSServiceRoleForAmazonGuardDuty` service\-linked role\. You can view its permissions or delete this service\-linked role via the IAM console\. To delete the `AWSServiceRoleForAmazonGuardDuty` service\-linked role, you must first [disable GuardDuty](guardduty_suspend-disable.md) in all Regions in that AWS account\. 
 
 To view the permissions attached to `AWSServiceRoleForAmazonGuardDuty`, choose the **View service role permissions** button in the **Setting/General** tab of the GuardDuty console\. 
 
@@ -100,7 +100,7 @@ The following is the trust policy that is attached to the `AWSServiceRoleForAmaz
 
 This section describes how to delegate access to GuardDuty to various IAM identities \(users, groups, and roles\)\. 
 
-By default, access to the GuardDuty resources \(detector, trusted IP lists, threat lists, findings, members, master account, and invitations\) is restricted to the owner of the AWS account that the resources were created in\. If you are the owner, you can choose to grant full or limited access to GuardDuty to the various IAM identities in your account\. For more information about creating IAM access policies, see [AWS Identity and Access Management \(IAM\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)\.
+By default, access to the GuardDuty resources \(detector, trusted IP lists, threat lists, findings, members, master account, and invitations\) is restricted to the owner of the AWS account that the resources were created in\. If you are the owner, you can choose to grant full or limited access to GuardDuty to the various IAM identities in your account\. For more information about creating IAM access policies, see the [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
 
 **Topics**
 + [AWS Managed \(Predefined\) Policies for GuardDuty](#guardduty_managedpolicies)
@@ -120,14 +120,14 @@ The following AWS managed policies, which you can attach to users in your accoun
    To grant various identities full access to working with trusted IP lists and threat lists \(in addition to renaming and deactivating, this includes uploading, activating, deleting, and updating the location of the lists\), make sure that the following actions are present in the permissions policy attached to an IAM user, group, or role: 
 
   ```
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "iam:PutRolePolicy",
-                  "iam:DeleteRolePolicy"
-              ],
-              "Resource": "arn:aws:iam::123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
-          }
+  {
+      "Effect": "Allow",
+      "Action": [
+          "iam:PutRolePolicy",
+          "iam:DeleteRolePolicy"
+      ],
+      "Resource": "arn:aws:iam::123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
+  }
   ```
 + **AmazonGuardDutyReadOnlyAccess ** – Provides read\-only access to GuardDuty\. 
 
@@ -278,7 +278,7 @@ You can use the following policy to deny an IAM user, role, or group access to G
 
 ### Using a Custom IAM Policy to Limit Access to GuardDuty Resources<a name="guardduty_restrict_access_to_resources"></a>
 
-To define a user's access to GuardDuty based on the detector ID, you can use all [GuardDuty operations](guardduty_api_ref.md) in your custom IAM policies, **except** the following operations:
+To define a user's access to GuardDuty based on the detector ID, you can use all [GuardDuty API Actions](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_Operations.html) in your custom IAM policies, **except** the following operations:
 + `guardduty:CreateDetector`
 + `guardduty:DeclineInvitations`
 + `guardduty:DeleteInvitations`
@@ -295,7 +295,7 @@ Use the following operations in an IAM policy to define a user's access to Guard
 + `guardduty:UpdateThreatIntelSet`
 
 The following examples show how to create policies using some of the preceding operations:
-+ This policy allows a user to run the `guardduty:UpdateDetector` operation, using the detector ID of 1234567 in the us\-east\-1 region: 
++ This policy allows a user to run the `guardduty:UpdateDetector` operation, using the detector ID of 1234567 in the us\-east\-1 Region: 
 
   ```
   {
@@ -311,7 +311,7 @@ The following examples show how to create policies using some of the preceding o
       ]
   }
   ```
-+ This policy allows a user to run the `guardduty:UpdateIPSet` operation, using the detector ID of 1234567 and the IPSet ID of 000000 in the us\-east\-1 region:
++ This policy allows a user to run the `guardduty:UpdateIPSet` operation, using the detector ID of 1234567 and the IPSet ID of 000000 in the us\-east\-1 Region:
 **Note**  
 Make sure that the user has the permissions required to access trusted IP lists and threat lists in GuardDuty\. For more information, see [Permissions Required to Upload Trusted IP Lists and Threat Lists](guardduty_upload_lists.md#upload-permissions)\.
 
@@ -329,7 +329,7 @@ Make sure that the user has the permissions required to access trusted IP lists 
       ]
   }
   ```
-+ This policy allows a user to run the `guardduty:UpdateIPSet` operation, using any detector ID and the IPSet ID of 000000 in the us\-east\-1 region:
++ This policy allows a user to run the `guardduty:UpdateIPSet` operation, using any detector ID and the IPSet ID of 000000 in the us\-east\-1 Region:
 **Note**  
 Make sure that the user has the permissions required to access trusted IP lists and threat lists in GuardDuty\. For more information, see [Permissions Required to Upload Trusted IP Lists and Threat Lists](guardduty_upload_lists.md#upload-permissions)\.
 
@@ -347,7 +347,7 @@ Make sure that the user has the permissions required to access trusted IP lists 
       ]
   }
   ```
-+ This policy allows a user to run the `guardduty:UpdateIPSet` operation, using the detector ID of 1234567 and any IPSet ID in the us\-east\-1 region:
++ This policy allows a user to run the `guardduty:UpdateIPSet` operation, using the detector ID of 1234567 and any IPSet ID in the us\-east\-1 Region:
 **Note**  
 Make sure that the user has the permissions required to access trusted IP lists and threat lists in GuardDuty\. For more information, see [Permissions Required to Upload Trusted IP Lists and Threat Lists](guardduty_upload_lists.md#upload-permissions)\.
 

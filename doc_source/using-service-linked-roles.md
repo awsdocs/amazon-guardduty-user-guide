@@ -4,9 +4,9 @@ Amazon GuardDuty uses AWS Identity and Access Management \(IAM\)[ service\-linke
 
 A service\-linked role makes setting up GuardDuty easier because you don't have to manually add the necessary permissions\. GuardDuty defines the permissions of its service\-linked role, and unless the permissions are defined otherwise, only GuardDuty can assume the role\. The defined permissions include the trust policy and the permissions policy, and that permissions policy can't be attached to any other IAM entity\.
 
-GuardDuty supports using service\-linked roles in all of the regions where GuardDuty is available\. For more information, see [Regions and Endpoints](guardduty_regions.md)\.
+GuardDuty supports using service\-linked roles in all of the Regions where GuardDuty is available\. For more information, see [Regions and Endpoints](guardduty_regions.md)\.
 
-You can delete the GuardDuty service\-linked role only after first disabling GuardDuty in all regions where it is enabled\. This protects your GuardDuty resources because you can't inadvertently remove permission to access them\.
+You can delete the GuardDuty service\-linked role only after first disabling GuardDuty in all Regions where it is enabled\. This protects your GuardDuty resources because you can't inadvertently remove permission to access them\.
 
 For information about other services that support service\-linked roles, see [AWS Services That Work with IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html) in the *IAM User Guide* and look for the services that have **Yes **in the **Service\-Linked Role** column\. Choose a **Yes** with a link to view the service\-linked role documentation for that service\.
 
@@ -64,7 +64,7 @@ Replace the sample account ID in the example below with your actual AWS account 
 
 ## Creating a Service\-Linked Role for GuardDuty<a name="create-slr"></a>
 
-The `AWSServiceRoleForAmazonGuardDuty` service\-linked role is automatically created when you enable GuardDuty for the first time or enable GuardDuty in a supported region where you previously didn't have it enabled\. You can also create the `AWSServiceRoleForAmazonGuardDuty` service\-linked role manually using the IAM console, the IAM CLI, or the IAM API\. 
+The `AWSServiceRoleForAmazonGuardDuty` service\-linked role is automatically created when you enable GuardDuty for the first time or enable GuardDuty in a supported Region where you previously didn't have it enabled\. You can also create the `AWSServiceRoleForAmazonGuardDuty` service\-linked role manually using the IAM console, the IAM CLI, or the IAM API\. 
 
 **Important**  
 The service\-linked role that is created for the master GuardDuty account doesn't apply to the member GuardDuty accounts\.
@@ -80,7 +80,7 @@ GuardDuty doesn't allow you to edit the `AWSServiceRoleForAmazonGuardDuty` servi
 If you no longer need to use a feature or service that requires a service\-linked role, we recommend that you delete that role\. That way you don't have an unused entity that isn't actively monitored or maintained\. 
 
 **Important**  
-You must first disable GuardDuty in all regions where it is enabled in order to delete the `AWSServiceRoleForAmazonGuardDuty`\.  
+You must first disable GuardDuty in all Regions where it is enabled in order to delete the `AWSServiceRoleForAmazonGuardDuty`\.  
 If the GuardDuty service isn't disabled when you try to delete the service\-linked role, the deletion fails\. For more information, see [Suspending or Disabling GuardDuty](guardduty_suspend-disable.md)\.
 
 When you disable GuardDuty, the `AWSServiceRoleForAmazonGuardDuty` is NOT automatically deleted\. If you then enable GuardDuty again, it'll start using the existing `AWSServiceRoleForAmazonGuardDuty`\.

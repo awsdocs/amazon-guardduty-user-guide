@@ -20,7 +20,7 @@ The origin or location of a set of data\. To detect unauthorized and unexpected 
 
 **Finding**  
 A potential security issue discovered by GuardDuty\. For more information, see [Findings](guardduty_findings.md)\.  
-Findings are displayed in the GuardDuty console and contain a detailed description of the security issue\. You can also retrieve your generated findings by calling the [GetFindings](get-findings.md) and [ListFindings](list-findings.md) HTTPS API operations\.  
+Findings are displayed in the GuardDuty console and contain a detailed description of the security issue\. You can also retrieve your generated findings by calling the [GetFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetFindings.html) and [ListFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListFindings.html) API operations\.  
 You can also see your GuardDuty findings through Amazon CloudWatch events\. GuardDuty sends findings to Amazon CloudWatch via HTTPS protocol\. For more information, see [Monitoring GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
 
 **Trusted IP list**  

@@ -34,7 +34,7 @@ It is possible to access EC2 metadata using DNS Rebinding only if the EC2 instan
 
 In response to this finding, you should evaluate whether there is a vulnerable application running on the EC2 instance, or a human user used a browser to access the domain identified in the finding\. If the root cause is a vulnerable application, you should fix the vulnerability\. If it was due to a user browsing the identified domain, you should block the domain or prevent users from accessing it\. If you determine this was related to either case above you should [revoke the session associated with the EC2 instance](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_revoke-sessions.html)\.
 
-Some AWS customers intentionally map the metadata IP address to a domain name on their authoritative DNS servers\. Such customers can implement an archive filter to auto\-archive all findings which have the type of UnauthorizedAccess:EC2/MetaDataDNSRebind and the service\.action\.dnsRequestAction\.domain field is same as the domain name they have mapped to the metadata IP address \(169\.254\.169\.254\)\. To learn more, see [CreateFilter](create-filter.md)\.
+Some AWS customers intentionally map the metadata IP address to a domain name on their authoritative DNS servers\. Such customers can implement an archive filter to auto\-archive all findings which have the type of UnauthorizedAccess:EC2/MetaDataDNSRebind and the service\.action\.dnsRequestAction\.domain field is same as the domain name they have mapped to the metadata IP address \(169\.254\.169\.254\)\. To learn more, see [CreateFilter](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateFilter.html)\.
 
 ### Default severity: High<a name="ec2-metadatadnsrebind-severity"></a>
 

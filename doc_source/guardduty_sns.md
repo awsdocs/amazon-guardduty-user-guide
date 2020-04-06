@@ -5,11 +5,11 @@ This section provides information on subscribing to the GuardDuty Announcements 
 **Note**  
 Your user account must have sns::subscribe IAM permissions to subscribe to an SNS topic\.
 
-You can subscribe an Amazon SQS queue to this notification topic, but you must use a topic ARN that is in the same region\. For more information, see [Tutorial: Subscribing an Amazon SQS Queue to an Amazon SNS Topic](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-subscribe-queue-sns-topic.html) in the Amazon Simple Queue Service Developer Guide\.
+You can subscribe an Amazon SQS queue to this notification topic, but you must use a topic ARN that is in the same Region\. For more information, see [Tutorial: Subscribing an Amazon SQS Queue to an Amazon SNS Topic](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-subscribe-queue-sns-topic.html) in the Amazon Simple Queue Service Developer Guide\.
 
 You can also use an AWS Lambda function to trigger events when notifications are received\. For more information, see [Invoking Lambda functions using Amazon SNS notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-lambda-as-subscriber.html) in the Amazon Simple Notification Service Developer Guide\.
 
-The Amazon SNS topic ARNs for each region are shown below\.
+The Amazon SNS topic ARNs for each Region are shown below\.
 
 
 | AWS Region | Amazon SNS Topic ARN | 
@@ -37,7 +37,7 @@ The Amazon SNS topic ARNs for each region are shown below\.
 
 1. Open the Amazon SNS console at [https://console\.aws\.amazon\.com/sns/v3/home](https://console.aws.amazon.com/sns/v3/home)\.
 
-1. In the region list, choose the same Region as the topic ARN to which to subscribe\. This example uses the `us-west-2` Region\.
+1. In the Region list, choose the same Region as the topic ARN to which to subscribe\. This example uses the `us-west-2` Region\.
 
 1. In the left navigation pane, choose **Subscriptions**, **Create subscription**\.
 

@@ -31,8 +31,8 @@ Trusted IP lists and threat lists that are uploaded by the master account and in
   The frequency value set by the master account in its own account is imposed on GuardDuty functionality in all its member accounts\. In other words, if a user from a master account sets this frequency value to 1 hour, all member accounts will also have the 1 hour frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. 
 + Users from a master account can suspend GuardDuty for its own \(master\) account\. Users from a master account can also suspend GuardDuty in its member accounts\.
 **Note**  
-If a master account user suspends GuardDuty in the master account, this suspension is NOT automatically imposed on the member accounts\. To suspend GuardDuty for member accounts, a user from a master account must select these member accounts and suspend GuardDuty through the console or specify their account IDs when running the [StopMonitoringMembers](stop-monitoring-members.md) API\.  
-A master account user can also re\-enable GuardDuty in member accounts either through the console or by running the [StartMonitoringMembers](start-monitoring-members.md) API\.
+If a master account user suspends GuardDuty in the master account, this suspension is NOT automatically imposed on the member accounts\. To suspend GuardDuty for member accounts, a user from a master account must select these member accounts and suspend GuardDuty through the console or specify their account IDs when running the [StopMonitoringMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_StopMonitoringMembers.html) operation of the GuardDuty API\.  
+A master account user can also re\-enable GuardDuty in member accounts either through the console or by running the [StartMonitoringMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_StartMonitoringMembers.html) operation\.
 + Users from a master account can disable GuardDuty in its own \(master\) account\. However, all member accounts must first be removed to disable GuardDuty in the master account\. Users from a master account CANNOT disable GuardDuty for member accounts\.
 
 ## GuardDuty Member Accounts<a name="guardduty_member"></a>
@@ -119,7 +119,7 @@ Complete the following procedure using the credentials of the AWS account that y
 
 ****
 
-1. Run the [CreateMembers](create-members.md) API operation using the credentials of the AWS account that has GuardDuty enabled \(this is the account that you want to be the master GuardDuty account\)\.
+1. Run the [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html) API operation using the credentials of the AWS account that has GuardDuty enabled \(this is the account that you want to be the master GuardDuty account\)\.
 
     You must specify the detector ID of the current AWS account and the account details \(account ID and email address\) of the accounts that you want to become GuardDuty members \(you can create one or more members with this API operation\)\.
 
@@ -129,7 +129,7 @@ Complete the following procedure using the credentials of the AWS account that y
    aws guardduty create-members --detector-id 12abc34d567e8fa901bc2d34e56789f0 --account-details AccountId=123456789012,Email=guarddutymember@amazon.com
    ```
 
-1. Run the [InviteMembers](invite-members.md) API operation using the credentials of the AWS account that has GuardDuty enabled \(this is the account that you want to be the master GuardDuty account\.
+1. Run the [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API operation using the credentials of the AWS account that has GuardDuty enabled \(this is the account that you want to be the master GuardDuty account\.
 
     You must specify the detector ID of the current AWS account and the account IDs \(you can invite one or more members with this API operation\) of the accounts that you want to become GuardDuty members\.
 **Note**  
@@ -145,7 +145,7 @@ Complete the following procedure using the credentials of each AWS account that 
 
 ****
 
-1. Run the [CreateDetector](create-detector.md) API operation for each AWS account that was invited to become a GuardDuty member account and where you want to accept an invitation\. 
+1. Run the [CreateDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateDetector.html) API operation for each AWS account that was invited to become a GuardDuty member account and where you want to accept an invitation\. 
 
    You must specify if the detector resource is to be enabled using the GuardDuty service\. A detector must be created and enabled in order for GuardDuty to become operational\. You must first enable GuardDuty before accepting an invitation\.
 
@@ -155,9 +155,9 @@ Complete the following procedure using the credentials of each AWS account that 
    aws guardduty create-detector --enable
    ```
 
-1. Run the [AcceptInvitation](accept-invitation.md) API operation for each AWS account where you want to accept the membership invitation using that account's credentials\. 
+1. Run the [AcceptInvitation](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_AcceptInvitation.html) API operation for each AWS account where you want to accept the membership invitation using that account's credentials\. 
 
-   You must specify the detector ID of this AWS account \(member account\), the account ID of the master account that sent the invitation, and the invitation ID of the invitation that you are accepting\. You can find the account ID of the master account from the invitation email, or by using the [docs.aws.amazon.com/guardduty/latest/APIReference/API_ListInvitations.html](docs.aws.amazon.com/guardduty/latest/APIReference/API_ListInvitations.html) operation of the API\.
+   You must specify the detector ID of this AWS account \(member account\), the account ID of the master account that sent the invitation, and the invitation ID of the invitation that you are accepting\. You can find the account ID of the master account from the invitation email, or by using the [https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListInvitations.html](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListInvitations.html) operation of the API\.
 
    You can also do this by using AWS Command Line Tools\. You can run the following CLI command \(make sure to use valid detector ID, master account ID, and invitation ID: 
 
@@ -191,7 +191,7 @@ sudo chmod +x disableguardduty.py enableguardduty.py
 **Note**  
 When prompted, set the region to us\-east\-1 or whatever default region you want\.
 
-The scripts have one parameter \- the account ID of your GuardDuty master account\. Before you execute enableguardduty\.py or disableguardduty\.py, update either script’s global variables to map to your AWS accounts\. You can create a list of the accounts and their associated email addresses\. Specify the master GuardDuty account and \(optionally\) customize the invite message that is sent to member accounts\. 
+The scripts have one parameter \- the account ID of your GuardDuty master account\. Before you execute enableguardduty\.py or disableguardduty\.py, update either script's global variables to map to your AWS accounts\. You can create a list of the accounts and their associated email addresses\. Specify the master GuardDuty account and \(optionally\) customize the invite message that is sent to member accounts\. 
 
 ### Use AWS CloudFormation StackSets to Enable GuardDuty in Multiple Accounts Simultaneously<a name="guardduty_become_stackset"></a>
 

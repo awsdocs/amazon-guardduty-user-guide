@@ -22,7 +22,7 @@ You CANNOT customize the default frequency \(5 minutes\) of notifications sent a
 **Notifications for subsequent finding occurrences** – By default, for every finding with a unique finding ID, GuardDuty aggregates all subsequent occurrences of a particular finding that take place in 6\-hour intervals into a single event\. GuardDuty then sends a notification about these subsequent occurrences based on this event\. In other words, by default, for the subsequent occurrences of the existing findings, GuardDuty sends notifications based on CloudWatch events every 6 hours\.
 
 **Important**  
-You can customize the default frequency of notifications sent about the subsequent finding occurrences\. Possible values are 15 minutes, 1 hour, or the default 6 hours\. You can update this value using the [CreateDetector](create-detector.md) or the [UpdateDetector](update-detector.md) API operation\. You can also update this value through the GuardDuty console \- choose **Settings** and then under **CloudWatch Events**, choose one of the available values from the **Updated findings** pull\-down menu\.  
+You can customize the default frequency of notifications sent about the subsequent finding occurrences\. Possible values are 15 minutes, 1 hour, or the default 6 hours\. You can update this value using the [CreateDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateDetector.html) or the [UpdateDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateDetector.html) API operations\. You can also update this value through the GuardDuty console \- choose **Settings** and then under **CloudWatch Events**, choose one of the available values from the **Updated findings** pull\-down menu\.  
 Only users from a master account can customize the default frequency of notifications sent about the subsequent finding occurrences to CloudWatch Events\. Users from member accounts CANNOT customize this frequency value\. The frequency value set by the master account in its own account is imposed on GuardDuty functionality in all its member accounts\. In other words, if a user from a master account sets this frequency value to 1 hour, all member accounts will also have the 1 hour frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. For more information, see [Managing Accounts in Amazon GuardDuty](guardduty_accounts.md)\. 
 
 ## Monitoring Archived GuardDuty Findings with CloudWatch Events<a name="guardduty_findings_cloudwatch_archived"></a>
@@ -49,7 +49,7 @@ The CloudWatch [event](https://docs.aws.amazon.com/AmazonCloudWatch/latest/event
         }
 ```
 
-For the complete list of all the parameters included in `COMPLETE_GUARDDUTY_FINDING_JSON`, see [Response Syntax](get-findings.md#get-findings-response-syntax)\. The `id` parameter that appears in `COMPLETE_GUARDDUTY_FINDING_JSON` is the finding ID previously described\.
+For the complete list of all the parameters included in `COMPLETE_GUARDDUTY_FINDING_JSON`, see [GetFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetFindings.html#API_GetFindings_ResponseSyntax)\. The `id` parameter that appears in `COMPLETE_GUARDDUTY_FINDING_JSON` is the finding ID previously described\.
 
 ## Creating a CloudWatch Events Rule and Target for GuardDuty<a name="guardduty_cloudwatch_example"></a>
 
@@ -68,7 +68,7 @@ You can also create a CloudWatch Events rule and target for GuardDuty through th
 **Important**  
 You can further customize your rule so that it instructs CloudWatch to send events only for a subset of the GuardDuty\-generated findings\. This subset is based on the finding attribute or attributes that are specified in the rule\. For example, use the following CLI command to create a rule that enables CloudWatch to only send events for the GuardDuty findings with the severity of either 5 or 8:   
 `aws events put-rule --name Test --event-pattern "{\"source\":[\"aws.guardduty\"],\"detail-type\":[\"GuardDuty Finding\"],\"detail\":{\"severity\":[5,8]}}"`  
-For this purpose, you can use any of the GuardDuty attributes that are supported for sorting findings\. For more information, see [GetFindings](get-findings.md)\.
+For this purpose, you can use any of the GuardDuty attributes that are supported for sorting findings\. For more information, see [GetFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetFindings.html)\.
 
 1. To attach a Lambda function as a target for the rule that you created in step 1, run the following CloudWatch CLI command\.
 

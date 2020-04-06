@@ -1,9 +1,6 @@
 # Active Finding Types<a name="guardduty_finding-types-active"></a>
 
-**Important**  
-For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\.
-
-In the current release, GuardDuty generates finding types of the following threat purposes: 
+GuardDuty generates finding types of the following threat purposes: 
 
 **Topics**
 + [Backdoor Finding Types](guardduty_backdoor.md)
@@ -18,3 +15,5 @@ In the current release, GuardDuty generates finding types of the following threa
 + [Stealth Finding Types](guardduty_stealth.md)
 + [Trojan Finding Types](guardduty_trojan.md)
 + [Unauthorized Finding Types](guardduty_unauthorized.md)
+
+For information about important changes to the GuardDuty finding types, including newly added or retired finding types, see [Document History for Amazon GuardDuty](doc-history.md)\.
