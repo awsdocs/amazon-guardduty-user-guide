@@ -17,7 +17,7 @@ For more information about data protection, see the [AWS Shared Responsibility M
 
 All GuardDuty customer data is encrypted at rest using AWS encryption solutions\.
 
-GuardDuty data, such as findings, is encrypted at rest using AWS Key Management Service \(AWS KMS\) customer master keys \(CMK\)\.
+GuardDuty data, such as findings, is encrypted at rest using AWS Key Management Service \(AWS KMS\) using AWS owned customer master keys \(CMK\)\.
 
 ## Encryption in Transit<a name="encryption-transit"></a>
 

@@ -10,10 +10,11 @@ Users of member accounts can configure GuardDuty as well as view and manage Guar
 An AWS account can't be a GuardDuty master and member account at the same time\. An AWS account can accept only one membership invitation\. Accepting a membership invitation is optional\.  
 For more information, see [Managing Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
 
-**  Auto\-archive**  
-Auto\-archive rules allow you to create very specific combinations of attributes to suppress findings\. For example, you can define a rule through the GuardDuty filter to auto\-archive `Recon:EC2/Portscan` from only those instances in a specific VPC, running a specific AMI, or with a specific EC2 tag\. This rule would result in port scan findings being automatically archived from the instances that meet the criteria\. However, it still allows alerting if GuardDuty detects those instances conducting other malicious activity, such as crypto\-currency mining\.  
-Auto\-archive rules defined in the GuardDuty master account apply to the GuardDuty member accounts\. GuardDuty member accounts can't modify auto\-archive rules\.  
-With auto\-archive rules, GuardDuty still generates all findings\. Auto\-archive rules provide suppression of findings while maintaining a complete and immutable history of all activity\. 
+** Suppression rule**  
+Suppression rules allow you to create very specific combinations of attributes to suppress findings\. For example, you can define a rule through the GuardDuty filter to auto\-archive `Recon:EC2/Portscan` from only those instances in a specific VPC, running a specific AMI, or with a specific EC2 tag\. This rule would result in port scan findings being automatically archived from the instances that meet the criteria\. However, it still allows alerting if GuardDuty detects those instances conducting other malicious activity, such as crypto\-currency mining\.  
+Suppression rules defined in the GuardDuty master account apply to the GuardDuty member accounts\. GuardDuty member accounts can't modify suppression rules\.  
+With auto\-archive rules, GuardDuty still generates all findings\. Suppression rules provide suppression of findings while maintaining a complete and immutable history of all activity\.   
+Typically suppression rules are used to hide findings that you have determined as false positives for your environment, and reduce the noise from low\-value findings so you can focus on larger threats\. For more information, see [Suppression Rules](guardduty_findings.md#guardduty_filter-suppression-rule)
 
 **Data source**  
 The origin or location of a set of data\. To detect unauthorized and unexpected activity in your AWS environment, GuardDuty analyzes and processes data from AWS CloudTrail event logs, VPC Flow Logs, and DNS logs\. For more information, see [How Amazon GuardDuty Uses Its Data Sources](guardduty_data-sources.md)\.
