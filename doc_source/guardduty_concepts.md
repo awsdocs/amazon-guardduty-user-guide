@@ -8,7 +8,7 @@ You can also invite other accounts to enable GuardDuty and become associated wit
 Users of the master account can configure GuardDuty as well as view and manage GuardDuty findings for their own account and all of their member accounts\. You can have up to 1000 member accounts in GuardDuty\.  
 Users of member accounts can configure GuardDuty as well as view and manage GuardDuty findings in their account \(either through the GuardDuty management console or GuardDuty API\)\. Users of member accounts can't view or manage findings in other members' accounts\.   
 An AWS account can't be a GuardDuty master and member account at the same time\. An AWS account can accept only one membership invitation\. Accepting a membership invitation is optional\.  
-For more information, see [Managing Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
+For more information, see [Managing Multiple Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
 
 ** Suppression rule**  
 Suppression rules allow you to create very specific combinations of attributes to suppress findings\. For example, you can define a rule through the GuardDuty filter to auto\-archive `Recon:EC2/Portscan` from only those instances in a specific VPC, running a specific AMI, or with a specific EC2 tag\. This rule would result in port scan findings being automatically archived from the instances that meet the criteria\. However, it still allows alerting if GuardDuty detects those instances conducting other malicious activity, such as crypto\-currency mining\.  
