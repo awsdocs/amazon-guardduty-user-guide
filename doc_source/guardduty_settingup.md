@@ -16,9 +16,26 @@ You must have an AWS account in order to enable Amazon GuardDuty\. If you don't 
 
 ## Enable Amazon GuardDuty<a name="guardduty_enable-gd"></a>
 
-To use GuardDuty, you must first enable it\. Use the following procedure to enable GuardDuty\.
+To use GuardDuty, you must first enable it\. When GuardDuty is enabled a GuardDuty detector is created in that region\. GuardDuty can be enabled in a region through the console or using the [createDetector]() API\.
 
-1. The IAM identity \(user, role, group\) that you use to enable GuardDuty must have the required permissions\. To grant the permissions required to enable GuardDuty, attach the following policy to an IAM user, group, or role:
+**Note the following about enabling GuardDuty**:
++ GuardDuty is assigned a service\-linked role called `AWSServiceRoleForAmazonGuardDuty`\. This service\-linked role allows GuardDuty to retrieve metadata for the EC2 instances in your AWS environment that are involved in potentially suspicious activity\. It also allows GuardDuty to include the retrieved EC2 instance metadata in the findings that GuardDuty generates about potentially suspicious activity\. To view the details of `AWSServiceRoleForAmazonGuardDuty`, on the **Welcome to GuardDuty** page, choose **View service role permissions**\. For more information, see [Using a Service\-Linked Role to Delegate Permissions to GuardDuty](guardduty_managing_access.md#guardduty_service-access)\. For more information about service\-linked roles, see [Using Service\-Linked Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)\.
++ After you enable GuardDuty, it immediately begins pulling and analyzing independent streams of data from AWS CloudTrail, VPC Flow Logs, and DNS logs to generate security findings\. Because GuardDuty only consumes this data for purposes of determining if there are any findings, GuardDuty doesn't manage AWS CloudTrail, VPC Flow Logs, and DNS logs for you or make their events and logs available to you\. If you have enabled these services independent of GuardDuty, you will continue to have the option to configure the settings of these data sources through their respective consoles or APIs\. For more information about the data sources that GuardDuty integrates with, see [What is AWS CloudTrail?](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html) and [Working With Flow Logs](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html#working-with-flow-logs)\.
+
+  We highly recommend that you enable GuardDuty in all supported AWS Regions\. This enables GuardDuty to generate findings about unauthorized or unusual activity even in Regions that you are not actively using\. This also enables GuardDuty to monitor AWS CloudTrail events for global AWS services such as IAM\. If GuardDuty is not enabled in all supported Regions, its ability to detect activity that involves global services is reduced\. 
++ You can disable GuardDuty at any time to stop it from processing and analyzing AWS CloudTrail events, VPC Flow Logs, and DNS logs\. For more information, see [Suspending or Disabling GuardDuty](guardduty_suspend-disable.md)\.
+
+### Enabling GuardDuty with an IAM User \(Console\)<a name="guardduty-thru-policy_proc"></a>
+
+Any user with administrator access can enable GuardDuty, however, following the security best practice of least privilege, it is recommended that you create an IAM user, role, or group to manage GuardDuty specifically\. 
+
+The minimum permissions required for an IAM identity to enable and manage GuardDuty are outlined in the following procedure\. 
+
+In this example we attach the policy to an IAM user and use that user to enable GuardDuty, however, it is also possible to connect this policy to an IAM group or role depending on the access needs of your environment\. For more information about the different IAM identities and how they can be used see [IAM: Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html)\. 
+
+1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+
+1. Select **Create policy** and then the **JSON** tab\. Replace the default JSON text with the following policy\.
 **Note**  
 Replace the sample account ID in the example below with your actual AWS account ID\.
 
@@ -50,14 +67,13 @@ Replace the sample account ID in the example below with your actual AWS account 
    }
    ```
 
-1. Use the credentials of the IAM identity from step 1 to sign in to the GuardDuty console\. When you open the GuardDuty console for the first time, choose **Get Started**, and then choose **Enable GuardDuty**\.
+   Once you've added the policy JSON select **Review policy** and give your policy a name that is easy to identify, then select **Create policy**\.
 
-   Note the following about enabling GuardDuty:
-   + GuardDuty is assigned a service\-linked role called `AWSServiceRoleForAmazonGuardDuty`\. This service\-linked role allows GuardDuty to retrieve metadata for the EC2 instances in your AWS environment that are involved in potentially suspicious activity\. It also allows GuardDuty to include the retrieved EC2 instance metadata in the findings that GuardDuty generates about potentially suspicious activity\. To view the details of `AWSServiceRoleForAmazonGuardDuty`, on the **Welcome to GuardDuty** page, choose **View service role permissions**\. For more information, see [Using a Service\-Linked Role to Delegate Permissions to GuardDuty](guardduty_managing_access.md#guardduty_service-access)\. For more information about service\-linked roles, see [Using Service\-Linked Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)\.
-   + After you enable GuardDuty, it immediately begins pulling and analyzing independent streams of data from AWS CloudTrail, VPC Flow Logs, and DNS logs to generate security findings\. Because GuardDuty only consumes this data for purposes of determining if there are any findings, GuardDuty doesn't manage AWS CloudTrail, VPC Flow Logs, and DNS logs for you or make their events and logs available to you\. If you have enabled these services independent of GuardDuty, you will continue to have the option to configure the settings of these data sources through their respective consoles or APIs\. For more information about the data sources that GuardDuty integrates with, see [What is AWS CloudTrail?](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html) and [Working With Flow Logs](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html#working-with-flow-logs)\.
+1. After selecting an existing or newly created IAM user select **Add permissions** and then **Attach existing policies directly**\. Use the search bar to find the policy you created in step 2 and add it to the user\.
 
-     We highly recommend that you enable GuardDuty in all supported AWS Regions\. This enables GuardDuty to generate findings about unauthorized or unusual activity even in Regions that you are not actively using\. This also enables GuardDuty to monitor AWS CloudTrail events for global AWS services such as IAM\. If GuardDuty is not enabled in all supported Regions, its ability to detect activity that involves global services is reduced\. 
-   + You can disable GuardDuty at any time to stop it from processing and analyzing AWS CloudTrail events, VPC Flow Logs, and DNS logs\. For more information, see [Suspending or Disabling GuardDuty](guardduty_suspend-disable.md)\.
+1. Use the credentials of the IAM user from step 3 to sign in to the GuardDuty console at [https://console\.aws\.amazon\.com/guardduty/](https://console.aws.amazon.com/guardduty/)\. 
+
+1. When you open the GuardDuty console for the first time, choose **Get Started**, and then choose **Enable GuardDuty**\.
 
 ## Amazon GuardDuty Free Trial<a name="guardduty_free-trial"></a>
 

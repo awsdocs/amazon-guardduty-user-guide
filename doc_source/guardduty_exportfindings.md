@@ -9,7 +9,7 @@ Because GuardDuty is enabled per Region, to export findings from all Regions, yo
 **Important**  
 Archived findings, including new instances of auto\-archived findings, aren't exported\. If you unarchive a finding, its status is updated to **Active**, and then it's exported\.
 
-To learn more, see [Monitoring GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
+To learn more, see [Creating Custom Responses to GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
 
 ## Permissions Required to Configure Findings Export<a name="guardduty_exportfindings-permissions"></a>
 

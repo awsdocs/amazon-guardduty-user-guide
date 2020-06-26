@@ -2,7 +2,7 @@
 
 Amazon GuardDuty monitors the security of your AWS environment by analyzing and processing VPC Flow Logs, AWS CloudTrail event logs, and DNS logs\. You can customize this monitoring scope by configuring GuardDuty to also use your own *trusted IP lists* and *threat lists*\. The IP lists described below will apply to all VPC Flow Log and CloudTrail findings, but do not apply to DNS findings
 
-Trusted IP lists consist of IP addresses that you have whitelisted for secure communication with your AWS infrastructure and applications\. GuardDuty does not generate VPC Flow Log or CloudTrail findings for IP addresses on trusted IP lists\. At any given time, you can have only one uploaded trusted IP list per AWS account per Region\.
+Trusted IP lists consist of IP addresses that you have trusted for secure communication with your AWS infrastructure and applications\. GuardDuty does not generate VPC Flow Log or CloudTrail findings for IP addresses on trusted IP lists\. At any given time, you can have only one uploaded trusted IP list per AWS account per Region\.
 
 Threat lists consist of known malicious IP addresses\. GuardDuty generates findings based on threat lists\. At any given time, you can have up to six uploaded threat lists per AWS account per Region\.
 
@@ -25,6 +25,19 @@ Note the following when creating trusted IP lists and threat lists that you plan
 + The maximum size of the file that hosts your trusted IP list or threat list is 35MB\.
 + You can include a maximum of 2000 IP addresses and CIDR ranges in a single trusted IP list\.
 + You can include a maximum of 250,000 IP addresses and CIDR ranges in a single threat list\.
++ If your list is encrypted using server\-side encryption \(SSE\)\-KMS you must grant the GuardDuty service\-linked role **AWSServiceRoleForAmazonGuardDuty** permission to decrypt the file in order to activate the list\. Add the following statement to the KMS key policy and replace the account ID with your own: 
+
+  ```
+  {
+  	"Sid": "Allow access for GuardDuty Service Role",
+  	"Effect": "Allow",
+  	"Principal": {
+  		"AWS": "arn:aws:iam::123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
+  	},
+  	"Action": "kms:Decrypt*",
+  	"Resource": "*"
+  }
+  ```
 
 **Topics**
 + [Permissions Required to Upload Trusted IP Lists and Threat Lists](#upload-permissions)
@@ -34,7 +47,7 @@ Note the following when creating trusted IP lists and threat lists that you plan
 
 ## Permissions Required to Upload Trusted IP Lists and Threat Lists<a name="upload-permissions"></a>
 
-Various IAM identity require proper permissions to work with trusted IP lists and threat lists in GuardDuty\. An identity with the **AmazonGuardDutyFullAccess** managed policy attached can only rename and deactivate uploaded trusted IP lists and threat lists\.
+Various IAM identities require special permissions to work with trusted IP lists and threat lists in GuardDuty\. An identity with the **AmazonGuardDutyFullAccess** managed policy attached can only rename and deactivate uploaded trusted IP lists and threat lists\.
 
 To grant various identities full access to working with trusted IP lists and threat lists \(in addition to renaming and deactivating, this includes uploading, activating, deleting, and updating the location of the lists\), make sure that the following actions are present in the permissions policy attached to an IAM user, group, or role: 
 

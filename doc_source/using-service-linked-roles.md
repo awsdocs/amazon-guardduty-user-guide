@@ -20,6 +20,8 @@ The `AWSServiceRoleForAmazonGuardDuty` service\-linked role trusts the following
 The role permissions policy allows GuardDuty to complete the following actions on the specified resources:
 + Action: `ec2:DescribeInstances` 
 + Action: `ec2:DescribeImages` 
++ Action: `organizations:ListAccounts` 
++ Action: `organizations:DescribeAccount` 
 + Resources: `arn:aws:iam::*:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty`
 
 You must configure permissions to allow an IAM entity \(such as a user, group, or role\) to create, edit, or delete a service\-linked role\. For the `AWSServiceRoleForAmazonGuardDuty` service\-linked role to be successfully created, the IAM identity that you use GuardDuty with must have the required permissions\. To grant the required permissions, attach the following policy to this IAM user, group, or role: 

@@ -1,13 +1,13 @@
 # Managing GuardDuty Accounts with AWS Organizations<a name="guardduty_organizations"></a>
 
-When you use GuardDuty with an AWS Organizations organization, you designate an account to be the GuardDuty delegated administrator for the organization\. Only the organization master account can designate GuardDuty delegated administrators\.
+When you use GuardDuty with an AWS Organizations organization, you can designate any account within the organization to be the GuardDuty delegated administrator\. Only the organization master account can designate GuardDuty delegated administrators\.
 
 **Note**  
 The Organization master can be the delegated administrator, but this is not recommended based on AWS Security best practices following the principle of least of privilege\.
 
 An account that is designated as a delegated administrator becomes a GuardDuty master account, has GuardDuty automatically enabled in the designated Region, and is granted permission to enable and manage GuardDuty for all accounts in the organization within that Region\. The other accounts in the organization can be viewed and added as GuardDuty member accounts associated with the master account\.
 
- If the organization’s GuardDuty delegated administrator is already a GuardDuty master with associated member accounts by invitation, and the member accounts are part of the same organization, their **Type** is **via Organizations** and the status is **Enabled**\. If the organization’s GuardDuty master previously added members by invitation that are not part of the same organization, their **Type** is **by Invitation**\. In both cases, these previously added accounts are member accounts to the organization’s GuardDuty delegated administrator\.
+ If you have already set up a GuardDuty master with associated member accounts by invitation, and the member accounts are part of the same organization, their **Type** changes from **by Invitation** to **via Organizations** when you set a GuardDuty delegated administrator for your organization\. If the organization’s GuardDuty master previously added members by invitation that are not part of the same organization, their **Type** is **by Invitation**\. In both cases, these previously added accounts are member accounts to the organization’s GuardDuty delegated administrator\.
 
 You can continue to add accounts as members even if they are outside of your organization\. To learn more, see [Designating Master and Member Accounts Through Invitation \(Console\)](guardduty_invitations.md#guardduty_become_console) and [Designating GuardDuty Master and Member Accounts Through Invitation \(API\)](guardduty_invitations.md#guardduty_become_api)\.
 
@@ -16,6 +16,51 @@ There is a limit of 5000 member accounts per GuardDuty master account\. However,
 If you exceed 5000 member accounts you will receive a notification through CloudWatch, Personal Health Dashboard, and in an email to the master account\.
 
 Use the following procedures to register a GuardDuty delegated administrator for your organization, add existing organization accounts as members, and automate the addition of new organization accounts as GuardDuty member accounts\.
+
+## Permissions Required to Designate a Delegated Administrator<a name="organizations_permissions"></a>
+
+When delegating a GuardDuty master you must have permissions to the following actions:
++ organizations:EnableAWSServiceAccess
++ organizations:ListAWSServiceAccessForOrganization
++ organizations:RegisterDelegatedAdministrator
++ organizations:DescribeOrganization
+
+You can add the following statement to the end of an existing GuardDuty policy to grant these permissions:
+
+```
+{
+    "Sid": "Permissions to Enable GuardDuty Delegated Administrator",
+    "Effect": "Allow",
+    "Action": [
+        "organizations:EnableAWSServiceAccess",
+        "organizations:ListAWSServiceAccessForOrganization",
+        "organizations:RegisterDelegatedAdministrator",
+        "organizations:DescribeOrganization"
+    ],
+    "Resource": "*"
+}
+```
+
+Additionally, if you wish to designate your AWS Organizations master account as the GuardDuty delegated administrator that entity will need `CreateServiceLinkedRole` permissions to initialize GuardDuty\. This can be added to an IAM policy using the following statement, replacing the account ID with the ID of your organization master:
+
+```
+{
+	'Sid": "Permissions to Enable GuardDuty"
+	"Effect": "Allow",
+	"Action": [
+		"iam:CreateServiceLinkedRole"
+	],
+	"Resource": "arn:aws:iam::123456789012:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty",
+	"Condition": {
+		"StringLike": {
+			"iam:AWSServiceName": "guardduty.amazonaws.com"
+		}
+	}
+}
+```
+
+**Note**  
+If you're using GuardDuty in an manually\-enabled Region, replace the value for the "Service" with the service endpoint for the Region\. For example, if you're using GuardDuty in the Middle East \(Bahrain\) \(me\-south\-1\) Region, replace `"Service": "guardduty.amazonaws.com"` with `"Service": "guardduty.me-south-1.amazonaws.com"`\.
 
 ## Designate a Delegated Administrator and add Member Accounts \(Console\)<a name="organization_thru_console"></a>
 
@@ -84,7 +129,7 @@ You can enable GuardDuty in the current Region for all organization accounts by 
 
 1. \(Recommended\) Repeat these steps in each AWS Region to ensure that GuardDuty is automatically enabled on any new account, in every Region\.
 
-When this setting is enabled, all new accounts that are created in, or added to, the organization are dded as a member accounts of the organization’s GuardDuty delegated administrator and GuardDuty is enabled in that Region\. When the number of member accounts reaches the limit of 5000, the Auto\-enable feature is automatically turned off\. If an account is removed and the total number of members decreases to fewer than 5000, the Auto\-enable feature turns back on\.\. 
+When this setting is enabled, all new accounts that are created in, or added to, the organization are added as a member accounts of the organization’s GuardDuty delegated administrator and GuardDuty is enabled in that Region\. When the number of member accounts reaches the limit of 5000, the Auto\-enable feature is automatically turned off\. If an account is removed and the total number of members decreases to fewer than 5000, the Auto\-enable feature turns back on\.\. 
 
 ## Designate a Delegated Administrator and add Member Accounts \(API\)<a name="organization_thru_api"></a>
 
@@ -95,7 +140,7 @@ You need to repeat these steps in each Region where you are using GuardDuty if y
 
 ****
 
-1. Run the [enableOrganizationAdminAccount](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_enableOrganizationAdminAccount.html) API operation using the credentials of the AWS account of the Organizations master\.
+1. Run the [enableOrganizationAdminAccount](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_EnableOrganizationAdminAccount.html) API operation using the credentials of the AWS account of the Organizations master\.
 
     You must specify the account ID of the account you want to make a GuardDuty delegated administrator\.
 
@@ -110,7 +155,7 @@ This command sets the delegated administrator for you current Region only\. If G
     To set the delegated administrator for other Regions, you must specify the Regional endpoint for the Region you want your delegated administrator to manage\. For more information, see [GuardDuty endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/guardduty.html)\. The following example demonstrates how to set your endpoint to US West \(Oregon\)\. 
 
    ```
-   aws guardduty enable-organization-admin-account —admin-account-id 11111111111 --endpoint guardduty.us-west-2.amazonaws.com
+   aws guardduty enable-organization-admin-account —admin-account-id 11111111111 --endpoint-url guardduty.us-west-2.amazonaws.com
    ```
 
 1.  Run the [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html) API operation using the credentials of the AWS account you designated as the delegated administrator for GuardDuty in the previous step\.
@@ -131,7 +176,7 @@ This command sets the delegated administrator for you current Region only\. If G
 **Note**  
  The detector ID is Regional\. To enable GuardDuty for organization members in other Regions, you must supply the unique detector ID of the delegated administrator for each Region\. 
 
-1. Run the [updateOrganizationConfiguration](https://docs.aws.amazon.com/guardduty/latest/APIReference/updateOrganizationConfiguration.html) API operation using the credentials of the GuardDuty delegated administrator account to automatically enable GuardDuty in that Region for new member accounts\.
+1. Run the [updateOrganizationConfiguration](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateOrganizationConfiguration.html) API operation using the credentials of the GuardDuty delegated administrator account to automatically enable GuardDuty in that Region for new member accounts\.
 
    You must specify the detector ID of the delegated administrator AWS account\.
 **Note**  
@@ -143,8 +188,26 @@ This command sets the delegated administrator for you current Region only\. If G
    aws guardduty update-organization-configuration --detector-id 12abc34d567e8fa901bc2d34e56789f0 --auto-enable 
    ```
 
-   You can confirm that you have turned on the auto enable GuardDuty feature in a Region by running the [describeOrganizationConfiguration](https://docs.aws.amazon.com/guardduty/latest/APIReference/describeOrganizationConfiguration.html) API operation or by running the following CLI command using the detector ID of the delegated administrator in the desired Region\.
+   You can confirm that you have turned on the auto enable GuardDuty feature in a Region by running the [describeOrganizationConfiguration](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeOrganizationConfiguration.html) API operation or by running the following CLI command using the detector ID of the delegated administrator in the desired Region\.
 
    ```
    aws guardduty describe-organization-configuration —detector-id 12abc34d567e8fa901bc2d34e56789f0 
    ```
+
+## Consolidating GuardDuty Master Accounts Under a Single Organization Delegated Administrator<a name="consolidate-orgs"></a>
+
+GuardDuty recommends using association through AWS Organizations to manage member accounts under a master account\. You can use the example process outlined below to consolidate master and member associated by invitation to under a single organization master\.
+
+1. Ensure all accounts you wish to manage GuardDuty for are part of your organization\. For information on adding account to your organization see [Inviting an AWS account to join your organization ](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html)\. 
+
+1. Disassociate all member accounts from pre\-existing master accounts, except those under the account you wish to designate as the GuardDuty delegated administrator for the organization\.
+**Note**  
+Accounts already being managed by a GuardDuty master or master accounts with active members cannot be added to a different GuardDuty master account\. Each organization can have only one GuardDuty master account per region, and each member account can have only one master\.
+
+1. Designate a GuardDuty delegated administrator for the organization from the **Settings** page\.
+
+1. Log in to the designated delegated admin account\.
+
+1. Proceed to add members from the organization\.
+**Important**  
+Remember that GuardDuty is a regional service\. It is recommended that you designate your master account and add all your members in every region to maximize the effectiveness of GuardDuty
