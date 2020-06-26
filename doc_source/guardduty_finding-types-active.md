@@ -13,7 +13,7 @@ For information about important about retired finding types see [Retired Finding
 
 **Findings Alphabetically by Name**
 
-The table below lists all finding types by name, threat purpose, resource and severity\. A severity listed with "\+" signs indicates the finding has variable severities depending the circumstances of the finding, which are described in the link to that finding\. Choose the finding name to open more info about that finding\. 
+The table below lists all finding types by name, threat purpose, resource and severity\. A severity listed with "\*" signs indicates the finding has variable severities depending the circumstances of the finding, which are described in the link to that finding\. Choose the finding name to open more info about that finding\. 
 
 
 |  FINDING TYPE  |  THREAT PURPOSE  |  RESOURCE  |  SEVERITY  | 
