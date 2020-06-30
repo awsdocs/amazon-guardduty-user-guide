@@ -17,7 +17,7 @@ All GuardDuty findings are associated with a detector, which is an object that r
 12abc34d567e8fa901bc2d34e56789f0
 ```
 You can find your detector ID for your current region in the console from the **Settings** pane, or programmatically using the [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetFindings.html#API_ListDetectors) API\.  
-In multiple account environments all findings for member accounts role up to the master account's detector\.
+In multiple account environments all findings for member accounts roll up to the master account's detector\.
 Some GuardDuty functionality is configured through the detector, such as configuring CloudWatch Events notification frequency\.
 
 **Data source**  
