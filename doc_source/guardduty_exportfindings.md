@@ -44,9 +44,6 @@ Configure the frequency for exporting updated Active findings as appropriate for
 
 Configure settings for exporting Active findings to an Amazon S3 bucket from the **Settings** page in the GuardDuty console\. When you configure findings export, you can choose an existing S3 bucket, or have GuardDuty create a new bucket to store exported findings\. If you choose to use a new bucket, GuardDuty applies all necessary permissions to the created bucket\. If you use an existing bucket, you must update the bucket policy to allow GuardDuty to put findings into the bucket\.
 
-**Important**  
-The bucket and KMS key that you use must be in the same Region\.
-
 ### Changing the Key Policy<a name="guardduty_exprotfindings-key-policy"></a>
 
 GuardDuty encrypts the findings data in the bucket by using an AWS KMS key\. To successfully configure findings export, you must first give GuardDuty permission to use the key that you choose when you configure findings export\. You grant the permissions by [changing the key policy](https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying.html) for the key you use\. 
