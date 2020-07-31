@@ -4,7 +4,7 @@ Your AWS account has default quotas, formerly referred to as limits, for each AW
 
 To view the quotas for GuardDuty, open the [Service Quotas console](https://console.aws.amazon.com/servicequotas/home)\. In the navigation pane, choose **AWS services** and select **Amazon GuardDuty**\.
 
-To request a quota increase, see [Requesting a Quota Increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html) in the *Service Quotas User Guide*\.
+To request a quota increase, see [Requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html) in the *Service Quotas User Guide*\.
 
 Your AWS account has the following quotas for Amazon GuardDuty per Region\.
 

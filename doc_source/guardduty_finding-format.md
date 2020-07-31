@@ -1,4 +1,4 @@
-# GuardDuty Finding Format<a name="guardduty_finding-format"></a>
+# GuardDuty finding format<a name="guardduty_finding-format"></a>
 
 When GuardDuty detects suspicious or unexpected behavior in your AWS environment, it generates a finding\. A finding is a notification that contains the details about a potential security issue that GuardDuty discovers\. The [finding details](guardduty_findings.md#guardduty_working-with-findings) include information about what happened, which AWS resources were involved in the suspicious activity, when this activity took place, and other information\.
 
@@ -22,7 +22,7 @@ This is what each part of the format represents:
   + **Stealth** \- this value indicates that an attack is actively trying to hide its actions and its tracks\. For example, an attack might use an anonymizing proxy server, making it virtually impossible to gauge the true nature of the activity\.
   + **Trojan** \- this value indicates that an attack is using Trojan programs that silently carry out malicious activity\. Sometimes this software takes on an appearance of a legitimate program\. Sometimes users accidentally run this software\. Other times this software might run automatically by exploiting a vulnerability\. 
   + **UnauthorizedAccess** \- this value indicates that GuardDuty is detecting suspicious activity or a suspicious activity pattern by an unauthorized individual\.
-+ **ResourceTypeAffected** \- describes which AWS resource is identified in this finding as the potential target of an attack\. In this release of GuardDuty, only EC2 instances and principals \(and their credentials\) can be identified as affected resources in GuardDuty findings\. 
++ **ResourceTypeAffected** \- describes which AWS resource type is identified in this finding as the potential target of an attack\. 
 + **ThreatFamilyName** \- describes the overall threat or potential malicious activity that GuardDuty is detecting\. For example, a value of **NetworkPortUnusual** indicates that an EC2 instance identified in the GuardDuty finding has no prior history of communications on a particular remote port that also is identified in the finding\.
 + **ThreatFamilyVariant** \- describes the specific variant of the **ThreatFamily** that GuardDuty is detecting\. Attackers often slightly modify the functionality of the attack, thus creating new variants\.
 + **Artifact** \- describes a specific resource that is owned by a tool that is used in the attack\. For example, **DNS** in the finding type *CryptoCurrency:EC2/BitcoinTool\.B\!DNS* indicates that an EC2 instance is communicating with a known Bitcoin\-related domain\.
