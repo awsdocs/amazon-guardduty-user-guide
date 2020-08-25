@@ -10,7 +10,7 @@ For all S3 Bucket type findings it is recommended that you examine the permissio
 + [Discovery:S3/TorIPCaller](#discovery-s3-toripcaller)
 + [Exfiltration:S3/ObjectRead\.Unusual](#exfiltration-s3-objectreadunusual)
 + [Impact:S3/PermissionsModification\.Unusual](#impact-s3-permissionsmodificationunusual)
-+ [Impact:S3/ObjectDelete\.Unusual](#impact-s3-objectdeleteunusual)
++ [Impact:S3/ObjectDestruction\.Unusual](#impact-s3-objectdestructionunusual)
 + [PenTest:S3/KaliLinux](#pentest-s3-kalilinux)
 + [PenTest:S3/ParrotLinux](#pentest-s3-parrotlinux)
 + [PenTest:S3/PentooLinux](#pentest-s3-pentoolinux)
@@ -102,17 +102,17 @@ This finding informs you that an IAM entity is making API calls designed to modi
 
 If this activity is unexpected for the associated principal it may indicate the credentials have been exposed or your S3 permissions are not restrictive enough, see [Remediating a Compromised S3 Bucket](guardduty_remediate.md#compromised-s3)\.
 
-## Impact:S3/ObjectDelete\.Unusual<a name="impact-s3-objectdeleteunusual"></a>
+## Impact:S3/ObjectDestruction\.Unusual<a name="impact-s3-objectdestructionunusual"></a>
 
-### An IAM entity invoked an API used to delete data in an S3 bucket\.<a name="impact-s3-objectdeleteunusual_description"></a>
+### An IAM entity invoked an API used to delete data in an S3 bucket\.<a name="impact-s3-objectdestructionunusual_description"></a>
 
-#### <a name="impact-s3-objectdeleteunusual_severity"></a>
+#### <a name="impact-s3-objectdestructionunusual_severity"></a>
 
 **Default severity: Medium**
 
 This finding informs you that a specific IAM entity in your AWS environment is making API calls designed to delete data in the listed S3 bucket by deleting the bucket itself\. This activity is suspicious because the way the IAM entity invoked the API was unusual\. For example, this IAM entity had no prior history of invoking this type of API, or the API was invoked from an unusual location\.
 
-#### <a name="impact-s3-objectdeleteunusual_remediation"></a>
+#### <a name="impact-s3-objectdestructionunusual_remediation"></a>
 
 **Remediation recommendations:**
 
