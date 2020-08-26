@@ -1,32 +1,34 @@
-# Filtering Findings<a name="guardduty_filter-findings"></a>
+# Filtering findings<a name="guardduty_filter-findings"></a>
 
-using the Amazon GuardDuty console you can easily create finding filters\. A finding filter allows you to view findings matching the criteria you specify, while filtering out any unmatched findings\. The easiest way to create filters is through the GuardDuty console, but you can also create them with the [CreateFilter](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateFilter.html) API using JSON\. Review the following sections to understand how to create a filter in the console\. To use these filters to automatically archive, or suppress, incoming findings see [Suppression Rules](suppression_rule.md)\.
+A finding filter allows you to view findings that match the criteria you specify and filter out any unmatched findings\. You can easily create finding filters using the Amazon GuardDuty console, or you can create them with the [CreateFilter](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateFilter.html) API using JSON\. Review the following sections to understand how to create a filter in the console\. To use these filters to automatically archive, or suppress, incoming findings see [Suppression rules](findings_suppression-rule.md)\.
 
-## Create Filters in the GuardDuty Console<a name="filter_console"></a>
+## Create filters in the GuardDuty console<a name="filter_console"></a>
 
-Finding filters can be created and tested through the GuardDuty UI\. Filters created through the UI can be saved for use in suppression rules or future filter operations\.
+Finding filters can be created and tested through the GuardDuty console\. You can save filters created through the console for use in suppression rules or future filter operations\.
+
+When you create filters, be aware of the following:
++ Filters do not accept wild cards\. 
++ You can specify a minimum of one attribute and up to a maximum of 50 attributes as the criteria for a particular filter\. 
++ When you use the **equal to** or **not equal to** condition to filter on an attribute value, such as Account ID, you can specify a maximum of 50 values\.
++ Each filter criteria attribute is evaluated as an `AND` operator\. Multiple values for the same attribute are evaluated as `AND/OR`\.
 
 **To filter findings \(console\)**
 
-1. Choose the **Add filter criteria** bar above the displayed list of your GuardDuty findings\.
+1. Choose **Add filter criteria** above the displayed list of your GuardDuty findings\.
 
-1. In the expanded list of criteria, select the attribute that you want to specify as the criteria for your filter\. For example, **Account ID** and/or **Action type**\. When creating filters be aware of the following:
-   + Filters do not accept wild cards\. 
-   + You can specify a minimum of one attribute up to a maximum of 50 attributes as the criteria for a particular filter\. 
-   + When you use the 'equal to' or 'not equal to' condition to filter on an attribute value, such as Account ID, you can specify a maximum of 50 values\.
-   + Each filter criteria attribute is evaluated as an `AND` operator, multiple values for the same attribute are evaluated as `AND/OR`\.
+1. In the expanded list of criteria, select the attribute that you want to specify as the criteria for your filter, such as **Account ID** or **Action type**\.
 **Note**  
-For the a list of attributes that you can specify as filter criteria, see the Filter Criteria table on this page\.
+See the Filter criteria table on this page for a list of attributes that you can specify as filter criteria\.
 
-1. In the displayed text field, specify a value for each selected attribute and then select **Apply**\.
+1. In the displayed text field, specify a value for each selected attribute and then choose **Apply**\.
 **Note**  
- After you apply a filter, you can convert the filter to exclude findings that match the filter by choosing the black dot to the left side of the filter name\. This effectively creates a "not equals" filter for the selected attribute\.
+ After you apply a filter, you can convert the filter to exclude findings that match the filter by choosing the black dot to the left of the filter name\. This effectively creates a "not equals" filter for the selected attribute\.
 
-1. To save the specified attributes and their values \(filter criteria\) as a filter, select **Save**\. Provide the filter name and description, and then choose **Done**\.
+1. To save the specified attributes and their values \(filter criteria\) as a filter, select **Save**\. Enter the filter name and description, and then choose **Done**\.
 
-## Filter Criteria<a name="filter_criteria"></a>
+## Filter criteria<a name="filter_criteria"></a>
 
- When creating filters or sorting findings using the API operations you must specify filter criteria in JSON\. These filter criteria correlate to a finding's details JSON\. The following table contains a list of the console display names for filter criteria matched to their equivalent JSON field name\.
+ When you create filters or sort findings using the API operations, you must specify filter criteria in JSON\. These filter criteria correlate to a finding's details JSON\. The following table contains a list of the console display names for filter criteria and their equivalent JSON field names\.
 
 
 | Console field name | JSON field name | 
@@ -43,7 +45,7 @@ For the a list of attributes that you can specify as filter criteria, see the Fi
 | Instance ID | resource\.instanceDetails\.instanceId | 
 | Instance Type | resource\.instanceDetails\.instanceType | 
 | Launch Time | resource\.instanceDetails\.launchTime | 
-| Instance image ID | resource\.instanceDetails\.networkInterfaces\.imageID | 
+| Instance image ID | resource\.instanceDetails\.imageId | 
 | IPv6 address | resource\.instanceDetails\.networkInterfaces\.ipv6Addresses | 
 | Private IPv4 address | resource\.instanceDetails\.networkInterfaces\.privateIpAddresses\.privateIpAddress | 
 | Public DNS name | resource\.instanceDetails\.networkInterfaces\.publicDnsName | 

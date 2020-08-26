@@ -1,18 +1,18 @@
-# Subscribing to GuardDuty Announcements SNS Topic<a name="guardduty_sns"></a>
+# Subscribing to GuardDuty announcements SNS topic<a name="guardduty_sns"></a>
 
 This section provides information on subscribing to the GuardDuty Announcements SNS topic to receive notifications about newly released finding types, updates to the existing finding types, and other functionality changes\. Notifications are available in all formats that Amazon SNS supports\. 
 
 **Note**  
 Your user account must have sns::subscribe IAM permissions to subscribe to an SNS topic\.
 
-You can subscribe an Amazon SQS queue to this notification topic, but you must use a topic ARN that is in the same Region\. For more information, see [Tutorial: Subscribing an Amazon SQS Queue to an Amazon SNS Topic](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-subscribe-queue-sns-topic.html) in the Amazon Simple Queue Service Developer Guide\.
+You can subscribe an Amazon SQS queue to this notification topic, but you must use a topic ARN that is in the same Region\. For more information, see [Tutorial: Subscribing an Amazon SQS queue to an Amazon SNS topic](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-subscribe-queue-sns-topic.html) in the Amazon Simple Queue Service Developer Guide\.
 
 You can also use an AWS Lambda function to trigger events when notifications are received\. For more information, see [Invoking Lambda functions using Amazon SNS notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-lambda-as-subscriber.html) in the Amazon Simple Notification Service Developer Guide\.
 
 The Amazon SNS topic ARNs for each Region are shown below\.
 
 
-| AWS Region | Amazon SNS Topic ARN | 
+| AWS Region | Amazon SNS topic ARN | 
 | --- | --- | 
 | us\-east\-1 | arn:aws:sns:us\-east\-1:242987662583:GuardDutyAnnouncements | 
 | us\-east\-2 | arn:aws:sns:us\-east\-2:118283430703:GuardDutyAnnouncements | 
@@ -63,7 +63,7 @@ The Amazon SNS topic ARNs for each Region are shown below\.
 
    Your web browser displays a confirmation response from Amazon SNS\.
 
-## Amazon SNS Message Format<a name="guardduty_sns-notification-format"></a>
+## Amazon SNS message format<a name="guardduty_sns-notification-format"></a>
 
 An example GuardDuty update notification message about new findings is shown below:
 

@@ -1,4 +1,4 @@
-# Working with Trusted IP Lists and Threat Lists<a name="guardduty_upload_lists"></a>
+# Working with trusted IP lists and threat lists<a name="guardduty_upload-lists"></a>
 
 Amazon GuardDuty monitors the security of your AWS environment by analyzing and processing VPC Flow Logs, AWS CloudTrail event logs, and DNS logs\. You can customize this monitoring scope by configuring GuardDuty to also use your own *trusted IP lists* and *threat lists*\. The IP lists described below will apply to all VPC Flow Log and CloudTrail findings, but do not apply to DNS findings
 
@@ -6,7 +6,7 @@ Trusted IP lists consist of IP addresses that you have trusted for secure commun
 
 Threat lists consist of known malicious IP addresses\. GuardDuty generates findings based on threat lists\. At any given time, you can have up to six uploaded threat lists per AWS account per Region\.
 
-Users from master GuardDuty accounts can upload and manage trusted IP lists and threat lists\. Users from member GuardDuty accounts CANNOT upload and manage lists\. Trusted IP lists and threat lists that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the master's threat lists and does not generate findings based on activity that involves IP addresses from the master's trusted IP lists\. For more information, see [Managing Multiple Accounts in Amazon GuardDuty](guardduty_accounts.md)\.
+Users from master GuardDuty accounts can upload and manage trusted IP lists and threat lists\. Users from member GuardDuty accounts CANNOT upload and manage lists\. Trusted IP lists and threat lists that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the master's threat lists and does not generate findings based on activity that involves IP addresses from the master's trusted IP lists\. For more information, see [Managing multiple accounts in Amazon GuardDuty](guardduty_accounts.md)\.
 
 **Important**  
 GuardDuty uses the same [`AWSServiceRoleForAmazonGuardDuty` service\-linked role](guardduty_managing_access.md#guardduty_service-access) that is automatically assigned to it when you enable GuardDuty for the permissions required to evaluate your trusted IP lists and threat lists\. 
@@ -40,12 +40,12 @@ Note the following when creating trusted IP lists and threat lists that you plan
   ```
 
 **Topics**
-+ [Permissions Required to Upload Trusted IP Lists and Threat Lists](#upload-permissions)
-+ [To Upload Trusted IP Lists and Threat Lists](#upload-procedure)
-+ [To Activate or Deactivate Trusted IP Lists and Threat Lists](#activate-procedure)
-+ [To Update Trusted IP Lists and Threat Lists](#update-lists-procedure)
++ [Permissions required to upload trusted IP lists and threat lists](#upload-permissions)
++ [To upload trusted IP lists and threat lists](#upload-procedure)
++ [To activate or deactivate trusted IP lists and threat lists](#activate-procedure)
++ [To update trusted IP lists and threat lists](#update-lists-procedure)
 
-## Permissions Required to Upload Trusted IP Lists and Threat Lists<a name="upload-permissions"></a>
+## Permissions required to upload trusted IP lists and threat lists<a name="upload-permissions"></a>
 
 Various IAM identities require special permissions to work with trusted IP lists and threat lists in GuardDuty\. An identity with the **AmazonGuardDutyFullAccess** managed policy attached can only rename and deactivate uploaded trusted IP lists and threat lists\.
 
@@ -65,7 +65,7 @@ To grant various identities full access to working with trusted IP lists and thr
 **Important**  
 These actions are not included in the **AmazonGuardDutyFullAccess** managed policy\.
 
-## To Upload Trusted IP Lists and Threat Lists<a name="upload-procedure"></a>
+## To upload trusted IP lists and threat lists<a name="upload-procedure"></a>
 
 The following procedure describes how you can upload trusted IP lists and threat lists using the GuardDuty console\. 
 
@@ -91,7 +91,7 @@ s3://mybucket/file\.txt
    + Select the **I agree** check box\.
    + Choose **Add list**\.
 
-## To Activate or Deactivate Trusted IP Lists and Threat Lists<a name="activate-procedure"></a>
+## To activate or deactivate trusted IP lists and threat lists<a name="activate-procedure"></a>
 
 The following procedures describe how you can activate or deactivate trusted IP lists and threat lists in GuardDuty once they are uploaded\. GuardDuty includes the uploaded lists in its monitoring of your AWS environment only if they are active\. 
 
@@ -116,7 +116,7 @@ The following procedures describe how you can activate or deactivate trusted IP 
 
   Make sure to replace <detector\-id> and <ip\-set\-id> with a valid detector ID and trusted IP list ID\.
 
-## To Update Trusted IP Lists and Threat Lists<a name="update-lists-procedure"></a>
+## To update trusted IP lists and threat lists<a name="update-lists-procedure"></a>
 
 If you make changes to a trusted IP list or a threat list that is already uploaded and activated in GuardDuty \(for example, rename the list or add more IP addresses to it\), you must update this list in GuardDuty and reactivate it in order for GuardDuty to use the latest version of the list in its security monitoring scope\. To update a safe or threat list, you can either use the procedure below or run the [UpdateThreatIntelSet](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateThreatIntelSet.html) and [UpdateIPSet](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateIPSet.html) operations of the GuardDuty API\.
 

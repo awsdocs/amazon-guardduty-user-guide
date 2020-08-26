@@ -1,4 +1,4 @@
-# Suppression Rules<a name="suppression_rule"></a>
+# Suppression rules<a name="findings_suppression-rule"></a>
 
 ## <a name="guardduty_filter-suppression-rule"></a>
 
@@ -8,17 +8,17 @@ A suppression rule is a set of criteria used to filter findings by automatically
 
 Suppressed findings are not sent to AWS Security Hub, Amazon S3 or CloudWatch Events, reducing finding noise level if you consume GuardDuty findings via Security Hub or a third\-party SIEM, alerting and ticketing applications\.
 
-GuardDuty continues to generate findings even when they match your suppression rules, however, those findings are automatically marked as “archived”\. The archived finding is stored in GuardDuty for 90\-days and can be viewed at any time during that period\. You can view suppressed findings in the GuardDuty console by selecting **Archived** from the findings table, or through the GuardDuty API using the [ListFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListFindings.html) API with a `findingCriteria` criterion of `service.archived` equal to true\. 
+GuardDuty continues to generate findings even when they match your suppression rules, however, those findings are automatically marked as "archived"\. The archived finding is stored in GuardDuty for 90\-days and can be viewed at any time during that period\. You can view suppressed findings in the GuardDuty console by selecting **Archived** from the findings table, or through the GuardDuty API using the [ListFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListFindings.html) API with a `findingCriteria` criterion of `service.archived` equal to true\. 
 
-## Common Use Cases for Suppression Rules<a name="guardduty_suppression-best-practices"></a>
+## Common use cases for suppression rules<a name="guardduty_suppression-best-practices"></a>
 
 The following are finding types with common use cases for applying suppression rules, select the finding name to learn more about how to apply a suppression rules for that use case\.
 + [UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration](guardduty_finding-types-iam.md#unauthorizedaccess-iam-instancecredentialexfiltration) – Use a suppression rule to automatically archive findings generated when VPC networking is configured to route Internet traffic such that it egresses from an on\-premises gateway rather than from a VPC Internet Gateway\.
-+ [Recon:EC2/Portscan ](guardduty_finding-types-ec2.md#recon-ec2-portscan) – Use a suppression rule to automatically archive findings when using a vulnerability assessment application\.
++ [Recon:EC2/Portscan](guardduty_finding-types-ec2.md#recon-ec2-portscan) – Use a suppression rule to automatically archive findings when using a vulnerability assessment application\.
 + [UnauthorizedAccess:EC2/SSHBruteForce](guardduty_finding-types-ec2.md#unauthorizedaccess-ec2-sshbruteforce) – Use a suppression rule to automatically archive findings when it is targeted to bastion instances\.
-+ [Recon:EC2/PortProbeUnprotectedPort ](guardduty_finding-types-ec2.md#recon-ec2-portprobeunprotectedport) – Use a suppression rule to automatically archive findings when it is targeted to intentionally exposed instances\.
++ [Recon:EC2/PortProbeUnprotectedPort](guardduty_finding-types-ec2.md#recon-ec2-portprobeunprotectedport) – Use a suppression rule to automatically archive findings when it is targeted to intentionally exposed instances\.
 
-## To Create a Suppression Rule Using the Console:<a name="suppression_rules-console"></a>
+## To create a suppression rule using the console:<a name="findings_suppression-rules-console"></a>
 
 The GuardDuty console allows you to easily visualize, create and manage suppression rules\.
 
@@ -34,9 +34,9 @@ The GuardDuty console allows you to easily visualize, create and manage suppress
 
 Your suppression rules can be viewed, edited, or deleted at any time by selecting the rule from the **Saved rules** drop down in the console\.
 
-## <a name="suppression_rules-api"></a>
+## <a name="findings_suppression-rules-api"></a>
 
-**To Create a Suppression Rule Using API:**
+**To create a suppression rule using API:**
 
 1. You can also create suppression rules through the [CreateFilter](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateFilter.html) API\. You can specify the filter criteria in a JSON file following the format of the example detailed below, which would select any unarchived findings where a DNS request to test\.example\.com was made\.
 
@@ -57,7 +57,7 @@ Your suppression rules can be viewed, edited, or deleted at any time by selectin
        }
    ```
 
-   For a list of JSON field names and their console equivalent see [Filter Criteria](guardduty_filter-findings.md#filter_criteria)\.
+   For a list of JSON field names and their console equivalent see [Filter criteria](guardduty_filter-findings.md#filter_criteria)\.
 
    You can test your filter criteria first by using the same JSON criterion in the [ListFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListFindings.html) API and confirming that the correct findings have been selected or you can do this through the AWS CLI by following the example below using your own detector ID, and \.json file\.
 

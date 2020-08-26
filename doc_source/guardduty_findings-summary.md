@@ -1,13 +1,13 @@
-# Finding Details<a name="guardduty_findings-summary"></a>
+# Finding details<a name="guardduty_findings-summary"></a>
 
 When viewed through the console an Amazon GuardDuty finding has a finding summary section that includes a number of finding details\. These details will vary based on finding type\.
 
 There are two primary details that will determine what kinds of information are available for any finding\. The first is the Resource Type, which can be `AccessKey`, or `Instance`\. The second detail that determines finding information is **Resource Role**, this will be `Target` for Access keys, meaning the resource was the target of suspicious activity, but for Instance type findings this can also be `Actor`, which means your resource was the actor carrying out suspicious activity\. The information on this page attempts to describes some of the commonly available details for findings\. 
 + A finding's summary section that includes the following information: 
-  + **Finding type** – A formatted string representing the type of activity that triggered the finding\. For more information, see [GuardDuty Finding Format](guardduty_finding-format.md)\.
+  + **Finding type** – A formatted string representing the type of activity that triggered the finding\. For more information, see [GuardDuty finding format](guardduty_finding-format.md)\.
   + **Finding ID** – A unique Finding ID for this finding type and set of parameters\. New occurrences of activity matching this pattern will be aggregated to the same ID\.
-  + **Severity** – a finding's assigned severity level of either High, Medium, or Low\. For more information, see [Severity Levels for GuardDuty Findings](guardduty_findings.md#guardduty_findings-severity)\.
-  + **Region** – the AWS Region in which the finding was generated\. For more information about supported Regions, see [Regions and Endpoints](guardduty_regions.md)
+  + **Severity** – a finding's assigned severity level of either High, Medium, or Low\. For more information, see [Severity levels for GuardDuty findings](guardduty_findings.md#guardduty_findings-severity)\.
+  + **Region** – the AWS Region in which the finding was generated\. For more information about supported Regions, see [Regions and endpoints](guardduty_regions.md)
   + **Count** – The number of times GuardDuty has aggregated an activity matching this pattern to this finding ID\.
   + **Account ID** – the ID of the AWS account in which the activity took place that prompted GuardDuty to generate this finding\.
   + **Resource ID** – the ID of the AWS resource against which the activity took place that prompted GuardDuty to generate this finding\.
@@ -19,7 +19,7 @@ Findings' time stamps in the GuardDuty console appear in your local time zone, w
 Findings' time stamps in the GuardDuty console appear in your local time zone, while JSON exports and CLI outputs display timestamps in UTC\.
 + The **Resource affected** gives details on the AWS resource that was targeted by the trigger activity\. The information available will vary based on resource type and action type\.
   + **Resource role** – The role of the AWS resource that triggered the finding\. This value can be **TARGET** or **ACTOR**, and represents whether your resource was the target of the suspicious activity or the actor that preformed the suspicious activity respectively\.
-  + **Resource type** – the type of the affected resource\. This value is either **AccessKey** or **Instance**\. Depending on the Resource type different finding details will be available\. 
+  + **Resource type** – the type of the affected resource\. This value is either **AccessKey**, **S3 bucket** or **Instance**\. Depending on the Resource type different finding details will be available\. 
     + Instance details:
       + **Instance ID** – the ID of the EC2 instance involved in the activity that prompted GuardDuty to generate the finding\. 
       + **Instance Type** – the type of the EC2 instance involved in the finding\. 
@@ -59,7 +59,7 @@ Findings' time stamps in the GuardDuty console appear in your local time zone, w
   + **Local IP** – The original source IP of the traffic that triggered the finding\. This info can be used to distinguish between the IP address of an intermediate layer through which traffic flows, and the original source IP address of the traffic that triggered the finding\. For example the IP address of an EKS pod as opposed to the IP address of the instance on which the EKS pod is running\. 
   + **API** – the name of the API operation that was invoked and thus prompted GuardDuty to generate this finding\. 
 **Note**  
-These operations can also include non\-API events captured by CloudTrail\. For more information, see [Non\-API Events Captured by CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-non-api-events.html)\.
+These operations can also include non\-API events captured by CloudTrail\. For more information, see [Non\-API events captured by CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-non-api-events.html)\.
   + **Service name** – the DNS name of the AWS service that attempted to make the API call that triggered the finding\. 
 + A finding will have an **Actor** section if the **Resource role** was `TARGET`\. This indicates your resource was targeted by suspicious activity, and the **Actor** section will contain details on the entity that targeted your resource\.
 
