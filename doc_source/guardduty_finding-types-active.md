@@ -85,4 +85,6 @@ The following table lists all finding types by name, threat purpose, resource an
 | [UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration](guardduty_finding-types-iam.md#unauthorizedaccess-iam-instancecredentialexfiltration) | UnauthorizedAccess | IAM | High | 
 | [UnauthorizedAccess:IAMUser/MaliciousIPCaller](guardduty_finding-types-iam.md#unauthorizedaccess-iam-maliciousipcaller) | UnauthorizedAccess | IAM | Medium | 
 | [UnauthorizedAccess:IAMUser/MaliciousIPCaller\.Custom](guardduty_finding-types-iam.md#unauthorizedaccess-iam-maliciousipcallercustom) | UnauthorizedAccess | IAM | Medium | 
+| [UnauthorizedAccess:IAMUser/TorIPCaller](guardduty_finding-types-iam.md#unauthorizedaccess-iam-toripcaller) | UnauthorizedAccess | IAM | Medium | 
 | [UnauthorizedAccess:S3/TorIPCaller](guardduty_finding-types-s3.md#unauthorizedaccess-s3-toripcaller) | UnauthorizedAccess | S3 | High | 
+
