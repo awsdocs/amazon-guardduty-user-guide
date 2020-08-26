@@ -3,7 +3,7 @@
 When you use GuardDuty with an AWS Organizations organization, you can designate any account within the organization to be the GuardDuty delegated administrator\. Only the organization master account can designate GuardDuty delegated administrators\.
 
 **Note**  
-The Organization master can be the delegated administrator, but this is not recommended based on AWS Security best practices following the principle of least of privilege\.
+The Organization master can be the delegated administrator, but this is not recommended based on AWS Security best practices following the principle of least privilege\.
 
 An account that is designated as a delegated administrator becomes a GuardDuty master account, has GuardDuty automatically enabled in the designated Region, and is granted permission to enable and manage GuardDuty for all accounts in the organization within that Region\. The other accounts in the organization can be viewed and added as GuardDuty member accounts associated with the master account\.
 
