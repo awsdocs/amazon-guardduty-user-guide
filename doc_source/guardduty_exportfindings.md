@@ -1,4 +1,4 @@
-# Exporting Findings<a name="guardduty_exportfindings"></a>
+# Exporting findings<a name="guardduty_exportfindings"></a>
 
 GuardDuty supports exporting active findings to CloudWatch Events and, optionally, to an Amazon S3 bucket\. New Active findings that GuardDuty generates are automatically exported within about 5 minutes after the finding is generated\. You can set the frequency for how often updated Active findings are exported to CloudWatch Events and your S3 bucket \(if configured\)\. The frequency that you select applies to exporting to both CloudWatch Events and your S3 bucket, but only for updated findings\.
 
@@ -9,9 +9,9 @@ Because GuardDuty is enabled per Region, to export findings from all Regions, yo
 **Important**  
 Archived findings, including new instances of auto\-archived findings, aren't exported\. If you unarchive a finding, its status is updated to **Active**, and then it's exported\.
 
-To learn more, see [Creating Custom Responses to GuardDuty Findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
+To learn more, see [Creating custom responses to GuardDuty findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
 
-## Permissions Required to Configure Findings Export<a name="guardduty_exportfindings-permissions"></a>
+## Permissions required to configure findings export<a name="guardduty_exportfindings-permissions"></a>
 
 When you configure options for exporting findings, you select a bucket to store the findings, and a KMS key to use for data encryption\. In addition to permissions to GuardDuty actions, you must also have permissions to the following actions to successfully configure options for exporting findings\.
 + kms:ListAliases
@@ -23,7 +23,7 @@ When you configure options for exporting findings, you select a bucket to store 
 + s3:PutBucketPolicy
 + s3:PutObject
 
-## Setting the Frequency for Exporting Updated Active Findings<a name="guardduty_exportfindings-frequency"></a>
+## Setting the frequency for exporting updated active findings<a name="guardduty_exportfindings-frequency"></a>
 
 Configure the frequency for exporting updated Active findings as appropriate for your environment\. By default, updated findings are exported every 6 hours\. This means that any findings that are updated after the most recent export are included in the next export\. If updated findings are exported every 6 hours and the export occurs at 12:00, any finding that you update after 12:00 is exported at 18:00\.
 
@@ -40,14 +40,14 @@ Configure the frequency for exporting updated Active findings as appropriate for
 
 1. Choose **Save**\.
 
-## Configuring Findings Export to an Amazon S3 Bucket<a name="guardduty_exportfindings-s3"></a>
+## Configuring findings export to an Amazon S3 bucket<a name="guardduty_exportfindings-s3"></a>
 
 Configure settings for exporting Active findings to an Amazon S3 bucket from the **Settings** page in the GuardDuty console\. When you configure findings export, you can choose an existing S3 bucket, or have GuardDuty create a new bucket to store exported findings\. If you choose to use a new bucket, GuardDuty applies all necessary permissions to the created bucket\. If you use an existing bucket, you must update the bucket policy to allow GuardDuty to put findings into the bucket\.
 
 **Important**  
 The bucket and KMS key that you use must be in the same Region\.
 
-### Changing the Key Policy<a name="guardduty_exprotfindings-key-policy"></a>
+### Updating the KMS key policy<a name="guardduty_exprotfindings-key-policy"></a>
 
 GuardDuty encrypts the findings data in the bucket by using an AWS KMS key\. To successfully configure findings export, you must first give GuardDuty permission to use the key that you choose when you configure findings export\. You grant the permissions by [changing the key policy](https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying.html) for the key you use\. 
 
@@ -67,7 +67,7 @@ If you plan to use a new key for GuardDuty findings, [create a key](https://docs
 **Note**  
 If **Switch to policy view** is displayed, choose that to display the key policy, and then choose **Edit**\.
 
-1. Add the following policy statement to the policy\. The statement allows GuardDuty to use only the key that you changed the policy for\.
+1. Add the following policy statement to the policy\. The statement allows GuardDuty to use only the key that you changed the policy for\. When editing the key policy make sure your JSON syntax is valid, if you add the statement before the final statement you must add a comma after the closing bracket\.
 
    ```
    {
@@ -85,79 +85,7 @@ If you're using GuardDuty in an manually\-enabled Region, replace the value for 
 
 1. Choose **Save**\.
 
-When you add the statement to the policy, make sure that the syntax is valid\. Policies are displayed in JavaScript Object Notation \(JSON\) format\. When you add a new section to the policy, you need to include a comma either before or after the added section\. The position of the comma depends on how you add the new statement\. If you add the statement as the last statement in the policy, add a comma after the closing bracket for the preceding section\. If you add it as the first statement, or add it between two existing statements, add a comma after the closing bracket\. The following examples show how to add the policy statement to a default key policy\.
-
-The following example shows a default key policy with no additional permissions granted:
-
-```
-{
-    "Id": "key-consolepolicy",
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "Enable IAM User Permissions",
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": "arn:aws:iam::111122223333:root"
-            },
-            "Action": "kms:*",
-            "Resource": "*"
-        }
-    ]
-}
-```
-
-The following example shows how to add the policy statement as the first statement:
-
-```
-{
-    "Id": "key-consolepolicy",
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "Allow GuardDuty to use the key",
-            "Effect": "Allow",
-            "Principal": {"Service": "guardduty.amazonaws.com"},
-            "Action": "kms:GenerateDataKey",
-            "Resource": "*"
-        },<--Add a comma after this bracket
-        {
-            "Sid": "Enable IAM User Permissions",
-            "Effect": "Allow",
-            "Principal": {"AWS": "arn:aws:iam::111122223333:root"},
-            "Action": "kms:*",
-            "Resource": "*"
-        }
-    ]
-}
-```
-
-The following example shows how to add the policy statement as the last statement:
-
-```
-{
-    "Id": "key-consolepolicy",
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "Enable IAM User Permissions",
-            "Effect": "Allow",
-            "Principal": {"AWS": "arn:aws:iam::111122223333:root"},
-            "Action": "kms:*",
-            "Resource": "*"
-        }, <--Add a comma after this bracket
-        {
-            "Sid": "Allow GuardDuty to use the key",
-            "Effect": "Allow",
-            "Principal": {"Service": "guardduty.amazonaws.com"},
-            "Action": "kms:GenerateDataKey",
-            "Resource": "*"
-        }
-    ]
-}
-```
-
-### Exporting Findings to a New Bucket<a name="guardduty_exportfindings-new-bucket"></a>
+### Exporting findings to a new bucket<a name="guardduty_exportfindings-new-bucket"></a>
 
 When you choose to create a new bucket to configure findings export, GuardDuty adds a bucket policy to the bucket that grants GuardDuty permission to put findings into the bucket\.
 
@@ -181,15 +109,15 @@ When you choose to create a new bucket to configure findings export, GuardDuty a
 
      Then enter the full ARN to the key that you changed the policy for\.
 
-     The key that you choose must be in the same Region as the bucket\. To learn how to find the key ARN, see [Finding the Key ID and ARN](https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn)\.
+     The key that you choose must be in the same Region as the bucket\. To learn how to find the key ARN, see [Finding the key ID and ARN](https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn)\.
 
 1. Choose **Save**\.
 
-### Exporting Findings to an Existing Bucket<a name="guardduty_exportfindings-existing-bucket"></a>
+### Exporting findings to an existing bucket<a name="guardduty_exportfindings-existing-bucket"></a>
 
-When you create a new bucket to export findings to, GuardDuty modifies the bucket policy to grant GuardDuty the necessary permissions to put findings in the bucket\. If you choose to use an existing bucket, you must update the bucket policy to grant GuardDuty those permissions to successfully configure findings export settings\. To learn more, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)\.
+When you create a new bucket to export findings to, GuardDuty modifies the bucket policy to grant GuardDuty the necessary permissions to put findings in the bucket\. If you choose to use an existing bucket, you must update the bucket policy to grant GuardDuty those permissions to successfully configure findings export settings\. To learn more, see [How do I add an S3 Bucket policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)\.
 
-#### Granting GuardDuty Permissions to Export Findings to Your Bucket<a name="guardduty_exportfindings-s3-policies"></a>
+#### Granting GuardDuty permissions to export findings to your bucket<a name="guardduty_exportfindings-s3-policies"></a>
 
 **To add a bucket policy**
 
@@ -304,11 +232,11 @@ If you're using GuardDuty in an manually\-enabled Region, replace the value for 
 
      Then enter the full ARN to the key that you changed the policy for\.
 
-     The key you choose must be in the same Region as the bucket\. To learn how to find the key ARN, see [Finding the Key ID and ARN](https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn)\.
+     The key you choose must be in the same Region as the bucket\. To learn how to find the key ARN, see [Finding the key ID and ARN](https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn)\.
 
 1. Choose **Save**\.
 
-## Export Access Error<a name="access-error"></a>
+## Export access error<a name="access-error"></a>
 
 After you configure finding export options, if GuardDuty is unable to export findings, an error message is displayed on the **Settings** page\. This can happen when GuardDuty can no longer access the target resource, such as when the S3 bucket is deleted or the permissions to the bucket are changed\. This can also happen when the KMS key used to encrypt data in the bucket becomes inaccessible\. 
 

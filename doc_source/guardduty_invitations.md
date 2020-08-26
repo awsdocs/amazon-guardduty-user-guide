@@ -1,19 +1,19 @@
-# Managing GuardDuty Accounts by Invitation<a name="guardduty_invitations"></a>
+# Managing GuardDuty accounts by invitation<a name="guardduty_invitations"></a>
 
 To manage accounts outside of your organization, you can use the legacy invitation method\. When you use this method, your account is designated as a master account when another account accepts your invitation to become a member account\. 
 
 If your account is not a master account, you can accept an invitation from another account\. When you accept, your account becomes a member account\. An AWS account cannot be a GuardDuty master and member account at the same time\.
 
-Accounts associated by invitation have the same overall master\-to\-member relationship as accounts associated by AWS Organizations, as described in [Understanding the Relationship between GuardDuty Master and Member Accounts](guardduty_accounts.md#master_member_relationships)\. However, invitation master account users cannot enable GuardDuty on behalf of associated member accounts or view other non\-member accounts within their AWS Organizations organization\.
+Accounts associated by invitation have the same overall master\-to\-member relationship as accounts associated by AWS Organizations, as described in [Understanding the relationship between GuardDuty master and member accounts](guardduty_accounts.md#master_member_relationships)\. However, invitation master account users cannot enable GuardDuty on behalf of associated member accounts or view other non\-member accounts within their AWS Organizations organization\.
 
 **Important**  
 Cross\-Regional data transfer may occur when GuardDuty creates member accounts using this method\. In order to verify member accounts' email addresses, GuardDuty uses an email verification service that operates only in the US East \(N\. Virginia\) Region\.
 
-## Designating Master and Member Accounts Through Invitation \(Console\)<a name="guardduty_become_console"></a>
+## Designating master and member accounts through invitation \(console\)<a name="guardduty_become_console"></a>
 
 Use the following procedures to add an account, invite an account, or accept an invitation from another account\.
 
-### Step 1 \- Add an account<a name="guardduty_add_member_proc"></a>
+### Step 1 \- add an account<a name="guardduty_add_member_proc"></a>
 
 1. Open the GuardDuty console at [https://console\.aws\.amazon\.com/guardduty/](https://console.aws.amazon.com/guardduty/)\.
 
@@ -38,7 +38,7 @@ The first line of your CSV file must contain the following header, as shown in t
 
    The added accounts appear in a list on the **Accounts** page\. Each added account in this list has an **Invite** link in the **Status** column\. 
 
-### Step 2 \- Invite an account<a name="guardduty_invite_member_proc"></a>
+### Step 2 \- invite an account<a name="guardduty_invite_member_proc"></a>
 
 1. Open the GuardDuty console at [https://console\.aws\.amazon\.com/guardduty/](https://console.aws.amazon.com/guardduty/)\.
 
@@ -52,7 +52,7 @@ If the invited account does not have access to email, select **Also send an emai
 
    The value in the **Status** column for the invited account changes to **Pending**\.
 
-### Step 3 \- Accept an invitation<a name="guardduty_accept_invite_proc"></a>
+### Step 3 \- accept an invitation<a name="guardduty_accept_invite_proc"></a>
 
 1. Open the GuardDuty console at [https://console\.aws\.amazon\.com/guardduty/](https://console.aws.amazon.com/guardduty/)\.
 
@@ -64,7 +64,7 @@ You must enable GuardDuty before you can accept a membership invitation\.
 
    After you accept the invitation, your account becomes a GuardDuty member account\. The account whose user sent the invitation becomes the GuardDuty master account\. The master account user can see that the value in the **Status** column for your member account changes to **Monitored**\. The master account user can now view and manage GuardDuty findings for your member account\.
 
-## Designating GuardDuty Master and Member Accounts Through Invitation \(API\)<a name="guardduty_become_api"></a>
+## Designating GuardDuty master and member accounts through invitation \(API\)<a name="guardduty_become_api"></a>
 
 You can designate master and member GuardDuty accounts by invitation through the API operations\. Run the following GuardDuty API operations in order to designate master and member accounts in GuardDuty\.
 
@@ -118,11 +118,11 @@ Complete the following procedure using the credentials of each AWS account that 
    aws guardduty accept-invitation --detector-id 12abc34d567e8fa901bc2d34e56789f0 --master-id 012345678901 --invitation-id 84b097800250d17d1872b34c4daadcf5 
    ```
 
-## Enable GuardDuty in Multiple Accounts Simultaneously<a name="guardduty_become_multiple"></a>
+## Enable GuardDuty in multiple accounts simultaneously<a name="guardduty_become_multiple"></a>
 
 Use the following method to enable GuardDuty in multiple accounts at the same time\.
 
-### Use Python Scripts to Enable GuardDuty in Multiple Accounts Simultaneously<a name="guardduty_become_scripts"></a>
+### Use Python scripts to enable GuardDuty in multiple accounts simultaneously<a name="guardduty_become_scripts"></a>
 
 You can automate the enabling or disabling of GuardDuty on multiple accounts using the scripts from the sample repository on GitHub at [https://github\.com/aws\-samples/amazon\-guardduty\-multiaccount\-scripts](https://github.com/aws-samples/amazon-guardduty-multiaccount-scripts)\. Use the process in this section to enable GuardDuty for a list of member accounts using Amazon EC2\. For information about using the disable script or setting up the script locally refer, to the GitHub instructions\.
 
