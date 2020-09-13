@@ -23,7 +23,7 @@ Findings' time stamps in the GuardDuty console appear in your local time zone, w
     + Instance details:
       + **Instance ID** – the ID of the EC2 instance involved in the activity that prompted GuardDuty to generate the finding\. 
       + **Instance Type** – the type of the EC2 instance involved in the finding\. 
-      + **Launch Time** – the time and date the assistance was launched\. 
+      + **Launch Time** – the time and date the instance was launched\. 
       + **Outpost ARN** – The Amazon Resource Name \(ARN\) of the AWS Outpost\. Only applicable to AWS Outposts instances\. For more information, see [What is AWS Outposts?](https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html)
       + **Security Group Name** – The name of the Security Group attached to the involved instance\.
       + **Security Group ID** – The ID of the Security Group attached to the involved instance\.
