@@ -71,7 +71,7 @@ This functionality is only available to masters of GuardDuty members incorporate
 
 1. In the navigation pane, under **Settings**, choose **Accounts**\.
 
-1.  Ensure **Auto\-enable** for GuardDuty is turned is turned on\. If it is off you can enable by selecting **Enable** from the banner or by selecting **Auto\-enable is OFF**\. This feature will automatically enable GuardDuty for new member accounts within your organization and must be enabled in order to auto\-enable S3 protection\.
+1.  Ensure **Auto\-enable** for GuardDuty is turned on\. If it is off you can enable by selecting **Enable** from the banner or by selecting **Auto\-enable is OFF**\. This feature will automatically enable GuardDuty for new member accounts within your organization and must be enabled in order to auto\-enable S3 protection\.
 
 1. Once Auto\-enable for GuardDuty is on, you can enable S3 protection for your new members in addition to enabling GuardDuty by selecting the **S3 Protection** toggle icon\. Choose **Update Settings** to confirm\.
 
