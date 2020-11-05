@@ -17,8 +17,9 @@ All GuardDuty findings are associated with a detector, which is an object that r
 12abc34d567e8fa901bc2d34e56789f0
 ```
 You can find your detector ID for your current region in the console from the **Settings** pane, or programmatically using the [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetFindings.html#API_ListDetectors) API\.  
-In multiple account environments all findings for member accounts role up to the master account's detector\.
-Some GuardDuty functionality is configured through the detector, such as configuring CloudWatch Events notification frequency and the enabling or disabling of optional data sources for GuardDuty to process\.
+
+In multiple account environments all findings for member accounts roll up to the master account's detector\.
+Some GuardDuty functionality is configured through the detector, such as configuring CloudWatch Events notification frequency\.
 
 **Data source**  
 The origin or location of a set of data\. To detect unauthorized and unexpected activity in your AWS environment, GuardDuty analyzes and processes data from AWS CloudTrail event logs, VPC Flow Logs, and DNS logs\. For more information, see [How Amazon GuardDuty uses its data sources](guardduty_data-sources.md)\.
@@ -28,7 +29,7 @@ A potential security issue discovered by GuardDuty\. For more information, see [
 Findings are displayed in the GuardDuty console and contain a detailed description of the security issue\. You can also retrieve your generated findings by calling the [GetFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetFindings.html) and [ListFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListFindings.html) API operations\.  
 You can also see your GuardDuty findings through Amazon CloudWatch events\. GuardDuty sends findings to Amazon CloudWatch via HTTPS protocol\. For more information, see [Creating custom responses to GuardDuty findings with Amazon CloudWatch Events](guardduty_findings_cloudwatch.md)\.
 
-** Suppression rule**  
+**Suppression rule**  
 Suppression rules allow you to create very specific combinations of attributes to suppress findings\. For example, you can define a rule through the GuardDuty filter to auto\-archive `Recon:EC2/Portscan` from only those instances in a specific VPC, running a specific AMI, or with a specific EC2 tag\. This rule would result in port scan findings being automatically archived from the instances that meet the criteria\. However, it still allows alerting if GuardDuty detects those instances conducting other malicious activity, such as crypto\-currency mining\.  
 Suppression rules defined in the GuardDuty master account apply to the GuardDuty member accounts\. GuardDuty member accounts can't modify suppression rules\.  
 With auto\-archive rules, GuardDuty still generates all findings\. Suppression rules provide suppression of findings while maintaining a complete and immutable history of all activity\.   
