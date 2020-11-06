@@ -21,9 +21,11 @@ Findings' time stamps in the GuardDuty console appear in your local time zone, w
   + **Resource role** – The role of the AWS resource that triggered the finding\. This value can be **TARGET** or **ACTOR**, and represents whether your resource was the target of the suspicious activity or the actor that preformed the suspicious activity respectively\.
   + **Resource type** – the type of the affected resource\. This value is either **AccessKey**, **S3 bucket** or **Instance**\. Depending on the Resource type different finding details will be available\. 
     + Instance details:
+**Note**  
+Some instance details may be missing if the instance has already been terminated or if the underlying API invocation originated from an EC2 instance in a different Region when making a cross Region API call\.
       + **Instance ID** – the ID of the EC2 instance involved in the activity that prompted GuardDuty to generate the finding\. 
       + **Instance Type** – the type of the EC2 instance involved in the finding\. 
-      + **Launch Time** – the time and date the assistance was launched\. 
+      + **Launch Time** – the time and date the instance was launched\. 
       + **Outpost ARN** – The Amazon Resource Name \(ARN\) of the AWS Outpost\. Only applicable to AWS Outposts instances\. For more information, see [What is AWS Outposts?](https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html)
       + **Security Group Name** – The name of the Security Group attached to the involved instance\.
       + **Security Group ID** – The ID of the Security Group attached to the involved instance\.
@@ -43,7 +45,7 @@ Findings' time stamps in the GuardDuty console appear in your local time zone, w
       + **Owner** – The canonical user ID of the user that owns the bucket involved in the finding\. For more information on canonical user ID's see [AWS account identifiers](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html)\.
       + **Type** – The type of bucket finding, can be either **Destination** or **Source**\.
       + ** Default server side encryption** – encryption details for the bucket\.
-      + **Bucket Tags** – A list of Tags attached to this resource, listed in the format of `key`:`value`\.
+      + **Bucket Tags** – a list of Tags attached to this resource, listed in the format of `key`:`value`\.
       + **Effective Permissions** – An evaluation of all effective permissions and policies on the bucket that indicates whether the involved bucket is publicly exposed, values can be PUBLIC or NOT PUBLIC\.
 + A finding's **Action** gives details on the type of activity that triggered the finding\. The information available will vary based on action type\.
   + **Action type** – The finding activity type\. This value can be one of the following: 
@@ -51,6 +53,7 @@ Findings' time stamps in the GuardDuty console appear in your local time zone, w
     + **PORT\_PROBE** – indicates that a remote host probed the identified EC2 instance on multiple open ports\.
     + **DNS\_REQUEST** – indicates that the identified EC2 instance queried a domain name\.
     + **AWS\_API\_CALL** – indicates that an AWS API was invoked\.
+    + **ERROR CODE** – if the finding was triggered by a failed API call this displays the error code for that call\.
   + **Connection direction** – The network connection direction observed in the activity that prompted GuardDuty to generate the finding\. The values can be one of the following:
     + **INBOUND** – indicates that a remote host initiated a connection to a local port on the identified EC2 instance in your account\.
     + **OUTBOUND** – indicates that the identified EC2 instance initiated a connection to a remote host\.
@@ -77,3 +80,12 @@ These operations can also include non\-API events captured by CloudTrail\. For m
   + **Archived** – a true or false value that indicates whether this is finding has been archived\.
   + **Unusual** – activity details that were not observed historically\. These can include an unusual \(previously not observed\) user, or location, or time\. 
   + **Unusual protocol**– the network connection protocol involved in the activity that prompted GuardDuty to generate the finding\.
+  + **Anomalies** – Information relating to anomalous API calls that triggered the finding, this information is present for **AnomalousBehaviour** findings only\. This type of finding is based on several factors, if a factor is new or abnormal it will be listed in red with a warning symbol, if it was expected it will be listed in green with a check mark\. Anomalies within the following factors can trigger this type of finding:
+    + **API**– If new or abnormal API calls triggered the finding they will be listed in red\. For comparison this information includes a list of typical API calls associated with the observed user's baseline, including the number of times GuardDuty has seen this API call \(from this source?account?session?\)
+    +  **User Types** – If a new or abnormal user type is associated with this finding it will be listed in red\. For comparison this information includes a list of users types that GuardDuty typically sees making this type of API call from your account, including the number of times that type of user has made this call\. User Types can be any of the following:
+      + Assumed Role
+      + AWS account
+      + IAM user
+      + AWS service
+    + **ASN Org**– The ASN Org that the API call originated from\. For comparison this information includes a list of ASNs typically associated with this behaviour pattern, including the number of times GuardDuty has seen this \(API call? behaviour?\) from that ASN\.
+    + **User Agent**– ?

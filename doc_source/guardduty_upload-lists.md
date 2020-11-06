@@ -6,7 +6,7 @@ Trusted IP lists consist of IP addresses that you have trusted for secure commun
 
 Threat lists consist of known malicious IP addresses\. GuardDuty generates findings based on threat lists\. At any given time, you can have up to six uploaded threat lists per AWS account per Region\.
 
-Users from master GuardDuty accounts can upload and manage trusted IP lists and threat lists\. Users from member GuardDuty accounts CANNOT upload and manage lists\. Trusted IP lists and threat lists that are uploaded by the master account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the master's threat lists and does not generate findings based on activity that involves IP addresses from the master's trusted IP lists\. For more information, see [Managing multiple accounts in Amazon GuardDuty](guardduty_accounts.md)\.
+in multi\-account environemtns only users from administrator GuardDuty accounts can upload and manage trusted IP lists and threat lists\. Trusted IP lists and threat lists that are uploaded by the administrator account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the administrator's threat lists and does not generate findings based on activity that involves IP addresses from the administrator's trusted IP lists\. For more information, see [Managing multiple accounts in Amazon GuardDuty](guardduty_accounts.md)\.
 
 **Important**  
 GuardDuty uses the same [`AWSServiceRoleForAmazonGuardDuty` service\-linked role](guardduty_managing_access.md#guardduty_service-access) that is automatically assigned to it when you enable GuardDuty for the permissions required to evaluate your trusted IP lists and threat lists\. 
@@ -25,22 +25,11 @@ Note the following when creating trusted IP lists and threat lists that you plan
 + The maximum size of the file that hosts your trusted IP list or threat list is 35MB\.
 + You can include a maximum of 2000 IP addresses and CIDR ranges in a single trusted IP list\.
 + You can include a maximum of 250,000 IP addresses and CIDR ranges in a single threat list\.
-+ If your list is encrypted using server\-side encryption \(SSE\)\-KMS you must grant the GuardDuty service\-linked role **AWSServiceRoleForAmazonGuardDuty** permission to decrypt the file in order to activate the list\. Add the following statement to the KMS key policy and replace the account ID with your own: 
-
-  ```
-  {
-  	"Sid": "Allow access for GuardDuty Service Role",
-  	"Effect": "Allow",
-  	"Principal": {
-  		"AWS": "arn:aws:iam::123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
-  	},
-  	"Action": "kms:Decrypt*",
-  	"Resource": "*"
-  }
-  ```
++ If you include the same IP included on both a trusted IP list and threat list it will be processed by the trusted IP list first, and will not generate a finding\.
 
 **Topics**
 + [Permissions required to upload trusted IP lists and threat lists](#upload-permissions)
++ [Using sever\-side encryption for trusted IP lists and threat lists](#encrypt-list)
 + [To upload trusted IP lists and threat lists](#upload-procedure)
 + [To activate or deactivate trusted IP lists and threat lists](#activate-procedure)
 + [To update trusted IP lists and threat lists](#update-lists-procedure)
@@ -65,6 +54,24 @@ To grant various identities full access to working with trusted IP lists and thr
 **Important**  
 These actions are not included in the **AmazonGuardDutyFullAccess** managed policy\.
 
+## Using sever\-side encryption for trusted IP lists and threat lists<a name="encrypt-list"></a>
+
+GuardDuty supports the following encryption types for lists: SSE\-AES256 and SSE\-KMS\. SSE\-C is not supported\. For more information on encryption types for S3 see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)\. 
+
+If your list is encrypted using server\-side encryption SSE\-KMS you must grant the GuardDuty service\-linked role **AWSServiceRoleForAmazonGuardDuty** permission to decrypt the file in order to activate the list\. Add the following statement to the KMS key policy and replace the account ID with your own: 
+
+```
+{
+	"Sid": "Allow access for GuardDuty Service Role",
+	"Effect": "Allow",
+	"Principal": {
+		"AWS": "arn:aws:iam::123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
+	},
+	"Action": "kms:Decrypt*",
+	"Resource": "*"
+}
+```
+
 ## To upload trusted IP lists and threat lists<a name="upload-procedure"></a>
 
 The following procedure describes how you can upload trusted IP lists and threat lists using the GuardDuty console\. 
@@ -86,7 +93,7 @@ https://s3\.amazonaws\.com/bucket\.name/file\.txt
 https://s3\-aws\-region\.amazonaws\.com/bucket\.name/file\.txt
 http://bucket\.s3\.amazonaws\.com/file\.txt
 http://bucket\.s3\-aws\-region\.amazonaws\.com/file\.txt
-s3://mybucket/file\.txt
+s3://bucket\.name/file\.txt
    + For **Format**, choose your list's file type\.
    + Select the **I agree** check box\.
    + Choose **Add list**\.

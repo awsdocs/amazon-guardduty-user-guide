@@ -100,7 +100,7 @@ The following is the trust policy that is attached to the `AWSServiceRoleForAmaz
 
 This section describes how to delegate access to GuardDuty to various IAM identities \(users, groups, and roles\)\. 
 
-By default, access to the GuardDuty resources \(detector, trusted IP lists, threat lists, findings, members, master account, and invitations\) is restricted to the owner of the AWS account that the resources were created in\. If you are the owner, you can choose to grant full or limited access to GuardDuty to the various IAM identities in your account\. For more information about creating IAM access policies, see the [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
+By default, access to the GuardDuty resources \(detector, trusted IP lists, threat lists, findings, members, administrator account, and invitations\) is restricted to the owner of the AWS account that the resources were created in\. If you are the owner, you can choose to grant full or limited access to GuardDuty to the various IAM identities in your account\. For more information about creating IAM access policies, see the [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
 
 **Topics**
 + [AWS managed \(predefined\) policies for GuardDuty](#guardduty_managedpolicies)

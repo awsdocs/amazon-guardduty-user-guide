@@ -1,22 +1,47 @@
 # Generating sample findings in GuardDuty<a name="sample_findings"></a>
 
-You can generate sample findings with Amazon GuardDuty to help you visualize and understand the various finding types that GuardDuty can generate\. When you generate sample findings, GuardDuty populates your current findings list with one sample finding for each supported finding type\. The generated samples are approximations populated with placeholder values\. These samples may look different from real findings for your environment, but you can use them to test various configurations for GuardDuty, such as your CloudWatch Events or filters\. For more information about GuardDuty finding types, see [Finding types](guardduty_finding-types-active.md)\.
+You can generate sample findings with Amazon GuardDuty to help you visualize and understand the various finding types that GuardDuty can generate\. When you generate sample findings, GuardDuty populates your current findings list with one sample finding for each supported finding type\. 
+
+The generated samples are approximations populated with placeholder values\. These samples may look different from real findings for your environment, but you can use them to test various configurations for GuardDuty, such as your CloudWatch Events or filters\. For a list of available values for finding types are listed in [Finding types](guardduty_finding-types-active.md) table\.
 
 To generate some common findings based on simulated activity within your environment see [Automatically generating common GuardDuty findings](#guardduty_findings-scripts) below\.
 
-## Generating sample findings through the GuardDuty console<a name="sample_console"></a>
+## Generating sample findings through the GuardDuty console or API<a name="sample_console"></a>
 
-Use the following procedure to generate sample findings\.
+Choose an access method to learn how to generate sample findings through that method\.
+
+**Note**  
+The console method generates one of each finding type\. Single sample findings can only be generated through the API\.
+
+------
+#### [ Console ]
+
+Use the following procedure to generate sample findings\. This process generates one sample finding for each GuardDuty finding type\.
 
 ****
 
 1. Open the GuardDuty console at [https://console\.aws\.amazon\.com/guardduty/](https://console.aws.amazon.com/guardduty/)\.
 
-1. In the navigation pane, under **Settings**, choose **General**\.
+1. In the navigation pane, choose **Settings**\.
 
 1. On the **Settings** page, under **Sample findings**, choose **Generate sample findings**\.
 
-1. In the navigation pane, under **Findings**, choose **Current**\. The sample findings are displayed on the **Current findings** page\. The title of sample findings always begins with **\[SAMPLE\]**\. Choose a specific sample finding to view its details\.
+1. In the navigation pane, choose **Findings**\. The sample findings are displayed on the **Current findings** page with the prefix **\[SAMPLE\]**\.
+
+------
+#### [ API ]
+
+You can generate a single sample finding matching any of the GuardDuty finding types through the [CreateSampleFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateSampleFindings.html) API, the available values for finding types are listed in [Finding types](guardduty_finding-types-active.md) table\. 
+
+This is useful for the testing of CloudWatch Events rules or automation based on findings\. The following example shows how to generate a single sample finding of the `Backdoor:EC2/DenialOfService.Tcp` type using the AWS CLI\.
+
+```
+                    aws guardduty create-sample-findings --detector-id yourRegionalDetectorId --finding-types Backdoor:EC2/DenialOfService.Tcp
+```
+
+------
+
+The title of sample findings generated through these methods always begins with **\[SAMPLE\]** in the console\. Additionally, sample findings have a value of `"sample": true` in the `additionalInfo` section of the finding JSON details\.
 
 ## Automatically generating common GuardDuty findings<a name="guardduty_findings-scripts"></a>
 

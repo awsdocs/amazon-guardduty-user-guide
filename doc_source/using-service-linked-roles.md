@@ -69,7 +69,7 @@ Replace the sample account ID in the example below with your actual AWS account 
 The `AWSServiceRoleForAmazonGuardDuty` service\-linked role is automatically created when you enable GuardDuty for the first time or enable GuardDuty in a supported Region where you previously didn't have it enabled\. You can also create the `AWSServiceRoleForAmazonGuardDuty` service\-linked role manually using the IAM console, the IAM CLI, or the IAM API\. 
 
 **Important**  
-The service\-linked role that is created for the master GuardDuty account doesn't apply to the member GuardDuty accounts\.
+The service\-linked role that is created for the GuardDuty account doesn't apply to the member GuardDuty accounts\.
 
 For more information about creating the role manually, see [Creating a service\-linked role](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#create-service-linked-role) in the *IAM User Guide*\.
 

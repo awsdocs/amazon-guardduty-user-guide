@@ -2,6 +2,9 @@
 
 The following findings are specific to Amazon EC2 resources and always have a Resource Type of `Instance`\. The severity and details of the findings differ based on the Resource Role, which indicates whether the EC2 instance was the target of suspicious activity or the actor performing the activity\.
 
+**Note**  
+Instance details may be missing for some ec2 findings if the instance has already been terminated or if the underlying API call was part of a cross Region API call that originated from an EC2 instance in a different Region\.
+
 For all instance type findings, it is recommended that you examine the resource in question to determine if it is behaving in an expected manner\. If the activity is authorized, you can use Suppression Rules or Trusted IP lists to prevent false positive notifications for that resource\. If the activity is unexpected, the security best practice is to assume the instance has been compromised and take the actions detailed in [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
 
 **Topics**
@@ -16,6 +19,8 @@ For all instance type findings, it is recommended that you examine the resource 
 + [Behavior:EC2/TrafficVolumeUnusual](#behavior-ec2-trafficvolumeunusual)
 + [CryptoCurrency:EC2/BitcoinTool\.B](#cryptocurrency-ec2-bitcointoolb)
 + [CryptoCurrency:EC2/BitcoinTool\.B\!DNS](#cryptocurrency-ec2-bitcointoolbdns)
++ [Impact:EC2/PortSweep](#impact-ec2-portsweep)
++ [Impact:EC2/WinRMBruteForce](#impact-ec2-winrmbruteforce)
 + [Recon:EC2/PortProbeEMRUnprotectedPort](#recon-ec2-portprobeemrunprotectedport)
 + [Recon:EC2/PortProbeUnprotectedPort](#recon-ec2-portprobeunprotectedport)
 + [Recon:EC2/Portscan](#recon-ec2-portscan)
@@ -33,7 +38,6 @@ For all instance type findings, it is recommended that you examine the resource 
 + [UnauthorizedAccess:EC2/RDPBruteForce](#unauthorizedaccess-ec2-rdpbruteforce)
 + [UnauthorizedAccess:EC2/SSHBruteForce](#unauthorizedaccess-ec2-sshbruteforce)
 + [UnauthorizedAccess:EC2/TorClient](#unauthorizedaccess-ec2-torclient)
-+ [UnauthorizedAccess:EC2/TorIPCaller](#unauthorizedaccess-ec2-toripcaller)
 + [UnauthorizedAccess:EC2/TorRelay](#unauthorizedaccess-ec2-torrelay)
 
 ## Backdoor:EC2/C&CActivity\.B\!DNS<a name="backdoor-ec2-ccactivitybdns"></a>
@@ -44,16 +48,18 @@ For all instance type findings, it is recommended that you examine the resource 
 
 **Default severity: High**
 
-This finding informs you that the listed Amazon EC2 instance within your AWS environment is querying a domain name associated with a known command and control \(C&C\) server\. The listed Amazon EC2 instance might be compromised\. Command and control servers are computers that issue commands to members of a botnet\. A botnet is a collection of internet\-connected devices which might include PCs, servers, mobile devices, and Internet of Things devices, that are infected and controlled by a common type of malware\. Botnets are often used to distribute malware and gather misappropriated information, such as credit card numbers\. Depending on the purpose and structure of the botnet, the C&C server might also issue commands to begin a distributed denial\-of\-service \(DDoS\) attack\.
+#### <a name="backdoor-ec2-ccactivitybdns_full"></a>
+
+This finding informs you that the listed instance within your AWS environment is querying a domain name associated with a known command and control \(C&C\) server\. The listed instance might be compromised\. Command and control servers are computers that issue commands to members of a botnet\. A botnet is a collection of internet\-connected devices which might include PCs, servers, mobile devices, and Internet of Things devices, that are infected and controlled by a common type of malware\. Botnets are often used to distribute malware and gather misappropriated information, such as credit card numbers\. Depending on the purpose and structure of the botnet, the C&C server might also issue commands to begin a distributed denial\-of\-service \(DDoS\) attack\.
 
 **Note**  
-To test how GuardDuty generates this finding type, you can make a DNS request from your instance \(using `dig` for Linux or `nslookup` for Windows\) against a test domain `guarddutyc2activityb.com`\.
+To test how generates this finding type, you can make a DNS request from your instance \(using `dig` for Linux or `nslookup` for Windows\) against a test domain `guarddutyc2activityb.com`\.
 
 #### <a name="backdoor-ec2-ccactivitybdns_remediation"></a>
 
 **Remediation recommendations:**
 
-If this activity is unexpected, your instance is likely compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Backdoor:EC2/DenialOfService\.Dns<a name="backdoor-ec2-denialofservicedns"></a>
 
@@ -62,6 +68,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 #### <a name="backdoor-ec2-denialofservicedns_severity"></a>
 
 **Default severity: High**
+
+#### <a name="backdoor-ec2-denialofservicedns_full"></a>
 
 This finding informs you that the listed EC2 instance within your AWS environment is generating a large volume of outbound DNS traffic\. This may indicate that the listed instance is compromised and being used to perform denial\-of\-service \(DoS\) attacks using DNS protocol\.
 
@@ -82,6 +90,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 **Default severity: High**
 
+#### <a name="backdoor-ec2-denialofservicetcp_full"></a>
+
 This finding informs you that the listed EC2 instance within your AWS environment is generating a large volume of outbound TCP traffic\. This may indicate that the instance is compromised and being used to perform denial\-of\-service \(DoS\) attacks using TCP protocol\. 
 
 **Note**  
@@ -100,6 +110,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 #### <a name="backdoor-ec2-denialofserviceudp_severity"></a>
 
 **Default severity: High**
+
+#### <a name="backdoor-ec2-denialofserviceudp_full"></a>
 
 This finding informs you that the listed EC2 instance within your AWS environment is generating a large volume of outbound UDP traffic\. This may indicate that the listed instance is compromised and being used to perform denial\-of\-service \(DoS\) attacks using UDP protocol\. 
 
@@ -120,6 +132,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 **Default severity: High**
 
+#### <a name="backdoor-ec2-denialofserviceudpontcpports_full"></a>
+
 This finding informs you that the listed EC2 instance within your AWS environment is generating a large volume of outbound UDP traffic targeted to a port that is typically used for TCP communication\. This may indicate that the listed instance is compromised and being used to perform a denial\-of\-service \(DoS\) attacks using UDP protocol on a TCP port\. 
 
 **Note**  
@@ -139,6 +153,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 **Default severity: High**
 
+#### <a name="backdoor-ec2-denialofserviceunusualprotocol_full"></a>
+
 This finding informs you that the listed EC2 instance in your AWS environment is generating a large volume of outbound traffic from an unusual protocol type that is not typically used by EC2 instances, such as Internet Group Management Protocol\. This may indicate that the instance is compromised and is being used to perform denial\-of\-service \(DoS\) attacks using an unusual protocol\. This finding detects DoS attacks only against publicly routable IP addresses, which are primary targets of DoS attacks\.
 
 #### <a name="backdoor-ec2-denialofserviceunusualprotocol_remediation"></a>
@@ -154,6 +170,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 #### <a name="backdoor-ec2-spambot_severity"></a>
 
 **Default severity: Medium**
+
+#### <a name="backdoor-ec2-spambot_full"></a>
 
 This finding informs you that the listed EC2 instance in your AWS environment is communicating with a remote host on port 25\. This behavior is unusual because this EC2 instance has no prior history of communications on port 25\. Port 25 is traditionally used by mail servers for SMTP communications\. This finding indicates your EC2 instance might be compromised for use in sending out spam\.
 
@@ -171,6 +189,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 **Default severity: Medium**
 
+#### <a name="behavior-ec2-networkportunusual_full"></a>
+
 This finding informs you that the listed EC2 instance in your AWS environment is behaving in a way that deviates from the established baseline\. This EC2 instance has no prior history of communications on this remote port\.
 
 #### <a name="behavior-ec2-networkportunusual_remediation"></a>
@@ -186,6 +206,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 #### <a name="behavior-ec2-trafficvolumeunusual_severity"></a>
 
 **Default severity: Medium**
+
+#### <a name="behavior-ec2-trafficvolumeunusual_full"></a>
 
 This finding informs you that the listed EC2 instance in your AWS environment is behaving in a way that deviates from the established baseline\. This EC2 instance has no prior history of sending this much traffic to this remote host\.
 
@@ -203,6 +225,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 **Default severity: High**
 
+#### <a name="cryptocurrency-ec2-bitcointoolb_full"></a>
+
 This finding informs you that the listed EC2 instance in your AWS environment is querying an IP Address that is associated with Bitcoin or other cryptocurrency\-related activity\. Bitcoin is a worldwide cryptocurrency and digital payment system\. Besides being used as a reward for Bitcoin mining, Bitcoin can be exchanged for other currencies, products, and services\. 
 
 #### <a name="cryptocurrency-ec2-bitcointoolb_remediation"></a>
@@ -219,6 +243,8 @@ If you use this EC2 instance to mine or manage cryptocurrency, or this instance 
 
 **Default severity: High**
 
+#### <a name="cryptocurrency-ec2-bitcointoolbdns_full"></a>
+
 This finding informs you that the listed EC2 instance in your AWS environment is querying a domain name that is associated with Bitcoin or other cryptocurrency\-related activity\. Bitcoin is a worldwide cryptocurrency and digital payment system\. Besides being used as a reward for Bitcoin mining, Bitcoin can be exchanged for other currencies, products, and services\.
 
 #### <a name="cryptocurrency-ec2-bitcointoolbdns_remediation"></a>
@@ -226,6 +252,42 @@ This finding informs you that the listed EC2 instance in your AWS environment is
 **Remediation recommendations:**
 
 If you use this EC2 instance to mine or manage cryptocurrency, or this instance is otherwise involved in blockchain activity, this finding could represented expected activity for your environment\. If this is the case in your AWS environment, we recommend that you set up a suppression rule for this finding\. The suppression rule should consist of two filter criteria\. The first criteria should use the **Finding type** attribute with a value of `CryptoCurrency:EC2/BitcoinTool.B!DNS`\. The second filter criteria should be the **Instance ID** of the instance involved in blockchain activity\. To learn more about creating suppression rules see [Suppression rules](findings_suppression-rule.md)\.
+
+## Impact:EC2/PortSweep<a name="impact-ec2-portsweep"></a>
+
+### An EC2 instance is probing a port on a large number of IP addresses\.<a name="impact-ec2-portsweep_description"></a>
+
+#### <a name="impact-ec2-portsweep_severity"></a>
+
+**Default severity: High**
+
+#### <a name="impact-ec2-portsweep_full"></a>
+
+This finding informs you the listed EC2 instance in your AWS environment is probing a port on a large number of publicly routable IP addresses\. This type of activity is typically used to find vulnerable hosts to exploit\.
+
+#### <a name="impact-ec2-portsweep_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
+
+## Impact:EC2/WinRMBruteForce<a name="impact-ec2-winrmbruteforce"></a>
+
+### An EC2 instance is performing an outbound Windows Remote Management brute force attack\.<a name="impact-ec2-winrmbruteforce_description"></a>
+
+#### <a name="impact-ec2-winrmbruteforce_severity"></a>
+
+**Default severity: High**
+
+#### <a name="impact-ec2-winrmbruteforce_full"></a>
+
+This finding informs you that the listed EC2 instance in your AWS environment is performing a Windows Remote Management \(WinRM\) brute force attack aimed at gaining access to the Windows Remote Management service on Windows\-based systems\.
+
+#### <a name="impact-ec2-winrmbruteforce_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Recon:EC2/PortProbeEMRUnprotectedPort<a name="recon-ec2-portprobeemrunprotectedport"></a>
 
@@ -235,13 +297,15 @@ If you use this EC2 instance to mine or manage cryptocurrency, or this instance 
 
 **Default severity: High**
 
-This finding informs you that an Amazon EMR related sensitive port on the listed EC2 instance that is part of an Amazon EMR cluster in your AWS environment is not blocked by a security group, an access control list \(ACL\), or an on\-host firewall such as Linux IPTables, and that known scanners on the internet are actively probing it\. Ports that can trigger this finding, such as port 8088 \(YARN Web UI port\), could potentially be used for remote code execution\. 
+#### <a name="recon-ec2-portprobeemrunprotectedport_full"></a>
+
+This finding informs you that an EMR related sensitive port on the listed EC2 instance that is part of an cluster in your AWS environment is not blocked by a security group, an access control list \(ACL\), or an on\-host firewall such as Linux IPTables, and that known scanners on the internet are actively probing it\. Ports that can trigger this finding, such as port 8088 \(YARN Web UI port\), could potentially be used for remote code execution\. 
 
 #### <a name="recon-ec2-portprobeemrunprotectedport_remediation"></a>
 
 **Remediation recommendations:**
 
-You should block open access to ports on Amazon EMR clusters from the internet and restrict access only to specific IP addresses that require access to these ports\. For more information see, [Security Groups for EMR Clusters](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-groups.html)\.
+You should block open access to ports on clusters from the internet and restrict access only to specific IP addresses that require access to these ports\. For more information see, [Security Groups for EMR Clusters](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-groups.html)\.
 
 ## Recon:EC2/PortProbeUnprotectedPort<a name="recon-ec2-portprobeunprotectedport"></a>
 
@@ -252,7 +316,9 @@ You should block open access to ports on Amazon EMR clusters from the internet a
 **Default severity: Low\***
 
 **Note**  
-This finding's default severity is Low\. However, if the port being probed is used by Amazon Elasticsearch Service \(9200 or 9300\), the finding's severity is High\.
+This finding's default severity is Low\. However, if the port being probed is used by \(9200 or 9300\), the finding's severity is High\.
+
+#### <a name="recon-ec2-portprobeunprotectedport_full"></a>
 
 This finding informs you that a port on the listed EC2 instance in your AWS environment is not blocked by a security group, access control list \(ACL\), or an on\-host firewall such as Linux IPTables, and that known scanners on the internet are actively probing it\. 
 
@@ -264,6 +330,8 @@ This finding informs you that a port on the listed EC2 instance in your AWS envi
 
 There may be cases in which instances are intentionally exposed, for example if they are hosting web servers\. If this is the case in your AWS environment, we recommend that you set up a suppression rule for this finding\. The suppression rule should consist of two filter criteria\. The first criteria should use the **Finding type** attribute with a value of `Recon:EC2/PortProbeUnprotectedPort`\. The second filter criteria should match the instance or instances that serve as a bastion host\. You can use either the **Instance image ID** attribute or the **Tag** value attribute, depending on which criteria is identifiable with the instances that host these tools\. For more information about creating suppression rules see [Suppression rules](findings_suppression-rule.md)\.
 
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
+
 ## Recon:EC2/Portscan<a name="recon-ec2-portscan"></a>
 
 ### An EC2 instance is performing outbound port scans to a remote host\.<a name="recon-ec2-portscan_description"></a>
@@ -272,13 +340,17 @@ There may be cases in which instances are intentionally exposed, for example if 
 
 **Default severity: Medium**
 
+#### <a name="recon-ec2-portscan_full"></a>
+
 This finding informs you that the listed EC2 instance in your AWS environment is engaged in a possible port scan attack because it is trying to connect to multiple ports over a short period of time\. The purpose of a port scan attack is to locate open ports to discover which services the machine is running and to identify its operating system\.
 
 #### <a name="recon-ec2-portscan_remediation"></a>
 
 **Remediation recommendations:**
 
-This finding is can be a false positive when vulnerability assessment applications are deployed on EC2 instances in your environment because these applications conduct portscans to alert you about misconfigured open ports\. If this is the case in your AWS environment, we recommend that you set up a suppression rule for this finding\. The suppression rule should consist of two filter criteria\. The first criteria should use the **Finding type** attribute with a value of `Recon:EC2/Portscan`\. The second filter criteria should match the instance or instances that host these vulnerability assessment tools\. You can use either the **Instance image ID** attribute or the **Tag** value attribute depending on which criteria are identifiable with the instances that host these tools\. For more information about creating suppression rules see [Suppression rules](findings_suppression-rule.md)\.
+This finding can be a false positive when vulnerability assessment applications are deployed on EC2 instances in your environment because these applications conduct portscans to alert you about misconfigured open ports\. If this is the case in your AWS environment, we recommend that you set up a suppression rule for this finding\. The suppression rule should consist of two filter criteria\. The first criteria should use the **Finding type** attribute with a value of `Recon:EC2/Portscan`\. The second filter criteria should match the instance or instances that host these vulnerability assessment tools\. You can use either the **Instance image ID** attribute or the **Tag** value attribute depending on which criteria are identifiable with the instances that host these tools\. For more information about creating suppression rules see [Suppression rules](findings_suppression-rule.md)\.
+
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Trojan:EC2/BlackholeTraffic<a name="trojan-ec2-blackholetraffic"></a>
 
@@ -287,6 +359,8 @@ This finding is can be a false positive when vulnerability assessment applicatio
 #### <a name="trojan-ec2-blackholetraffic_severity"></a>
 
 **Default severity: Medium**
+
+#### <a name="trojan-ec2-blackholetraffic_full"></a>
 
 This finding informs you the listed EC2 instance in your AWS environment might be compromised because it is trying to communicate with an IP address of a black hole \(or sink hole\)\. Black holes are places in the network where incoming or outgoing traffic is silently discarded without informing the source that the data didn't reach its intended recipient\. A black hole IP address specifies a host machine that is not running or an address to which no host has been assigned\.
 
@@ -304,6 +378,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 **Default severity: Medium**
 
+#### <a name="trojan-ec2-blackholetrafficdns_full"></a>
+
 This finding informs you the listed EC2 instance in your AWS environment might be compromised because it is querying a domain name that is being redirected to a black hole IP address\. Black holes are places in the network where incoming or outgoing traffic is silently discarded without informing the source that the data didn't reach its intended recipient\.
 
 #### <a name="trojan-ec2-blackholetrafficdns_remediation"></a>
@@ -319,6 +395,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 #### <a name="trojan-ec2-dgadomainrequestb_severity"></a>
 
 **Default severity: High**
+
+#### <a name="trojan-ec2-dgadomainrequestb_full"></a>
 
 This finding informs you that the listed EC2 instance in your AWS environment is trying to query domain generation algorithm \(DGA\) domains\. Your EC2 instance might be compromised\.
 
@@ -341,6 +419,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 **Default severity: High**
 
+#### <a name="trojan-ec2-dgadomainrequestcdns_full"></a>
+
 This finding informs you that the listed EC2 instance in your AWS environment is trying to query domain generation algorithm \(DGA\) domains\. Your EC2 instance might be compromised\.
 
 DGAs are used to periodically generate a large number of domain names that can be used as rendezvous points with their command and control \(C&C\) servers\. Command and control servers are computers that issue commands to members of a botnet, which is a collection of internet\-connected devices that are infected and controlled by a common type of malware\. The large number of potential rendezvous points makes it difficult to effectively shut down botnets because infected computers attempt to contact some of these domain names every day to receive updates or commands\.
@@ -362,6 +442,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 **Default severity: High**
 
+#### <a name="trojan-ec2-dnsdataexfiltration_full"></a>
+
 This finding informs you that the listed EC2 instance in your AWS environment is running malware that uses DNS queries for outbound data transfers\. This type of data transfer is indicative of a compromised instance and could result in the exfiltration of data\. DNS traffic is not typically blocked by firewalls\. For example, malware in a compromised EC2 instance can encode data, \(such as your credit card number\), into a DNS query and send it to a remote DNS server that is controlled by an attacker\.
 
 #### <a name="trojan-ec2-dnsdataexfiltration_remediation"></a>
@@ -377,6 +459,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 #### <a name="trojan-ec2-drivebysourcetrafficdns_severity"></a>
 
 **Default severity: Medium**
+
+#### <a name="trojan-ec2-drivebysourcetrafficdns_full"></a>
 
 This finding informs you that the listed EC2 instance in your AWS environment might be compromised because it is querying a domain name of a remote host that is a known source of drive\-by download attacks\. These are unintended downloads of computer software from the internet that can trigger an automatic installation of a virus, spyware, or malware\.
 
@@ -394,6 +478,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 **Default severity: Medium**
 
+#### <a name="trojan-ec2-droppoint_full"></a>
+
 This finding informs you that an EC2 instance in your AWS environment is trying to communicate with an IP address of a remote host that is known to hold credentials and other stolen data captured by malware\.
 
 #### <a name="trojan-ec2-droppoint_remediation"></a>
@@ -409,6 +495,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 #### <a name="trojan-ec2-droppointdns_severity"></a>
 
 **Default severity: High**
+
+#### <a name="trojan-ec2-droppointdns_full"></a>
 
 This finding informs you that an EC2 instance in your AWS environment is querying a domain name of a remote host that is known to hold credentials and other stolen data captured by malware\.
 
@@ -426,6 +514,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 **Default severity: High**
 
+#### <a name="trojan-ec2-phishingdomainrequestdns_full"></a>
+
 This finding informs you that there is an EC2 instance in your AWS environment that is trying to query a domain involved in phishing attacks\. Phishing domains are set up by someone posing as a legitimate institution in order to induce individuals to provide sensitive data, such as personally identifiable information, banking and credit card details, and passwords\. Your EC2 instance may be trying to retrieve sensitive data stored on a phishing website, or it may be attempting to set up a phishing website\. Your EC2 instance might be compromised\.
 
 #### <a name="trojan-ec2-phishingdomainrequestdns_remediation"></a>
@@ -436,13 +526,15 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 ## UnauthorizedAccess:EC2/MaliciousIPCaller\.Custom<a name="unauthorizedaccess-ec2-maliciousipcallercustom"></a>
 
-### An EC2 instance is making outbound connections to an IP address on a custom threat list\.<a name="unauthorizedaccess-ec2-maliciousipcallercustom_description"></a>
+### An EC2 instance is making connections to an IP address on a custom threat list\.<a name="unauthorizedaccess-ec2-maliciousipcallercustom_description"></a>
 
 #### <a name="unauthorizedaccess-ec2-maliciousipcallercustom_severity"></a>
 
 **Default severity: Medium**
 
-This finding informs you that an EC2 instance in your AWS environment is communicating on an outbound port with an IP address included on a threat list that you uploaded\. In GuardDuty, a threat list consists of known malicious IP addresses\. GuardDuty generates findings based on uploaded threat lists\. This can indicate unauthorized access to your AWS resources\.
+#### <a name="unauthorizedaccess-ec2-maliciousipcallercustom_full"></a>
+
+This finding informs you that an EC2 instance in your AWS environment is communicating with an IP address included on a threat list that you uploaded\. In GuardDuty, a threat list consists of known malicious IP addresses\. GuardDuty generates findings based on uploaded threat lists\. This can indicate unauthorized access to your AWS resources\.
 
 #### <a name="unauthorizedaccess-ec2-maliciousipcallercustom_remediation"></a>
 
@@ -458,6 +550,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 **Default severity: High**
 
+#### <a name="unauthorizedaccess-ec2-metadatadnsrebind_full"></a>
+
 This finding informs you that an EC2 instance in your AWS environment is querying a domain that resolves to the EC2 metadata IP address \(169\.254\.169\.254\)\. A DNS query of this kind may indicate that the instance is a target of a DNS rebinding technique\. This technique can be used to obtain metadata from an EC2 instance, including the IAM credentials associated with the instance\.
 
 DNS rebinding involves tricking an application running on the EC2 instance to load return data from a URL, where the domain name in the URL resolves to the EC2 metadata IP address \(169\.254\.169\.254\)\. This causes the application to access EC2 metadata and possibly make it available to the attacker\. 
@@ -468,7 +562,7 @@ It is possible to access EC2 metadata using DNS rebinding only if the EC2 instan
 
 **Remediation recommendations:**
 
-In response to this finding, you should evaluate if there is a vulnerable application running on the EC2 instance, or if someone used a browser to access the domain identified in the finding\. If the root cause is a vulnerable application, you should fix the vulnerability\. If someone browsed the identified domain, you should block the domain or prevent users from accessing it\. If you determine this finding was related to either case above, you should [revoke the session associated with the EC2 instance](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_revoke-sessions.html)\.
+In response to this finding, you should evaluate if there is a vulnerable application running on the EC2 instance, or if someone used a browser to access the domain identified in the finding\. If the root cause is a vulnerable application, you should fix the vulnerability\. If someone browsed the identified domain, you should block the domain or prevent users from accessing it\. If you determine this finding was related to either case above, you should [revoke the session associated with the EC2 instance](id_roles_use_revoke-sessions.html)\.
 
 Some AWS customers intentionally map the metadata IP address to a domain name on their authoritative DNS servers\. If this is the case in your environment, we recommend that you set up a suppression rule for this finding\. The suppression rule should consist of two filter criteria\. The first criteria should use the **Finding type** attribute with a value of `UnauthorizedAccess:EC2/MetaDataDNSRebind`\. The second filter criteria should be **DNS request domain** and the value should match the domain you have mapped to the metadata IP address \(169\.254\.169\.254\)\. For more information on creating suppression rules see [Suppression rules](findings_suppression-rule.md)\.
 
@@ -482,6 +576,8 @@ Some AWS customers intentionally map the metadata IP address to a domain name on
 
 **Note**  
 This finding's severity is low if your EC2 instance was the target of a brute force attack\. This finding's severity is high if your EC2 instance is the actor being used to perform the brute force attack\.
+
+#### <a name="unauthorizedaccess-ec2-rdpbruteforce_full"></a>
 
 This finding informs you that an EC2 instance in your AWS environment was involved in a brute force attack aimed at obtaining passwords to RDP services on Windows\-based systems\. This can indicate unauthorized access to your AWS resources\.
 
@@ -504,10 +600,12 @@ If your instance's **Resource Role** is `TARGET`, this finding can be remediated
 **Note**  
 This finding's severity is low if a brute force attack is aimed at one of your EC2 instances\. This finding's severity is high if your EC2 instance is being used to perform the brute force attack\.
 
+#### <a name="unauthorizedaccess-ec2-sshbruteforce_full"></a>
+
 This finding informs you that an EC2 instance in your AWS environment was involved in a brute force attack aimed at obtaining passwords to SSH services on Linux\-based systems\. This can indicate unauthorized access to your AWS resources\. 
 
 **Note**  
-This finding is generated only through GuardDuty monitoring traffic on port 22\. If your SSH services are configured to use other ports, this finding is not generated\.
+This finding is generated only through monitoring traffic on port 22\. If your SSH services are configured to use other ports, this finding is not generated\.
 
 #### <a name="unauthorizedaccess-ec2-sshbruteforce_remediation"></a>
 
@@ -515,7 +613,9 @@ This finding is generated only through GuardDuty monitoring traffic on port 22\.
 
 If the target of the brute force attempt is a bastion host, this may represent expected behavior for your AWS environment\. If this is the case, we recommend that you set up a suppression rule for this finding\. The suppression rule should consist of two filter criteria\. The first criteria should use the **Finding type** attribute with a value of `UnauthorizedAccess:EC2/SSHBruteForce`\. The second filter criteria should match the instance or instances that serve as a bastion host\. You can use either the **Instance image ID** attribute or the **Tag** value attribute depending on which criteria is identifiable with the instances that host these tools\. For more information about creating suppression rules see [Suppression rules](findings_suppression-rule.md)\.
 
-If this activity is not expected for your environment and your instance's **Resource Role** is `TARGET`, this finding can be remediated by securing your SSH port to only trusted IPs through Security Groups, ACLs, or firewalls\. For more information, see [Tips for securing your EC2 instances \(Linux\)](http://aws.amazon.com/articles/tips-for-securing-your-ec2-instance/)\. If your instance's **Resource Role** is `ACTOR`, this indicates the instance has been used to perform SSH brute force attacks\. Unless this instance has a legitimate reason to be contacting the IP address listed as the `Target`, it is recommended that you assume your instance has been compromised and take the actions listed in [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
+If this activity is not expected for your environment and your instance's **Resource Role** is `TARGET`, this finding can be remediated by securing your SSH port to only trusted IPs through Security Groups, ACLs, or firewalls\. For more information, see [Tips for securing your EC2 instances \(Linux\)](http://aws.amazon.com/articles/tips-for-securing-your-ec2-instance/)\.
+
+ If your instance's **Resource Role** is `ACTOR`, this indicates the instance has been used to perform SSH brute force attacks\. Unless this instance has a legitimate reason to be contacting the IP address listed as the `Target`, it is recommended that you assume your instance has been compromised and take the actions listed in [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## UnauthorizedAccess:EC2/TorClient<a name="unauthorizedaccess-ec2-torclient"></a>
 
@@ -525,25 +625,11 @@ If this activity is not expected for your environment and your instance's **Reso
 
 **Default severity: High**
 
+#### <a name="unauthorizedaccess-ec2-torclient_full"></a>
+
 This finding informs you that an EC2 instance in your AWS environment is making connections to a Tor Guard or an Authority node\. Tor is software for enabling anonymous communication\. Tor Guards and Authority nodes act as initial gateways into a Tor network\. This traffic can indicate that this EC2 instance has been compromised and is acting as a client on a Tor network\. This finding may indicate unauthorized access to your AWS resources with the intent of hiding the attacker's true identity\.
 
 #### <a name="unauthorizedaccess-ec2-torclient_remediation"></a>
-
-**Remediation recommendations:**
-
-If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
-
-## UnauthorizedAccess:EC2/TorIPCaller<a name="unauthorizedaccess-ec2-toripcaller"></a>
-
-### Your EC2 instance is receiving inbound connections from a Tor exit node\.<a name="unauthorizedaccess-ec2-toripcaller_description"></a>
-
-#### <a name="unauthorizedaccess-ec2-toripcaller_severity"></a>
-
-**Default severity: Medium**
-
-This finding informs you that an API operation, such as an attempt to launch an EC2 instance, create a new IAM user, or modify your AWS privileges, was invoked from a Tor exit node IP address\. Tor is software for enabling anonymous communication\. It encrypts and randomly bounces communications through relays between a series of network nodes\. The last Tor node is called the exit node\. This finding can indicate unauthorized access to your AWS resources with the intent of hiding the attacker's true identity\.
-
-#### <a name="unauthorizedaccess-ec2-toripcaller_remediation"></a>
 
 **Remediation recommendations:**
 
@@ -556,6 +642,8 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 #### <a name="unauthorizedaccess-ec2-torrelay_severity"></a>
 
 **Default severity: High**
+
+#### <a name="unauthorizedaccess-ec2-torrelay_full"></a>
 
 This finding informs you that an EC2 instance in your AWS environment is making connections to a Tor network in a manner that suggests that it's acting as a Tor relay\. Tor is software for enabling anonymous communication\. Tor increases anonymity of communication by forwarding the client's possibly illicit traffic from one Tor relay to another\.
 

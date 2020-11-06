@@ -6,10 +6,29 @@ For information about important changes to the GuardDuty finding types, includin
 In the current release of GuardDuty, the following finding types are retired \(no longer generated\)\. You CANNOT reactivate retired GuardDuty findings types\. 
 
 **Topics**
++ [UnauthorizedAccess:EC2/TorIPCaller](#unauthorizedaccess-ec2-toripcaller)
 + [Backdoor:EC2/XORDDOS](#backdoor2)
 + [Behavior:IAMUser/InstanceLaunchUnusual](#behavior1)
 + [CryptoCurrency:EC2/BitcoinTool\.A](#crypto1)
 + [UnauthorizedAccess:IAMUser/UnusualASNCaller](#unauthorized6)
+
+## UnauthorizedAccess:EC2/TorIPCaller<a name="unauthorizedaccess-ec2-toripcaller"></a>
+
+### Your EC2 instance is receiving inbound connections from a Tor exit node\.<a name="unauthorizedaccess-ec2-toripcaller_description"></a>
+
+#### <a name="unauthorizedaccess-ec2-toripcaller_severity"></a>
+
+**Default severity: Medium**
+
+#### <a name="unauthorizedaccess-ec2-toripcaller_full"></a>
+
+This finding informs you that an EC2 instance in your AWS environment is receiving inbound connections from a Tor exit node\. Tor is software for enabling anonymous communication\. It encrypts and randomly bounces communications through relays between a series of network nodes\. The last Tor node is called the exit node\. This finding can indicate unauthorized access to your AWS resources with the intent of hiding the attacker's true identity\.
+
+#### <a name="unauthorizedaccess-ec2-toripcaller_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Backdoor:EC2/XORDDOS<a name="backdoor2"></a>
 

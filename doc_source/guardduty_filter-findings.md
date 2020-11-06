@@ -4,7 +4,7 @@ A finding filter allows you to view findings that match the criteria you specify
 
 ## Create filters in the GuardDuty console<a name="filter_console"></a>
 
-Finding filters can be created and tested through the GuardDuty console\. You can save filters created through the console for use in suppression rules or future filter operations\.
+Finding filters can be created and tested through the GuardDuty console\. You can save filters created through the console for use in suppression rules or future filter operations\. A filter is made up of at least one filter criteria, which consists of one filter attribute paired with at least one value\.
 
 When you create filters, be aware of the following:
 + Filters do not accept wild cards\. 
@@ -16,9 +16,9 @@ When you create filters, be aware of the following:
 
 1. Choose **Add filter criteria** above the displayed list of your GuardDuty findings\.
 
-1. In the expanded list of criteria, select the attribute that you want to specify as the criteria for your filter, such as **Account ID** or **Action type**\.
+1. In the expanded list of attributes, select the attribute that you want to specify as the criteria for your filter, such as **Account ID** or **Action type**\.
 **Note**  
-See the Filter criteria table on this page for a list of attributes that you can specify as filter criteria\.
+See the filter attribute table on this page for a list of attributes that you can use to create filter criteria\.
 
 1. In the displayed text field, specify a value for each selected attribute and then choose **Apply**\.
 **Note**  
@@ -26,9 +26,9 @@ See the Filter criteria table on this page for a list of attributes that you can
 
 1. To save the specified attributes and their values \(filter criteria\) as a filter, select **Save**\. Enter the filter name and description, and then choose **Done**\.
 
-## Filter criteria<a name="filter_criteria"></a>
+## Filter attributes<a name="filter_criteria"></a>
 
- When you create filters or sort findings using the API operations, you must specify filter criteria in JSON\. These filter criteria correlate to a finding's details JSON\. The following table contains a list of the console display names for filter criteria and their equivalent JSON field names\.
+ When you create filters or sort findings using the API operations, you must specify filter criteria in JSON\. These filter criteria correlate to a finding's details JSON\. The following table contains a list of the console display names for filter attributes and their equivalent JSON field names\.
 
 
 | Console field name | JSON field name | 
@@ -66,6 +66,7 @@ See the Filter criteria table on this page for a list of attributes that you can
 | Action type | service\.action\.actionType | 
 | API called | service\.action\.awsApiCallAction\.api | 
 | API caller type | service\.action\.awsApiCallAction\.callerType | 
+| API Error Code | service\.action\.awsApiCallAction\.errorCode | 
 | API caller city | service\.action\.awsApiCallAction\.remoteIpDetails\.city\.cityName | 
 | API caller country | service\.action\.awsApiCallAction\.remoteIpDetails\.country\.countryName | 
 | API caller IPv4 address | service\.action\.awsApiCallAction\.remoteIpDetails\.ipAddressV4 | 

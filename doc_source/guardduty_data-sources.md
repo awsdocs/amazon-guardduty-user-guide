@@ -17,7 +17,7 @@ AWS CloudTrail provides you with a history of AWS API calls for your account, in
 
 When you enable GuardDuty, it immediately starts analyzing your CloudTrail event logs\. It consumes CloudTrail management and S3 data events directly from CloudTrail through an independent and duplicative stream of events\. There is no additional charge for GuardDuty to access CloudTrail events\.
 
-GuardDuty does not manage your CloudTrail events or affect your existing CloudTrail configurations in anyway\. To manage access and retention of your CloudTrail events directly you must use the CloudTrail service console or API\. For more information see [Viewing Events with CloudTrail Event History\.](https://docs.aws.amazon.com/wscloudtrail/latest/userguide/view-cloudtrail-events.html)
+GuardDuty does not manage your CloudTrail events or affect your existing CloudTrail configurations in anyway\. To manage access and retention of your CloudTrail events directly you must use the CloudTrail service console or API\. For more information see [Viewing Events with CloudTrail Event History\.](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)
 
 ### How GuardDuty Handles AWS CloudTrail Global Events<a name="cloudtrail_global"></a>
 

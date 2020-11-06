@@ -57,7 +57,7 @@ Your suppression rules can be viewed, edited, or deleted at any time by selectin
        }
    ```
 
-   For a list of JSON field names and their console equivalent see [Filter criteria](guardduty_filter-findings.md#filter_criteria)\.
+   For a list of JSON field names and their console equivalent see [Filter attributes](guardduty_filter-findings.md#filter_criteria)\.
 
    You can test your filter criteria first by using the same JSON criterion in the [ListFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListFindings.html) API and confirming that the correct findings have been selected or you can do this through the AWS CLI by following the example below using your own detector ID, and \.json file\.
 

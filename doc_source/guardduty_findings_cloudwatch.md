@@ -26,7 +26,7 @@ You CANNOT customize the default frequency \(5 minutes\) of notifications sent a
 
 **Important**  
 You can customize the default frequency of notifications sent about the subsequent finding occurrences\. Possible values are 15 minutes, 1 hour, or the default 6 hours\. You can update this value using the [CreateDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateDetector.html) or the [UpdateDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateDetector.html) API operations\. You can also update this value through the GuardDuty console \- choose **Settings** and then under **CloudWatch Events**, choose one of the available values from the **Updated findings** pull\-down menu\.  
-Only users from a master account can customize the default frequency of notifications sent about the subsequent finding occurrences to CloudWatch Events\. Users from member accounts CANNOT customize this frequency value\. The frequency value set by the master account in its own account is imposed on GuardDuty functionality in all its member accounts\. In other words, if a user from a master account sets this frequency value to 1 hour, all member accounts will also have the 1 hour frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. For more information, see [Managing multiple accounts in Amazon GuardDuty](guardduty_accounts.md)\. 
+Only users from a administrator account can customize the default frequency of notifications sent about the subsequent finding occurrences to CloudWatch Events\. Users from member accounts CANNOT customize this frequency value\. The frequency value set by the administrator account in its own account is imposed on GuardDuty functionality in all its member accounts\. In other words, if a user from a administrator account sets this frequency value to 1 hour, all member accounts will also have the 1 hour frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. For more information, see [Managing multiple accounts in Amazon GuardDuty](guardduty_accounts.md)\. 
 
 ## Monitoring archived GuardDuty findings with CloudWatch Events<a name="guardduty_findings_cloudwatch_archived"></a>
 
@@ -59,17 +59,24 @@ For the complete list of all the parameters included in `GUARDDUTY_FINDING_JSON_
 
 ## Creating a CloudWatch Events rule to notify you of GuardDuty findings \(console\)<a name="guardduty_cloudwatch_severity_notification"></a>
 
- The following procedure can be used to set up automatic email notifications for Medium to High Severity findings to the email address of your choice\. 
+You can use CloudWatch Events with GuardDuty to set up automated findign alerts by sending GuardDuty finding events to a messaging hub to help increase the visibility of GuardDuty findings\. This topic shows you how to send findings alerts to email, Slack, or Amazon Chime by setting up an SNS topic and then connecting that topic to an CloudWatch Events event rule\.
 
 ### Setup an Amazon SNS topic and endpoint<a name="SNS_setup"></a>
 
-To begin, you must first set up a topic in Amazon Simple Notification Service and add an email address as an endpoint\. For more information refer to the [SNS guide](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html)\.
+To begin, you must first set up a topic in Amazon Simple Notification Service and add an endpoint\. For more information on refer to the [SNS guide](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html)\.
+
+This procedure establishes where you want to send GuardDuty finding data\. The SNS topic can be added to an CloudWatch Events Event rule during or after the creation of the Event Rule\.
+
+------
+#### [ Email setup ]
+
+**Creating an SNS topic**
 
 1. Sign in to the Amazon SNS console at [https://console\.aws\.amazon\.com/sns/v3/home](https://console.aws.amazon.com/sns/v3/home)\.
 
 1. Select **Topics** from the navigation pane and then **Create Topic**\.
 
-1. In the Create topic section, enter a Topic name, for example **GuardDuty**\. Other details are optional\.
+1. In the Create topic section, select **Standard**\. Next, enter a Topic name, for example **GuardDuty\_to\_Email**\. Other details are optional\.
 
 1. Choose **Create Topic**\. The Topic details for your new topic will open\.
 
@@ -86,6 +93,84 @@ You will be required to confirm your subscription through your email client afte
    1. Choose **Create Subscription**
 
 1. Check for a subscription message in your inbox and choose **Confirm Subscription**
+
+------
+#### [ Slack setup ]
+
+**Creating an SNS topic**
+
+1. Sign in to the Amazon SNS console at [https://console\.aws\.amazon\.com/sns/v3/home](https://console.aws.amazon.com/sns/v3/home)\.
+
+1. Select **Topics** from the navigation pane and then **Create Topic**\.
+
+1. In the Create topic section, select **Standard**\. Next, enter a Topic name, for example **GuardDuty\_to\_Slack**\. Other details are optional\. Choose **Create topic** to finalize\.
+
+**Configuring an AWS Chatbot client**
+
+1. Navigate to the AWS Chatbot console
+
+1. From the **Configured clients** panel, select **Configure new client**\.
+
+1. Choose Slack and confirm with "Configure"\. 
+**Note**  
+When choosing Slack you must confirm permissions for AWS Chatbot to access your channel by selecting "allow"\.
+
+1. Select **Configure new channel** to open the configuration details pane\.
+
+   1. Enter a name for the channel\.
+
+   1. For Slack channel, choose the channel that you want to use\. To use private Slack channel with AWS Chatbot, choose Private channel\.
+
+   1. In Slack, copy the Channel ID of the private channel by right\-clicking on the channel name and selecting Copy Link\.
+
+   1. On the AWS Management Console, in the AWS Chatbot window, paste the ID you copied from slack into the Private channel ID field\.
+
+   1. In **Permissions**, chose to create an IAM role using a template, if you do not have a role already\.
+
+   1. For **Policy** templates, choose Notification permissions\. This is the IAM policy template for AWS Chatbot\. It provides the necessary read and list permissions for CloudWatch alarms, events and logs, and for Amazon SNS topics\. 
+
+   1. Choose the Region you previously created your SNS topic in, and then select the Amazon SNS topic you created to send notifications to the Slack channel\.
+
+1. Select **Configure**\.
+
+------
+#### [ Chime setup ]
+
+**Creating an SNS topic**
+
+1. Sign in to the Amazon SNS console at [https://console\.aws\.amazon\.com/sns/v3/home](https://console.aws.amazon.com/sns/v3/home)\.
+
+1. Select **Topics** from the navigation pane and then **Create Topic**\.
+
+1. In the Create topic section, select **Standard**\. Next, enter a Topic name, for example **GuardDuty\_to\_Chime**\. Other details are optional\. Choose **Create topic** to finalize\.
+
+**Configuring a AWS Chatbot client**
+
+1. Navigate to the AWS AWS Chatbot console
+
+1. From the **Configured clients** panel, select **Configure new client**\.
+
+1. Choose Chime and confirm with "Configure"\. 
+
+1. From the **Configuration details** pane, enter a name for the channel\.
+
+1. In Chime open the desired chat room
+
+   1. Choose the gear icon in the upper\-right corner and choose **Manage webhooks and bots**\.
+
+   1. Select **Copy URL** to copy the webhook URL to your clipboard\.
+
+1. On the AWS Management Console, in AWS Chatbot window, paste the URL you copied into the **Webhook URL** field\.
+
+1. In **Permissions**, chose to create an IAM role using a template, if you do not have a role already\.
+
+1. For **Policy** templates, choose Notification permissions\. This is the IAM policy template for AWS Chatbot\. It provides the necessary read and list permissions for CloudWatch alarms, events and logs, and for Amazon SNS topics\. 
+
+1. Choose the Region you previously created your SNS topic in, and then select the Amazon SNS topic you created to send notifications to the Chime room\.
+
+1. Select **Configure**\.
+
+------
 
 ### Setup a CloudWatch event for GuardDuty findings<a name="setup_cloudwatch_event"></a>
 
@@ -179,28 +264,32 @@ The above code will alert for any Medium to High finding\.
 
 1. For **Select Topic** select the name of the SNS Topic you created in Step 1\.
 
-1. Expand **Configure input** and then choose **Input Transformer**\.
+1. Configure the input for the event\.
+   + If you are setting up notifications for Chime or Slack skip to Step 11, the input type defaults to **Matched event**\.
+   + If you are setting up notifications for email via SNS follow the steps below to customize the message sent to your inbox using the following steps: 
 
-1. Copy the following code and paste it into the **Input Path** field\.
+   1. Expand **Configure input** and then choose **Input Transformer**\.
 
-   ```
-   {
-       "severity": "$.detail.severity",
-       "Finding_ID": "$.detail.id",
-       "Finding_Type": "$.detail.type",
-       "region": "$.region",
-       "Finding_description": "$.detail.description"
-   }
-   ```
+   1. Copy the following code and paste it into the **Input Path** field\.
 
-1. Copy the following code and paste it into the **Input Template** field to format the email\.
+      ```
+      {
+          "severity": "$.detail.severity",
+          "Finding_ID": "$.detail.id",
+          "Finding_Type": "$.detail.type",
+          "region": "$.region",
+          "Finding_description": "$.detail.description"
+      }
+      ```
 
-   ```
-   "You have a severity <severity> GuardDuty finding type <Finding_Type> in the <region> region."
-   "Finding Description:"
-   "<Finding_description>. "
-   "For more details open the GuardDuty console at https://console.aws.amazon.com/guardduty/home?region=<region>#/findings?search=id%3D<Finding_ID>"
-   ```
+   1. Copy the following code and paste it into the **Input Template** field to format the email\.
+
+      ```
+      "You have a severity <severity> GuardDuty finding type <Finding_Type> in the <region> region."
+      "Finding Description:"
+      "<Finding_description>. "
+      "For more details open the GuardDuty console at https://console.aws.amazon.com/guardduty/home?region=<region>#/findings?search=id%3D<Finding_ID>"
+      ```
 
 1. Click **Configure Details**\.
 
