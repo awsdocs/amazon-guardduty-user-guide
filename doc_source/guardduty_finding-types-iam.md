@@ -207,7 +207,7 @@ If this activity is unexpected your credentials may be compromised, see [Remedia
 
 #### <a name="recon-iam-maliciousipcaller_full"></a>
 
-This finding informs you that an API operation that can list or describe AWS resources in an account within your environment was invoked from an IP address that is included on an internal threat list\. generates findings based off of third\-party partner threat lists\. The threat list used to generate this finding will be listed in the finding's details\. An attacker might use stolen credentials to perform this type of reconnaissance of your AWS resources in order to find more valuable credentials or determine the capabilities of the credentials they already have\.
+This finding informs you that an API operation that can list or describe AWS resources in an account within your environment was invoked from an IP address that is included on a GuardDuty threat list\. An attacker may use stolen credentials to perform this type of reconnaissance of your AWS resources in order to find more valuable credentials or determine the capabilities of the credentials they already have\.
 
 #### <a name="recon-iam-maliciousipcaller_remediation"></a>
 
@@ -334,6 +334,8 @@ This finding's default severity is Medium\. However, if the API is invoked using
 #### <a name="resourceconsumption-iam-computeresources_full"></a>
 
 This finding is triggered when EC2 instances in the listed account within your AWS environment are launched under suspicious circumstances\. This finding indicates that a specific principal in your AWS environment is exhibiting behavior that is different from the established baseline; for example, if a principal \(AWS account root user, IAM role, or IAM user\) invoked the `RunInstances` API with no prior history of doing so\. This might be an indication of an attacker using stolen credentials to steal compute time \(possibly for cryptocurrency mining or password cracking\)\. It can also be an indication of an attacker using an EC2 instance in your AWS environment and its credentials to maintain access to your account\.
+
+
 
 #### <a name="resourceconsumption-iam-computeresources_remediation"></a>
 

@@ -1,7 +1,7 @@
 # Amazon GuardDuty Amazon GuardDuty User Guide
 
 -----
-*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2021 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -47,7 +47,9 @@ Amazon's trademarks and trade dress may not be used in
    + [Compliance validation for Amazon GuardDuty](compliance-validation.md)
    + [Resilience in Amazon GuardDuty](disaster-recovery-resiliency.md)
    + [Infrastructure security in Amazon GuardDuty](infrastructure-security.md)
-+ [Integration with AWS Security Hub](securityhub-integration.md)
++ [AWS Service Integrations with GuardDuty](guardduty_integrations.md)
+   + [Integration with AWS Security Hub](securityhub-integration.md)
+   + [Integration with Amazon Detective](detective-integration.md)
 + [Suspending or disabling GuardDuty](guardduty_suspend-disable.md)
 + [Subscribing to GuardDuty announcements SNS topic](guardduty_sns.md)
 + [Quotas for Amazon GuardDuty](guardduty_limits.md)

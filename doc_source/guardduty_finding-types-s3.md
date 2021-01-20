@@ -6,17 +6,20 @@ For all S3 Bucket type findings it is recommended that you examine the permissio
 
 **Topics**
 + [Discovery:S3/BucketEnumeration\.Unusual](#discovery-s3-bucketenumerationunusual)
++ [Discovery:S3/MaliciousIPCaller](#discovery-s3-maliciousipcaller)
 + [Discovery:S3/MaliciousIPCaller\.Custom](#discovery-s3-maliciousipcallercustom)
 + [Discovery:S3/TorIPCaller](#discovery-s3-toripcaller)
++ [Exfiltration:S3/MaliciousIPCaller](#exfiltration-s3-maliciousipcaller)
 + [Exfiltration:S3/ObjectRead\.Unusual](#exfiltration-s3-objectreadunusual)
-+ [Impact:S3/PermissionsModification\.Unusual](#impact-s3-permissionsmodificationunusual)
++ [Impact:S3/MaliciousIPCaller](#impact-s3-maliciousipcaller)
 + [Impact:S3/ObjectDelete\.Unusual](#impact-s3-objectdeleteunusual)
++ [Impact:S3/PermissionsModification\.Unusual](#impact-s3-permissionsmodificationunusual)
 + [PenTest:S3/KaliLinux](#pentest-s3-kalilinux)
 + [PenTest:S3/ParrotLinux](#pentest-s3-parrotlinux)
 + [PenTest:S3/PentooLinux](#pentest-s3-pentoolinux)
 + [Policy:S3/AccountBlockPublicAccessDisabled](#policy-s3-accountblockpublicaccessdisabled)
-+ [Policy:S3/BucketBlockPublicAccessDisabled](#policy-s3-bucketblockpublicaccessdisabled)
 + [Policy:S3/BucketAnonymousAccessGranted](#policy-s3-bucketanonymousaccessgranted)
++ [Policy:S3/BucketBlockPublicAccessDisabled](#policy-s3-bucketblockpublicaccessdisabled)
 + [Policy:S3/BucketPublicAccessGranted](#policy-s3-bucketpublicaccessgranted)
 + [Stealth:S3/ServerAccessLoggingDisabled](#stealth-s3-serveraccessloggingdisabled)
 + [UnauthorizedAccess:S3/MaliciousIPCaller\.Custom](#unauthorizedaccess-s3-maliciousipcallercustom)
@@ -38,6 +41,24 @@ This finding's default severity is Medium\. However, if the API is invoked using
 This finding informs you that an IAM entity has invoked an S3 API to discover S3 buckets in your environment, such as `ListBuckets`\. This type of activity is associated with the discovery stage of an attack wherein an attacker is gathering information to determine if your AWS environment is susceptible to a broader attack\. This activity is suspicious because the way the IAM entity invoked the API was unusual\. For example, this IAM entity had no prior history of invoking this type of API, or the API was invoked from an unusual location\.
 
 #### <a name="discovery-s3-bucketenumerationunusual_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected for the associated principal it may indicate the credentials have been exposed or your S3 permissions are not restrictive enough, see [Remediating a Compromised S3 Bucket](guardduty_remediate.md#compromised-s3)\.
+
+## Discovery:S3/MaliciousIPCaller<a name="discovery-s3-maliciousipcaller"></a>
+
+### An S3 API commonly used to discover resources in an AWS environment was invoked from a known malicious IP address\.<a name="discovery-s3-maliciousipcaller_description"></a>
+
+#### <a name="discovery-s3-maliciousipcaller_severity"></a>
+
+**Default severity: High**
+
+#### <a name="discovery-s3-maliciousipcaller_full"></a>
+
+This finding informs you that an S3 API operation was invoked from an IP address that is associated with known malicious activity\. The observed API is commonly associated with the discovery stage of an attack when an adversary is gathering information on your AWS environment\. Examples include, `GetObjectAcl` or `ListObjects`\.
+
+#### <a name="discovery-s3-maliciousipcaller_remediation"></a>
 
 **Remediation recommendations:**
 
@@ -79,6 +100,24 @@ This finding informs you that an S3 API, such as `GetObjectAcl` or `ListObjects`
 
 If this activity is unexpected for the associated principal it may indicate the credentials have been exposed or your S3 permissions are not restrictive enough, see [Remediating a Compromised S3 Bucket](guardduty_remediate.md#compromised-s3)\.
 
+## Exfiltration:S3/MaliciousIPCaller<a name="exfiltration-s3-maliciousipcaller"></a>
+
+### An S3 API commonly used to collect data from an AWS environment was invoked from a known malicious IP address\.<a name="exfiltration-s3-maliciousipcaller_description"></a>
+
+#### <a name="exfiltration-s3-maliciousipcaller_severity"></a>
+
+**Default severity: High**
+
+#### <a name="exfiltration-s3-maliciousipcaller_full"></a>
+
+This finding informs you that an S3 API operation was invoked from an IP address that is associated with known malicious activity\. The observed API is commonly associated with exfiltration tactics where an adversary is is trying to collect data from your network\. Examples include, `GetObject` and `CopyObject`\.
+
+#### <a name="exfiltration-s3-maliciousipcaller_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected for the associated principal it may indicate the credentials have been exposed or your S3 permissions are not restrictive enough, see [Remediating a Compromised S3 Bucket](guardduty_remediate.md#compromised-s3)\.
+
 ## Exfiltration:S3/ObjectRead\.Unusual<a name="exfiltration-s3-objectreadunusual"></a>
 
 ### An IAM entity invoked an S3 API in a suspicious way\.<a name="exfiltration-s3-objectreadunusual_description"></a>
@@ -100,22 +139,19 @@ This finding informs you that a IAM entity in your AWS environment is making API
 
 If this activity is unexpected for the associated principal it may indicate the credentials have been exposed or your S3 permissions are not restrictive enough, see [Remediating a Compromised S3 Bucket](guardduty_remediate.md#compromised-s3)\.
 
-## Impact:S3/PermissionsModification\.Unusual<a name="impact-s3-permissionsmodificationunusual"></a>
+## Impact:S3/MaliciousIPCaller<a name="impact-s3-maliciousipcaller"></a>
 
-### An IAM entity invoked an API to modify permissions on one or more S3 resources\.<a name="impact-s3-permissionsmodificationunusual_description"></a>
+### An S3 API commonly used to tamper with data or processes in an AWS environment was invoked from a known malicious IP address\.<a name="impact-s3-maliciousipcaller_description"></a>
 
-#### <a name="impact-s3-permissionsmodificationunusual_severity"></a>
+#### <a name="impact-s3-maliciousipcaller_severity"></a>
 
-**Default severity: Medium\***
+**Default severity: High**
 
-**Note**  
-This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
+#### <a name="impact-s3-maliciousipcaller_full"></a>
 
-#### <a name="impact-s3-permissionsmodificationunusual_full"></a>
+This finding informs you that an S3 API operation was invoked from an IP address that is associated with known malicious activity\. The observed API is commonly associated with impact tactics where an adversary is trying manipulate, interrupt, or destroy data within your AWS environment\. Examples include, `PutObject` or `PutObjectAcl`\.
 
-This finding informs you that an IAM entity is making API calls designed to modify the permissions on one or more buckets or objects in your AWS environment\. This action may be performed by an attacker to allow information to be shared outside of the account\. This activity is suspicious because the way the IAM entity invoked the API was unusual\. For example, this IAM entity had no prior history of invoking this type of API, or the API was invoked from an unusual location\.
-
-#### <a name="impact-s3-permissionsmodificationunusual_remediation"></a>
+#### <a name="impact-s3-maliciousipcaller_remediation"></a>
 
 **Remediation recommendations:**
 
@@ -137,6 +173,27 @@ This finding's default severity is Medium\. However, if the API is invoked using
 This finding informs you that a specific IAM entity in your AWS environment is making API calls designed to delete data in the listed S3 bucket by deleting the bucket itself\. This activity is suspicious because the way the IAM entity invoked the API was unusual\. For example, this IAM entity had no prior history of invoking this type of API, or the API was invoked from an unusual location\.
 
 #### <a name="impact-s3-objectdeleteunusual_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected for the associated principal it may indicate the credentials have been exposed or your S3 permissions are not restrictive enough, see [Remediating a Compromised S3 Bucket](guardduty_remediate.md#compromised-s3)\.
+
+## Impact:S3/PermissionsModification\.Unusual<a name="impact-s3-permissionsmodificationunusual"></a>
+
+### An IAM entity invoked an API to modify permissions on one or more S3 resources\.<a name="impact-s3-permissionsmodificationunusual_description"></a>
+
+#### <a name="impact-s3-permissionsmodificationunusual_severity"></a>
+
+**Default severity: Medium\***
+
+**Note**  
+This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
+
+#### <a name="impact-s3-permissionsmodificationunusual_full"></a>
+
+This finding informs you that an IAM entity is making API calls designed to modify the permissions on one or more buckets or objects in your AWS environment\. This action may be performed by an attacker to allow information to be shared outside of the account\. This activity is suspicious because the way the IAM entity invoked the API was unusual\. For example, this IAM entity had no prior history of invoking this type of API, or the API was invoked from an unusual location\.
+
+#### <a name="impact-s3-permissionsmodificationunusual_remediation"></a>
 
 **Remediation recommendations:**
 
@@ -216,26 +273,6 @@ Typically, S3 Block Public Access is turned off in an account to allow public ac
 
 If this activity is unexpected for the associated principal it may indicate the credentials have been exposed or your S3 permissions are not restrictive enough, see [Remediating a Compromised S3 Bucket](guardduty_remediate.md#compromised-s3)\.
 
-## Policy:S3/BucketBlockPublicAccessDisabled<a name="policy-s3-bucketblockpublicaccessdisabled"></a>
-
-### An IAM entity invoked an API used to disable S3 block public access on a bucket\.<a name="policy-s3-bucketblockpublicaccessdisabled_description"></a>
-
-#### <a name="policy-s3-bucketblockpublicaccessdisabled_severity"></a>
-
-**Default severity: Low**
-
-#### <a name="policy-s3-bucketblockpublicaccessdisabled_full"></a>
-
-This finding informs you that Block Public Access was disabled for the listed S3 bucket\. When enabled, S3 Block Public Access settings are used to filter the policies or access control lists \(ACLs\) applied to buckets as a security measure to prevent inadvertent public exposure of data\. 
-
-Typically, S3 Block Public Access is turned off on a bucket to allow public access to the bucket or to the objects within\. When S3 Block Public Access is disabled for a bucket, access to the bucket is controlled by the policies or ACLs applied to it\. This does not mean that the bucket is shared publicly, but you should audit the policies and ACLs applied to the bucket to confirm that appropriate permissions are applied\.
-
-#### <a name="policy-s3-bucketblockpublicaccessdisabled_remediation"></a>
-
-**Remediation recommendations:**
-
-If this activity is unexpected for the associated principal it may indicate the credentials have been exposed or your S3 permissions are not restrictive enough, see [Remediating a Compromised S3 Bucket](guardduty_remediate.md#compromised-s3)\.
-
 ## Policy:S3/BucketAnonymousAccessGranted<a name="policy-s3-bucketanonymousaccessgranted"></a>
 
 ### An IAM principal has granted access to an S3 bucket to the internet by changing bucket policies or ACLs\.<a name="policy-s3-bucketanonymousaccessgranted_description"></a>
@@ -252,6 +289,26 @@ This finding informs you that the listed S3 bucket has been made publicly access
 If a bucket's ACLs or bucket policies are configured to explicitly deny or to deny all, this finding cannot be generated for that bucket\.
 
 #### <a name="policy-s3-bucketanonymousaccessgranted_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected for the associated principal it may indicate the credentials have been exposed or your S3 permissions are not restrictive enough, see [Remediating a Compromised S3 Bucket](guardduty_remediate.md#compromised-s3)\.
+
+## Policy:S3/BucketBlockPublicAccessDisabled<a name="policy-s3-bucketblockpublicaccessdisabled"></a>
+
+### An IAM entity invoked an API used to disable S3 block public access on a bucket\.<a name="policy-s3-bucketblockpublicaccessdisabled_description"></a>
+
+#### <a name="policy-s3-bucketblockpublicaccessdisabled_severity"></a>
+
+**Default severity: Low**
+
+#### <a name="policy-s3-bucketblockpublicaccessdisabled_full"></a>
+
+This finding informs you that Block Public Access was disabled for the listed S3 bucket\. When enabled, S3 Block Public Access settings are used to filter the policies or access control lists \(ACLs\) applied to buckets as a security measure to prevent inadvertent public exposure of data\. 
+
+Typically, S3 Block Public Access is turned off on a bucket to allow public access to the bucket or to the objects within\. When S3 Block Public Access is disabled for a bucket, access to the bucket is controlled by the policies or ACLs applied to it\. This does not mean that the bucket is shared publicly, but you should audit the policies and ACLs applied to the bucket to confirm that appropriate permissions are applied\.
+
+#### <a name="policy-s3-bucketblockpublicaccessdisabled_remediation"></a>
 
 **Remediation recommendations:**
 

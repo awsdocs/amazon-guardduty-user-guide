@@ -44,6 +44,9 @@ You can add the following statement to the end of an IAM policy to grant these p
 }
 ```
 
+**Important**  
+These actions are not included in the **AmazonGuardDutyFullAccess** managed policy\.
+
 Additionally, if you wish to designate your AWS Organizations management account as the GuardDuty delegated administrator that entity will need `CreateServiceLinkedRole` permissions to initialize GuardDuty\. This can be added to an IAM policy using the following statement, replacing the account ID with the ID of your organization management account:
 
 ```
@@ -94,6 +97,8 @@ If you remove the delegated administrator, all associated member accounts are re
 
 ### Step 2 \- add existing organization accounts as members<a name="guardduty_add_orgs_accounts"></a>
 
+
+
 **Important**  
 When you add an account as a member, GuardDuty is automatically enabled in that account in the current Region\. This behaviour differs from the invitation method, in which GuardDuty must be enabled prior to the account being added as a member\.
 
@@ -108,11 +113,14 @@ You must add your organization members in each Region to enable GuardDuty for th
 1. Select the account or accounts that you want to add as members by checking the box next to the account ID\.
 **Note**  
 You can enable GuardDuty in the current Region for all organization accounts by selecting **enable** in the banner at the top of the page\. This action also triggers the *Auto\-Enable* feature that will enable GuardDuty in any future accounts added to your organization\.  
+  
  Alternately, you can use the **filter** field to filter by **Relationship status: Not a member**, and then select every account that does not have GuardDuty enabled in the current Region\.
 
 1. Choose **Actions** then choose **Add member**\.
 
 1. Confirm that you want to add as members the number of accounts selected\. The **Status** for the accounts will change to **Enabled**\.
+
+   
 
 1. \(Recommended\) Repeat these steps in each AWS Region to ensure that your delegated administrator can manage findings for member accounts in all Regions\.
 

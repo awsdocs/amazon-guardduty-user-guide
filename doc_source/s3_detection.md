@@ -75,6 +75,8 @@ This functionality is only available to masters of GuardDuty members incorporate
 
 1. Once Auto\-enable for GuardDuty is on, you can enable S3 protection for your new members in addition to enabling GuardDuty by selecting the **S3 Protection** toggle icon\. Choose **Update Settings** to confirm\.
 
+
+
 ### Enable or disable S3 protection for member accounts \(Console\)<a name="s3-disable-member_console"></a>
 
 ### To enable S3 protection for all accounts

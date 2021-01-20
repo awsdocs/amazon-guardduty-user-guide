@@ -115,21 +115,46 @@ By default, access to the GuardDuty resources \(detector, trusted IP lists, thre
 AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. These *managed policies* grant necessary permissions for common use cases so that you can avoid having to investigate which permissions are needed\. For more information, see [AWS managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
 
 The following AWS managed policies, which you can attach to users in your account, are specific to GuardDuty:
-+ **AmazonGuardDutyFullAccess ** – provides access to all of GuardDuty functionality\. However, when it comes to working with trusted IP lists and threat lists in GuardDuty, this managed policy provides identities with only limited access\. More specifically, an identity with the **AmazonGuardDutyFullAccess** managed policy attached can only rename and deactivate uploaded trusted IP lists and threat lists\.
-
-   To grant various identities full access to working with trusted IP lists and threat lists \(in addition to renaming and deactivating, this includes uploading, activating, deleting, and updating the location of the lists\), make sure that the following actions are present in the permissions policy attached to an IAM user, group, or role: 
-
-  ```
-  {
-      "Effect": "Allow",
-      "Action": [
-          "iam:PutRolePolicy",
-          "iam:DeleteRolePolicy"
-      ],
-      "Resource": "arn:aws:iam::123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
-  }
-  ```
 + **AmazonGuardDutyReadOnlyAccess ** – Provides read\-only access to GuardDuty\. 
++ **AmazonGuardDutyFullAccess ** – provides access to all of GuardDuty functionality\. However, some GuardDuty functionality is dependant on access to actions from other AWS services\. Review the following scenarios to determine what policy additions must be added to grant access\.
+  + **Granting full access to work with trusted IP and threat lists in GuardDuty**
+
+    The **AmazonGuardDutyFullAccess** managed policy can only rename and deactivate uploaded trusted IP lists and threat lists\.
+
+     To grant various identities full access to working with trusted IP lists and threat lists \(in addition to renaming and deactivating, this includes uploading, activating, deleting, and updating the location of the lists\), make sure that the following policy additions are present in the permissions policy attached to an IAM user, group, or role: 
+
+    ```
+    {
+        "Effect": "Allow",
+        "Action": [
+            "iam:PutRolePolicy",
+            "iam:DeleteRolePolicy"
+        ],
+        "Resource": "arn:aws:iam::123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
+    }
+    ```
+  + **Granting access to designate an account within your organization as a delegated administrator**
+
+    The **AmazonGuardDutyFullAccess** managed policy cannot designate a delegated administrator\.
+
+     To grant various identities the ability to designate a delegated administrator, make sure that the following policy additions are present in the permissions policy attached to an IAM user, group, or role: 
+
+    ```
+    {
+        "Effect": "Allow",
+        "Action": [
+            "guardduty:EnableOrganizationAdminAccount",
+            "organizations:EnableAWSServiceAccess",
+            "organizations:RegisterDelegatedAdministrator",
+            "organizations:ListDelegatedAdministrators",
+            "organizations:ListAWSServiceAccessForOrganization",
+            "organizations:DescribeOrganizationalUnit",
+            "organizations:DescribeAccount",
+            "organizations:DescribeOrganization"
+        ],
+        "Resource": "*"
+    }
+    ```
 
 ### Using a custom IAM policy to grant full access to GuardDuty<a name="guardduty_allow"></a>
 

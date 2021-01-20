@@ -60,76 +60,81 @@ For some GuardDuty finding types Security Hub assigns different ASFF finding nam
 
 |  GuardDuty finding type  |  ASFF finding type  | 
 | --- | --- | 
+|  Backdoor:EC2/C&CActivity\.B  |  TTPs/Command and Control/Backdoor:EC2\-C&CActivity\.B  | 
 |  Backdoor:EC2/C&CActivity\.B\!DNS  |  TTPs/Command and Control/Backdoor:EC2\-C&CActivity\.B\!DNS  | 
-|  Backdoor:EC2/DenialOfService\.Dns  |  Effects/Denial of Service/Backdoor:EC2\-DenialOfService\.Tcp  | 
-|  Backdoor:EC2/DenialOfService\.Tcp  |  Effects/Denial of Service/Backdoor:EC2\-DenialOfService\.Udp  | 
-|  Backdoor:EC2/DenialOfService\.Udp  |  Effects/Denial of Service/Backdoor:EC2\-DenialOfService\.Dns  | 
-|  Backdoor:EC2/DenialOfService\.UdpOnTcpPorts  |  Effects/Denial of Service/Backdoor:EC2\-DenialOfService\.UdpOnTcpPorts  | 
-|  Backdoor:EC2/DenialOfService\.UnusualProtocol  |  Effects/Denial of Service/Backdoor:EC2\-DenialOfService\.UnusualProtocol  | 
-|  Backdoor:EC2/Spambot  |  TTPs/Command and Control/Backdoor:EC2\-Spambot,  Unusual Behaviors/ VM/Backdoor:EC2\-Spambot  | 
+|  Backdoor:EC2/DenialOfService\.Dns  |  TTPs/Command and Control/Backdoor:EC2\-DenialOfService\.Dns  | 
+|  Backdoor:EC2/DenialOfService\.Tcp  |  TTPs/Command and Control/Backdoor:EC2\-DenialOfService\.Tcp  | 
+|  Backdoor:EC2/DenialOfService\.Udp  |  TTPs/Command and Control/Backdoor:EC2\-DenialOfService\.Udp  | 
+|  Backdoor:EC2/DenialOfService\.UdpOnTcpPorts  |  TTPs/Command and Control/Backdoor:EC2\-DenialOfService\.UdpOnTcpPorts  | 
+|  Backdoor:EC2/DenialOfService\.UnusualProtocol  |  TTPs/Command and Control/Backdoor:EC2\-DenialOfService\.UnusualProtocol  | 
+|  Backdoor:EC2/Spambot  |  TTPs/Command and Control/Backdoor:EC2\-Spambot  | 
 |  Behavior:EC2/NetworkPortUnusual  |  Unusual Behaviors/VM/Behavior:EC2\-NetworkPortUnusual  | 
 |  Behavior:EC2/TrafficVolumeUnusual  |  Unusual Behaviors/VM/Behavior:EC2\-TrafficVolumeUnusual  | 
-|  CryptoCurrency:EC2/BitcoinTool\.B  |  TTPs/Command and Control/CryptoCurrency:EC2\-BitcoinTool\.B,  Effects/Resource Consumption/CryptoCurrency:EC2\-BitcoinTool\.B   | 
-|  CryptoCurrency:EC2/BitcoinTool\.B\!DNS  |  TTPs/Command and Control/CryptoCurrency:EC2\-BitcoinTool\.B\!DNS,  Effects/Resource Consumption/CryptoCurrency:EC2\-BitcoinTool\.B\!DNS  | 
-|  Recon:EC2/PortProbeEMRUnprotectedPort  |  TTPs/Initial Access/Recon:EC2\-PortProbeEMRUnprotectedPort,  Software and Configuration Checks/Network Reachability/Recon:EC2\-PortProbeEMRUnprotectedPort  | 
+|  CryptoCurrency:EC2/BitcoinTool\.B  |  TTPs/Command and Control/CryptoCurrency:EC2\-BitcoinTool\.B  | 
+|  CryptoCurrency:EC2/BitcoinTool\.B\!DNS  |  TTPs/Command and Control/CryptoCurrency:EC2\-BitcoinTool\.B\!DNS  | 
+|  Discovery:S3/BucketEnumeration\.Unusual  |  TTPs/Discovery:S3\-BucketEnumeration\.Unusual  | 
+|  Discovery:S3/MaliciousIPCaller\.Custom  |  TTPs/Discovery:S3\-MaliciousIPCaller\.Custom  | 
+|  Discovery:S3/TorIPCaller  |  TTPs/Discovery:S3\-TorIPCaller  | 
+|  Discovery:S3\-MaliciousIPCaller  |  TTPs/Discovery:S3\-MaliciousIPCaller  | 
+|  Exfiltration:S3/ObjectRead\.Unusual  |  TTPs/Exfiltration:S3\-ObjectRead\.Unusual  | 
+|  Exfiltration:S3\-MaliciousIPCaller  |  TTPs/Exfiltration:S3\-MaliciousIPCaller  | 
+|  Impact:EC2/PortSweep  |  TTPs/Impact/Impact:EC2\-PortSweep  | 
+|  Impact:EC2/WinRMBruteForce  |  TTPs/Impact/Impact:EC2\-WinRMBruteForce  | 
+|  Impact:S3/ObjectDelete\.Unusual  |  TTPs/Impact:S3\-ObjectDelete\.Unusual  | 
+|  Impact:S3/PermissionsModification\.Unusual  |  TTPs/Impact:S3\-PermissionsModification\.Unusual  | 
+|  Impact:S3\-MaliciousIPCaller  |  TTPs/Impact:S3\-MaliciousIPCaller  | 
+|  PenTest:IAMUser/KaliLinux  |  TTPs/PenTest:IAMUser/KaliLinux  | 
+|  PenTest:IAMUser/ParrotLinux  |  TTPs/PenTest:IAMUser/ParrotLinux  | 
+|  PenTest:IAMUser/PentooLinux  |  TTPs/PenTest:IAMUser/PentooLinux  | 
+|  PenTest:S3/KaliLinux  |  TTPs/PenTest:S3\-KaliLinux  | 
+|  PenTest:S3/ParrotLinux  |  TTPs/PenTest:S3\-ParrotLinux  | 
+|  PenTest:S3/PentooLinux  |  TTPs/PenTest:S3\-PentooLinux  | 
+|  Persistence:IAMUser/NetworkPermissions  |  TTPs/Persistence/Persistence:IAMUser\-NetworkPermissions  | 
+|  Persistence:IAMUser/ResourcePermissions  |  TTPs/Persistence/Persistence:IAMUser\-ResourcePermissions  | 
+|  Persistence:IAMUser/UserPermissions  |  TTPs/Persistence/Persistence:IAMUser\-UserPermissions  | 
+|  Policy:IAMUser/RootCredentialUsage  |  TTPs/Policy:IAMUser\-RootCredentialUsage  | 
+|  Policy:S3/AccountBlockPublicAccessDisabled  |  TTPs/Policy:S3\-AccountBlockPublicAccessDisabled  | 
+|  Policy:S3/BucketAnonymousAccessGranted  |  TTPs/Policy:S3\-BucketAnonymousAccessGranted  | 
+|  Policy:S3/BucketBlockPublicAccessDisabled  |  Effects/Data Exposure/Policy:S3\-BucketBlockPublicAccessDisabled  | 
+|  Policy:S3/BucketPublicAccessGranted  |  TTPs/Policy:S3\-BucketPublicAccessGranted  | 
+|  PrivilegeEscalation:IAMUser/AdministrativePermissions  |  TTPs/Privilege Escalation/PrivilegeEscalation:IAMUser\-AdministrativePermissions  | 
+|  Recon:EC2/PortProbeEMRUnprotectedPort  |  TTPs/Discovery/Recon:EC2\-PortProbeEMRUnprotectedPort  | 
 |  Recon:EC2/PortProbeUnprotectedPort  |  TTPs/Discovery/Recon:EC2\-PortProbeUnprotectedPort  | 
 |  Recon:EC2/Portscan  |  TTPs/Discovery/Recon:EC2\-Portscan  | 
+|  Recon:IAMUser/MaliciousIPCaller  |  TTPs/Discovery/Recon:IAMUser\-MaliciousIPCaller  | 
+|  Recon:IAMUser/MaliciousIPCaller\.Custom  |  TTPs/Discovery/Recon:IAMUser\-MaliciousIPCaller\.Custom  | 
+|  Recon:IAMUser/NetworkPermissions  |  TTPs/Discovery/Recon:IAMUser\-NetworkPermissions  | 
+|  Recon:IAMUser/ResourcePermissions  |  TTPs/Discovery/Recon:IAMUser\-ResourcePermissions  | 
+|  Recon:IAMUser/TorIPCaller  |  TTPs/Discovery/Recon:IAMUser\-TorIPCaller  | 
+|  Recon:IAMUser/UserPermissions  |  TTPs/Discovery/Recon:IAMUser\-UserPermissions  | 
+|  ResourceConsumption:IAMUser/ComputeResources  |  Unusual Behaviors/User/ResourceConsumption:IAMUser\-ComputeResources  | 
+|  Stealth:IAMUser/CloudTrailLoggingDisabled  |  TTPs/Defense Evasion/Stealth:IAMUser\-CloudTrailLoggingDisabled  | 
+|  Stealth:IAMUser/LoggingConfigurationModified  |  TTPs/Defense Evasion/Stealth:IAMUser\-LoggingConfigurationModified  | 
+|  Stealth:IAMUser/PasswordPolicyChange  |  TTPs/Defense Evasion/Stealth:IAMUser\-PasswordPolicyChange  | 
+|  Stealth:S3/ServerAccessLoggingDisabled  |  TTPs/Defense Evasion/Stealth:S3\-ServerAccessLoggingDisabled  | 
 |  Trojan:EC2/BlackholeTraffic  |  TTPs/Command and Control/Trojan:EC2\-BlackholeTraffic  | 
 |  Trojan:EC2/BlackholeTraffic\!DNS  |  TTPs/Command and Control/Trojan:EC2\-BlackholeTraffic\!DNS  | 
 |  Trojan:EC2/DGADomainRequest\.B  |  TTPs/Command and Control/Trojan:EC2\-DGADomainRequest\.B  | 
 |  Trojan:EC2/DGADomainRequest\.C\!DNS  |  TTPs/Command and Control/Trojan:EC2\-DGADomainRequest\.C\!DNS  | 
-|  Trojan:EC2/DNSDataExfiltration  |  Effects/Data Exfiltration/Trojan:EC2\-DNSDataExfiltration  | 
-|  Trojan:EC2/DriveBySourceTraffic\!DNS  |  TTPs/Command and Control/Trojan:EC2\-PhishingDomainRequest\!DNS  | 
+|  Trojan:EC2/DNSDataExfiltration  |  TTPs/Command and Control/Trojan:EC2\-DNSDataExfiltration\!DNS  | 
+|  Trojan:EC2/DriveBySourceTraffic\!DNS  |  TTPs/Initial Access/Trojan:EC2\-DriveBySourceTraffic\!DNS  | 
 |  Trojan:EC2/DropPoint  |  Effects/Data Exfiltration/Trojan:EC2\-DropPoint  | 
-|  Trojan:EC2/DropPoint\!DNS  |  TTPs/Command and Control/Trojan:EC2\-BlackholeTraffic\!DNS  | 
+|  Trojan:EC2/DropPoint\!DNS  |  Effects/Data Exfiltration/Trojan:EC2\-DropPoint\!DNS  | 
 |  Trojan:EC2/PhishingDomainRequest\!DNS  |  TTPs/Command and Control/Trojan:EC2\-PhishingDomainRequest\!DNS  | 
 |  UnauthorizedAccess:EC2/MaliciousIPCaller\.Custom  |  TTPs/Command and Control/UnauthorizedAccess:EC2\-MaliciousIPCaller\.Custom  | 
-|  UnauthorizedAccess:EC2/MetadataDNSRebind  |  Software and Configuration Checks/AWS Security Best Practices/UnauthorizedAccess:EC2\-MetadataDNSRebind  | 
+|  UnauthorizedAccess:EC2/MetadataDNSRebind  |  TTPs/UnauthorizedAccess:EC2\-MetadataDNSRebind  | 
 |  UnauthorizedAccess:EC2/RDPBruteForce  |  TTPs/Initial Access/UnauthorizedAccess:EC2\-RDPBruteForce  | 
 |  UnauthorizedAccess:EC2/SSHBruteForce  |  TTPs/Initial Access/UnauthorizedAccess:EC2\-SSHBruteForce  | 
-|  UnauthorizedAccess:EC2/TorClient  |  Effects/Data Exfiltration/UnauthorizedAccess:EC2\-TorClient,  TTPs/Command and Control/UnauthorizedAccess:EC2\-TorClient  | 
-|  UnauthorizedAccess:EC2/TorIPCaller  |  TTPs/Command and Control/UnauthorizedAccess:EC2\-TorIPCaller  | 
-|  UnauthorizedAccess:EC2/TorRelay  |   Effects/Resource Consumption/UnauthorizedAccess:EC2\-TorRelay  | 
-|  PenTest:IAMUser/KaliLinux  |  TTPs/Discovery/PenTest:IAMUser\-KaliLinux  | 
-|  PenTest:IAMUser/ParrotLinux  |  TTPs/Discovery/PenTest:IAMUser\-ParrotLinux  | 
-|  PenTest:IAMUser/PentooLinux  |  TTPs/Discovery/PenTest:IAMUser\-PenTooLinux  | 
-|  Persistence:IAMUser/NetworkPermissions  |  TTPs/Persistence/Persistence:IAMUser\-NetworkPermissions,  Unusual Behaviors/User/Persistence:IAMUser\-NetworkPermissions  | 
-|  Persistence:IAMUser/ResourcePermissions  |  TTPs/Persistence/Persistence:IAMUser\-ResourcePermissions,  Unusual Behaviors/User/Persistence:IAMUser\-ResourcePermissions  | 
-|  Persistence:IAMUser/UserPermissions  |  TTPs/Persistence/Persistence:IAMUser\-UserPermissions,  Unusual Behaviors/User/Recon:IAMUser\-UserPermissions  | 
-|  Policy:IAMUser/RootCredentialUsage  |  Software and Configuration Checks/AWS Security Best Practices/Policy:IAMUser\-RootCredentialUsage  | 
-|  PrivilegeEscalation:IAMUser/AdministrativePermissions  |  TTPs/PrivilegeEscalation/PrivilegeEscalation:IAMUser\-AdministrativePermissions  | 
-|  Recon:IAMUser/MaliciousIPCaller  |  TTPs/Discovery/Recon:IAMUser\-MaliciousIPCaller  | 
-|  Recon:IAMUser/MaliciousIPCaller\.Custom  |  TTPs/Discovery/Recon:IAMUser\-MaliciousIPCaller\.Custom  | 
-|  Recon:IAMUser/NetworkPermissions  |  TTPs/Discovery/Recon:IAMUser\-NetworkPermissions,  Unusual Behaviors/User/Recon:IAMUser\-NetworkPermissions  | 
-|  Recon:IAMUser/ResourcePermissions  |  TTPs/Discovery/Recon:IAMUser\-ResourcePermissions,  Unusual Behaviors/User/Recon:IAMUser\-ResourcePermissions  | 
-|  Recon:IAMUser/TorIPCaller  |  TTPs/Discovery/Recon:IAMUser\-TorIPCaller  | 
-|  Recon:IAMUser/UserPermissions  |  TTPs/Discovery/Recon:IAMUser\-UserPermissions, Unusual Behaviors/User/Recon:IAMUser\-UserPermissions  | 
-|  ResourceConsumption:IAMUser/ComputeResources  |  Unusual Behaviors/User/ResourceConsumption:IAMUser\-ComputeResources,  Effects/Resource Consumption/ResourceConsumption:IAMUser\-ComputeResources  | 
-|  Stealth:IAMUser/CloudTrailLoggingDisabled  |  TTPs/Defense Evasion/Stealth:IAMUser\-CloudTrailLoggingDisabled  | 
-|  Stealth:IAMUser/LoggingConfigurationModified  |  TTPs/Defense Evasion/Stealth:IAMUser\-LoggingConfigurationModified,  Unusual Behaviors/User/Stealth:IAMUser\-LoggingConfigurationModified  | 
-|  Stealth:IAMUser/PasswordPolicyChange  |  TTPs/Defense Evasion/Stealth:IAMUser\-PasswordPolicyChange  | 
+|  UnauthorizedAccess:EC2/TorClient  |  Effects/Resource Consumption/UnauthorizedAccess:EC2\-TorClient  | 
+|  UnauthorizedAccess:EC2/TorRelay  |  Effects/Resource Consumption/UnauthorizedAccess:EC2\-TorRelay  | 
 |  UnauthorizedAccess:IAMUser/ConsoleLogin  |  Unusual Behaviors/User/UnauthorizedAccess:IAMUser\-ConsoleLogin  | 
-|  UnauthorizedAccess:IAMUser/ConsoleLoginSuccess\.B  |  TTPs//UnauthorizedAccess:IAMUser\-ConsoleLoginSuccess\.B  | 
+|  UnauthorizedAccess:IAMUser/ConsoleLoginSuccess\.B  |  TTPs/UnauthorizedAccess:IAMUser\-ConsoleLoginSuccess\.B  | 
 |  UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration  |  Effects/Data Exfiltration/UnauthorizedAccess:IAMUser\-InstanceCredentialExfiltration  | 
-|  UnauthorizedAccess:IAMUser/MaliciousIPCaller  |  TTPs//UnauthorizedAccess:IAMUser\-MaliciousIPCaller  | 
-|  UnauthorizedAccess:IAMUser/MaliciousIPCaller\.Custom  |  TTPs//UnauthorizedAccess:IAMUser\-MaliciousIPCaller\.Custom  | 
+|  UnauthorizedAccess:IAMUser/MaliciousIPCaller  |  TTPs/UnauthorizedAccess:IAMUser\-MaliciousIPCaller  | 
+|  UnauthorizedAccess:IAMUser/MaliciousIPCaller\.Custom  |  TTPs/UnauthorizedAccess:IAMUser\-MaliciousIPCaller\.Custom  | 
 |  UnauthorizedAccess:IAMUser/TorIPCaller  |  TTPs/Command and Control/UnauthorizedAccess:IAMUser\-TorIPCaller  | 
-|  Discovery:S3/BucketEnumeration\.Unusual  |  TTPs/Discovery/Recon:S3\-BucketEnumeration, Unusual Behaviours/User/Recon:S3\-BucketEnumeration  | 
-|  Discovery:S3/MaliciousIPCaller\.Custom  |  TTPs/Discovery/Recon:S3\-MaliciousIPCaller\.Custom  | 
-|  Discovery:S3/TorIPCaller  |  TTPs/Discovery/Recon:S3\-TorIpCaller  | 
-|  Exfiltration:S3/ObjectRead\.Unusual  |  Effects/Data Exfiltration/UnauthorizedAccess:S3\-ObjectRead,Unusual Behaviours/User/Data Exfiltration/UnauthorizedAccess:S3\-ObjectRead | 
-|  Impact:S3/PermissionsModification\.Unusual  |  TTPs/Permission Escalation/Impact:S3\-PermissionsModification, Unusual Behaviours/User/Permission Escalation/Impact:S3\-PermissionsModification  | 
-|  Impact:S3/ObjectDelete\.Unusual  |  Effects/Data Destruction/Impact:S3\-ObjectDelete, Unusual Behaviours/User/Data Destruction/Impact:S3\-ObjectDelete  | 
-|  PenTest:S3/KaliLinux  | TTPs/PenTest:S3/KaliLinux | 
-|  PenTest:S3/ParrotLinux  |  TTPs/PenTest:S3/ParrotLinux  | 
-|  PenTest:S3/PentooLinux  |  TTPs/PenTest:S3/PentoolLinux  | 
-|  Policy:S3/AccountBlockPublicAccessDisabled  |  Effects/Data Exposure/Policy:IAMUser\-S3BlockPublicAccessDisabled  | 
-|  Policy:S3/BucketBlockPublicAccessDisabled  |  Effects/Data Exposure/Policy:S3\-BucketBlockPublicAccessDisabled  | 
-|  Policy:S3/BucketAnonymousAccessGranted  |  Effects/Data Exposure/Policy:S3\-BucketAnonymousAccessGranted  | 
-|  Policy:S3/BucketPublicAccessGranted  |  Effects/Data Exposure/Policy:S3\-BucketPublicAccessGranted  | 
-|  Stealth:S3/ServerAccessLoggingDisabled  |  Software and Configuration Checks/AWS Security Best Practices/Stealth:IAMUser\-S3ServerAccessLoggingDisabled  | 
 |  UnauthorizedAccess:S3/MaliciousIPCaller\.Custom  |  TTPs/UnauthorizedAccess:S3\-MaliciousIPCaller\.Custom  | 
-|  UnauthorizedAccess:S3/TorIPCaller  |  TTPs/Command and Control/UnauthorizedAccess:S3\-TorIPCaller  | 
+|  UnauthorizedAccess:S3/TorIPCaller  |  TTPs/UnauthorizedAccess:S3\-TorIPCaller  | 
 
 ## Typical finding from GuardDuty<a name="securityhub-integration-finding-example"></a>
 

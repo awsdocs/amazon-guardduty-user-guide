@@ -8,6 +8,7 @@ Instance details may be missing for some ec2 findings if the instance has alread
 For all instance type findings, it is recommended that you examine the resource in question to determine if it is behaving in an expected manner\. If the activity is authorized, you can use Suppression Rules or Trusted IP lists to prevent false positive notifications for that resource\. If the activity is unexpected, the security best practice is to assume the instance has been compromised and take the actions detailed in [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
 
 **Topics**
++ [Backdoor:EC2/C&CActivity\.B](#backdoor-ec2-ccactivityb)
 + [Backdoor:EC2/C&CActivity\.B\!DNS](#backdoor-ec2-ccactivitybdns)
 + [Backdoor:EC2/DenialOfService\.Dns](#backdoor-ec2-denialofservicedns)
 + [Backdoor:EC2/DenialOfService\.Tcp](#backdoor-ec2-denialofservicetcp)
@@ -39,6 +40,24 @@ For all instance type findings, it is recommended that you examine the resource 
 + [UnauthorizedAccess:EC2/SSHBruteForce](#unauthorizedaccess-ec2-sshbruteforce)
 + [UnauthorizedAccess:EC2/TorClient](#unauthorizedaccess-ec2-torclient)
 + [UnauthorizedAccess:EC2/TorRelay](#unauthorizedaccess-ec2-torrelay)
+
+## Backdoor:EC2/C&CActivity\.B<a name="backdoor-ec2-ccactivityb"></a>
+
+### An EC2 instance is querying an IP that is associated with a known command and control server\.<a name="backdoor-ec2-ccactivityb_description"></a>
+
+#### <a name="backdoor-ec2-ccactivityb_severity"></a>
+
+**Default severity: High**
+
+#### <a name="backdoor-ec2-ccactivityb_full"></a>
+
+This finding informs you that the listed instance within your AWS environment is querying an IP associated with a known command and control \(C&C\) server\. The listed instance might be compromised\. Command and control servers are computers that issue commands to members of a botnet\. A botnet is a collection of internet\-connected devices which might include PCs, servers, mobile devices, and Internet of Things devices, that are infected and controlled by a common type of malware\. Botnets are often used to distribute malware and gather misappropriated information, such as credit card numbers\. Depending on the purpose and structure of the botnet, the C&C server might also issue commands to begin a distributed denial\-of\-service \(DDoS\) attack\.
+
+#### <a name="backdoor-ec2-ccactivityb_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Backdoor:EC2/C&CActivity\.B\!DNS<a name="backdoor-ec2-ccactivitybdns"></a>
 
@@ -277,7 +296,10 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 #### <a name="impact-ec2-winrmbruteforce_severity"></a>
 
-**Default severity: High**
+**Default severity: Low\***
+
+**Note**  
+This finding's severity is low if your EC2 instance was the target of a brute force attack\. This finding's severity is high if your EC2 instance is the actor being used to perform the brute force attack\.
 
 #### <a name="impact-ec2-winrmbruteforce_full"></a>
 
@@ -494,7 +516,7 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 #### <a name="trojan-ec2-droppointdns_severity"></a>
 
-**Default severity: High**
+**Default severity: Medium**
 
 #### <a name="trojan-ec2-droppointdns_full"></a>
 
@@ -534,7 +556,7 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 #### <a name="unauthorizedaccess-ec2-maliciousipcallercustom_full"></a>
 
-This finding informs you that an EC2 instance in your AWS environment is communicating with an IP address included on a threat list that you uploaded\. In GuardDuty, a threat list consists of known malicious IP addresses\. GuardDuty generates findings based on uploaded threat lists\. This can indicate unauthorized access to your AWS resources\.
+This finding informs you that an EC2 instance in your AWS environment is communicating with an IP address included on a threat list that you uploaded\. In GuardDuty, a threat list consists of known malicious IP addresses\. GuardDuty generates findings based on uploaded threat lists\. The threat list used to generate this finding will be listed in the finding's details\.
 
 #### <a name="unauthorizedaccess-ec2-maliciousipcallercustom_remediation"></a>
 

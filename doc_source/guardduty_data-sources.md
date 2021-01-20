@@ -29,7 +29,7 @@ We highly recommend that you enable GuardDuty in all supported AWS Regions\. Thi
 
 ## AWS CloudTrail Management Events<a name="guardduty_controlplane"></a>
 
-Management events are also known as control plane events, and provide insight into management operations that are performed on resources in your AWS account\. The following are some examples of CloudTrail management events that can GuardDuty process:
+Management events are also known as control plane events, and provide insight into management operations that are performed on resources in your AWS account\. The following are some examples of CloudTrail management events that GuardDuty can process:
 
 The following are examples of CloudTrail management events that GuardDuty monitors:  
 + configuring security \(IAM AttachRolePolicy API operations\)

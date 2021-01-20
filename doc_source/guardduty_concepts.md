@@ -8,7 +8,7 @@ You can also invite other accounts to enable GuardDuty and become associated wit
 Users of the administrator account can configure GuardDuty as well as view and manage GuardDuty findings for their own account and all of their member accounts\. You can have up to 1000 member accounts in GuardDuty\.  
 Users of member accounts can configure GuardDuty as well as view and manage GuardDuty findings in their account \(either through the GuardDuty management console or GuardDuty API\)\. Users of member accounts can't view or manage findings in other members' accounts\.   
 An AWS account can't be a GuardDuty administrator and member account at the same time\. An AWS account can accept only one membership invitation\. Accepting a membership invitation is optional\.  
-For more information, see [Managing multiple accounts in Amazon GuardDuty](guardduty_accounts.md)\.
+For more information, see [Managing multiple accounts in Amazon GuardDutyAWS Service Integrations with GuardDuty](guardduty_accounts.md)\.
 
 **Detector**  
 All GuardDuty findings are associated with a detector, which is an object that represents the GuardDuty service\. The detector is a regional entity, and a unique detector is required in each region GuardDuty operates in\. When you enable GuardDuty in a region a new detector with a unique 32 alphanumeric detector ID is generated in that region\. The detector ID format looks like this:  

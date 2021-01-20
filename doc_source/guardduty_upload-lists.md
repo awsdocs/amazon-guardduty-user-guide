@@ -6,7 +6,7 @@ Trusted IP lists consist of IP addresses that you have trusted for secure commun
 
 Threat lists consist of known malicious IP addresses\. GuardDuty generates findings based on threat lists\. At any given time, you can have up to six uploaded threat lists per AWS account per Region\.
 
-in multi\-account environemtns only users from administrator GuardDuty accounts can upload and manage trusted IP lists and threat lists\. Trusted IP lists and threat lists that are uploaded by the administrator account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the administrator's threat lists and does not generate findings based on activity that involves IP addresses from the administrator's trusted IP lists\. For more information, see [Managing multiple accounts in Amazon GuardDuty](guardduty_accounts.md)\.
+In multi\-account environments only users from GuardDuty administrator accounts can upload and manage trusted IP lists and threat lists\. Trusted IP lists and threat lists that are uploaded by the administrator account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the administrator's threat lists and does not generate findings based on activity that involves IP addresses from the administrator's trusted IP lists\. For more information, see [Managing multiple accounts in Amazon GuardDutyAWS Service Integrations with GuardDuty](guardduty_accounts.md)\.
 
 **Important**  
 GuardDuty uses the same [`AWSServiceRoleForAmazonGuardDuty` service\-linked role](guardduty_managing_access.md#guardduty_service-access) that is automatically assigned to it when you enable GuardDuty for the permissions required to evaluate your trusted IP lists and threat lists\. 
@@ -111,9 +111,7 @@ The following procedures describe how you can activate or deactivate trusted IP 
 1. On the **List management** page, locate the trusted IP set or a threat list that you want to activate, and then choose the radio button under the **Active** column\.
 
 **To deactivate trusted IP lists and threat lists \(API or CLI\)**
-+ Currently in GuardDuty, deactivating trusted IP lists and threat lists through the console is not supported\.
-
-  You can deactivate your trusted IP lists or threat lists by running the [UpdateThreatIntelSet](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateThreatIntelSet.html) and [UpdateIPSet](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateIPSet.html) operations, or the [update\-ip\-set](https://docs.aws.amazon.com/cli/latest/reference/guardduty/update-ip-set.html) and [update\-threat\-intel\-set](https://docs.aws.amazon.com/cli/latest/reference/guardduty/update-threat-intel-set.html) CLI commands\. 
++ You can deactivate your trusted IP lists or threat lists by running the [UpdateThreatIntelSet](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateThreatIntelSet.html) and [UpdateIPSet](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateIPSet.html) operations, or the [update\-ip\-set](https://docs.aws.amazon.com/cli/latest/reference/guardduty/update-ip-set.html) and [update\-threat\-intel\-set](https://docs.aws.amazon.com/cli/latest/reference/guardduty/update-threat-intel-set.html) CLI commands\. 
 
   For example, you can run the following command:
 
