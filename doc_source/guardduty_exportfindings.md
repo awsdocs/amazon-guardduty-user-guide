@@ -1,11 +1,11 @@
 # Exporting findings<a name="guardduty_exportfindings"></a>
 
-GuardDuty supports exporting active findings to CloudWatch Events and, optionally, to an Amazon S3 bucket\. New Active findings that GuardDuty generates are automatically exported within about 5 minutes after the finding is generated\. You can set the frequency for how often updated Active findings are exported to CloudWatch Events and your S3 bucket \(if configured\)\. The frequency that you select applies to exporting to both CloudWatch Events and your S3 bucket, but only for aggregated findings\.
+GuardDuty supports exporting active findings to CloudWatch Events and, optionally, to an Amazon S3 bucket\. New Active findings that GuardDuty generates are automatically exported within about 5 minutes after the finding is generated\. You can set the frequency for how often updates to Active findings are exported to CloudWatch Events\. The frequency that you select applies to the exporting of new occurences of existing findings to CloudWatch Events, your S3 bucket \(if configured\), and Detective \(if integrated\)\. For more information on updates to existing findings see [GuardDuty finding aggregation ](guardduty_findings.md#finding-aggregation)
 
 **Note the following about export settings for findings:**
 + Export settings are regional, which means you need to configure export options for each Region in which you're using GuardDuty\. You can export findings from all Regions into one bucket located in one Region\.
-+ Archived findings, including new instances of suppressed findings, aren't exported\. If you unarchive a finding, its status is updated to **Active**, and then it's exported\.
-+ If you enable findings export in a GuardDuty administrator account, all findings from associated member accounts that are generated in the current Region are also exported to the same location that is configured for the administrator account\.
++ Archived findings, including new instances of suppressed findings, aren't exported\. If you unarchive a finding, its status is updated to **Active**, and it will be exported at the next interval\.
++ If you enable findings export in a GuardDuty administrator account all findings from associated member accounts that are generated in the current Region are also exported to the same location that you configured for the administrator account\.
 
 To configure settings for exporting Active findings to an Amazon S3 bucket you will need a KMS key that GuardDuty can use to encrypt findings, and an S3 bucket with permissions that allows GuardDuty to upload objects\. Review this topic to learn how to configure findings export and frequency\. 
 
@@ -43,13 +43,13 @@ If **Switch to policy view** is displayed, choose that to display the key policy
 
    ```
    {
-       "Sid": "Allow GuardDuty to use the key",
-       "Effect": "Allow",
-       "Principal": {
-           "Service": "guardduty.amazonaws.com"
-               },
-               "Action": "kms:GenerateDataKey",
-               "Resource": "*"
+   	"Sid": "Allow GuardDuty to use the key",
+   	"Effect": "Allow",
+   	"Principal": {
+   		"Service": "guardduty.amazonaws.com"
+   	},
+   	"Action": "kms:GenerateDataKey",
+   	"Resource": "*"
    }
    ```
 **Note**  
@@ -75,7 +75,7 @@ When using a pre\-existing bucket withing your account, or in a different AWS ac
 
 1. Replace the placeholder values in the example policy with the values appropriate for your environment\.
 
-   Replace *myBucketName* with the name of the bucket that you're adding the bucket policy for\. Replace *region* with the Region that the KMS key is in\. Replace *111122223333* with the AWS account number of the account that owns the bucket, and replace *KMSKeyId* with the key ID of the key that you chose for encryption\.
+   Replace *myBucketName* with the name of the bucket that you're adding the bucket policy for\. Replace *region* with the Region that the KMS key is in\. Replace *111122223333* with the AWS account number of the account that owns the bucket and replace *KMSKeyId* with the key ID of the key that you chose for encryption\.
 
 **Example policy**
 
@@ -152,11 +152,11 @@ If you're using GuardDuty in an manually\-enabled Region, replace the value for 
 
 ## Exporting findings to a bucket with the Console<a name="guardduty_exportfindings-new-bucket"></a>
 
-When you configure findings export, you can choose an existing S3 bucket, or have GuardDuty create a new bucket to store exported findings in\. If you choose to use a new bucket, GuardDuty applies all necessary permissions to the created bucket\. If you use an existing bucket, you must first update the bucket policy to allow GuardDuty to put findings into the bucket\.
+When you configure findings export, you can choose an existing S3 bucket or have GuardDuty create a new bucket to store exported findings in\. If you choose to use a new bucket, GuardDuty applies all necessary permissions to the created bucket\. If you use an existing bucket, you must first update the bucket policy to allow GuardDuty to put findings into the bucket\.
 
 You may also export findings to an existing bucket in another account\.
 
-When choosing a new or existing bucket in your account you can add a prefix, GuardDuty creates a new folder in the S3 bucket for your findings\. The prefix will prepend the default folder structure created by GuardDuty, which is `/AWSLogs/111122223333/GuardDuty/Region`\.
+When choosing a new or existing bucket in your account you can add a prefix\. When configuring findings export GuardDuty creates a new folder in the S3 bucket for your findings\. The prefix will prepend the default folder structure created by GuardDuty, which is `/AWSLogs/111122223333/GuardDuty/Region`\.
 
 **Important**  
 The KMS key and S3 bucket must be in the Region

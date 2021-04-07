@@ -1,10 +1,10 @@
 # Creating custom responses to GuardDuty findings with Amazon CloudWatch Events<a name="guardduty_findings_cloudwatch"></a>
 
-GuardDuty can send notifications based on [Amazon CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) when any change in findings takes place\. Finding changes that will create a CloudWatch event include newly generated findings or newly aggregated findings\.
+GuardDuty creates an event for [Amazon CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) when any change in findings takes place\. Finding changes that will create a CloudWatch event include newly generated findings or newly aggregated findings\. Events are emitted on a best effort basis\.
 
-Every GuardDuty finding is assigned a finding ID\. GuardDuty creates a CloudWatch event for every finding with a unique finding ID\. All subsequent occurrences of an existing finding are aggregated to the original finding\. 
+Every GuardDuty finding is assigned a finding ID\. GuardDuty creates a CloudWatch event for every finding with a unique finding ID\. All subsequent occurrences of an existing finding are aggregated to the original finding\.
 
-By using CloudWatch events with GuardDuty you can automate tasks to help you respond to security issues revealed by GuardDuty findings\.
+By using CloudWatch events with GuardDuty, you can automate tasks to help you respond to security issues revealed by GuardDuty findings\.
 
 In order to receive notifications about GuardDuty findings based on CloudWatch Events, you must create a CloudWatch Events rule and a target for GuardDuty\. This rule enables CloudWatch to send notifications for findings that GuardDuty generates to the target that is specified in the rule\. For more information, see [Creating a CloudWatch Events rule and target for GuardDuty \(CLI\)](#guardduty_cloudwatch_example)\.
 
@@ -26,7 +26,7 @@ You CANNOT customize the default frequency \(5 minutes\) of notifications sent a
 
 **Important**  
 You can customize the default frequency of notifications sent about the subsequent finding occurrences\. Possible values are 15 minutes, 1 hour, or the default 6 hours\. You can update this value using the [CreateDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateDetector.html) or the [UpdateDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateDetector.html) API operations\. You can also update this value through the GuardDuty console \- choose **Settings** and then under **CloudWatch Events**, choose one of the available values from the **Updated findings** pull\-down menu\.  
-Only users from a administrator account can customize the default frequency of notifications sent about the subsequent finding occurrences to CloudWatch Events\. Users from member accounts CANNOT customize this frequency value\. The frequency value set by the administrator account in its own account is imposed on GuardDuty functionality in all its member accounts\. In other words, if a user from a administrator account sets this frequency value to 1 hour, all member accounts will also have the 1 hour frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. For more information, see [Managing multiple accounts in Amazon GuardDutyAWS Service Integrations with GuardDuty](guardduty_accounts.md)\. 
+Only users from an administrator account can customize the default frequency of notifications sent about the subsequent finding occurrences to CloudWatch Events\. Users from member accounts CANNOT customize this frequency value\. The frequency value set by the administrator account in its own account is imposed on GuardDuty functionality in all its member accounts\. In other words, if a user from a administrator account sets this frequency value to 1 hour, all member accounts will also have the 1 hour frequency of notifications about the subsequent finding occurrences sent to CloudWatch Events\. For more information, see [Managing multiple accounts in Amazon GuardDutyAWS Service Integrations with GuardDuty](guardduty_accounts.md)\. 
 
 ### Monitoring archived GuardDuty findings with CloudWatch Events<a name="guardduty_findings_cloudwatch_archived"></a>
 
@@ -90,7 +90,7 @@ This procedure establishes where you want to send GuardDuty finding data\. The S
 **Note**  
 You will be required to confirm your subscription through your email client after creating it\.
 
-   1. Choose **Create Subscription**
+   1. Choose **Create subscription**
 
 1. Check for a subscription message in your inbox and choose **Confirm Subscription**
 
@@ -333,9 +333,9 @@ In the procedure above, we're using a Lambda function as the target for the rule
 
 As a GuardDuty administrator CloudWatch Event rules on your account will trigger based on applicable findings from your member accounts \. This means that if you set up the finding notifications through CloudWatch Events in your administrator account, as detailed in the preceding section, you will be notified of high and medium severity findings generated by your member accounts in addition to your own\.
 
-You can identify the member account the finding originates from by using the `accountId` field of the finding's JSON details\.
+You can identify the member account the GuardDuty finding originated from with the `accountId` field of the finding's JSON details\.
 
-To start write a custom event rule for a specific member account in your environment in the console, create a new rule and paste the following template into Event Pattern Preview, adding the account ID of the member account you want to trigger the event\.
+To start writing a custom event rule for a specific member account in your environment in the console, create a new rule and paste the following template into Event Pattern Preview, adding the account ID of the member account you want to trigger the event\.
 
 ```
 {

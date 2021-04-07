@@ -31,7 +31,7 @@ You can also see your GuardDuty findings through Amazon CloudWatch events\. Guar
 ** Suppression rule**  
 Suppression rules allow you to create very specific combinations of attributes to suppress findings\. For example, you can define a rule through the GuardDuty filter to auto\-archive `Recon:EC2/Portscan` from only those instances in a specific VPC, running a specific AMI, or with a specific EC2 tag\. This rule would result in port scan findings being automatically archived from the instances that meet the criteria\. However, it still allows alerting if GuardDuty detects those instances conducting other malicious activity, such as crypto\-currency mining\.  
 Suppression rules defined in the GuardDuty administrator account apply to the GuardDuty member accounts\. GuardDuty member accounts can't modify suppression rules\.  
-With auto\-archive rules, GuardDuty still generates all findings\. Suppression rules provide suppression of findings while maintaining a complete and immutable history of all activity\.   
+With suppression rules, GuardDuty still generates all findings\. Suppression rules provide suppression of findings while maintaining a complete and immutable history of all activity\.   
 Typically suppression rules are used to hide findings that you have determined as false positives for your environment, and reduce the noise from low\-value findings so you can focus on larger threats\. For more information, see [Suppression rules](findings_suppression-rule.md)
 
 **Trusted IP list**  

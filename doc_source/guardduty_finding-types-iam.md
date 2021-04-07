@@ -1,34 +1,152 @@
 # GuardDuty IAM finding types<a name="guardduty_finding-types-iam"></a>
 
-The following findings are specific to IAM entities and access keys and always have a Resource Type of `AccessKey`\. The severity and details of the findings differ based on the finding type\.
+The following findings are specific to IAM entities and access keys and always have a **Resource Type** of `AccessKey`\. The severity and details of the findings differ based on the finding type\.
 
 For all IAM related findings, it is recommended that you examine the permissions on the entity in question and ensure that this entity follows the best practice of least privilege\. If the activity is unexpected, the credentials may be compromised\. See actions detailed in [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
 
 **Topics**
++ [CredentialAccess:IAMUser/AnomalousBehavior](#credentialaccess-iam-anomalousbehavior)
++ [DefenseEvasion:IAMUser/AnomalousBehavior](#defenseevasion-iam-anomalousbehavior)
++ [Discovery:IAMUser/AnomalousBehavior](#discovery-iam-anomalousbehavior)
++ [Exfiltration:IAMUser/AnomalousBehavior](#exfiltration-iam-anomalousbehavior)
++ [Impact:IAMUser/AnomalousBehavior](#impact-iam-anomalousbehavior)
++ [InitialAccess:IAMUser/AnomalousBehavior](#initialaccess-iam-anomalousbehavior)
 + [PenTest:IAMUser/KaliLinux](#pentest-iam-kalilinux)
 + [PenTest:IAMUser/ParrotLinux](#pentest-iam-parrotlinux)
 + [PenTest:IAMUser/PentooLinux](#pentest-iam-pentoolinux)
-+ [Persistence:IAMUser/NetworkPermissions](#persistence-iam-networkpermissions)
-+ [Persistence:IAMUser/ResourcePermissions](#persistence-iam-resourcepermissions)
-+ [Persistence:IAMUser/UserPermissions](#persistence-iam-userpermissions)
++ [Persistence:IAMUser/AnomalousBehavior](#persistence-iam-anomalousbehavior)
 + [Policy:IAMUser/RootCredentialUsage](#policy-iam-rootcredentialusage)
-+ [PrivilegeEscalation:IAMUser/AdministrativePermissions](#privilegeescalation-iam-administrativepermissions)
++ [PrivilegeEscalation:IAMUser/AnomalousBehavior](#privilegeescalation-iam-anomalousbehavior)
 + [Recon:IAMUser/MaliciousIPCaller](#recon-iam-maliciousipcaller)
 + [Recon:IAMUser/MaliciousIPCaller\.Custom](#recon-iam-maliciousipcallercustom)
-+ [Recon:IAMUser/NetworkPermissions](#recon-iam-networkpermissions)
-+ [Recon:IAMUser/ResourcePermissions](#recon-iam-resourcepermissions)
 + [Recon:IAMUser/TorIPCaller](#recon-iam-toripcaller)
-+ [Recon:IAMUser/UserPermissions](#recon-iam-userpermissions)
-+ [ResourceConsumption:IAMUser/ComputeResources](#resourceconsumption-iam-computeresources)
 + [Stealth:IAMUser/CloudTrailLoggingDisabled](#stealth-iam-cloudtrailloggingdisabled)
-+ [Stealth:IAMUser/LoggingConfigurationModified](#stealth-iam-loggingconfigurationmodified)
 + [Stealth:IAMUser/PasswordPolicyChange](#stealth-iam-passwordpolicychange)
-+ [UnauthorizedAccess:IAMUser/ConsoleLogin](#unauthorizedaccess-iam-consolelogin)
 + [UnauthorizedAccess:IAMUser/ConsoleLoginSuccess\.B](#unauthorizedaccess-iam-consoleloginsuccessb)
 + [UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration](#unauthorizedaccess-iam-instancecredentialexfiltration)
 + [UnauthorizedAccess:IAMUser/MaliciousIPCaller](#unauthorizedaccess-iam-maliciousipcaller)
 + [UnauthorizedAccess:IAMUser/MaliciousIPCaller\.Custom](#unauthorizedaccess-iam-maliciousipcallercustom)
 + [UnauthorizedAccess:IAMUser/TorIPCaller](#unauthorizedaccess-iam-toripcaller)
+
+## CredentialAccess:IAMUser/AnomalousBehavior<a name="credentialaccess-iam-anomalousbehavior"></a>
+
+### An API used to gain access to an AWS environment was invoked in an anomalous way\.<a name="credentialaccess-iam-anomalousbehavior_description"></a>
+
+#### <a name="credentialaccess-iam-anomalousbehavior_severity"></a>
+
+**Default severity: Medium**
+
+#### <a name="credentialaccess-iam-anomalousbehavior_full"></a>
+
+This finding informs you that an anomalous API request was observed in your account\. This finding may include a single API or a series of related API requests made in proximity by a single [CloudTrail user identity](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\. The API observed is commonly associated with the credential access stage of an attack when an adversary is attempting to collect passwords, usernames, and access keys for your environment\. The API’s in this category are `GetPasswordData`, `GetSecretValue`, and `GenerateDbAuthToken`\. 
+
+This API request was identified as anomalous by GuardDuty's anomaly detection machine learning \(ML\) model\. The ML model evaluates all API requests in your account and identifies anomalous events that are associated with techniques used by adversaries\. The ML model tracks various factors of the API request, such as, the user that made the request, the location the request was made from, and the specific API that was requested\. Details on which factors of the API request are unusual for the user identity that invoked the request can be found in the [finding details](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-summary.html#finding-anomalous)\.
+
+#### <a name="credentialaccess-iam-anomalousbehavior_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
+
+## DefenseEvasion:IAMUser/AnomalousBehavior<a name="defenseevasion-iam-anomalousbehavior"></a>
+
+### An API used to evade defensive measures was invoked in an anomalous way\.<a name="defenseevasion-iam-anomalousbehavior_description"></a>
+
+#### <a name="defenseevasion-iam-anomalousbehavior_severity"></a>
+
+**Default severity: Medium**
+
+#### <a name="defenseevasion-iam-anomalousbehavior_full"></a>
+
+This finding informs you that an anomalous API request was observed in your account\. This finding may include a single API or a series of related API requests made in proximity by a single [CloudTrail user identity](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\. The API observed is commonly associated with defense evasion tactics where an adversary is trying to cover their tracks and avoid detection\. API’s in this category are typically delete, disable, or stop operations, such as, `DeleteFlowLogs`, `DisableAlarmActions`, or `StopLogging`\. 
+
+This API request was identified as anomalous by GuardDuty's anomaly detection machine learning \(ML\) model\. The ML model evaluates all API requests in your account and identifies anomalous events that are associated with techniques used by adversaries\. The ML model tracks various factors of the API request, such as, the user that made the request, the location the request was made from, and the specific API that was requested\. Details on which factors of the API request are unusual for the user identity that invoked the request can be found in the [finding details](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-summary.html#finding-anomalous)\.
+
+#### <a name="defenseevasion-iam-anomalousbehavior_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
+
+## Discovery:IAMUser/AnomalousBehavior<a name="discovery-iam-anomalousbehavior"></a>
+
+### An API commonly used to discover resources was invoked in an anomalous way\.<a name="discovery-iam-anomalousbehavior_description"></a>
+
+#### <a name="discovery-iam-anomalousbehavior_severity"></a>
+
+**Default severity: Low**
+
+#### <a name="discovery-iam-anomalousbehavior_full"></a>
+
+This finding informs you that an anomalous API request was observed in your account\. This finding may include a single API or a series of related API requests made in proximity by a single [CloudTrail user identity](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\. The API observed is commonly associated with the discovery stage of an attack when an adversary is gathering information to determine if your AWS environment is susceptible to a broader attack\. API’s in this category are typically get, describe, or list operations, such as, `DescribeInstances`, `GetRolePolicy`, or `ListAccessKeys`\.
+
+This API request was identified as anomalous by GuardDuty's anomaly detection machine learning \(ML\) model\. The ML model evaluates all API requests in your account and identifies anomalous events that are associated with techniques used by adversaries\. The ML model tracks various factors of the API request, such as, the user that made the request, the location the request was made from, and the specific API that was requested\. Details on which factors of the API request are unusual for the user identity that invoked the request can be found in the [finding details](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-summary.html#finding-anomalous)\.
+
+#### <a name="discovery-iam-anomalousbehavior_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
+
+## Exfiltration:IAMUser/AnomalousBehavior<a name="exfiltration-iam-anomalousbehavior"></a>
+
+### An API commonly used to collect data from an AWS environment was invoked in an anomalous way\.<a name="exfiltration-iam-anomalousbehavior_description"></a>
+
+#### <a name="exfiltration-iam-anomalousbehavior_severity"></a>
+
+**Default severity: High**
+
+#### <a name="exfiltration-iam-anomalousbehavior_full"></a>
+
+This finding informs you that an anomalous API request was observed in your account\. This finding may include a single API or a series of related API requests made in proximity by a single [CloudTrail user identity](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\. The API observed is commonly associated with exfiltration tactics where an adversary is trying to collect data from your network using packaging and encryption to avoid detection\. API’s for this finding type are CloudTrail management \(control\-plane\) operations only and are typically related to S3, snapshots, and databases, such as, `PutBucketReplication`, `CreateSnapshot`, or `RestoreDBInstanceFromDBSnapshot`\. 
+
+This API request was identified as anomalous by GuardDuty's anomaly detection machine learning \(ML\) model\. The ML model evaluates all API requests in your account and identifies anomalous events that are associated with techniques used by adversaries\. The ML model tracks various factors of the API request, such as, the user that made the request, the location the request was made from, and the specific API that was requested\. Details on which factors of the API request are unusual for the user identity that invoked the request can be found in the [finding details](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-summary.html#finding-anomalous)\.
+
+#### <a name="exfiltration-iam-anomalousbehavior_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
+
+## Impact:IAMUser/AnomalousBehavior<a name="impact-iam-anomalousbehavior"></a>
+
+### An API commonly used to tamper with data or processes in an AWS environment was invoked in an anomalous way\.<a name="impact-iam-anomalousbehavior_description"></a>
+
+#### <a name="impact-iam-anomalousbehavior_severity"></a>
+
+**Default severity: High**
+
+#### <a name="impact-iam-anomalousbehavior_full"></a>
+
+This finding informs you that an anomalous API request was observed in your account\. This finding may include a single API or a series of related API requests made in proximity by a single [CloudTrail user identity](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\. The API observed is commonly associated with impact tactics where an adversary is trying to disrupt operations and manipulate, interrupt, or destroy data in your account\. API’s for this finding type are typically delete, update, or put operations, such as, `DeleteSecurityGroup`, `UpdateUser`, or `PutBucketPolicy`\. 
+
+This API request was identified as anomalous by GuardDuty's anomaly detection machine learning \(ML\) model\. The ML model evaluates all API requests in your account and identifies anomalous events that are associated with techniques used by adversaries\. The ML model tracks various factors of the API request, such as, the user that made the request, the location the request was made from, and the specific API that was requested\. Details on which factors of the API request are unusual for the user identity that invoked the request can be found in the [finding details](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-summary.html#finding-anomalous)\.
+
+#### <a name="impact-iam-anomalousbehavior_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
+
+## InitialAccess:IAMUser/AnomalousBehavior<a name="initialaccess-iam-anomalousbehavior"></a>
+
+### An API commonly used to gain unauthorized access to an AWS environment was invoked in an anomalous way\.<a name="initialaccess-iam-anomalousbehavior_description"></a>
+
+#### <a name="initialaccess-iam-anomalousbehavior_severity"></a>
+
+**Default severity: Medium**
+
+#### <a name="initialaccess-iam-anomalousbehavior_full"></a>
+
+This finding informs you that an anomalous API request was observed in your account\. This finding may include a single API or a series of related API requests made in proximity by a single [CloudTrail user identity](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\. The API observed is commonly associated with the initial access stage of an attack when an adversary is attempting to establish access to your environment\. API’s in this category are typically get token, or session operations, such as, `GetFederationToken`, `StartSession`, or `GetAuthorizationToken`\. 
+
+This API request was identified as anomalous by GuardDuty's anomaly detection machine learning \(ML\) model\. The ML model evaluates all API requests in your account and identifies anomalous events that are associated with techniques used by adversaries\. The ML model tracks various factors of the API request, such as, the user that made the request, the location the request was made from, and the specific API that was requested\. Details on which factors of the API request are unusual for the user identity that invoked the request can be found in the [finding details](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-summary.html#finding-anomalous)\.
+
+#### <a name="initialaccess-iam-anomalousbehavior_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
 
 ## PenTest:IAMUser/KaliLinux<a name="pentest-iam-kalilinux"></a>
 
@@ -84,70 +202,21 @@ This finding informs you that a machine running Pentoo Linux is making API calls
 
 If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
 
-## Persistence:IAMUser/NetworkPermissions<a name="persistence-iam-networkpermissions"></a>
+## Persistence:IAMUser/AnomalousBehavior<a name="persistence-iam-anomalousbehavior"></a>
 
-### An IAM entity invoked an API commonly used to change the network access permissions for security groups, routes, and ACLs in your AWS account\.<a name="persistence-iam-networkpermissions_description"></a>
+### An API commonly used to maintain unauthorized access to an AWS environment was invoked in an anomalous way\.<a name="persistence-iam-anomalousbehavior_description"></a>
 
-#### <a name="persistence-iam-networkpermissions_severity"></a>
+#### <a name="persistence-iam-anomalousbehavior_severity"></a>
 
-**Default severity: Medium\***
+**Default severity: Medium**
 
-**Note**  
-This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
+#### <a name="persistence-iam-anomalousbehavior_full"></a>
 
-#### <a name="persistence-iam-networkpermissions_full"></a>
+This finding informs you that an anomalous API request was observed in your account\. This finding may include a single API or a series of related API requests made in proximity by a single [CloudTrail user identity](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\. The API observed is commonly associated with persistence tactics where an adversary has gained access to your environment and is attempting to maintain that access\. API’s in this category are typically create, import, or modify operations, such as, `CreateAccessKey`, `ImportKeyPair`, or `ModifyInstanceAttribute`\. 
 
-This finding indicates that a specific principal \(AWS account root user, IAM role, or IAM user\) in your AWS environment is exhibiting behavior that is different from the established baseline\. This principal has no prior history of invoking this API\.
+This API request was identified as anomalous by GuardDuty's anomaly detection machine learning \(ML\) model\. The ML model evaluates all API requests in your account and identifies anomalous events that are associated with techniques used by adversaries\. The ML model tracks various factors of the API request, such as, the user that made the request, the location the request was made from, and the specific API that was requested\. Details on which factors of the API request are unusual for the user identity that invoked the request can be found in the [finding details](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-summary.html#finding-anomalous)\.
 
-This finding is triggered when network configuration settings are changed under suspicious circumstances, such as when a principal invokes the `CreateSecurityGroup` API with no prior history of doing so\. Attackers often attempt to change security groups to allow certain inbound traffic on various ports to improve their ability to access an EC2 instance\.
-
-#### <a name="persistence-iam-networkpermissions_remediation"></a>
-
-**Remediation recommendations:**
-
-If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
-
-## Persistence:IAMUser/ResourcePermissions<a name="persistence-iam-resourcepermissions"></a>
-
-### A principal invoked an API commonly used to change the security access policies of various resources in your AWS account\.<a name="persistence-iam-resourcepermissions_description"></a>
-
-#### <a name="persistence-iam-resourcepermissions_severity"></a>
-
-**Default severity: Medium\***
-
-**Note**  
-This finding's default severity is Medium\. However, if the API is invoked is using temporary AWS credentials that are created on an instance, the finding's severity is High\.
-
-#### <a name="persistence-iam-resourcepermissions_full"></a>
-
-This finding indicates that a specific principal \(AWS account root user, IAM role, or IAM user\) in your AWS environment is exhibiting behavior that is different from the established baseline\. This principal has no prior history of invoking this API\. 
-
-This finding is triggered when a change is detected to policies or permissions attached to AWS resources, such as when a principal in your AWS environment invokes the `PutBucketPolicy` API with no prior history of doing so\. Some services, such as Amazon S3, support resource\-attached permissions that grant one or more principals access to the resource\. With stolen credentials, attackers can change the policies attached to a resource in order to gain access to that resource\.
-
-#### <a name="persistence-iam-resourcepermissions_remediation"></a>
-
-**Remediation recommendations:**
-
-If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
-
-## Persistence:IAMUser/UserPermissions<a name="persistence-iam-userpermissions"></a>
-
-### A principal invoked an API commonly used to add, modify, or delete IAM users, groups or policies in your AWS account\.<a name="persistence-iam-userpermissions_description"></a>
-
-#### <a name="persistence-iam-userpermissions_severity"></a>
-
-**Default severity: Medium\***
-
-**Note**  
-This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
-
-#### <a name="persistence-iam-userpermissions_full"></a>
-
-This finding indicates that a specific principal \(AWS account root user, IAM role, or IAM user\) in your AWS environment is exhibiting behavior that is different from the established baseline\. This principal has no prior history of invoking this API\. 
-
-This finding is triggered by suspicious changes to the user\-related permissions in your AWS environment, such as when a principal in your AWS environment invokes the `AttachUserPolicy` API with no prior history of doing so\. Attackers may use stolen credentials to create new users, add access policies to existing users, or create access keys to maximize their access to an account, even if their original access point is closed\. For example, the owner of the account might notice that a particular IAM user or password was stolen and delete it from the account\. However, they might not delete other users that were created by a fraudulently created admin principal, leaving their AWS account accessible to the attacker\. 
-
-#### <a name="persistence-iam-userpermissions_remediation"></a>
+#### <a name="persistence-iam-anomalousbehavior_remediation"></a>
 
 **Remediation recommendations:**
 
@@ -166,7 +235,7 @@ If this activity is unexpected your credentials may be compromised, see [Remedia
 This finding informs you that the root credentials of the listed AWS account in your environment are being used to make requests to AWS services\. It is recommended that users never use root credentials to access AWS services\. Instead, AWS services should be accessed using least privilege temporary credentials from AWS Security Token Service \(STS\)\. For situations where STS is not supported, IAM user credentials are recommended\. For more information, see [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)
 
 **Note**  
-If S3 threat detection is enabled for the account this finding may be generated in response to attempts to run S3 data plane operations on S3 resources using the root credentials of the AWS account\. The API call used will be listed in the finding details\. If S3 threat detection is not enabled this finding can only be triggered by Event log API's\. For more information on S3 threat detection see [Amazon S3 protection in Amazon GuardDuty](s3_detection.md)\.
+If S3 threat detection is enabled for the account this finding may be generated in response to attempts to run S3 data plane operations on S3 resources using the root credentials of the AWS account\. The API call used will be listed in the finding details\. If S3 threat detection is not enabled this finding can only be triggered by Event log APIs\. For more information on S3 threat detection see [S3 protection](https://docs.aws.amazon.com/guardduty/latest/ug/s3_detection.html)\.
 
 #### <a name="policy-iam-rootcredentialusage_remediation"></a>
 
@@ -174,24 +243,21 @@ If S3 threat detection is enabled for the account this finding may be generated 
 
 If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
 
-## PrivilegeEscalation:IAMUser/AdministrativePermissions<a name="privilegeescalation-iam-administrativepermissions"></a>
+## PrivilegeEscalation:IAMUser/AnomalousBehavior<a name="privilegeescalation-iam-anomalousbehavior"></a>
 
-### A principal has attempted to assign a highly permissive policy to themselves\.<a name="privilegeescalation-iam-administrativepermissions_description"></a>
+### An API commonly used to used to obtain high\-level permissions to an AWS environment was invoked in an anomalous way\.<a name="privilegeescalation-iam-anomalousbehavior_description"></a>
 
-#### <a name="privilegeescalation-iam-administrativepermissions_severity"></a>
+#### <a name="privilegeescalation-iam-anomalousbehavior_severity"></a>
 
-**Default severity: Low\***
+**Default severity: Medium**
 
-**Note**  
-This finding's severity is Low if the attempt at privilege escalation was unsuccessful, and Medium if the attempt at privilege escalation was successful\.
+#### <a name="privilegeescalation-iam-anomalousbehavior_full"></a>
 
-#### <a name="privilegeescalation-iam-administrativepermissions_full"></a>
+This finding informs you that an anomalous API request was observed in your account\. This finding may include a single API or a series of related API requests made in proximity by a single [CloudTrail user identity](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\. The API observed is commonly associated with privilege escalation tactics where an adversary is attempting to gain higher\-level permissions to an environment \. API’s in this category typically involve operations that change IAM policies, roles, and users, such as, `AssociateIamInstanceProfile`, `AddUserToGroup`, or `PutUserPolicy`\. 
 
-This finding indicates that a specific IAM entity in your AWS environment is exhibiting behavior that can be indicative of a privilege escalation attack\. This finding is triggered when an IAM user or role attempts to assign a highly permissive policy to themselves\. If the user or role in question is not meant to have administrative privileges, either the user's credentials may be compromised or the role's permissions may not be configured properly\. 
+This API request was identified as anomalous by GuardDuty's anomaly detection machine learning \(ML\) model\. The ML model evaluates all API requests in your account and identifies anomalous events that are associated with techniques used by adversaries\. The ML model tracks various factors of the API request, such as, the user that made the request, the location the request was made from, and the specific API that was requested\. Details on which factors of the API request are unusual for the user identity that invoked the request can be found in the [finding details](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-summary.html#finding-anomalous)\.
 
-Attackers will use stolen credentials to create new users, add access policies to existing users, or create access keys to maximize their access to an account even if their original access point is closed\. For example, the owner of the account might notice that a particular IAM user or password was stolen and delete it from the account, but might not delete other users that were created by a fraudulently created admin principal, leaving their AWS account still accessible to the attacker\. 
-
-#### <a name="privilegeescalation-iam-administrativepermissions_remediation"></a>
+#### <a name="privilegeescalation-iam-anomalousbehavior_remediation"></a>
 
 **Remediation recommendations:**
 
@@ -207,7 +273,7 @@ If this activity is unexpected your credentials may be compromised, see [Remedia
 
 #### <a name="recon-iam-maliciousipcaller_full"></a>
 
-This finding informs you that an API operation that can list or describe AWS resources in an account within your environment was invoked from an IP address that is included on a GuardDuty threat list\. An attacker may use stolen credentials to perform this type of reconnaissance of your AWS resources in order to find more valuable credentials or determine the capabilities of the credentials they already have\.
+This finding informs you that an API operation that can list or describe AWS resources in an account within your environment was invoked from an IP address that is included on a threat list\. An attacker may use stolen credentials to perform this type of reconnaissance of your AWS resources in order to find more valuable credentials or determine the capabilities of the credentials they already have\.
 
 #### <a name="recon-iam-maliciousipcaller_remediation"></a>
 
@@ -233,52 +299,6 @@ This finding informs you that an API operation that can list or describe AWS res
 
 If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
 
-## Recon:IAMUser/NetworkPermissions<a name="recon-iam-networkpermissions"></a>
-
-### A principal invoked an API commonly used to change the network access permissions for security groups, routes, and ACLs in your AWS account\.<a name="recon-iam-networkpermissions_description"></a>
-
-#### <a name="recon-iam-networkpermissions_severity"></a>
-
-**Default severity: Medium\***
-
-**Note**  
-This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
-
-#### <a name="recon-iam-networkpermissions_full"></a>
-
-This finding indicates that a specific principal \(AWS account root user, IAM role, or IAM user\) in your AWS environment is exhibiting behavior that is different from the established baseline\. This principal has no prior history of invoking this API\. 
-
-This finding is triggered when resource access permissions in your AWS account are probed under suspicious circumstances\. For example, if a principal invoked the `DescribeInstances` API with no prior history of doing so\. An attacker might use stolen credentials to perform this type of reconnaissance of your AWS resources in order to find more valuable credentials or determine the capabilities of the credentials they already have\.
-
-#### <a name="recon-iam-networkpermissions_remediation"></a>
-
-**Remediation recommendations:**
-
-If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
-
-## Recon:IAMUser/ResourcePermissions<a name="recon-iam-resourcepermissions"></a>
-
-### A principal invoked an API commonly used to change the security access policies of various resources in your AWS account\.<a name="recon-iam-resourcepermissions_description"></a>
-
-#### <a name="recon-iam-resourcepermissions_severity"></a>
-
-**Default severity: Medium\***
-
-**Note**  
-This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
-
-#### <a name="recon-iam-resourcepermissions_full"></a>
-
-This finding indicates that a specific principal \(AWS account root user, IAM role, or IAM user\) in your AWS environment is exhibiting behavior that is different from the established baseline\. This principal has no prior history of invoking this API\. 
-
- This finding is triggered when resource access permissions in your AWS account are probed under suspicious circumstances\. For example, if a principal invoked the `DescribeInstances` API with no prior history of doing so\. An attacker might use stolen credentials to perform this type of reconnaissance of your AWS resources in order to find more valuable credentials or determine the capabilities of the credentials they already have\.
-
-#### <a name="recon-iam-resourcepermissions_remediation"></a>
-
-**Remediation recommendations:**
-
-If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
-
 ## Recon:IAMUser/TorIPCaller<a name="recon-iam-toripcaller"></a>
 
 ### An API was invoked from a Tor exit node IP address\.<a name="recon-iam-toripcaller_description"></a>
@@ -292,52 +312,6 @@ If this activity is unexpected your credentials may be compromised, see [Remedia
 This finding informs you that an API operation that can list or describe AWS resources in an account within your environment was invoked from a Tor exit node IP address\. Tor is software for enabling anonymous communication\. It encrypts and randomly bounces communications through relays between a series of network nodes\. The last Tor node is called the exit node\. An attacker would use Tor to mask their true identity\.
 
 #### <a name="recon-iam-toripcaller_remediation"></a>
-
-**Remediation recommendations:**
-
-If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
-
-## Recon:IAMUser/UserPermissions<a name="recon-iam-userpermissions"></a>
-
-### A principal invoked an API commonly used to add, modify, or delete IAM users, groups or policies in your AWS account\.<a name="recon-iam-userpermissions_description"></a>
-
-#### <a name="recon-iam-userpermissions_severity"></a>
-
-**Default severity: Medium\***
-
-**Note**  
-This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
-
-#### <a name="recon-iam-userpermissions_full"></a>
-
-This finding is triggered when user permissions in your AWS environment are probed under suspicious circumstances\. For example, if a principal \(AWS account root user, IAM role, or IAM user\) invoked the `ListInstanceProfilesForRole` API with no prior history of doing so\. An attacker might use stolen credentials to perform this type of reconnaissance of your AWS resources in order to find more valuable credentials or determine the capabilities of the credentials they already have\.
-
-This finding indicates that a specific principal in your AWS environment is exhibiting behavior that is different from the established baseline\. This principal has no prior history of invoking this API in this way\.
-
-#### <a name="recon-iam-userpermissions_remediation"></a>
-
-**Remediation recommendations:**
-
-If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
-
-## ResourceConsumption:IAMUser/ComputeResources<a name="resourceconsumption-iam-computeresources"></a>
-
-### A principal invoked an API commonly used to launch Compute resources like EC2 Instances\.<a name="resourceconsumption-iam-computeresources_description"></a>
-
-#### <a name="resourceconsumption-iam-computeresources_severity"></a>
-
-**Default severity: Medium\***
-
-**Note**  
-This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
-
-#### <a name="resourceconsumption-iam-computeresources_full"></a>
-
-This finding is triggered when EC2 instances in the listed account within your AWS environment are launched under suspicious circumstances\. This finding indicates that a specific principal in your AWS environment is exhibiting behavior that is different from the established baseline; for example, if a principal \(AWS account root user, IAM role, or IAM user\) invoked the `RunInstances` API with no prior history of doing so\. This might be an indication of an attacker using stolen credentials to steal compute time \(possibly for cryptocurrency mining or password cracking\)\. It can also be an indication of an attacker using an EC2 instance in your AWS environment and its credentials to maintain access to your account\.
-
-
-
-#### <a name="resourceconsumption-iam-computeresources_remediation"></a>
 
 **Remediation recommendations:**
 
@@ -361,27 +335,6 @@ This finding informs you that a CloudTrail trail within your AWS environment was
 
 If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
 
-## Stealth:IAMUser/LoggingConfigurationModified<a name="stealth-iam-loggingconfigurationmodified"></a>
-
-### A principal invoked an API commonly used to stop CloudTrail Logging, delete existing logs, and otherwise eliminate traces of activity in your AWS account\.<a name="stealth-iam-loggingconfigurationmodified_description"></a>
-
-#### <a name="stealth-iam-loggingconfigurationmodified_severity"></a>
-
-**Default severity: Medium\***
-
-**Note**  
-This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
-
-#### <a name="stealth-iam-loggingconfigurationmodified_full"></a>
-
-This finding is triggered when the logging configuration in the listed AWS account within your environment is modified under suspicious circumstances\. This finding informs you that a specific principal in your AWS environment is exhibiting behavior that is different from the established baseline; for example, if a principal \(AWS account root user, IAM role, or IAM user\) invoked the `StopLogging` API with no prior history of doing so\. This can be an indication of an attacker trying to cover their tracks by eliminating any trace of their activity\.
-
-#### <a name="stealth-iam-loggingconfigurationmodified_remediation"></a>
-
-**Remediation recommendations:**
-
-If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
-
 ## Stealth:IAMUser/PasswordPolicyChange<a name="stealth-iam-passwordpolicychange"></a>
 
 ### Account password policy was weakened\.<a name="stealth-iam-passwordpolicychange_description"></a>
@@ -395,29 +348,6 @@ If this activity is unexpected your credentials may be compromised, see [Remedia
 The AWS account password policy was weakened on the listed account within your AWS environment\. For example, it was deleted or updated to require fewer characters, not require symbols and numbers, or required to extend the password expiration period\. This finding can also be triggered by an attempt to update or delete your AWS account password policy\. The AWS account password policy defines the rules that govern what kinds of passwords can be set for your IAM users\. A weaker password policy permits the creation of passwords that are easy to remember and potentially easier to guess, thereby creating a security risk\.
 
 #### <a name="stealth-iam-passwordpolicychange_remediation"></a>
-
-**Remediation recommendations:**
-
-If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
-
-## UnauthorizedAccess:IAMUser/ConsoleLogin<a name="unauthorizedaccess-iam-consolelogin"></a>
-
-### An unusual console login by a principal in your AWS account was observed\.<a name="unauthorizedaccess-iam-consolelogin_description"></a>
-
-#### <a name="unauthorizedaccess-iam-consolelogin_severity"></a>
-
-**Default severity: Medium\***
-
-**Note**  
-This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
-
-#### <a name="unauthorizedaccess-iam-consolelogin_full"></a>
-
-This finding is triggered when a console login is detected under suspicious circumstances\. For example, if a principal with no prior history of doing so, invoked the ConsoleLogin API from a never\-before\-used client or an unusual location\. This could be an indication of stolen credentials being used to gain access to your AWS account, or a valid user accessing the account in an invalid or less secure manner \(for example, not over an approved VPN\)\.
-
-This finding informs you that a specific principal in your AWS environment is exhibiting behavior that is different from the established baseline\. This principal has no prior history of login activity using this client application from this specific location\.
-
-#### <a name="unauthorizedaccess-iam-consolelogin_remediation"></a>
 
 **Remediation recommendations:**
 
@@ -454,15 +384,15 @@ If this activity is unexpected your credentials may be compromised, see [Remedia
 This finding informs you of attempts to run AWS API operations from a host outside of EC2, using temporary AWS credentials that were created on an EC2 instance in your AWS environment\. The listed EC2 instance might be compromised, and the temporary credentials from this instance might have been exfiltrated to a remote host outside of AWS\. AWS does not recommend redistributing temporary credentials outside of the entity that created them \(for example, AWS applications, EC2, or Lambda\)\. However, authorized users can export credentials from their EC2 instances to make legitimate API calls\. To rule out a potential attack and verify the legitimacy of the activity, contact the IAM user to whom these credentials are assigned\.
 
 **Note**  
-If S3 threat detection is enabled for the account this finding may be generated in response to attempts to run S3 data plane operations on the S3 resources using EC2 credentials\. The API call used will be listed in the finding details\. If S3 threat detection is not enabled this finding can only be triggered by Event log API's\. For more information on S3 threat detection see [Amazon S3 protection in Amazon GuardDuty](s3_detection.md)\.
+If S3 threat detection is enabled for the account this finding may be generated in response to attempts to run S3 data plane operations on the S3 resources using EC2 credentials\. The API call used will be listed in the finding details\. If S3 threat detection is not enabled this finding can only be triggered by Event log APIs\. For more information on S3 threat detection see [S3 protection](https://docs.aws.amazon.com/guardduty/latest/ug/s3_detection.html?icmpid=docs_gd_help_panel)\.
 
 #### <a name="unauthorizedaccess-iam-instancecredentialexfiltration_remediation"></a>
 
 **Remediation recommendations:**
 
-This finding is generated when networking is configured to route internet traffic such that it egresses from an on\-premises gateway rather than from a VPC Internet Gateway \(IGW\)\. Common configurations, such as using , [AWS Outposts](https://docs.aws.amazon.com/outposts/latest/userguide/), or VPC VPN connections, can result in traffic routed this way\. If this is expected behavior, it's recommended that you use suppression rules in and create a rule that consists of two filter criteria\. The first criteria is **finding type**, which should be `UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration`\. The second filter criteria is **API caller IPv4 Address** with the IP address or CIDR range of your on\-premises internet gateway\. To learn more about creating suppression rules see [Suppression rules](findings_suppression-rule.md)\. 
+This finding is generated when networking is configured to route internet traffic such that it egresses from an on\-premises gateway rather than from a VPC Internet Gateway \(IGW\)\. Common configurations, such as using [AWS Outposts](https://docs.aws.amazon.com/outposts/latest/userguide/), or VPC VPN connections, can result in traffic routed this way\. If this is expected behavior, it's recommended that you use suppression rules in and create a rule that consists of two filter criteria\. The first criteria is **finding type**, which should be `UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration`\. The second filter criteria is **API caller IPv4 Address** with the IP address or CIDR range of your on\-premises internet gateway\. To learn more about creating suppression rules see [Suppression rules](https://docs.aws.amazon.com/guardduty/latest/ug/findings_suppression-rule.html?icmpid=docs_gd_help_panel)\. 
 
-If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
+If this activity is unexpected your credentials may be compromised, see [Remediating compromised credentials](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_remediate.html#compromised-creds)\.
 
 ## UnauthorizedAccess:IAMUser/MaliciousIPCaller<a name="unauthorizedaccess-iam-maliciousipcaller"></a>
 
@@ -492,7 +422,7 @@ If this activity is unexpected your credentials may be compromised, see [Remedia
 
 #### <a name="unauthorizedaccess-iam-maliciousipcallercustom_full"></a>
 
-This finding informs you that an API operation \(for example, an attempt to launch an EC2 instance, create a new IAM user, modify AWS privileges\) was invoked from an IP address that is included on a threat list that you uploaded\. In , a threat list consists of known malicious IP addresses\. generates findings based on uploaded threat lists\. This can indicate unauthorized access to your AWS resources within your environment\.
+This finding informs you that an API operation \(for example, an attempt to launch an EC2 instance, create a new IAM user, modify AWS privileges\) was invoked from an IP address that is included on a threat list that you uploaded\. In , a threat list consists of known malicious IP addresses\. This can indicate unauthorized access to AWS resources within your environment\.
 
 #### <a name="unauthorizedaccess-iam-maliciousipcallercustom_remediation"></a>
 

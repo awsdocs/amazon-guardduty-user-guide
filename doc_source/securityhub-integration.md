@@ -6,15 +6,15 @@ The Amazon GuardDuty integration with Security Hub enables you to send findings 
 
 **Contents**
 + [How Amazon GuardDuty sends findings to AWS Security Hub](#securityhub-integration-sending-findings)
-  + [Types of findings that GuardDuty sends](#securityhub-integration-finding-types)
-  + [Latency for sending findings](#securityhub-integration-finding-latency)
-  + [Retrying when Security Hub is not available](#securityhub-integration-retry-send)
-  + [Updating existing findings in Security Hub](#securityhub-integration-finding-updates)
+  + [Types of findings that GuardDuty sends to Security Hub](#securityhub-integration-finding-types)
+    + [Latency for sending findings](#securityhub-integration-finding-latency)
+    + [Retrying when Security Hub is not available](#securityhub-integration-retry-send)
+    + [Updating existing findings in Security Hub](#securityhub-integration-finding-updates)
 + [Viewing GuardDuty findings in AWS Security Hub](#findings-in-securityhub)
   + [Interpreting GuardDuty finding names in AWS Security Hub](#interpreting-findings-in-securityhub)
-+ [Typical finding from GuardDuty](#securityhub-integration-finding-example)
+  + [Typical finding from GuardDuty](#securityhub-integration-finding-example)
 + [Enabling and configuring the integration](#securityhub-integration-enable)
-+ [How to stop sending findings](#securityhub-integration-disable)
++ [Stopping the publication of findings to Security Hub](#securityhub-integration-disable)
 
 ## How Amazon GuardDuty sends findings to AWS Security Hub<a name="securityhub-integration-sending-findings"></a>
 
@@ -22,27 +22,25 @@ In AWS Security Hub, security issues are tracked as findings\. Some findings com
 
 Security Hub provides tools to manage findings from across all of these sources\. You can view and filter lists of findings and view details for a finding\. See [Viewing findings](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-viewing.html) in the *AWS Security Hub User Guide*\. You can also track the status of an investigation into a finding\. See [Taking action on findings](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-taking-action.html) in the *AWS Security Hub User Guide*\.
 
-All findings in Security Hub use a standard JSON format called the AWS Security Finding Format \(ASFF\)\. The ASFF includes details about the source of the issue, the affected resources, and the current status of the finding\. See [AWS Security Finding Format \(ASFF\)](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.htm) in the *AWS Security Hub User Guide*\.
+All findings in Security Hub use a standard JSON format called the AWS Security Finding Format \(ASFF\)\. The ASFF includes details about the source of the issue, the affected resources, and the current status of the finding\. See [AWS Security Finding Format \(ASFF\)](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) in the *AWS Security Hub User Guide*\.
 
-Amazon GuardDuty is one of the AWS services that sends findings to Security Hub\.
+Amazon GuardDuty is one of the AWS services that sends findings to Security Hub
 
-### Types of findings that GuardDuty sends<a name="securityhub-integration-finding-types"></a>
+### Types of findings that GuardDuty sends to Security Hub<a name="securityhub-integration-finding-types"></a>
 
-GuardDuty sends all of the findings it generates to Security Hub\.
+Once the integration is enabled, GuardDuty sends all of the findings it generates to Security Hub\. The findings are sent to Security Hub using the [AWS Security Finding Format \(ASFF\)](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)\. In ASFF, the `Types` field provides the finding type\.
 
-GuardDuty sends the findings to Security Hub using the [AWS Security Finding Format \(ASFF\)](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)\. In ASFF, the `Types` field provides the finding type\.
-
-### Latency for sending findings<a name="securityhub-integration-finding-latency"></a>
+#### Latency for sending findings<a name="securityhub-integration-finding-latency"></a>
 
 When GuardDuty creates a new finding, it is usually sent to Security Hub within five minutes\.
 
-### Retrying when Security Hub is not available<a name="securityhub-integration-retry-send"></a>
+#### Retrying when Security Hub is not available<a name="securityhub-integration-retry-send"></a>
 
 If Security Hub is not available, GuardDuty retries sending the findings until they are received\.
 
-### Updating existing findings in Security Hub<a name="securityhub-integration-finding-updates"></a>
+#### Updating existing findings in Security Hub<a name="securityhub-integration-finding-updates"></a>
 
-After it sends a finding to Security Hub, GuardDuty sends updates to reflect additional observations of the finding activity to Security Hub\. The rate at which aggregated findings are updated is based on the [](guardduty_exportfindings.md#guardduty_exportfindings-frequency) specified\.
+After it sends a finding to Security Hub, GuardDuty sends updates to reflect additional observations of the finding activity to Security Hub\. The rate at which aggregated findings are updated is based on the [Export update frequency](guardduty_exportfindings.md#guardduty_exportfindings-frequency) specified\.
 
 Archiving or unarchiving a GuardDuty finding will not update the finding in Security Hub\. This means that manually unarchived findings that become active in GuardDuty will not be sent to Security Hub 
 
@@ -136,7 +134,7 @@ For some GuardDuty finding types Security Hub assigns different ASFF finding nam
 |  UnauthorizedAccess:S3/MaliciousIPCaller\.Custom  |  TTPs/UnauthorizedAccess:S3\-MaliciousIPCaller\.Custom  | 
 |  UnauthorizedAccess:S3/TorIPCaller  |  TTPs/UnauthorizedAccess:S3\-TorIPCaller  | 
 
-## Typical finding from GuardDuty<a name="securityhub-integration-finding-example"></a>
+### Typical finding from GuardDuty<a name="securityhub-integration-finding-example"></a>
 
 GuardDuty sends findings to Security Hub using the [AWS Security Finding Format \(ASFF\)](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)\.
 
@@ -145,9 +143,9 @@ Here is an example of a typical finding from GuardDuty\.
 ```
   {
   "SchemaVersion": "2018-10-08",
-  "Id": "arn:aws:guardduty:us-east-1:193043430472:detector/d4b040365221be2b54a6264dc9a4bc64/finding/46ba0ac2845071e23ccdeb2ae03bfdea",
-  "ProductArn": "arn:aws:securityhub:us-east-1::product/aws/guardduty",
-  "GeneratorId": "arn:aws:guardduty:us-east-1:193043430472:detector/d4b040365221be2b54a6264dc9a4bc64",
+  "Id": "arn:aws::guardduty:us-east-1:193043430472:detector/d4b040365221be2b54a6264dc9a4bc64/finding/46ba0ac2845071e23ccdeb2ae03bfdea",
+  "ProductArn": "arn:aws::securityhub:us-east-1::product/aws/guardduty",
+  "GeneratorId": "arn:aws::guardduty:us-east-1:193043430472:detector/d4b040365221be2b54a6264dc9a4bc64",
   "AwsAccountId": "193043430472",
   "Types": [
     "TTPs/Initial Access/UnauthorizedAccess:EC2-SSHBruteForce"
@@ -192,14 +190,14 @@ Here is an example of a typical finding from GuardDuty\.
     "aws/guardduty/service/count": "74",
     "aws/guardduty/service/action/networkConnectionAction/remoteIpDetails/organization/asn": "209",
     "aws/guardduty/service/action/networkConnectionAction/remoteIpDetails/organization/isp": "CenturyLink",
-    "aws/securityhub/FindingId": "arn:aws:securityhub:us-east-1::product/aws/guardduty/arn:aws:guardduty:us-east-1:193043430472:detector/d4b040365221be2b54a6264dc9a4bc64/finding/46ba0ac2845071e23ccdeb2ae03bfdea",
+    "aws/securityhub/FindingId": "arn:aws::securityhub:us-east-1::product/aws/guardduty/arn:aws::guardduty:us-east-1:193043430472:detector/d4b040365221be2b54a6264dc9a4bc64/finding/46ba0ac2845071e23ccdeb2ae03bfdea",
     "aws/securityhub/ProductName": "GuardDuty",
     "aws/securityhub/CompanyName": "Amazon"
   },
   "Resources": [
     {
       "Type": "AwsEc2Instance",
-      "Id": "arn:aws:ec2:us-east-1:193043430472:instance/i-0c10c2c7863d1a356",
+      "Id": "arn:aws::ec2:us-east-1:193043430472:instance/i-0c10c2c7863d1a356",
       "Partition": "aws",
       "Region": "us-east-1",
       "Tags": {
@@ -234,7 +232,7 @@ To use the integration with AWS Security Hub, you must enable Security Hub\. For
 
 When you enable both GuardDuty and Security Hub, the integration is enabled automatically\. GuardDuty immediately begins to send findings to Security Hub\.
 
-## How to stop sending findings<a name="securityhub-integration-disable"></a>
+## Stopping the publication of findings to Security Hub<a name="securityhub-integration-disable"></a>
 
 To stop sending findings to Security Hub, you can use either the Security Hub console or the API\.
 

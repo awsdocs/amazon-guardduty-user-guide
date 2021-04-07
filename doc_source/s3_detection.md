@@ -4,9 +4,9 @@ S3 protection enables Amazon GuardDuty to monitor object\-level API operations t
 
  GuardDuty monitors threats against your Amazon S3 resources by analyzing AWS CloudTrail management events and CloudTrail S3 data events\. These data sources monitor different kinds of activity, for example, CloudTrail management events for S3 include operations that list or configure S3 buckets, such as `ListBuckets`, `DeleteBuckets`, and `PutBucketReplication`\. Examples of data events for S3 include object\-level API operations, such as `GetObject`, `ListObjects`, `DeleteObject`, and `PutObject`\. 
 
-GuardDuty monitoring of CloudTrail management events is on by default for all accounts that have enabled GuardDuty and is not configurable\. S3 data event logs are a configurable data source in GuardDuty\. The processes for enabling or disabling S3 data event monitoring is covered in this topic\.
+GuardDuty monitoring of CloudTrail management events is on by default for all accounts that have enabled GuardDuty and is not configurable\. S3 data event logs are a configurable data source in GuardDuty\. By default, S3 protection is enabled for new detectors, for accounts created before the addition of S3 protection this data source must be enabled manually\. The processes for enabling or disabling S3 data event monitoring is covered in this topic\.
 
-We strongly recommend that you enable S3 protection in GuardDuty\. If the feature is disabled, GuardDuty is unable to fully monitor, and generate findings for, suspicious access to data stored in your S3 buckets\. 
+We strongly recommend that you enable S3 protection in GuardDuty\. If the feature is disabled, GuardDuty is unable to fully monitor or generate findings for suspicious access to data stored in your S3 buckets\. 
 
 ## Understanding how GuardDuty uses S3 data events<a name="s3-data-source"></a>
 
@@ -16,18 +16,20 @@ GuardDuty does not process requests to objects that you have made publicly acces
 
 If you disable S3 protection, GuardDuty immediately stops consuming this data source and stops monitoring access to data stored in your S3 buckets\.
 
-## Configuring S3 protection for an individual account<a name="data-source-configure"></a>
+## Configuring S3 protection for a standalone account<a name="data-source-configure"></a>
 
-**Important**  
-By default, S3 protection is enabled automatically for new detectors\.
-
-If you are a GuardDuty administrator enabling GuardDuty for the first time on a new account, and you do not want S3 protection turned on, you can disable it through the [createDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateDetector.html) API\.
+For accounts associated by AWS Organizations, this process can be automated through console settings as described in the next section\.
 
 Accounts that were using GuardDuty before the addition of S3 protection can enable the new data source by configuring GuardDuty through the console or the `UpdateDetector` API operation\.
 
 To configure Amazon S3 data events as a data source for your account, see the following configuration options\.
 
-### To enable or disable S3 protection \(Console\)<a name="data-source-disable_console"></a>
+### To enable or disable S3 protection<a name="data-source-disable_api"></a>
+
+Choose your access method below for instructions on enabling or disabling S3 protection for a standalone account\.
+
+------
+#### [ Console ]
 
 1. Log into the [https://console\.aws\.amazon\.com/guardduty/](https://console.aws.amazon.com/guardduty/) console\.
 
@@ -35,7 +37,8 @@ To configure Amazon S3 data events as a data source for your account, see the fo
 
 1. The **S3 Protection** pane lists the current status of S3 protection for your account\. You may enable or disable it at any time by selecting **Enable** or **Disable** respectively, then confirming your selection\.
 
-### To enable or disable S3 protection \(API\)<a name="data-source-disable_api"></a>
+------
+#### [ API ]
 + Run the [updateDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateDetector.html) API operation using your own regional detector ID and passing the `dataSources` object with `"S3 Logs":"enable"` set to true or false, respectively\.
 
   You can also enable or disable S3 protection using AWS command line tools by running the following AWS CLI command\. Make sure to use your own valid detector ID\. 
@@ -46,15 +49,7 @@ The following example code enables S3 protection\. To disable it, replace `true`
   aws guardduty update-detector --detector-id 12abc34d567e8fa901bc2d34e56789f0 --data-sources '{"S3Logs":{"Enable":true}}'
   ```
 
-#### Disable S3 protection when enabling GuardDuty for new accounts \(API\)<a name="s3-disable-member_api"></a>
-
-If you want to enable GuardDuty in a new account but do not want S3 protection to be enabled by default, you can modify the [createDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateDetector.html) API operation with the optional `dataSources` object\. The following example uses the AWS CLI to enable a new GuardDuty detector with the S3 protection disabled\.
-
-```
-aws guardduty create-detector --enable --data-sources '{"S3Logs":{"Enable":false}}'
-```
-
-For accounts associated by AWS Organizations, this process can be automated through console settings as described in the next section\.
+------
 
 ## Configuring S3 protection in multiple\-account environments<a name="s3-multiaccount"></a>
 
@@ -65,7 +60,7 @@ GuardDuty administrator accounts that manage their member accounts with AWS Orga
 ### Automatically enabling S3 protection for Organization member accounts<a name="s3-autoenable"></a>
 
 **Note**  
-This functionality is only available to masters of GuardDuty members incorporated through AWS Organizations\.
+This functionality is only available to administrators of GuardDuty members incorporated through AWS Organizations\.
 
 1. Log in to the [https://console\.aws\.amazon\.com/guardduty/](https://console.aws.amazon.com/guardduty/) console using the administrator account\.
 
@@ -77,7 +72,12 @@ This functionality is only available to masters of GuardDuty members incorporate
 
 
 
-### Enable or disable S3 protection for member accounts \(Console\)<a name="s3-disable-member_console"></a>
+### To selectively enable or disable S3 protection in member accounts<a name="s3-enable-members"></a>
+
+Choose your access method below for instructions on enabling or disabling S3 protection for member accounts\.
+
+------
+#### [ Console ]
 
 ### To enable S3 protection for all accounts
 
@@ -87,7 +87,7 @@ This functionality is only available to masters of GuardDuty members incorporate
 
 1. Your will see a statement reflecting the number of accounts you manage that have S3 protection enabled\. Choose **Enable all** to enable S3 protection for all accounts\.
 **Note**  
-If you manage accounts within an organization this action also enables the **Auto\-enable** feature to automatically enable S3 protection for future member accounts within your organization\.
+If you manage accounts within an organization, this action also enables the **Auto\-enable** feature to automatically enable S3 protection for future member accounts within your organization\.
 
 ### To selectively enable or disable S3 protection in member accounts
 
@@ -99,7 +99,8 @@ From the Accounts table, review the **S3 Protection** column\. A green check mar
 
 1. Select the account for which you want to configure S3 protection\. From the **Actions** menu choose **Enable S3 Protection** or **Disable S3 Protection**, then confirm your selection to change the settings for the selected account\. The table will update automatically to show your changes\.
 
-#### Enable or disable S3 protection for member accounts \(API\)<a name="s3-disable-member_api"></a>
+------
+#### [ API ]
 
 To selectively enable or disable S3 protection for your member accounts, run the [updateMemberDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateMemberDetector.html) API operation using your own detector ID\. The following example shows how you can enable S3 protection for a single member account\. To disable it, replace `true` with `false`\. 
 
@@ -113,4 +114,17 @@ You can also pass a list of account IDs separated by a space\.
 When the code has successfully executed, it returns an empty list of `UnprocessedAccounts`\. If there were any problems changing the detector settings for an account, that account ID is listed along with a summary of the issue\.
 
 **Note**  
-If you use scripts to on\-board new accounts and wish to disable S3 protection in your new accounts you can modify the [createDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateDetector.html) API operation with the optional `dataSources` object as described in this topic\.
+If you use scripts to on\-board new accounts and wish to disable S3 protection in your new accounts, you can modify the [createDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateDetector.html) API operation with the optional `dataSources` object as described in this topic\.
+
+------
+
+## Automatically disabling S3 protection for new GuardDuty accounts<a name="s3-disable-member_api"></a>
+
+**Important**  
+By default, S3 protection is enabled automatically for new detectors\.
+
+If you are a GuardDuty administrator enabling GuardDuty for the first time on a new account, and you do not want S3 protection enabled by default, you can disable it by modifying the [createDetector](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateDetector.html) API operation with the optional `dataSources` object\. The following example uses the AWS CLI to enable a new GuardDuty detector with the S3 protection disabled\. 
+
+```
+aws guardduty create-detector --enable --data-sources '{"S3Logs":{"Enable":false}}'
+```

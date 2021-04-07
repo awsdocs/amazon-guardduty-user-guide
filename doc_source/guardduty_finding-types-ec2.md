@@ -3,7 +3,7 @@
 The following findings are specific to Amazon EC2 resources and always have a Resource Type of `Instance`\. The severity and details of the findings differ based on the Resource Role, which indicates whether the EC2 instance was the target of suspicious activity or the actor performing the activity\.
 
 **Note**  
-Instance details may be missing for some ec2 findings if the instance has already been terminated or if the underlying API call was part of a cross Region API call that originated from an EC2 instance in a different Region\.
+Instance details may be missing for some EC2 findings if the instance has already been terminated or if the underlying API call was part of a cross Region API call that originated from an EC2 instance in a different Region\.
 
 For all instance type findings, it is recommended that you examine the resource in question to determine if it is behaving in an expected manner\. If the activity is authorized, you can use Suppression Rules or Trusted IP lists to prevent false positive notifications for that resource\. If the activity is unexpected, the security best practice is to assume the instance has been compromised and take the actions detailed in [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
 
@@ -20,7 +20,11 @@ For all instance type findings, it is recommended that you examine the resource 
 + [Behavior:EC2/TrafficVolumeUnusual](#behavior-ec2-trafficvolumeunusual)
 + [CryptoCurrency:EC2/BitcoinTool\.B](#cryptocurrency-ec2-bitcointoolb)
 + [CryptoCurrency:EC2/BitcoinTool\.B\!DNS](#cryptocurrency-ec2-bitcointoolbdns)
++ [Impact:EC2/AbusedDomainRequest\.Reputation](#impact-ec2-abuseddomainrequestreputation)
++ [Impact:EC2/BitcoinDomainRequest\.Reputation](#impact-ec2-bitcoindomainrequestreputation)
++ [Impact:EC2/MaliciousDomainRequest\.Reputation](#impact-ec2-maliciousdomainrequestreputation)
 + [Impact:EC2/PortSweep](#impact-ec2-portsweep)
++ [Impact:EC2/SuspiciousDomainRequest\.Reputation](#impact-ec2-suspiciousdomainrequestreputation)
 + [Impact:EC2/WinRMBruteForce](#impact-ec2-winrmbruteforce)
 + [Recon:EC2/PortProbeEMRUnprotectedPort](#recon-ec2-portprobeemrunprotectedport)
 + [Recon:EC2/PortProbeUnprotectedPort](#recon-ec2-portprobeunprotectedport)
@@ -246,13 +250,15 @@ If this activity is unexpected, your instance is likely compromised, see [Remedi
 
 #### <a name="cryptocurrency-ec2-bitcointoolb_full"></a>
 
-This finding informs you that the listed EC2 instance in your AWS environment is querying an IP Address that is associated with Bitcoin or other cryptocurrency\-related activity\. Bitcoin is a worldwide cryptocurrency and digital payment system\. Besides being used as a reward for Bitcoin mining, Bitcoin can be exchanged for other currencies, products, and services\. 
+This finding informs you that the listed EC2 instance in your AWS environment is querying an IP Address that is associated with Bitcoin or other cryptocurrency\-related activity\. Bitcoin is a worldwide cryptocurrency and digital payment system that can be exchanged for other currencies, products, and services\. Bitcoin is a reward for bitcoin\-mining and is highly sought after by threat actors\.
 
 #### <a name="cryptocurrency-ec2-bitcointoolb_remediation"></a>
 
 **Remediation recommendations:**
 
 If you use this EC2 instance to mine or manage cryptocurrency, or this instance is otherwise involved in blockchain activity, this finding could represented expected activity for your environment\. If this is the case in your AWS environment, we recommend that you set up a suppression rule for this finding\. The suppression rule should consist of two filter criteria\. The first criteria should use the **Finding type** attribute with a value of `CryptoCurrency:EC2/BitcoinTool.B!DNS`\. The second filter criteria should be the **Instance ID** of the instance involved in blockchain activity\. To learn more about creating suppression rules see [Suppression rules](findings_suppression-rule.md)\.
+
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## CryptoCurrency:EC2/BitcoinTool\.B\!DNS<a name="cryptocurrency-ec2-bitcointoolbdns"></a>
 
@@ -264,13 +270,77 @@ If you use this EC2 instance to mine or manage cryptocurrency, or this instance 
 
 #### <a name="cryptocurrency-ec2-bitcointoolbdns_full"></a>
 
-This finding informs you that the listed EC2 instance in your AWS environment is querying a domain name that is associated with Bitcoin or other cryptocurrency\-related activity\. Bitcoin is a worldwide cryptocurrency and digital payment system\. Besides being used as a reward for Bitcoin mining, Bitcoin can be exchanged for other currencies, products, and services\.
+This finding informs you that the listed EC2 instance in your AWS environment is querying a domain name that is associated with Bitcoin or other cryptocurrency\-related activity\. Bitcoin is a worldwide cryptocurrency and digital payment system that can be exchanged for other currencies, products, and services\. Bitcoin is a reward for bitcoin\-mining and is highly sought after by threat actors\.
 
 #### <a name="cryptocurrency-ec2-bitcointoolbdns_remediation"></a>
 
 **Remediation recommendations:**
 
 If you use this EC2 instance to mine or manage cryptocurrency, or this instance is otherwise involved in blockchain activity, this finding could represented expected activity for your environment\. If this is the case in your AWS environment, we recommend that you set up a suppression rule for this finding\. The suppression rule should consist of two filter criteria\. The first criteria should use the **Finding type** attribute with a value of `CryptoCurrency:EC2/BitcoinTool.B!DNS`\. The second filter criteria should be the **Instance ID** of the instance involved in blockchain activity\. To learn more about creating suppression rules see [Suppression rules](findings_suppression-rule.md)\.
+
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
+
+## Impact:EC2/AbusedDomainRequest\.Reputation<a name="impact-ec2-abuseddomainrequestreputation"></a>
+
+### An EC2 instance is querying a low reputation domain name that is associated with known abused domains\.<a name="impact-ec2-abuseddomainrequestreputation_description"></a>
+
+#### <a name="impact-ec2-abuseddomainrequestreputation_severity"></a>
+
+**Default severity: Medium**
+
+#### <a name="impact-ec2-abuseddomainrequestreputation_full"></a>
+
+This finding informs you that the listed Amazon EC2 instance within your AWS environment is querying a low reputation domain name associated with known abused domains or IP addresses\. Examples of abused domains are top level domain names \(TLDs\) and second\-level domain names \(2LDs\) providing free subdomain registrations as well as dynamic DNS providers\. Threat actors tend to use these services to register domains for free or at low costs\. Low reputation domains in this category may also be expired domains resolving to a registrar's parking IP address and therefore may no longer be active\. A parking IP is where a registrar directs traffic for domains that have not been linked to any service\. The listed Amazon EC2 instance may be compromised as threat actors commonly use these registrar's or services for C&C and malware distribution\.
+
+Low reputation domains are based on a reputation score model developed by GuardDuty, which evaluates and ranks the characteristics of a domain to determine its likelihood of being malicious\.
+
+#### <a name="impact-ec2-abuseddomainrequestreputation_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
+
+## Impact:EC2/BitcoinDomainRequest\.Reputation<a name="impact-ec2-bitcoindomainrequestreputation"></a>
+
+### An EC2 instance is querying a low reputation domain name that is associated with crypocurrency\-related activity\.<a name="impact-ec2-bitcoindomainrequestreputation_description"></a>
+
+#### <a name="impact-ec2-bitcoindomainrequestreputation_severity"></a>
+
+**Default severity: High**
+
+#### <a name="impact-ec2-bitcoindomainrequestreputation_full"></a>
+
+This finding informs you that the listed Amazon EC2 instance within your AWS environment is querying a low reputation domain name associated with Bitcoin or other cryptocurrency\-related activity\. Bitcoin is a worldwide cryptocurrency and digital payment system that can be exchanged for other currencies, products, and services\. Bitcoin is a reward for bitcoin\-mining and is highly sought after by threat actors\.
+
+Low reputation domains are based on a reputation score model developed by GuardDuty, which evaluates and ranks the characteristics of a domain to determine its likelihood of being malicious\.
+
+#### <a name="impact-ec2-bitcoindomainrequestreputation_remediation"></a>
+
+**Remediation recommendations:**
+
+If you use this EC2 instance to mine or manage cryptocurrency, or this instance is otherwise involved in blockchain activity, this finding could represent expected activity for your environment\. If this is the case in your AWS environment, we recommend that you set up a suppression rule for this finding\. The suppression rule should consist of two filter criteria\. The first criteria should use the **Finding type** attribute with a value of `Impact:EC2/BitcoinDomainRequest.Reputation`\. The second filter criteria should be the **Instance ID** of the instance involved in blockchain activity\. To learn more about creating suppression rules see [Suppression rules](findings_suppression-rule.md)\.
+
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
+
+## Impact:EC2/MaliciousDomainRequest\.Reputation<a name="impact-ec2-maliciousdomainrequestreputation"></a>
+
+### An EC2 instance is querying a low reputation domain that is associated with known malicious domains\.<a name="impact-ec2-maliciousdomainrequestreputation_description"></a>
+
+#### <a name="impact-ec2-maliciousdomainrequestreputation_severity"></a>
+
+**Default severity: High**
+
+#### <a name="impact-ec2-maliciousdomainrequestreputation_full"></a>
+
+This finding informs you that the listed Amazon EC2 instance within your AWS environment is querying a low reputation domain name associated with known malicious domains or IP addresses\. For example, domains may be associated with a known sinkhole IP address\. Sinkholed domains are domains that were previously controlled by a threat actor, and requests made to them can indicate the instance is compromised\. These domains may also be correlated with known malicious campaigns or domain generation algorithms\.
+
+Low reputation domains are based on a reputation score model developed by GuardDuty, which evaluates and ranks the characteristics of a domain to determine its likelihood of being malicious\.
+
+#### <a name="impact-ec2-maliciousdomainrequestreputation_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
 
 ## Impact:EC2/PortSweep<a name="impact-ec2-portsweep"></a>
 
@@ -285,6 +355,26 @@ If you use this EC2 instance to mine or manage cryptocurrency, or this instance 
 This finding informs you the listed EC2 instance in your AWS environment is probing a port on a large number of publicly routable IP addresses\. This type of activity is typically used to find vulnerable hosts to exploit\.
 
 #### <a name="impact-ec2-portsweep_remediation"></a>
+
+**Remediation recommendations:**
+
+If this activity is unexpected, your instance is likely compromised, see [Remediating a compromised EC2 instance](guardduty_remediate.md#compromised-ec2)\.
+
+## Impact:EC2/SuspiciousDomainRequest\.Reputation<a name="impact-ec2-suspiciousdomainrequestreputation"></a>
+
+### An EC2 instance is querying a low reputation domain name that is suspicious in nature due to its age, or low popularity\.<a name="impact-ec2-suspiciousdomainrequestreputation_description"></a>
+
+#### <a name="impact-ec2-suspiciousdomainrequestreputation_severity"></a>
+
+**Default severity: Low**
+
+#### <a name="impact-ec2-suspiciousdomainrequestreputation_full"></a>
+
+This finding informs you that the listed Amazon EC2 instance within your AWS environment is querying a low reputation domain name that is suspected of being malicious\. GuardDuty noticed characteristics of this domain that were consistent with previously observed malicious domains, however, our reputation model was unable to definitively relate it to a known threat\. These domains are typically newly observed or receive a low amount of traffic\.
+
+Low reputation domains are based on a reputation score model developed by GuardDuty, which evaluates and ranks the characteristics of a domain to determine its likelihood of being malicious\.
+
+#### <a name="impact-ec2-suspiciousdomainrequestreputation_remediation"></a>
 
 **Remediation recommendations:**
 

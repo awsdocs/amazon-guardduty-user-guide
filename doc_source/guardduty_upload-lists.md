@@ -65,7 +65,7 @@ If your list is encrypted using server\-side encryption SSE\-KMS you must grant 
 	"Sid": "Allow access for GuardDuty Service Role",
 	"Effect": "Allow",
 	"Principal": {
-		"AWS": "arn:aws:iam::123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
+		"AWS": "arn:aws::iam::123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
 	},
 	"Action": "kms:Decrypt*",
 	"Resource": "*"
@@ -85,7 +85,7 @@ The following procedure describes how you can upload trusted IP lists and threat
 1. On the **List management** page, choose **Add a trusted IP list** or **Add a threat list**\.
 
 1. In the dialog box, do the following:
-   + For **List name**, type a name for the list\.
+   + For **List name**, enter` a name for the list\.
    + For **Location**, specify the location of the list \- this is the S3 bucket where you store your trusted IP list or threat list and the file that contains your list\. 
 **Note**  
 You can specify the location URL in the following formats:  
@@ -123,7 +123,7 @@ The following procedures describe how you can activate or deactivate trusted IP 
 
 ## To update trusted IP lists and threat lists<a name="update-lists-procedure"></a>
 
-If you make changes to a trusted IP list or a threat list that is already uploaded and activated in GuardDuty \(for example, rename the list or add more IP addresses to it\), you must update this list in GuardDuty and reactivate it in order for GuardDuty to use the latest version of the list in its security monitoring scope\. To update a safe or threat list, you can either use the procedure below or run the [UpdateThreatIntelSet](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateThreatIntelSet.html) and [UpdateIPSet](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateIPSet.html) operations of the GuardDuty API\.
+If you make changes to a trusted IP list or a threat list that is already uploaded and activated in GuardDuty \(for example, rename the list or add more IP addresses to it\), you must update this list in GuardDuty and reactivate it in order for GuardDuty to use the latest version of the list in its security monitoring scope\. To update a trusted IP or threat list, you can either use the procedure below or run the [UpdateThreatIntelSet](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateThreatIntelSet.html) and [UpdateIPSet](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateIPSet.html) operations of the GuardDuty API\.
 
 **To update trusted IP lists and threat lists \(console\)**
 

@@ -1,7 +1,7 @@
 # Amazon GuardDuty Amazon GuardDuty User Guide
 
 -----
-*****Copyright &copy; 2021 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy;  Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -15,7 +15,7 @@ Amazon's trademarks and trade dress may not be used in
 -----
 ## Contents
 + [What is Amazon GuardDuty?](what-is-guardduty.md)
-+ [Setting up GuardDuty](guardduty_settingup.md)
++ [Getting started with GuardDuty](guardduty_settingup.md)
 + [Concepts and terminology](guardduty_concepts.md)
 + [How Amazon GuardDuty uses its data sources](guardduty_data-sources.md)
 + [Understanding Amazon GuardDuty findings](guardduty_findings.md)

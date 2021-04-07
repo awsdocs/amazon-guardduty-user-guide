@@ -45,9 +45,9 @@ The title of sample findings generated through these methods always begins with 
 
 ## Automatically generating common GuardDuty findings<a name="guardduty_findings-scripts"></a>
 
-You can use the following [scripts](https://github.com/awslabs/amazon-guardduty-tester) to automatically generate several common GuardDuty findings\. The **guardduty\-tester\.template** uses AWS CloudFormation to create an isolated environment with a bastion host, a tester Amazon EC2 instance that you can access through SSH, and two target EC2 instances\. Then you can run **guardduty\_tester\.sh** to start an interaction between the tester EC2 instance, the target Windows EC2 instance, and the target Linux EC2 instance to simulate five types of common attacks that GuardDuty can detect and notify you about with generated findings\.
+You can use the following [scripts](https://github.com/awslabs/amazon-guardduty-tester) to automatically generate several common GuardDuty findings\. The **guardduty\-tester\.template** uses AWS CloudFormation to create an isolated environment with a bastion host, a tester Amazon EC2 instance that you can access through SSH, and two target EC2 instances\. Then you can run **guardduty\_tester\.sh** to start an interaction between the tester EC2 instance, the target Windows EC2 instance, and the target Linux EC2 instance, to simulate five types of common attacks that GuardDuty can detect and notify you about with generated findings\.
 
-1. As a prerequisite, you must enable GuardDuty in the account and Region in which you want to run **guardduty\-tester\.template** and **guardduty\_tester\.sh**\. For more information about enabling GuardDuty, see [Setting up GuardDuty](guardduty_settingup.md)\.
+1. As a prerequisite, you must enable GuardDuty in the account and Region in which you want to run **guardduty\-tester\.template** and **guardduty\_tester\.sh**\. For more information about enabling GuardDuty, see [Getting started with GuardDuty](guardduty_settingup.md)\.
 
    You must also generate a new or use an existing EC2 key pair in each Region in which you want to run these scripts\. This EC2 key pair is used as a parameter in the **guardduty\-tester\.template** script that you use to create a new CloudFormation stack\. For more information about generating key pairs, see [Amazon EC2 key pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)\.
 
@@ -64,7 +64,7 @@ You can use the following [scripts](https://github.com/awslabs/amazon-guardduty-
            HostName {Elastic IP Address of Bastion}
            User ec2-user
            IdentityFile ~/.ssh/{your-ssh-key.pem}
-           Host tester
+   Host tester
            ForwardAgent yes
            HostName {Local IP Address of RedTeam Instance}
            User ec2-user

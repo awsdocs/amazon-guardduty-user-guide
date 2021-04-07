@@ -13,7 +13,7 @@ The following sections describe the details of how GuardDuty uses each supported
 
 ## AWS CloudTrail Event Logs<a name="guardduty_cloudtrail"></a>
 
-AWS CloudTrail provides you with a history of AWS API calls for your account, including API calls made using the AWS Management Console, the AWS SDKs, the command line tools, and higher\-level AWS services\. CloudTrail also allows you to identify which users and accounts called AWS APIs for services that support CloudTrail, the source IP address that the calls were made from, and when the calls occurred\. For more information, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\. GuardDuty can monitor both CloudTrail management events, and optional CloudTrail data events for S3\.
+AWS CloudTrail provides you with a history of AWS API calls for your account, including API calls made using the AWS Management Console, the AWS SDKs, the command line tools, and higher\-level AWS services\. CloudTrail also allows you to identify which users and accounts called AWS APIs for services that support CloudTrail, the source IP address that the calls were made from, and when the calls occurred\. For more information, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\. GuardDuty can monitor both CloudTrail management events, and optionally, CloudTrail data events for S3\.
 
 When you enable GuardDuty, it immediately starts analyzing your CloudTrail event logs\. It consumes CloudTrail management and S3 data events directly from CloudTrail through an independent and duplicative stream of events\. There is no additional charge for GuardDuty to access CloudTrail events\.
 
@@ -43,7 +43,7 @@ Data events, also known as data plane operations, provide insight into the resou
 The following are examples of CloudTrail S3 data events that GuardDuty can monitor:  
 GetObject, ListObjects, DeleteObject, and PutObject API operations\.
 
-S3 data event monitoring is enabled by default for new accounts starting with GuardDuty\. Accounts that had already started using GuardDuty prior to S3 data event monitoring must opt in to enable this data source\. This data source is optional and can be enabled or disabled for any account, or region at any time\. For more information about configuring S3 as a data source see [Amazon S3 protection in Amazon GuardDuty](s3_detection.md)\. 
+S3 data event monitoring is enabled by default for new accounts starting with GuardDuty\. Accounts that had already started using GuardDuty prior to S3 data event monitoring must opt in to enable this data source\. This data source is optional and can be enabled or disabled for any account, or region, at any time\. For more information about configuring S3 as a data source see [Amazon S3 protection in Amazon GuardDuty](s3_detection.md)\. 
 
 ## VPC Flow Logs<a name="guardduty_vpc"></a>
 
