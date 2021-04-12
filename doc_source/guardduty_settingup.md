@@ -1,6 +1,6 @@
 # Getting started with GuardDuty<a name="guardduty_settingup"></a>
 
-This tutorial provides a hands\-on introduction to GuardDuty\. The minimum requirements for enabling GuardDuty as a standalone account or as a GuardDuty administrator with AWS Organizations are covered in Step 1\. Steps 2 through 5 cover using additional features recommended by GuardDuty to get the most out of your findings\.
+This tutorial provides a hands\-on introduction to GuardDuty\. The minimum requirements for enabling GuardDuty as a standalone account or as a GuardDuty administrator with AWS Organizations are covered in Step 1\. Steps 2 through 5 cover using additional features recommended by GuardDuty can to get the most out of your findings\.
 
 **Topics**
 + [Before you begin](#setup-before)
