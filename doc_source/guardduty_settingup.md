@@ -12,7 +12,7 @@ This tutorial provides a hands\-on introduction to GuardDuty\. The minimum requi
 
 ## Before you begin<a name="setup-before"></a>
 
-GuardDuty is a monitoring service that analyzes AWS CloudTrail management and Amazon S3 data events, VPC flow logs, and DNS logs to generate security findings for your account\. Once GuardDuty is enabled, it starts monitoring your environment immediately\. GuardDuty be disabled at any time to stop it from processing all AWS CloudTrail events, VPC Flow Logs, and DNS logs\.
+GuardDuty is a monitoring service that analyzes AWS CloudTrail management and Amazon S3 data events, VPC flow logs, and DNS logs to generate security findings for your account\. Once GuardDuty is enabled, it starts monitoring your environment immediately\. GuardDuty can be disabled at any time to stop it from processing all AWS CloudTrail events, VPC Flow Logs, and DNS logs\.
 
 **Note the following about enabling GuardDuty**:
 + GuardDuty is a Regional service, meaning any of the configuration procedures you follow on this page must be repeated in each region that you want to monitor with GuardDuty\.
