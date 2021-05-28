@@ -182,7 +182,7 @@ You can check email confirmation status by selecting the subscription name from 
 
 **To create an EventBridge rule to capture GuardDuty findings and format them**
 
-1. Open the EventBridge console at [https://console\.aws\.amazon\.com/events/](https://console.aws.amazon.com/eventsy/)\.
+1. Open the EventBridge console at [https://console\.aws\.amazon\.com/events/](https://console.aws.amazon.com/events/)\.
 
 1. Select **Rules** from the navigation pane and then **Create Rule**\.
 
