@@ -39,7 +39,7 @@ Some instance details may be missing if the instance has already been terminated
 + **Instance ID** – the ID of the EC2 instance involved in the activity that prompted GuardDuty to generate the finding\.
 + **Instance Type** – the type of the EC2 instance involved in the finding\.
 + **Launch Time** – the time and date the instance was launched\.
-+ **Outpost ARN** – The Amazon Resource Name \(ARN\) of the AWS Outpost\. Only applicable to AWS Outposts instances\. For more information, see [What is AWS Outposts?](https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html)
++ **Outpost ARN** – The Amazon Resource Name \(ARN\) of the AWS Outposts\. Only applicable to AWS Outpostss instances\. For more information, see [What is AWS Outposts?](https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html)
 + **Security Group Name** – The name of the Security Group attached to the involved instance\.
 + **Security Group ID** – The ID of the Security Group attached to the involved instance\.
 + **Instance state** – The current state of the targeted instance\.
@@ -74,22 +74,27 @@ Some instance details may be missing if the instance has already been terminated
 ## Action<a name="finding-action-section"></a>
 
 A finding's **Action** gives details on the type of activity that triggered the finding\. The information available varies based on action type\.
-+ **Action type** – The finding activity type\. This value can be one of the following: 
-  + **NETWORK\_CONNECTION** – indicates that network traffic was exchanged between the identified EC2 instance and the remote host\.
-  + **PORT\_PROBE** – indicates that a remote host probed the identified EC2 instance on multiple open ports\.
-  + **DNS\_REQUEST** – indicates that the identified EC2 instance queried a domain name\.
-  + **AWS\_API\_CALL** – indicates that an AWS API was invoked\.
-  + **ERROR CODE** – if the finding was triggered by a failed API call this displays the error code for that call\.
-+ **Connection direction** – The network connection direction observed in the activity that prompted GuardDuty to generate the finding\. The values can be one of the following:
-  + **INBOUND** – indicates that a remote host initiated a connection to a local port on the identified EC2 instance in your account\.
-  + **OUTBOUND** – indicates that the identified EC2 instance initiated a connection to a remote host\.
-  + **UNKNOWN** – indicates that GuardDuty could not determine the direction of the connection\.
-+ **Protocol** – the network connection protocol observed in the activity that prompted GuardDuty to generate the finding\. 
-+ **Local IP** – The original source IP of the traffic that triggered the finding\. This info can be used to distinguish between the IP address of an intermediate layer through which traffic flows, and the original source IP address of the traffic that triggered the finding\. For example the IP address of an EKS pod as opposed to the IP address of the instance on which the EKS pod is running\. 
-+ **API** – the name of the API operation that was invoked and thus prompted GuardDuty to generate this finding\. 
++ **Action type** – The finding activity type\. This value can be **NETWORK\_CONNECTION**, **PORT\_PROBE**, **DNS\_REQUEST**, or **AWS\_API\_CALL**\. The information available varies based on action type: 
+  + **NETWORK\_CONNECTION** – indicates that network traffic was exchanged between the identified EC2 instance and the remote host\. This action type has the following additional information:
+    + **Connection direction** – The network connection direction observed in the activity that prompted GuardDuty to generate the finding\. The values can be one of the following:
+      + **INBOUND** – indicates that a remote host initiated a connection to a local port on the identified EC2 instance in your account\.
+      + **OUTBOUND** – indicates that the identified EC2 instance initiated a connection to a remote host\.
+      + **UNKNOWN** – indicates that GuardDuty could not determine the direction of the connection\.
+    + **Protocol** – the network connection protocol observed in the activity that prompted GuardDuty to generate the finding\. 
+    + **Local IP** – The original source IP of the traffic that triggered the finding\. This info can be used to distinguish between the IP address of an intermediate layer through which traffic flows, and the original source IP address of the traffic that triggered the finding\. For example the IP address of an EKS pod as opposed to the IP address of the instance on which the EKS pod is running\. 
+    + **Blocked** – Indicates whether the targeted port is blocked\. 
+  + **PORT\_PROBE** – indicates that a remote host probed the identified EC2 instance on multiple open ports\. This action type has the following additional information:
+    + **Local IP** – The original source IP of the traffic that triggered the finding\. This info can be used to distinguish between the IP address of an intermediate layer through which traffic flows, and the original source IP address of the traffic that triggered the finding\. For example the IP address of an EKS pod as opposed to the IP address of the instance on which the EKS pod is running\. 
+    + **Blocked** – Indicates whether the targeted port is blocked\. 
+  + **DNS\_REQUEST** – indicates that the identified EC2 instance queried a domain name\. This action type has the following additional information:
+    + **Protocol** – the network connection protocol observed in the activity that prompted GuardDuty to generate the finding\. 
+    + **Blocked** – Indicates whether the targeted port is blocked\. 
+  + **AWS\_API\_CALL** – indicates that an AWS API was invoked\. This action type has the following additional information:
+    + **API** – the name of the API operation that was invoked and thus prompted GuardDuty to generate this finding\. 
 **Note**  
 These operations can also include non\-API events captured by AWS CloudTrail\. For more information, see [Non\-API events captured by CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-non-api-events.html)\.
-+ **Service name** – the DNS name of the AWS service that attempted to make the API call that triggered the finding\. 
+    + **ERROR CODE** – if the finding was triggered by a failed API call this displays the error code for that call\.
+    + **Service name** – the DNS name of the service that attempted to make the API call that triggered the finding\. 
 
 ## Actor or Target<a name="finding-actor-target"></a>
 
@@ -113,6 +118,12 @@ All findings have an **Additional information** section that can include the fol
 + **Unusual** – activity details that were not observed historically\. These can include an unusual \(previously not observed\) user, or location, or time\. 
 + **Unusual protocol**– the network connection protocol involved in the activity that prompted GuardDuty to generate the finding\.
 
+## Evidence<a name="finding-additional-info"></a>
+
+Findings based on DNS logs have an **Evidence** section that includes the following information:
++ **Threat intelligence details** – the name of the threat list that the recognized `Threat name` appears on\. 
++ **Threat name** – the name of the malware family, or other identifier, associated with the threat\.
+
 ## Anomalous behavior<a name="finding-anomalous"></a>
 
 Findings types that end in **AnomalousBehavior** indicate that the finding was generated by the GuardDuty anomaly detection machine learning \(ML\) model\. The ML model evaluates all API requests to your account and identifies anomalous events that are associated with tactics used by adversaries\. The ML model tracks various factors of the API request, such as the user that made the request, the location the request was made from, and the specific API that was requested\. 
@@ -124,7 +135,7 @@ In addition to the details available for all GuardDuty findings that are associa
   + The first API listed is the primary API, which is the API request associated with the highest\-risk observed activity\. This is the API that triggered the finding and correlates to the attack stage of the finding type\. This is also the API that is detailed under the **Action** section in the console, and in the finding's JSON\.
   + Any other APIs listed are additional anomalous APIs from the listed user identity observed in proximity to the primary API\. If there is only one API on the list, the ML model did not identify any additional API requests from that user identity as anomalous\. 
   + The list of APIs is divided based on whether an API was **successfully called**, or if the API was unsuccessfully called, meaning an error response was received\. The type of error response received is listed above each unsuccessfully\-called API\. Possible error response types are: `access denied`, `access denied exception`, `auth failure`, `instance limit exceeded`, `invalid permission - duplicate`, `invalid permission - not found`, `operation not permitted`\.
-  + APIs are categorized by their associated AWS service\. 
+  + APIs are categorized by their associated service\. 
 **Note**  
 For more context, select **Usual APIs** to open a pane that gives details on the top APIs, to a maximum of 20, usually seen for both the user identity and all users within the account\. The APIs are marked **rare** \(less than once a month\), **infrequent** \(a few times a month\), or **frequent** \(daily to weekly\), depending on how often they are used within your account\.
 + **Unusual Behavior \(Account\)** – this section gives additional details on the profiled behavior for your account\. The information tracked in this panel includes:
@@ -132,7 +143,7 @@ For more context, select **Usual APIs** to open a pane that gives details on the
   + **User Name** – The name of the user that made the anomalous API call\.
   + **User Agent**– the user agent used to make the anomalous API call\. The user agent is the method used to make the call such as `aws-cli` or `Botocore`\.
   + **User Type** – The type of user that made the anomalous API call\. Possible values are `AWS_SERVICE`, `ASSUMED_ROLE`, `IAM_USER`, or `ROLE`\.
-+ **Unusual Behavior \(User Identity\)** – this section gives additional details on the profiled behavior for the user identity involved with the finding\. 
++ **Unusual Behavior \(User Identity\)** – this section gives additional details on the profiled behavior for the **User Identity** involved with the finding\.  When a behavior is identified as unusual this means GuardDuty's ML model has not previously seen this user identity making this API call in this way within the training period\. The following additional details about the **User Identity** are available:
   + **ASN Org** – The ASN Org the anomalous API call was made from\. 
   + **User Agent**– the user agent used to make the anomalous API call\. The user agent is the method used to make the call such as `aws-cli` or `Botocore`\.
 **Note**  

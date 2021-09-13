@@ -79,7 +79,7 @@ Complete the following procedure using the credentials of the AWS account that y
    You can also use AWS Command Line Tools to designate a administrator account by running the following CLI command\. Make sure to use your own valid detector ID, account ID, and email\.
 
    ```
-   aws guardduty create-members --detector-id 12abc34d567e8fa901bc2d34e56789f0 --account-details AccountId=123456789012,Email=guarddutymember@amazon.com
+    AWS  guardduty create-members --detector-id 12abc34d567e8fa901bc2d34e56789f0 --account-details AccountId=123456789012,Email=guarddutymember@amazon.com
    ```
 
 1. Run the [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API operation using the credentials of the AWS account that has GuardDuty enabled\. This is the account that you want to be the administrator GuardDuty account\.
@@ -91,7 +91,7 @@ You can also specify an optional invitation message using the `message` request 
    You can also use AWS Command Line Tools to designate member accounts by running the following CLI command\. Make sure to use your own valid detector ID and valid account IDs for the accounts you want to invite\. 
 
    ```
-   aws guardduty invite-members --detector-id 12abc34d567e8fa901bc2d34e56789f0 --account-ids 123456789012
+    AWS  guardduty invite-members --detector-id 12abc34d567e8fa901bc2d34e56789f0 --account-ids 123456789012
    ```
 
 Complete the following procedure using the credentials of each AWS account that you want to designate as a GuardDuty member account\.
@@ -105,7 +105,7 @@ Complete the following procedure using the credentials of each AWS account that 
    You can also do this by using AWS Command Line Tools using the following CLI command\.
 
    ```
-   aws guardduty create-detector --enable
+    AWS  guardduty create-detector --enable
    ```
 
 1. Run the [AcceptInvitation](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_AcceptInvitation.html) API operation for each AWS account that you want to accept the membership invitation, using that account's credentials\. 
@@ -115,7 +115,7 @@ Complete the following procedure using the credentials of each AWS account that 
    You can also accept an invitation using AWS Command Line Tools by running the following CLI command\. Make sure to use a valid detector ID, administrator account ID, and invitation ID\.
 
    ```
-   aws guardduty accept-invitation --detector-id 12abc34d567e8fa901bc2d34e56789f0 --master-id 012345678901 --invitation-id 84b097800250d17d1872b34c4daadcf5 
+    AWS  guardduty accept-invitation --detector-id 12abc34d567e8fa901bc2d34e56789f0 --master-id 012345678901 --invitation-id 84b097800250d17d1872b34c4daadcf5 
    ```
 
 ## Enable GuardDuty in multiple accounts simultaneously<a name="guardduty_become_multiple"></a>
@@ -182,7 +182,7 @@ The following process enables GuardDuty in all available Regions by default\. Yo
    sudo yum install git python 
    sudo yum install python-pip
    pip install boto3 
-   aws configure 
+    AWS  configure 
    git clone https://github.com/aws-samples/amazon-guardduty-multiaccount-scripts.git
    cd amazon-guardduty-multiaccount-scripts 
    sudo chmod +x disableguardduty.py enableguardduty.py
@@ -197,7 +197,7 @@ The following process enables GuardDuty in all available Regions by default\. Yo
  The CSV file must be in the same location as your `enableguardduty.py` script\. You can copy an existing CSV file from Amazon S3 to your current directory with the following method\.   
 
    ```
-   aws s3 cp s3://my-bucket/my_key_name example.csv
+    AWS  s3 cp s3://my-bucket/my_key_name example.csv
    ```
 
 1. Run the Python script\. Make sure to supply your GuardDuty administrator account ID, the name of the role created in the first steps, and the name of your CSV file as arguments\.

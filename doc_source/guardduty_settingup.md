@@ -12,19 +12,22 @@ This tutorial provides a hands\-on introduction to GuardDuty\. The minimum requi
 
 ## Before you begin<a name="setup-before"></a>
 
-GuardDuty is a monitoring service that analyzes AWS CloudTrail management and Amazon S3 data events, VPC flow logs, and DNS logs to generate security findings for your account\. Once GuardDuty is enabled, it starts monitoring your environment immediately\. GuardDuty can be disabled at any time to stop it from processing all AWS CloudTrail events, VPC Flow Logs, and DNS logs\.
+GuardDuty is a monitoring service that analyzes AWS CloudTrail management and Amazon S3 data events, VPC Flow Logs, and DNS logs to generate security findings for your account\. Once GuardDuty is enabled, it starts monitoring your environment immediately\. GuardDuty can be disabled at any time to stop it from processing all AWS CloudTrail events, VPC Flow Logs, and DNS logs\.
+
+**Note**  
+You do not need to enable AWS CloudTrail, Amazon S3 data events, VPC Flow Logs, and DNS logs before starting GuardDuty\. Amazon GuardDuty pulls independent streams of data directly from those services\. For more information see [How Amazon GuardDuty uses its data sources](guardduty_data-sources.md)\. 
 
 **Note the following about enabling GuardDuty**:
 + GuardDuty is a Regional service, meaning any of the configuration procedures you follow on this page must be repeated in each region that you want to monitor with GuardDuty\.
 
   We highly recommend that you enable GuardDuty in all supported AWS Regions\. This enables GuardDuty to generate findings about unauthorized or unusual activity even in Regions that you are not actively using\. This also enables GuardDuty to monitor AWS CloudTrail events for global AWS services such as IAM\. If GuardDuty is not enabled in all supported Regions, its ability to detect activity that involves global services is reduced\. For a full list of regions in which GuardDuty is supported see [Regions and endpoints](guardduty_regions.md)\.
-+ Any user with administrator privileges in an AWS Account can enable GuardDuty, however, following the security best practice of least privilege, it is recommended that you create an IAM user, role, or group to manage GuardDuty specifically\. For information on the permissions required to enable GuardDuty see [Permissions required to enable GuardDuty](guardduty_managing_access.md#guardduty_enable-permissions)\.
-+ When you enable GuardDuty for the first time in any region, it creates a service\-linked role for your account called `AWSServiceRoleForAmazonGuardDuty`\. This role includes the permissions and the trust policies that allow GuardDuty to consume and analyze events directly from AWS CloudTrail, VPC Flow logs, and DNS logs in order to generate security findings\. For more information, see [Using a service\-linked role to delegate permissions to GuardDuty](guardduty_managing_access.md#guardduty_service-access)\. For more information about service\-linked roles, see [Using service\-linked roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)\.
++ Any user with administrator privileges in an AWS Account can enable GuardDuty, however, following the security best practice of least privilege, it is recommended that you create an IAM user, role, or group to manage GuardDuty specifically\. For information on the permissions required to enable GuardDuty see [Permissions required to enable GuardDuty](security_iam_id-based-policy-examples.md#guardduty_enable-permissions)\.
++ When you enable GuardDuty for the first time in any region, it creates a service\-linked role for your account called `AWSServiceRoleForAmazonGuardDuty`\. This role includes the permissions and the trust policies that allow GuardDuty to consume and analyze events directly from AWS CloudTrail, VPC Flow logs, and DNS logs in order to generate security findings\. For more information, see [Service\-linked role permissions for GuardDuty](using-service-linked-roles.md#slr-permissions)\. For more information about service\-linked roles, see [Using service\-linked roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)\.
 + When you enable GuardDuty for the first time in any Region your AWS account is automatically enrolled in a 30\-day GuardDuty free trial for that Region\.
 
 ## Step 1: Enable Amazon GuardDuty<a name="guardduty_enable-gd"></a>
 
-The first step to using GuardDuty is to enable it in your account, Once enabled, GuardDuty will immediately begin to monitor for security threats in the current region\.
+The first step to using GuardDuty is to enable it in your account\. Once enabled, GuardDuty will immediately begin to monitor for security threats in the current region\.
 
 If you want to manage GuardDuty findings for other accounts within your organization as a GuardDuty administrator, you must add member accounts and enable GuardDuty for them as well\. Choose an option to learn how to enable GuardDuty for your environment\.
 
@@ -136,7 +139,7 @@ GuardDuty recommends setting up findings export, which allows you to export your
 
       ```
       {
-          "Sid": "Allow GuardDuty to use the key",
+          "Sid": "AllowGuardDutyKey",
           "Effect": "Allow",
           "Principal": {
               "Service": "guardduty.amazonaws.com"

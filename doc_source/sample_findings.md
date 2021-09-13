@@ -36,7 +36,7 @@ You can generate a single sample finding matching any of the GuardDuty finding t
 This is useful for the testing of CloudWatch Events rules or automation based on findings\. The following example shows how to generate a single sample finding of the `Backdoor:EC2/DenialOfService.Tcp` type using the AWS CLI\.
 
 ```
-                    aws guardduty create-sample-findings --detector-id yourRegionalDetectorId --finding-types Backdoor:EC2/DenialOfService.Tcp
+                     AWS  guardduty create-sample-findings --detector-id yourRegionalDetectorId --finding-types Backdoor:EC2/DenialOfService.Tcp
 ```
 
 ------

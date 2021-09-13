@@ -5,7 +5,7 @@ As you get started with Amazon GuardDuty, you can benefit from learning about it
 **Account**  
 A standard Amazon Web Services \(AWS\) account that contains your AWS resources\. You can sign in to AWS with your account and enable GuardDuty\.  
 You can also invite other accounts to enable GuardDuty and become associated with your AWS account in GuardDuty\. If your invitations are accepted, your account is designated as the **administrator** GuardDuty account, and the added accounts become your **member** accounts\. You can then view and manage those accounts' GuardDuty findings on their behalf\.  
-Users of the administrator account can configure GuardDuty as well as view and manage GuardDuty findings for their own account and all of their member accounts\. You can have up to 1000 member accounts in GuardDuty\.  
+Users of the administrator account can configure GuardDuty as well as view and manage GuardDuty findings for their own account and all of their member accounts\. You can have up to 5000 member accounts in GuardDuty\.  
 Users of member accounts can configure GuardDuty as well as view and manage GuardDuty findings in their account \(either through the GuardDuty management console or GuardDuty API\)\. Users of member accounts can't view or manage findings in other members' accounts\.   
 An AWS account can't be a GuardDuty administrator and member account at the same time\. An AWS account can accept only one membership invitation\. Accepting a membership invitation is optional\.  
 For more information, see [Managing multiple accounts in Amazon GuardDutyAWS Service Integrations with GuardDuty](guardduty_accounts.md)\.

@@ -10,6 +10,6 @@ You can use the GuardDuty console to suspend or disable GuardDuty\. You are not 
 
 1. Open the GuardDuty console at [https://console\.aws\.amazon\.com/guardduty/](https://console.aws.amazon.com/guardduty/)\.
 
-1. In the navigation pane, under **Settings**, choose **General**\.
+1. In the navigation pane, Choose **Settings**\.
 
-1. Choose either **Suspend GuardDuty** or **Disable GuardDuty**\. Then choose **Save settings**\.
+1. Within the **Suspend GuardDuty** section, choose **Suspend GuardDuty** or **Disable GuardDuty**, then confirm your action in the next panel\.

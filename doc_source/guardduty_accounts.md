@@ -31,7 +31,7 @@ Delegated administrator accounts managed with AWS Organizations automatically en
 
 The following table details the relationship between GuardDuty administrator and member accounts\.
 
-Account designations listed as *Self* can take the listed action only in their own accounts\. A designation of *Any* indicates that account can perform the described action for any associated account, and *All* denotes actions that are applied to all associated accounts when taken by the designated account\. Table cells with dashes \(–\) indicate that an account of that designation cannot preform the listed action\.
+Account designations listed as *Self* can take the listed action only in their own accounts\. A designation of *Any* indicates that account can perform the described action for any associated account, and *All* denotes actions that are applied to all associated accounts when taken by the designated account\. Table cells with dashes \(–\) indicate that an account of that designation cannot perform the listed action\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/guardduty/latest/ug/guardduty_accounts.html)
 

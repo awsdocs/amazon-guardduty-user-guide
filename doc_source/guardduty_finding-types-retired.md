@@ -11,7 +11,6 @@ In the current release of GuardDuty, the following finding types are retired \(n
 + [Discovery:S3/BucketEnumeration\.Unusual](#discovery-s3-bucketenumerationunusual)
 + [Persistence:IAMUser/NetworkPermissions](#persistence-iam-networkpermissions)
 + [Persistence:IAMUser/ResourcePermissions](#persistence-iam-resourcepermissions)
-+ [Stealth:IAMUser/LoggingConfigurationModified](#stealth-iam-loggingconfigurationmodified)
 + [Persistence:IAMUser/UserPermissions](#persistence-iam-userpermissions)
 + [PrivilegeEscalation:IAMUser/AdministrativePermissions](#privilegeescalation-iam-administrativepermissions)
 + [Recon:IAMUser/NetworkPermissions](#recon-iam-networkpermissions)
@@ -130,27 +129,6 @@ This finding indicates that a specific principal \(AWS account root user, IAM ro
 This finding is triggered when a change is detected to policies or permissions attached to AWS resources, such as when a principal in your AWS environment invokes the `PutBucketPolicy` API with no prior history of doing so\. Some services, such as Amazon S3, support resource\-attached permissions that grant one or more principals access to the resource\. With stolen credentials, attackers can change the policies attached to a resource in order to gain access to that resource\.
 
 #### <a name="persistence-iam-resourcepermissions_remediation"></a>
-
-**Remediation recommendations:**
-
-If this activity is unexpected your credentials may be compromised, see [Remediating compromised AWS credentials](guardduty_remediate.md#compromised-creds)\.
-
-## Stealth:IAMUser/LoggingConfigurationModified<a name="stealth-iam-loggingconfigurationmodified"></a>
-
-### A principal invoked an API commonly used to stop CloudTrail Logging, delete existing logs, and otherwise eliminate traces of activity in your AWS account\.<a name="stealth-iam-loggingconfigurationmodified_description"></a>
-
-#### <a name="stealth-iam-loggingconfigurationmodified_severity"></a>
-
-**Default severity: Medium\***
-
-**Note**  
-This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
-
-#### <a name="stealth-iam-loggingconfigurationmodified_full"></a>
-
-This finding is triggered when the logging configuration in the listed AWS account within your environment is modified under suspicious circumstances\. This finding informs you that a specific principal in your AWS environment is exhibiting behavior that is different from the established baseline; for example, if a principal \(AWS account root user, IAM role, or IAM user\) invoked the `StopLogging` API with no prior history of doing so\. This can be an indication of an attacker trying to cover their tracks by eliminating any trace of their activity\.
-
-#### <a name="stealth-iam-loggingconfigurationmodified_remediation"></a>
 
 **Remediation recommendations:**
 

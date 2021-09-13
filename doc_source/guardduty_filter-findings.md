@@ -2,7 +2,7 @@
 
 A finding filter allows you to view findings that match the criteria you specify and filter out any unmatched findings\. You can easily create finding filters using the Amazon GuardDuty console, or you can create them with the [CreateFilter](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateFilter.html) API using JSON\. Review the following sections to understand how to create a filter in the console\. To use these filters to automatically archive incoming findings see [Suppression rules](findings_suppression-rule.md)\.
 
-## Create filters in the GuardDuty console<a name="filter_console"></a>
+## Creating filters in the GuardDuty console<a name="filter_console"></a>
 
 Finding filters can be created and tested through the GuardDuty console\. You can save filters created through the console for use in suppression rules or future filter operations\. A filter is made up of at least one filter criteria, which consists of one filter attribute paired with at least one value\.
 

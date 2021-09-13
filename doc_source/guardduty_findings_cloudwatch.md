@@ -1,8 +1,11 @@
 # Creating custom responses to GuardDuty findings with Amazon CloudWatch Events<a name="guardduty_findings_cloudwatch"></a>
 
-GuardDuty creates an event for [Amazon CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) when any change in findings takes place\. Finding changes that will create a CloudWatch event include newly generated findings or newly aggregated findings\. Events are emitted on a best effort basis\.
+GuardDuty creates an event for [Amazon CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) when any change in findings takes place\. Finding changes that will create a CloudWatch event include newly generated findings or newly aggregated findings\. Events are emitted on a best effort basis\. 
 
 Every GuardDuty finding is assigned a finding ID\. GuardDuty creates a CloudWatch event for every finding with a unique finding ID\. All subsequent occurrences of an existing finding are aggregated to the original finding\.
+
+**Note**  
+If your acccount is a GuardDuty delegated administrator CloudWatch events are published to your account in addition to the member account that it originated from\.
 
 By using CloudWatch events with GuardDuty, you can automate tasks to help you respond to security issues revealed by GuardDuty findings\.
 
@@ -146,7 +149,7 @@ When choosing Slack you must confirm permissions for AWS Chatbot to access your 
 
 **Configuring a AWS Chatbot client**
 
-1. Navigate to the AWS AWS Chatbot console
+1. Navigate to the AWS Chatbot console
 
 1. From the **Configured clients** panel, select **Configure new client**\.
 
@@ -160,7 +163,7 @@ When choosing Slack you must confirm permissions for AWS Chatbot to access your 
 
    1. Select **Copy URL** to copy the webhook URL to your clipboard\.
 
-1. On the AWS Management Console, in AWS Chatbot window, paste the URL you copied into the **Webhook URL** field\.
+1. On the AWS Management Console, in the AWS Chatbot window, paste the URL you copied into the **Webhook URL** field\.
 
 1. In **Permissions**, chose to create an IAM role using a template, if you do not have a role already\.
 
@@ -309,21 +312,21 @@ You can also create a CloudWatch Events rule and target for GuardDuty through th
 
 1. To create a rule that enables CloudWatch to send events for all findings that GuardDuty generates, run the following CloudWatch CLI command\.
 
-   `aws events put-rule --name Test --event-pattern "{\"source\":[\"aws.guardduty\"]}"`
+   ` AWS events put-rule --name Test --event-pattern "{\"source\":[\"aws.guardduty\"]}"`
 **Important**  
 You can further customize your rule so that it instructs CloudWatch to send events only for a subset of the GuardDuty\-generated findings\. This subset is based on the finding attribute or attributes that are specified in the rule\. For example, use the following CLI command to create a rule that enables CloudWatch to only send events for the GuardDuty findings with the severity of either 5 or 8:   
-`aws events put-rule --name Test --event-pattern "{\"source\":[\"aws.guardduty\"],\"detail-type\":[\"GuardDuty Finding\"],\"detail\":{\"severity\":[5,8]}}"`  
+` AWS events put-rule --name Test --event-pattern "{\"source\":[\"aws.guardduty\"],\"detail-type\":[\"GuardDuty Finding\"],\"detail\":{\"severity\":[5,8]}}"`  
 For this purpose, you can use any of the property values that are available in the JSON for GuardDuty findings\. 
 
 1. To attach a Lambda function as a target for the rule that you created in step 1, run the following CloudWatch CLI command\.
 
-   `aws events put-targets --rule Test --targets Id=1,Arn=arn:aws:lambda:us-east-1:111122223333:function:<your_function>`
+   ` AWS events put-targets --rule Test --targets Id=1,Arn=arn:aws:lambda:us-east-1:111122223333:function:<your_function>`
 **Note**  
 Make sure to replace <your\_function> in the command above with your actual Lambda function for the GuardDuty events\.
 
 1. To add the permissions required to invoke the target, run the following Lambda CLI command\.
 
-   `aws lambda add-permission --function-name <your_function> --statement-id 1 --action 'lambda:InvokeFunction' --principal events.amazonaws.com`
+   ` AWS lambda add-permission --function-name <your_function> --statement-id 1 --action 'lambda:InvokeFunction' --principal events.amazonaws.com`
 **Note**  
 Make sure to replace <your\_function> in the command above with your actual Lambda function for the GuardDuty events\.
 **Note**  
@@ -331,7 +334,7 @@ In the procedure above, we're using a Lambda function as the target for the rule
 
 ## CloudWatch Events for GuardDuty multi\-account environments<a name="guardduty_findings_cloudwatch_multiaccount"></a>
 
-As a GuardDuty administrator CloudWatch Event rules on your account will trigger based on applicable findings from your member accounts \. This means that if you set up the finding notifications through CloudWatch Events in your administrator account, as detailed in the preceding section, you will be notified of high and medium severity findings generated by your member accounts in addition to your own\.
+As a GuardDuty administrator CloudWatch Event rules in your account will trigger based on applicable findings from your member accounts \. This means that if you set up a finding notifications through CloudWatch Events in your administrator account, as detailed in the preceding section, you will be notified of high and medium severity findings generated by your member accounts in addition to your own\. 
 
 You can identify the member account the GuardDuty finding originated from with the `accountId` field of the finding's JSON details\.
 

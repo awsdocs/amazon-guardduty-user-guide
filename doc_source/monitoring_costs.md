@@ -42,5 +42,5 @@ To view cost metrics, run the [getUsageStatistics](https://docs.aws.amazon.com/g
 You can also use the AWS Command Line\. Run the command below, replacing the example detector ID with your own, to get the sum of usage for all data sources\. For single accounts, this command returns the cost over the past 30 days for your account only\. If you are a GuardDuty administrator with member accounts, you see costs listed by account for all members\.
 
 ```
-aws guardduty get-usage-statistics --detector-id 12abc34d567e8fa901bc2d34e56789f0 --usage-statistic-type SUM_BY_ACCOUNT --usage-criteria '{"DataSources":["S3_LOGS","CLOUD_TRAIL","DNS_LOGS","FLOW_LOGS"]}'
+ AWS  guardduty get-usage-statistics --detector-id 12abc34d567e8fa901bc2d34e56789f0 --usage-statistic-type SUM_BY_ACCOUNT --usage-criteria '{"DataSources":["S3_LOGS","CLOUD_TRAIL","DNS_LOGS","FLOW_LOGS"]}'
 ```

@@ -1,38 +1,40 @@
 # Working with trusted IP lists and threat lists<a name="guardduty_upload-lists"></a>
 
-Amazon GuardDuty monitors the security of your AWS environment by analyzing and processing VPC Flow Logs, AWS CloudTrail event logs, and DNS logs\. You can customize this monitoring scope by configuring GuardDuty to also use your own *trusted IP lists* and *threat lists*\. The IP lists described below will apply to all VPC Flow Log and CloudTrail findings, but do not apply to DNS findings
+Amazon GuardDuty monitors the security of your AWS environment by analyzing and processing VPC Flow Logs, AWS CloudTrail event logs, and DNS logs\. You can customize this monitoring scope by configuring GuardDuty to stop alerts for trusted IPs from your own *trusted IP lists* and alert on known malicious IPs from your own *threat lists*\. 
 
-Trusted IP lists consist of IP addresses that you have trusted for secure communication with your AWS infrastructure and applications\. GuardDuty does not generate VPC Flow Log or CloudTrail findings for IP addresses on trusted IP lists\. At any given time, you can have only one uploaded trusted IP list per AWS account per Region\.
+Trusted IP lists and threat lists apply only to traffic destined for publicly routable IP addresses\. The effects of a list apply to all VPC Flow Log and CloudTrail findings, but do not apply to DNS findings\. 
 
-Threat lists consist of known malicious IP addresses\. GuardDuty generates findings based on threat lists\. At any given time, you can have up to six uploaded threat lists per AWS account per Region\.
+GuardDuty can be configured to use the following types of lists\.
+
+**Trusted IP list**  
+Trusted IP lists consist of IP addresses that you have trusted for secure communication with your AWS infrastructure and applications\. GuardDuty does not generate VPC Flow Log or CloudTrail findings for IP addresses on trusted IP lists\. You can include a maximum of 2000 IP addresses and CIDR ranges in a single trusted IP list\. At any given time, you can have only one uploaded trusted IP list per AWS account per Region\.
+
+**Threat list**  
+Threat lists consist of known malicious IP addresses\. These list can be supplied by third party threat intelligence or created specifically for your organization\. GuardDuty generates findings based on threat lists\. You can include a maximum of 250,000 IP addresses and CIDR ranges in a single threat list\. GuardDuty only generates findings based on activity that involves IP addresses and CIDR ranges in your threat lists, findings will not be generated based of domain names\. At any given time, you can have up to six uploaded threat lists per AWS account per Region\.
+
+**Note**  
+If you include the same IP on both a trusted IP list and threat list it will be processed by the trusted IP list first, and will not generate a finding\.
 
 In multi\-account environments only users from GuardDuty administrator accounts can upload and manage trusted IP lists and threat lists\. Trusted IP lists and threat lists that are uploaded by the administrator account are imposed on GuardDuty functionality in its member accounts\. In other words, in member accounts GuardDuty generates findings based on activity that involves known malicious IP addresses from the administrator's threat lists and does not generate findings based on activity that involves IP addresses from the administrator's trusted IP lists\. For more information, see [Managing multiple accounts in Amazon GuardDutyAWS Service Integrations with GuardDuty](guardduty_accounts.md)\.
 
-**Important**  
-GuardDuty uses the same [`AWSServiceRoleForAmazonGuardDuty` service\-linked role](guardduty_managing_access.md#guardduty_service-access) that is automatically assigned to it when you enable GuardDuty for the permissions required to evaluate your trusted IP lists and threat lists\. 
+## List formats<a name="prepare_list"></a>
 
-Note the following when creating trusted IP lists and threat lists that you plan to upload with GuardDuty:
-+ In your trusted IP lists and threat lists, IP addresses and CIDR ranges must appear one per line\.
+GuardDuty accepts lists in the following formats:
++ `TXT`
++ `STIX`
++ `OTX_CSV`
++ `ALIEN_VAULT`
++ `PROOF_POINT`
++ `FIRE_EYE`
 
-  The following is a sample list in Plaintext format:
+The maximum size of the file that hosts your trusted IP list or threat list is 35MB\.
 
-  ```
-  54.20.175.217
-  205.0.0.0/8
-  ```
-+ Trusted IP list and threat lists apply only to traffic destined for publicly routable IP addresses\.
-+ GuardDuty doesn't generate findings based on activity that involves domain names that are included in your threat lists\. GuardDuty only generates findings based on activity that involves IP addresses and CIDR ranges in your threat lists\.
-+ The maximum size of the file that hosts your trusted IP list or threat list is 35MB\.
-+ You can include a maximum of 2000 IP addresses and CIDR ranges in a single trusted IP list\.
-+ You can include a maximum of 250,000 IP addresses and CIDR ranges in a single threat list\.
-+ If you include the same IP included on both a trusted IP list and threat list it will be processed by the trusted IP list first, and will not generate a finding\.
+In your trusted IP lists and threat lists, IP addresses and CIDR ranges must appear one per line\. The following is a sample list in Plaintext \(TXT\) format:
 
-**Topics**
-+ [Permissions required to upload trusted IP lists and threat lists](#upload-permissions)
-+ [Using sever\-side encryption for trusted IP lists and threat lists](#encrypt-list)
-+ [To upload trusted IP lists and threat lists](#upload-procedure)
-+ [To activate or deactivate trusted IP lists and threat lists](#activate-procedure)
-+ [To update trusted IP lists and threat lists](#update-lists-procedure)
+```
+54.20.175.217
+205.0.0.0/8
+```
 
 ## Permissions required to upload trusted IP lists and threat lists<a name="upload-permissions"></a>
 
@@ -62,7 +64,7 @@ If your list is encrypted using server\-side encryption SSE\-KMS you must grant 
 
 ```
 {
-	"Sid": "Allow access for GuardDuty Service Role",
+	"Sid": "AllowGuardDutyServiceRole",
 	"Effect": "Allow",
 	"Principal": {
 		"AWS": "arn:aws::iam::123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
@@ -116,7 +118,7 @@ The following procedures describe how you can activate or deactivate trusted IP 
   For example, you can run the following command:
 
   ```
-  aws guardduty update-ip-set --detector-id <detector-id> --ip-set-id <ip-set-id> --no-activate
+   AWS  guardduty update-ip-set --detector-id <detector-id> --ip-set-id <ip-set-id> --no-activate
   ```
 
   Make sure to replace <detector\-id> and <ip\-set\-id> with a valid detector ID and trusted IP list ID\.

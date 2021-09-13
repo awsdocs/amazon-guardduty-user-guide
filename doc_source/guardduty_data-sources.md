@@ -58,3 +58,5 @@ There is no additional charge for GuardDuty access to flow logs\. However, enabl
 ## DNS logs<a name="guardduty_dns"></a>
 
 If you use AWS DNS resolvers for your EC2 instances \(the default setting\), then GuardDuty can access and process your request and response DNS logs through the internal AWS DNS resolvers\. If you are using a 3rd party DNS resolver, for example, OpenDNS or GoogleDNS, or if you set up your own DNS resolvers, then GuardDuty cannot access and process data from this data source\.
+
+When you enable GuardDuty it immediately starts analyzing your DNS logs from an independent stream of data\. This data stream is separate from the data provided through the [Route 53 Resolver query logging](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-query-logs.html?) feature, configuration of this feature does not effect GuardDuty analysis\.

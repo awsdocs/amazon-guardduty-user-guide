@@ -60,7 +60,7 @@ The Amazon SNS topic ARNs for each Region are shown below\.
 1. Run the following command with the AWS CLI:
 
    ```
-   aws sns --region us-west-2 subscribe --topic-arn arn:aws:sns:us-west-2:934957504740:GuardDutyAnnouncements --protocol email --notification-endpoint your_email@your_domain.com
+    AWS  sns --region us-west-2 subscribe --topic-arn arn:aws:sns:us-west-2:934957504740:GuardDutyAnnouncements --protocol email --notification-endpoint your_email@your_domain.com
    ```
 
 1. In your email application, open the message from AWS Notifications and open the link to confirm your subscription\.

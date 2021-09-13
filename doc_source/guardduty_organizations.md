@@ -14,7 +14,7 @@ Take note of the following factors that define how the delegated administrator o
 
 **A delegated administrator can manage a maximum of 5000 members\.**  
 There is a limit of 5000 member accounts per GuardDuty delegated administrator\. However, there could be more than 5000 accounts in your organization\. The number of **All** accounts in your organization is displayed on the **Accounts** page of the GuardDuty console\.  
-If you exceed 5000 member accounts you will receive a notification through CloudWatch, Personal Health Dashboard, and in an email to the delegated administrator account\.
+If you exceed 5000 member accounts you will receive a notification through CloudWatch, AWS Personal Health Dashboard, and in an email to the delegated administrator account\.
 
 **A delegated administrator is Regional\.**  
 Unlike AWS Organizations, GuardDuty is a Regional service\. This means that GuardDuty delegated administrators, and their member accounts must be added in each desired Region for account management through AWS Organizations to be active in every Region\. In other words, if the organization management account designates a delegated administrator for GuardDuty in only US East \(N\. Virginia\) that delegated administrator will only manage member accounts added in that Region\. For more information on Regions in GuardDuty see [Regions and endpoints](guardduty_regions.md)\.
@@ -36,7 +36,7 @@ You can add the following statement to the end of an IAM policy to grant these p
 
 ```
 {
-    "Sid": "Permissions to Enable GuardDuty delegated administrator",
+    "Sid": "PermissionsForGuardDutyAdmin",
     "Effect": "Allow",
     "Action": [
         "guardduty:EnableOrganizationAdminAccount",
@@ -56,7 +56,7 @@ Additionally, if you wish to designate your AWS Organizations management account
 
 ```
 {
-	'Sid": "Permissions to Enable GuardDuty"
+	'Sid": "PermissionsToEnableGuardDuty"
 	"Effect": "Allow",
 	"Action": [
 		"iam:CreateServiceLinkedRole"
@@ -71,7 +71,7 @@ Additionally, if you wish to designate your AWS Organizations management account
 ```
 
 **Note**  
-If you're using GuardDuty in an manually\-enabled Region, replace the value for the "Service" with the service endpoint for the Region\. For example, if you're using GuardDuty in the Middle East \(Bahrain\) \(me\-south\-1\) Region, replace `"Service": "guardduty.amazonaws.com"` with `"Service": "guardduty.me-south-1.amazonaws.com"`\.
+If you're using GuardDuty in an manually\-enabled Region, replace the value for the "Service" with the Regional endpoint for the Region\. For example, if you're using GuardDuty in the Middle East \(Bahrain\) \(me\-south\-1\) Region, replace `"Service": "guardduty.amazonaws.com"` with `"Service": "guardduty.me-south-1.amazonaws.com"`\.
 
 ## Designating a GuardDuty delegated administrator<a name="delegated-admin-designate"></a>
 
@@ -151,7 +151,7 @@ The auto\-enable feature enables GuardDuty for all future members of your organi
    You can also use the AWS Command Line to do this by running the following CLI command\. Make sure to specify the account ID of the account you want to make a GuardDuty delegated administrator\.
 
    ```
-   aws guardduty enable-organization-admin-account —admin-account-id 11111111111
+    AWS  guardduty enable-organization-admin-account --admin-account-id 11111111111
    ```
 
    This command sets the delegated administrator for your current Region only\. If GuardDuty is not already enabled for that account in the current Region, it will be automatically enabled\.
@@ -159,7 +159,7 @@ The auto\-enable feature enables GuardDuty for all future members of your organi
     To set the delegated administrator for other Regions, you must specify the Region you want your delegated administrator to manage\. For more information, see [GuardDuty endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/guardduty.html)\. The following example demonstrates how to enable a delegated administrator in US West \(Oregon\)\. 
 
    ```
-   aws guardduty enable-organization-admin-account --admin-account-id 11111111111 --region us-west-2
+    AWS  guardduty enable-organization-admin-account --admin-account-id 11111111111 --region us-west-2
    ```
 
 1.  Run the [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html) API operation using the credentials of the AWS account you designated as the delegated administrator for GuardDuty in the previous step\.
@@ -171,13 +171,13 @@ Accounts added as members will have GuardDuty enabled in that region, with the e
    You can also do this using AWS Command Line Tools by running the following CLI command\. Make sure to use your own valid detector ID, account ID, and email\. 
 
    ```
-   aws guardduty create-members --detector-id 12abc34d567e8fa901bc2d34e56789f0 --account-details AccountId=123456789012,Email=guarddutymember@amazon.com
+    AWS  guardduty create-members --detector-id 12abc34d567e8fa901bc2d34e56789f0 --account-details AccountId=123456789012,Email=guarddutymember@amazon.com
    ```
 
    You can view a list of all organization members using the [ListAccounts](https://docs.aws.amazon.com/organizations/latest/APIReference/API_ListAccounts.html) API operation or by running the following CLI command\.
 
    ```
-   aws organizations list-accounts
+    AWS  organizations list-accounts
    ```
 
 1. Run the [updateOrganizationConfiguration](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateOrganizationConfiguration.html) API operation using the credentials of the GuardDuty delegated administrator account to automatically enable GuardDuty in that Region for new member accounts\.
@@ -187,13 +187,13 @@ Accounts added as members will have GuardDuty enabled in that region, with the e
    You can also do this using AWS Command Line Tools by running the following CLI command\. Make sure to use your own valid detector ID\. 
 
    ```
-   aws guardduty update-organization-configuration --detector-id 12abc34d567e8fa901bc2d34e56789f0 --auto-enable 
+    AWS  guardduty update-organization-configuration --detector-id 12abc34d567e8fa901bc2d34e56789f0 --auto-enable 
    ```
 
    You can confirm that you have turned on the auto enable GuardDuty feature in a Region by running the [describeOrganizationConfiguration](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeOrganizationConfiguration.html) API operation or by running the following CLI command using the detector ID of the delegated administrator in the desired Region\.
 
    ```
-   aws guardduty describe-organization-configuration —detector-id 12abc34d567e8fa901bc2d34e56789f0 
+    AWS  guardduty describe-organization-configuration —detector-id 12abc34d567e8fa901bc2d34e56789f0 
    ```
 
 1. \(Recommended\) Repeat these steps in each Region using your unique detector ID for that Region to enable GuardDuty monitoring coverage for all members in all AWS Regions\.
@@ -249,7 +249,7 @@ When you de\-register a delegated administrator from the API you must do so in e
 1. Run the [DisableOrganizationAdminAccount](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisableOrganizationAdminAccount.html) API operation using the credentials of the Organizations management account\.
 
    ```
-   aws guardduty disable-organization-admin-account ‐‐admin-account-id "123456789012"
+    AWS  guardduty disable-organization-admin-account ‐‐admin-account-id "123456789012"
    ```
 
 1. Repeat in each Region managed by that delegated administrator\.

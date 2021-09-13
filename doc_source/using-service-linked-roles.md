@@ -12,17 +12,69 @@ For information about other services that support service\-linked roles, see [AW
 
 ## Service\-linked role permissions for GuardDuty<a name="slr-permissions"></a>
 
-GuardDuty uses the service\-linked role named `AWSServiceRoleForAmazonGuardDuty`\. This service\-linked role allows GuardDuty to retrieve metadata for the EC2 instances in your AWS environment that are involved in potentially suspicious activity\. It also allows GuardDuty to include the retrieved EC2 instance metadata in the findings that GuardDuty generates about potentially suspicious activity\.
+GuardDuty uses the service\-linked role named `AWSServiceRoleForAmazonGuardDuty`\. This service\-linked role allows GuardDuty to retrieve metadata for the EC2 instances in your AWS environment that are involved in potentially suspicious activity\. It also allows GuardDuty to include the retrieved EC2 instance metadata in the findings that GuardDuty generates about potentially suspicious activity\. The `AWSServiceRoleForAmazonGuardDuty` service\-linked role trusts the `guardduty.amazonaws.com` service to assume the role\.
 
-The `AWSServiceRoleForAmazonGuardDuty` service\-linked role trusts the following services to assume the role:
-+ `guardduty.amazonaws.com`
+The permissions policy for the role allows GuardDuty to perform tasks such as: 
++ Use Amazon EC2 actions to retrieve information about your EC2 instances and images\.
++ Use Amazon EC2 actions to retrieve information about your EC2 networking components such as VPCs, subnets, and transit gateways\.
++ Use Amazon S3 actions to retrieve information about S3 buckets and objects\.
++ Use AWS Organizations actions to describe associated accounts\.
 
-The role permissions policy allows GuardDuty to complete the following actions on the specified resources:
-+ Action: `ec2:DescribeInstances` 
-+ Action: `ec2:DescribeImages` 
-+ Action: `organizations:ListAccounts` 
-+ Action: `organizations:DescribeAccount` 
-+ Resources: `arn:aws:iam::*:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty`
+The role is configured with the following [AWS managed policy](https://docs.aws.amazon.com/guardduty/latest/ug/security-iam-awsmanpol), named `AWSServiceRoleForAmazonGuardDuty`\.
+
+```
+        {
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeImages",
+        "ec2:DescribeVpcEndpoints",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcPeeringConnections",
+        "ec2:DescribeTransitGatewayAttachments"
+        "organizations:ListAccounts",
+        "organizations:DescribeAccount",
+        "s3:GetBucketPublicAccessBlock",
+        "s3:GetEncryptionConfiguration",
+        "s3:GetBucketTagging",
+        "s3:GetAccountPublicAccessBlock",
+        "s3:ListAllMyBuckets",
+        "s3:GetBucketAcl",
+        "s3:GetBucketPolicy",
+        "s3:GetBucketPolicyStatus",
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+The following is the trust policy that is attached to the `AWSServiceRoleForAmazonGuardDuty` service\-linked role:
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "guardduty.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+```
+
+## Creating a service\-linked role for GuardDuty<a name="create-slr"></a>
+
+The `AWSServiceRoleForAmazonGuardDuty` service\-linked role is automatically created when you enable GuardDuty for the first time or enable GuardDuty in a supported Region where you previously didn't have it enabled\. You can also create the `AWSServiceRoleForAmazonGuardDuty` service\-linked role manually using the IAM console, the IAM CLI, or the IAM API\. 
+
+**Important**  
+The service\-linked role that is created for the GuardDuty delegated administrator account doesn't apply to the member GuardDuty accounts\.
 
 You must configure permissions to allow an IAM entity \(such as a user, group, or role\) to create, edit, or delete a service\-linked role\. For the `AWSServiceRoleForAmazonGuardDuty` service\-linked role to be successfully created, the IAM identity that you use GuardDuty with must have the required permissions\. To grant the required permissions, attach the following policy to this IAM user, group, or role: 
 
@@ -63,13 +115,6 @@ Replace the sample account ID in the example below with your actual AWS account 
     ]
 }
 ```
-
-## Creating a service\-linked role for GuardDuty<a name="create-slr"></a>
-
-The `AWSServiceRoleForAmazonGuardDuty` service\-linked role is automatically created when you enable GuardDuty for the first time or enable GuardDuty in a supported Region where you previously didn't have it enabled\. You can also create the `AWSServiceRoleForAmazonGuardDuty` service\-linked role manually using the IAM console, the IAM CLI, or the IAM API\. 
-
-**Important**  
-The service\-linked role that is created for the GuardDuty account doesn't apply to the member GuardDuty accounts\.
 
 For more information about creating the role manually, see [Creating a service\-linked role](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#create-service-linked-role) in the *IAM User Guide*\.
 

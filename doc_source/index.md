@@ -1,7 +1,7 @@
 # Amazon GuardDuty Amazon GuardDuty User Guide
 
 -----
-*****Copyright &copy;  Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -41,9 +41,13 @@ Amazon's trademarks and trade dress may not be used in
 + [Estimating GuardDuty costs](monitoring_costs.md)
 + [Security in Amazon GuardDuty](security.md)
    + [Data protection in Amazon GuardDuty](data-protection.md)
-   + [Managing access](guardduty_managing_access.md)
    + [Logging Amazon GuardDuty API calls with AWS CloudTrail](logging-using-cloudtrail.md)
+   + [Identity and Access Management for AWS GuardDuty](security-iam.md)
+      + [How AWS GuardDuty works with IAM](security_iam_service-with-iam.md)
+      + [Identity-based policy examples for AWS GuardDuty](security_iam_id-based-policy-examples.md)
+      + [Troubleshooting AWS GuardDuty identity and access](security_iam_troubleshoot.md)
    + [Using service-linked roles for Amazon GuardDuty](using-service-linked-roles.md)
+   + [AWS managed policies for Amazon GuardDuty](security-iam-awsmanpol.md)
    + [Compliance validation for Amazon GuardDuty](compliance-validation.md)
    + [Resilience in Amazon GuardDuty](disaster-recovery-resiliency.md)
    + [Infrastructure security in Amazon GuardDuty](infrastructure-security.md)

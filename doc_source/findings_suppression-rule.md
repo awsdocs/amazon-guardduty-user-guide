@@ -6,9 +6,12 @@ A suppression rule is a set of criteria, consisting of a filter attribute paired
 
  After you create a suppression rule, new findings that match the criteria defined in the rule are automatically archived as long as the suppression rule is in place\. You can use an existing filter to create a suppression rule or create a suppression rule from a new filter you define\. You can configure suppression rules to suppress entire finding types, or define more granular filter criteria to suppress only specific instances of a particular finding type\. Your suppression rules can be edited at any time\. 
 
-Suppressed findings are not sent to AWS Security Hub, Amazon S3 or CloudWatch Events, reducing finding noise level if you consume GuardDuty findings via Security Hub or a third\-party SIEM, alerting and ticketing applications\.
+Suppressed findings are not sent to AWS Security Hub, Amazon S3, Detective, or CloudWatch, reducing finding noise level if you consume GuardDuty findings via Security Hub, a third\-party SIEM, or other alerting and ticketing applications\.
 
 GuardDuty continues to generate findings even when they match your suppression rules, however, those findings are automatically marked as **archived**\. The archived finding is stored in GuardDuty for 90\-days and can be viewed at any time during that period\. You can view suppressed findings in the GuardDuty console by selecting **Archived** from the findings table, or through the GuardDuty API using the [ListFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListFindings.html) API with a `findingCriteria` criterion of `service.archived` equal to true\. 
+
+**Note**  
+In a multi\-account environment only the GuardDuty administrator can create suppression rules\.
 
 ## Common use cases for suppression rules and examples<a name="guardduty_suppression-best-practices"></a>
 
@@ -16,7 +19,7 @@ The following finding types have common use cases for applying suppression rules
 
 **Important**  
 GuardDuty recommends that you build suppression rules reactively and only for findings you have repeatedly identified false positives for\.
-+ [UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration](guardduty_finding-types-iam.md#unauthorizedaccess-iam-instancecredentialexfiltration) – Use a suppression rule to automatically archive findings generated when VPC networking is configured to route Internet traffic such that it egresses from an on\-premises gateway rather than from a VPC Internet Gateway\.
++ [UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration\.OutsideAWS](guardduty_finding-types-iam.md#unauthorizedaccess-iam-instancecredentialexfiltrationoutsideaws) – Use a suppression rule to automatically archive findings generated when VPC networking is configured to route internet traffic such that it egresses from an on\-premises gateway rather than from a VPC Internet Gateway\.
 
   This finding is generated when networking is configured to route internet traffic such that it egresses from an on\-premises gateway rather than from a VPC Internet Gateway \(IGW\)\. Common configurations, such as using [AWS Outposts](https://docs.aws.amazon.com/outposts/latest/userguide/), or VPC VPN connections, can result in traffic routed this way\. If this is expected behavior, it's recommended that you use suppression rules in and create a rule that consists of two filter criteria\. The first criteria is **finding type**, which should be `UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration`\. The second filter criteria is **API caller IPv4 address** with the IP address or CIDR range of your on\-premises internet gateway\. The example below represents the filter you would use to suppress this finding type based on API caller IP address\.
 
@@ -107,13 +110,13 @@ Your suppression rules can be viewed, edited, or deleted at any time by selectin
    You can test your filter criteria first by using the same JSON criterion in the [ListFindings](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListFindings.html) API and confirming that the correct findings have been selected or you can do this through the AWS CLI by following the below example using your own detector ID, and \.json file\.
 
    ```
-   aws guardduty list-findings --detector-id 12abc34d567e8fa901bc2d34e56789f0 --finding-criteria file://criteria.json
+    AWS  guardduty list-findings --detector-id 12abc34d567e8fa901bc2d34e56789f0 --finding-criteria file://criteria.json
    ```
 
 1. Upload your filter to be used as suppression rule with the [CreateFilter](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateFilter.html) API or by using the AWS CLI following the example below with your own detector ID, a name for the suppression rule, and \.json file\.
 
    ```
-   aws guardduty create-filter --action ARCHIVE --detector-id 12abc34d567e8fa901bc2d34e56789f0 --name yourfiltername --finding-criteria file://criteria.json
+    AWS  guardduty create-filter --action ARCHIVE --detector-id 12abc34d567e8fa901bc2d34e56789f0 --name yourfiltername --finding-criteria file://criteria.json
    ```
 
 You can view a list of your filters programmatically with the [ListFilter](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListFilter.html) API, you can see details of an individual filter by supplying the filter name to the [GetFilter](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetFilter.html) API\. Update filters using [UpdateFilter](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateFilter.html) or delete them with the [DeleteFilter](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteFilter.html) API\.

@@ -1,6 +1,11 @@
 # GuardDuty S3 finding types<a name="guardduty_finding-types-s3"></a>
 
-The following findings are specific to S3 bucket resources and will always have a Resource Type of `S3Bucket`\. The severity and details of the findings will differ based on the finding type and the permission associated with the bucket\.
+The following findings are specific to S3 resources and will have a **Resource Type** of `S3Bucket` if the data source is **S3 CloudTrail data events**, or `AccessKey` if the data source is **CloudTrail management events**\. The severity and details of the findings will differ based on the finding type and the permission associated with the bucket\.
+
+The findings listed here include the data sources and models used to generate that finding type\. For more information data sources and models see [How Amazon GuardDuty uses its data sources](guardduty_data-sources.md)\.
+
+**Important**  
+Findings with a data source of **S3 CloudTrail data events** are only generated if you have S3 protection enabled for GuardDuty\. S3 protection is enabled by default in all accounts created after July 31, 2020\. For information on how to enable or disable S3 protection see [Amazon S3 protection in Amazon GuardDuty](s3_detection.md)
 
 For all S3 Bucket type findings it is recommended that you examine the permissions on the bucket in question and the permissions of any users involved in the finding, if the activity is unexpected see the remediation recommendations detailed in [Remediating a Compromised S3 Bucket](guardduty_remediate.md#compromised-s3)\.
 
@@ -30,6 +35,9 @@ For all S3 Bucket type findings it is recommended that you examine the permissio
 
 **Default severity: High**
 
+#### <a name="discovery-s3-maliciousipcaller_datasource"></a>
++ **Data source: **S3 CloudTrail data events
+
 #### <a name="discovery-s3-maliciousipcaller_full"></a>
 
 This finding informs you that an S3 API operation was invoked from an IP address that is associated with known malicious activity\. The observed API is commonly associated with the discovery stage of an attack when an adversary is gathering information on your AWS environment\. Examples include, `GetObjectAcl` or `ListObjects`\.
@@ -47,6 +55,9 @@ If this activity is unexpected for the associated principal it may indicate the 
 #### <a name="discovery-s3-maliciousipcallercustom_severity"></a>
 
 **Default severity: High**
+
+#### <a name="discovery-s3-maliciousipcallercustom_datasource"></a>
++ **Data source: **S3 CloudTrail data events
 
 #### <a name="discovery-s3-maliciousipcallercustom_full"></a>
 
@@ -66,6 +77,9 @@ If this activity is unexpected for the associated principal it may indicate the 
 
 **Default severity: Medium**
 
+#### <a name="discovery-s3-toripcaller_datasource"></a>
++ **Data source: **S3 CloudTrail data events
+
 #### <a name="discovery-s3-toripcaller_full"></a>
 
 This finding informs you that an S3 API, such as `GetObjectAcl` or `ListObjects`, was invoked from a Tor exit node IP address\. This type of activity is associated with the discovery stage of an attack wherein an attacker is gathering information to determine if your AWS environment is susceptible to a broader attack\. Tor is software for enabling anonymous communication\. It encrypts and randomly bounces communications through relays between a series of network nodes\. The last Tor node is called the exit node\. This can indicate unauthorized access to your AWS resources with the intent of hiding the attacker's true identity\.
@@ -84,9 +98,12 @@ If this activity is unexpected for the associated principal it may indicate the 
 
 **Default severity: High**
 
+#### <a name="exfiltration-s3-maliciousipcaller_datasource"></a>
++ **Data source: **S3 CloudTrail data events
+
 #### <a name="exfiltration-s3-maliciousipcaller_full"></a>
 
-This finding informs you that an S3 API operation was invoked from an IP address that is associated with known malicious activity\. The observed API is commonly associated with exfiltration tactics where an adversary is is trying to collect data from your network\. Examples include, `GetObject` and `CopyObject`\.
+This finding informs you that an S3 API operation was invoked from an IP address that is associated with known malicious activity\. The observed API is commonly associated with exfiltration tactics where an adversary is trying to collect data from your network\. Examples include, `GetObject` and `CopyObject`\.
 
 #### <a name="exfiltration-s3-maliciousipcaller_remediation"></a>
 
@@ -104,6 +121,9 @@ If this activity is unexpected for the associated principal it may indicate the 
 
 **Note**  
 This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
+
+#### <a name="exfiltration-s3-objectreadunusual_datasource"></a>
++ **Data source: **S3 CloudTraildata events
 
 #### <a name="exfiltration-s3-objectreadunusual_full"></a>
 
@@ -123,6 +143,9 @@ If this activity is unexpected for the associated principal it may indicate the 
 
 **Default severity: High**
 
+#### <a name="impact-s3-maliciousipcaller_datasource"></a>
++ **Data source: **S3 CloudTrail data events
+
 #### <a name="impact-s3-maliciousipcaller_full"></a>
 
 This finding informs you that an S3 API operation was invoked from an IP address that is associated with known malicious activity\. The observed API is commonly associated with impact tactics where an adversary is trying manipulate, interrupt, or destroy data within your AWS environment\. Examples include, `PutObject` or `PutObjectAcl`\.
@@ -140,6 +163,9 @@ If this activity is unexpected for the associated principal it may indicate the 
 #### <a name="pentest-s3-kalilinux_severity"></a>
 
 **Default severity: Medium**
+
+#### <a name="pentest-s3-kalilinux_datasource"></a>
++ **Data source: **S3 CloudTrail data events
 
 #### <a name="pentest-s3-kalilinux_full"></a>
 
@@ -159,6 +185,9 @@ If this activity is unexpected for the associated principal it may indicate the 
 
 **Default severity: Medium**
 
+#### <a name="pentest-s3-parrotlinux_datasource"></a>
++ **Data source: **S3 CloudTrail data events
+
 #### <a name="pentest-s3-parrotlinux_full"></a>
 
 This finding informs you that a machine running Parrot Security Linux is making S3 API calls using credentials that belong to your AWS account\. Your credentials might be compromised\. Parrot Security Linux is a popular penetration testing tool that security professionals use to identify weaknesses in EC2 instances that require patching\. Attackers also use this tool to find EC2 configuration weaknesses and gain unauthorized access to your AWS environment\.
@@ -177,6 +206,9 @@ If this activity is unexpected for the associated principal it may indicate the 
 
 **Default severity: Medium**
 
+#### <a name="pentest-s3-pentoolinux_datasource"></a>
++ **Data source: **S3 CloudTrail data events
+
 #### <a name="pentest-s3-pentoolinux_full"></a>
 
 This finding informs you that a machine running Pentoo Linux is making S3 API calls using credentials that belong to your AWS account\. Your credentials might be compromised\. Pentoo Linux is a popular penetration testing tool that security professionals use to identify weaknesses in EC2 instances that require patching\. Attackers also use this tool to find EC2 configuration weaknesses and gain unauthorized access to your AWS environment\.
@@ -189,11 +221,14 @@ If this activity is unexpected for the associated principal it may indicate the 
 
 ## Policy:S3/AccountBlockPublicAccessDisabled<a name="policy-s3-accountblockpublicaccessdisabled"></a>
 
-### An IAM entity invoked an API used to disable S3 block public access on an account\.<a name="policy-s3-accountblockpublicaccessdisabled_description"></a>
+### An IAM entity invoked an API used to disable S3 Block Public Access on an account\.<a name="policy-s3-accountblockpublicaccessdisabled_description"></a>
 
 #### <a name="policy-s3-accountblockpublicaccessdisabled_severity"></a>
 
 **Default severity: Low**
+
+#### <a name="policy-s3-accountblockpublicaccessdisabled_datasource"></a>
++ **Data source: **CloudTrail management events
 
 #### <a name="policy-s3-accountblockpublicaccessdisabled_full"></a>
 
@@ -215,9 +250,12 @@ If this activity is unexpected for the associated principal it may indicate the 
 
 **Default severity: High**
 
+#### <a name="policy-s3-bucketanonymousaccessgranted_datasource"></a>
++ **Data source: **CloudTrail management events
+
 #### <a name="policy-s3-bucketanonymousaccessgranted_full"></a>
 
-This finding informs you that the listed S3 bucket has been made publicly accessible on the internet because an IAM entity has changed a bucket policy or ACL on that bucket\. After a policy or ACL change is detected, uses automated reasoning powered by [Zelkova](security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/), to determine if the bucket is publicly accessible\.
+This finding informs you that the listed S3 bucket has been made publicly accessible on the internet because an IAM entity has changed a bucket policy or ACL on that bucket\. After a policy or ACL change is detected, uses automated reasoning powered by [Zelkova](http://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/), to determine if the bucket is publicly accessible\.
 
 **Note**  
 If a bucket's ACLs or bucket policies are configured to explicitly deny or to deny all, this finding cannot be generated for that bucket\.
@@ -230,11 +268,14 @@ If this activity is unexpected for the associated principal it may indicate the 
 
 ## Policy:S3/BucketBlockPublicAccessDisabled<a name="policy-s3-bucketblockpublicaccessdisabled"></a>
 
-### An IAM entity invoked an API used to disable S3 block public access on a bucket\.<a name="policy-s3-bucketblockpublicaccessdisabled_description"></a>
+### An IAM entity invoked an API used to disable S3 Block Public Access on a bucket\.<a name="policy-s3-bucketblockpublicaccessdisabled_description"></a>
 
 #### <a name="policy-s3-bucketblockpublicaccessdisabled_severity"></a>
 
 **Default severity: Low**
+
+#### <a name="policy-s3-bucketblockpublicaccessdisabled_datasource"></a>
++ **Data source: **CloudTrail management events
 
 #### <a name="policy-s3-bucketblockpublicaccessdisabled_full"></a>
 
@@ -256,9 +297,12 @@ If this activity is unexpected for the associated principal it may indicate the 
 
 **Default severity: High**
 
+#### <a name="policy-s3-bucketpublicaccessgranted_datasource"></a>
++ **Data source: **CloudTrail management events
+
 #### <a name="policy-s3-bucketpublicaccessgranted_full"></a>
 
-This finding informs you that the listed S3 bucket has been publicly exposed to all authenticated AWS users because an IAM entity has changed a bucket policy or ACL on that S3 bucket\. After a policy or ACL change is detected, uses automated reasoning powered by [Zelkova](security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/), to determine if the bucket is publicly accessible\.
+This finding informs you that the listed S3 bucket has been publicly exposed to all authenticated AWS users because an IAM entity has changed a bucket policy or ACL on that S3 bucket\. After a policy or ACL change is detected, uses automated reasoning powered by [Zelkova](http://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/), to determine if the bucket is publicly accessible\.
 
 **Note**  
 If a bucket's ACLs or bucket policies are configured to explicitly deny or to deny all, this finding cannot be generated for that bucket\.
@@ -277,9 +321,12 @@ If this activity is unexpected for the associated principal it may indicate the 
 
 **Default severity: Low**
 
+#### <a name="stealth-s3-serveraccessloggingdisabled_datasource"></a>
++ **Data source: **CloudTrail management events
+
 #### <a name="stealth-s3-serveraccessloggingdisabled_full"></a>
 
-This finding informs you that S3 server access logging is disabled for a bucket within your AWS environment\. If disabled, no logs are created for any actions taken on the identified S3 bucket or on the objects in the bucket, unless S3 object level logging is enabled for this bucket\. Disabling logging is a technique used by unauthorized users in order to cover their tracks\. This finding is triggered when server access logging is disabled for a bucket\. To learn more, see [S3 Server Access Logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html)\.
+This finding informs you that S3 server access logging is disabled for a bucket within your AWS environment\. If disabled, no web request logs are created for any attempts to access the identified S3 bucket, however, S3 management API calls to the bucket, such as [DeleteBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html), are still tracked\. If S3 data event logging is enabled through CloudTrail for this bucket, web requests for objects within the bucket will still be tracked\. Disabling logging is a technique used by unauthorized users in order to evade detection\. To learn more about S3 logs, see [ S3 Server Access Logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) and [S3 Logging Options ](https://docs.aws.amazon.com/AmazonS3/latest/userguide/logging-with-S3.html)\.
 
 #### <a name="stealth-s3-serveraccessloggingdisabled_remediation"></a>
 
@@ -294,6 +341,9 @@ If this activity is unexpected for the associated principal it may indicate the 
 #### <a name="unauthorizedaccess-s3-maliciousipcallercustom_severity"></a>
 
 **Default severity: High**
+
+#### <a name="unauthorizedaccess-s3-maliciousipcallercustom_datasource"></a>
++ **Data source: **S3 CloudTrail data events
 
 #### <a name="unauthorizedaccess-s3-maliciousipcallercustom_full"></a>
 
@@ -312,6 +362,9 @@ If this activity is unexpected for the associated principal it may indicate the 
 #### <a name="unauthorizedaccess-s3-toripcaller_severity"></a>
 
 **Default severity: High**
+
+#### <a name="unauthorizedaccess-s3-toripcaller_datasource"></a>
++ **Data source: **S3 CloudTrail data events
 
 #### <a name="unauthorizedaccess-s3-toripcaller_full"></a>
 

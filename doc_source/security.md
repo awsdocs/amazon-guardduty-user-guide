@@ -10,9 +10,10 @@ This documentation helps you understand how to apply the shared responsibility m
 
 **Topics**
 + [Data protection in Amazon GuardDuty](data-protection.md)
-+ [Managing access](guardduty_managing_access.md)
 + [Logging Amazon GuardDuty API calls with AWS CloudTrail](logging-using-cloudtrail.md)
++ [Identity and Access Management for AWS GuardDuty](security-iam.md)
 + [Using service\-linked roles for Amazon GuardDuty](using-service-linked-roles.md)
++ [AWS managed policies for Amazon GuardDuty](security-iam-awsmanpol.md)
 + [Compliance validation for Amazon GuardDuty](compliance-validation.md)
 + [Resilience in Amazon GuardDuty](disaster-recovery-resiliency.md)
 + [Infrastructure security in Amazon GuardDuty](infrastructure-security.md)
