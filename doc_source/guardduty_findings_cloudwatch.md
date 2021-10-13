@@ -5,7 +5,7 @@ GuardDuty creates an event for [Amazon CloudWatch Events](https://docs.aws.amazo
 Every GuardDuty finding is assigned a finding ID\. GuardDuty creates a CloudWatch event for every finding with a unique finding ID\. All subsequent occurrences of an existing finding are aggregated to the original finding\.
 
 **Note**  
-If your acccount is a GuardDuty delegated administrator CloudWatch events are published to your account in addition to the member account that it originated from\.
+If your account is a GuardDuty delegated administrator CloudWatch events are published to your account in addition to the member account that it originated from\.
 
 By using CloudWatch events with GuardDuty, you can automate tasks to help you respond to security issues revealed by GuardDuty findings\.
 
