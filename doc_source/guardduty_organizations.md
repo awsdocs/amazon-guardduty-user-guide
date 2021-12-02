@@ -56,7 +56,7 @@ Additionally, if you wish to designate your AWS Organizations management account
 
 ```
 {
-	'Sid": "PermissionsToEnableGuardDuty"
+	"Sid": "PermissionsToEnableGuardDuty"
 	"Effect": "Allow",
 	"Action": [
 		"iam:CreateServiceLinkedRole"
@@ -204,11 +204,12 @@ Accounts added as members will have GuardDuty enabled in that region, with the e
 
 GuardDuty recommends using association through AWS Organizations to manage member accounts under a delegated administrator account\. You can use the example process outlined below to consolidate administrator and member associated by invitation in an organization under a single GuardDuty delegated administrator\.
 
-1. Ensure all accounts you wish to manage GuardDuty for are part of your organization\. For information on adding account to your organization see [Inviting an AWS account to join your organization](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html)\. 
-
-1. Disassociate all member accounts from pre\-existing administrator accounts, except those under the account you wish to designate as the GuardDuty delegated administrator for the organization\.
 **Note**  
 Accounts already being managed by a GuardDuty delegated administrator or delegated administrator accounts with active members cannot be added to a different GuardDuty delegated administrator account\. Each organization can have only one GuardDuty delegated administrator account per region, and each member account can have only one delegated administrator\.
+
+1. Ensure all accounts you wish to manage GuardDuty for are part of your organization\. For information on adding an account to your organization see [Inviting an AWS account to join your organization](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html)\. 
+
+1. Disassociate all member accounts from pre\-existing administrator accounts, except those under the account you wish to designate as the GuardDuty delegated administrator for the organization\.
 
 1. Designate a GuardDuty delegated administrator for the organization from the **Settings** page\.
 
@@ -249,7 +250,7 @@ When you de\-register a delegated administrator from the API you must do so in e
 1. Run the [DisableOrganizationAdminAccount](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisableOrganizationAdminAccount.html) API operation using the credentials of the Organizations management account\.
 
    ```
-    AWS  guardduty disable-organization-admin-account ‐‐admin-account-id "123456789012"
+   aws guardduty disable-organization-admin-account ‐‐admin-account-id "123456789012"
    ```
 
 1. Repeat in each Region managed by that delegated administrator\.

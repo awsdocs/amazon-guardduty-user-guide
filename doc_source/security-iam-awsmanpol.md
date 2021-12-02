@@ -8,7 +8,7 @@ Additionally, AWS supports managed policies for job functions that span multiple
 
 ## <a name="w282aac27c25c11"></a>
 
-## AWS managed policy: AmazonGuardDutyFullAccess<a name="security-iam-awsmanpol-AmazonGuardDutyFullAccess"></a>
+## AWS managed policy: AmazonGuardDutyFullAccess<a name="security-iam-awsmanpol-AWSServiceRoleForAmazonGuardDuty"></a>
 
 You can attach the `AmazonGuardDutyFullAccess` policy to your IAM identities\.
 
@@ -63,7 +63,7 @@ This policy includes the following permissions\.
 }
 ```
 
-## AWS managed policy: AmazonGuardDutyReadOnlyAccess<a name="security-iam-awsmanpol-AmazonGuardDutyReadOnlyAccess"></a>
+## AWS managed policy: AmazonGuardDutyReadOnlyAccess<a name="security-iam-awsmanpol-AWSServiceRoleForAmazonGuardDuty"></a>
 
 You can attach the `AmazonGuardDutyReadOnlyAccess` policy to your IAM identities\.
 

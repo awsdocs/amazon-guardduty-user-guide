@@ -10,15 +10,19 @@ Amazon GuardDuty generates [findings](guardduty_findings.md) that indicate poten
 ## Remediating a compromised EC2 instance<a name="compromised-ec2"></a>
 
 Follow these recommended steps to remediate a compromised EC2 instance in your AWS environment:
-+ Investigate the potentially compromised instance for malware and remove any discovered malware\. You can also refer to the [AWS Marketplace](https://aws.amazon.com/marketplace) for partner products that might help to identify and remove malware\.
-+ If you are unable to identify and stop unauthorized activity on your EC2 instance, we recommend that you terminate the compromised EC2 instance and replace it with a new instance as needed\. The following are additional resources for securing your EC2 instances:
-  + "Security and Network" section in [Best practices for amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-best-practices.html)\.
-  + [Amazon EC2 security groups for Linux instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) and [Amazon EC2 security groups for Windows instances](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/using-network-security.html)\.
-  + [Tips for securing your EC2 instances \(Linux\)](http://aws.amazon.com/articles/tips-for-securing-your-ec2-instance/)\.
-  + [AWS security best practices](https://aws.amazon.com//architecture/security-identity-compliance/)
-  + [Infrastructure Domain Incidents on AWS](https://docs.aws.amazon.com/whitepapers/latest/aws-security-incident-response-guide/infrastructure-domain-incidents.html)
-+ Browse for further assistance on the AWS developer forums: [https://forums\.aws\.amazon\.com/index\.jspa](https://forums.aws.amazon.com/index.jspa) 
-+ If you are a Premium Support package subscriber, you can submit a [technical support](https://console.aws.amazon.com/support/home#/case/create?issueType=technical) request\. 
+
+1. Investigate the potentially compromised instance for malware and remove any discovered malware\. You can also refer to the [AWS Marketplace](https://aws.amazon.com/marketplace) for partner products that might help to identify and remove malware\.
+
+1. If you are unable to identify and stop unauthorized activity on your EC2 instance, we recommend that you terminate the compromised EC2 instance and replace it with a new instance as needed\. The following are additional resources for securing your EC2 instances:
+   + "Security and Network" section in [Best practices for amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-best-practices.html)\.
+   + [Amazon EC2 security groups for Linux instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) and [Amazon EC2 security groups for Windows instances](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/using-network-security.html)\.
+   + [Tips for securing your EC2 instances \(Linux\)](http://aws.amazon.com/articles/tips-for-securing-your-ec2-instance/)\.
+   + [AWS security best practices](https://aws.amazon.com//architecture/security-identity-compliance/)
+   + [Infrastructure Domain Incidents on AWS](https://docs.aws.amazon.com/whitepapers/latest/aws-security-incident-response-guide/infrastructure-domain-incidents.html)
+
+1. Browse for further assistance on the AWS developer forums: [https://forums\.aws\.amazon\.com/index\.jspa](https://forums.aws.amazon.com/index.jspa) 
+
+1. If you are a Premium Support package subscriber, you can submit a [technical support](https://console.aws.amazon.com/support/home#/case/create?issueType=technical) request\. 
 
 ## Remediating a Compromised S3 Bucket<a name="compromised-s3"></a>
 
@@ -37,7 +41,7 @@ Follow these recommended steps to remediate a compromised S3 bucket in your AWS 
    For example consider the following:
    + If an IAM user was involved is it possible their credentials have been compromised? See the next section on Remediating Compromised AWS Credentials\.
    + If an API was invoked from a principal that has no prior history of invoking this type of API, does this source need access permissions for this operation? Can the bucket permissions be further restricted?
-   +  If the access was seen from the **user name** `ANONYMOUS_PRINCIPAL` with **user type** of `AWSAccount` this indicates the bucket is public and was accessed\. Should this bucket be public? If not, review the security recommendations below for alternative solutions to sharing S3 resources\. 
+   + If the access was seen from the **user name** `ANONYMOUS_PRINCIPAL` with **user type** of `AWSAccount` this indicates the bucket is public and was accessed\. Should this bucket be public? If not, review the security recommendations below for alternative solutions to sharing S3 resources\. 
    + If the access was though a successful `PreflightRequest` call seen from the **user name **`ANONYMOUS_PRINCIPAL` with **user type** of `AWSAccount` this indicates the bucket has a cross\-origin resource sharing \(CORS\) policy set\. Should this bucket have a CORS policy? If not, ensure the bucket is not inadvertently public and review the security recommendations below for alternative solutions to sharing S3 resources\. For more information on CORS see [Using cross\-origin resource sharing \(CORS\)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html) in the S3 user guide\.
 
 If the access was authorized, you can ignore the finding\. If you determine that your S3 data has been exposed or accessed by an unauthorized party review the following S3 security recommendations to tighten permissions and restrict access\. Appropriate remediation solutions will depend on the needs of your specific environment\. 

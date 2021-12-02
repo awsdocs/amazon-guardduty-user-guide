@@ -67,7 +67,7 @@ If your list is encrypted using server\-side encryption SSE\-KMS you must grant 
 	"Sid": "AllowGuardDutyServiceRole",
 	"Effect": "Allow",
 	"Principal": {
-		"AWS": "arn:aws::iam::123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
+		"AWS": "arn:aws::iam:123456789123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
 	},
 	"Action": "kms:Decrypt*",
 	"Resource": "*"

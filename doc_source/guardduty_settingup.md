@@ -135,17 +135,27 @@ GuardDuty recommends setting up findings export, which allows you to export your
 
    1. Choose **Next** and then **Next** again to accept the default administration and usage permissions\.
 
-   1. In the **Review and edit key policy** pane add the following statement to the `"Statements":` section\. When editing the key policy make sure your JSON syntax is valid, each statement must be separated by a comma, for more information on writing policies with JSON see [Overview of JSON policies](IAM/latest/UserGuide/access_policies.html#access_policies-json>)\.
+   1. In the **Review and edit key policy** pane add the following statement to the `"Statements":` section\. 
+
+      Replace *Region* with the Region that the KMS key is in\. Replace *111122223333* with the AWS account number of the account that owns the bucket\. Replace *KMSKeyId* with the key ID of the key that you chose for encryption and replace *SourceDetectorID* with the source account's GuardDuty detector ID for the current Region\.
+
+       This statement allows GuardDuty to use only the key that you changed the policy for\. When editing the key policy make sure your JSON syntax is valid, if you add the statement before the final statement you must add a comma after the closing bracket\.
 
       ```
-      {
+      {    
           "Sid": "AllowGuardDutyKey",
           "Effect": "Allow",
           "Principal": {
               "Service": "guardduty.amazonaws.com"
-                  },
-                  "Action": "kms:GenerateDataKey",
-                  "Resource": "*"
+          },
+          "Action": "kms:GenerateDataKey",
+          "Resource": "arn:aws:kms:Region:111122223333:key/KMSKeyId",
+          "Condition": {
+              "StringEquals": {
+                  "aws:SourceAccount": "111122223333",
+                  "aws:SourceArn": "arn:aws:guardduty:Region:111122223333:detector/SourceDetectorID"	
+              }
+          }
       }
       ```
 

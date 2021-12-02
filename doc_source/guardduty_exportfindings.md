@@ -40,21 +40,31 @@ If you plan to use a new key for GuardDuty findings, [create a key](https://docs
 
 1. Select your key then copy the key ARN from the **General configuration** panel\.
 
-1. Under**Key policy**, choose **Edit**\.
+1. Under **Key policy**, choose **Edit**\.
 **Tip**  
 If **Switch to policy view** is displayed, choose that to display the key policy, and then choose **Edit**\.
 
-1. Add the following statement granting GuardDuty access to your key to the policy\. The statement allows GuardDuty to use only the key that you changed the policy for\. When editing the key policy make sure your JSON syntax is valid, if you add the statement before the final statement you must add a comma after the closing bracket\.
+1. Add the following key policy granting GuardDuty access to your key\. Replace the values in red to match your environment\.
+
+   Replace *Region* with the Region that the KMS key is in\. Replace *111122223333* with the AWS account number of the source account that owns the GuardDuty detector\. Replace *KMSKeyId* with the key ID of the key that you chose for encryption and replace *SourceDetectorID* with the source account's GuardDuty detector ID for the current Region\.
+
+    This statement allows GuardDuty to use only the key that you changed the policy for\. When editing the key policy make sure your JSON syntax is valid, if you add the statement before the final statement you must add a comma after the closing bracket\.
 
    ```
-   {
-   	"Sid": "AllowGuardDutyKey",
-   	"Effect": "Allow",
-   	"Principal": {
-   		"Service": "guardduty.amazonaws.com"
-   	},
-   	"Action": "kms:GenerateDataKey",
-   	"Resource": "arn:aws:kms:region:111122223333:key/KMSKeyId"
+   {    
+       "Sid": "AllowGuardDutyKey",
+       "Effect": "Allow",
+       "Principal": {
+           "Service": "guardduty.amazonaws.com"
+       },
+       "Action": "kms:GenerateDataKey",
+       "Resource": "arn:aws:kms:Region:111122223333:key/KMSKeyId",
+       "Condition": {
+           "StringEquals": {
+               "aws:SourceAccount": "111122223333",
+               "aws:SourceArn": "arn:aws:guardduty:Region:111122223333:detector/SourceDetectorID"	
+           }
+       }
    }
    ```
 **Note**  
@@ -80,7 +90,7 @@ When using a pre\-existing bucket withing your account, or in a different AWS ac
 
 1. Replace the placeholder values in the example policy with the values appropriate for your environment\.
 
-   Replace *myBucketName* with the name of the bucket that you're adding the bucket policy for\. Replace *\[optional prefix\]* with a folder location for your exported findings \(GuardDuty will create this location during set up if it does not already exist\)\. Replace *region* with the Region that the KMS key is in\. Replace *111122223333* with the AWS account number of the account that owns the bucket and replace *KMSKeyId* with the key ID of the key that you chose for encryption\.
+   Replace *myBucketName* \. Replace *\[optional prefix\]* with a folder location for your exported findings \(GuardDuty will create this location during set up if it does not already exist\)\. Replace *Region* with the Region that the KMS key is in\. Replace *111122223333* with the AWS account number of the account that owns the bucket\. Replace *KMSKeyId* with the key ID of the key that you chose for encryption and replace *SourceDetectorID* with the source account's GuardDuty detector ID for the current Region\.
 
 **Example policy**
 
@@ -97,7 +107,14 @@ The following example policy shows how to grant GuardDuty permission to send fin
                 "Service": "guardduty.amazonaws.com"
             },
             "Action": "s3:GetBucketLocation",
-            "Resource": "arn:aws:s3:::myBucketName"
+            "Resource": "arn:aws:s3:::myBucketName",
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceAccount": "111122223333",
+                    "aws:SourceArn": "arn:aws:guardduty:Region:111122223333:detector/SourceDetectorID"	
+
+                }
+            }
         },
         {
             "Sid": "AllowGuardDutyPutObject",
@@ -106,7 +123,14 @@ The following example policy shows how to grant GuardDuty permission to send fin
                 "Service": "guardduty.amazonaws.com"
             },
             "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::myBucketName/[optional prefix]/*"
+            "Resource": "arn:aws:s3:::myBucketName/[optional prefix]/*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceAccount": "111122223333",
+                    "aws:SourceArn": "arn:aws:guardduty:Region:111122223333:detector/SourceDetectorID"	
+
+                }
+            }
         },
         {
             "Sid": "DenyUnencryptedUploadsThis is optional",
@@ -123,7 +147,7 @@ The following example policy shows how to grant GuardDuty permission to send fin
             }
         },
         {
-            "Sid": "DenyIncorrectHeaderThis is optional,
+            "Sid": "DenyIncorrectHeaderThis is optional",
             "Effect": "Deny",
             "Principal": {
                 "Service": "guardduty.amazonaws.com"
@@ -132,7 +156,7 @@ The following example policy shows how to grant GuardDuty permission to send fin
             "Resource": "arn:aws:s3:::myBucketName/[optional prefix]/*",
             "Condition": {
                 "StringNotEquals": {
-                    "s3:x-amz-server-side-encryption-aws-kms-key-id": "arn:aws:kms:region:111122223333:key/KMSKeyId"
+                    "s3:x-amz-server-side-encryption-aws-kms-key-id": "arn:aws:kms:Region:111122223333:key/KMSKeyId"
                 }
             }
         },

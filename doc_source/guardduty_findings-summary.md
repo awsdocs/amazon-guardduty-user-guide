@@ -2,7 +2,7 @@
 
 In the Amazon GuardDuty console, you can view finding details in a finding summary section\. Finding details vary based on finding type\.
 
-There are two primary details that will determine what kinds of information are available for any finding\. The first is the resource type, which can be `AccessKey`, or `Instance`\. The second detail that determines finding information is **Resource Role**\. Resource role, can be `Target` for access keys, meaning the resource was the target of suspicious activity\. For instance type findings, resource role can also be `Actor`, which means that your resource was the actor carrying out suspicious activity\. This topic describes some of the commonly available details for findings\.
+There are two primary details that will determine what kinds of information are available for any finding\. The first is the resource type, which can be `AccessKey`, `Instance`, or `S3Bucket`\. The second detail that determines finding information is **Resource Role**\. Resource role, can be `Target` for access keys, meaning the resource was the target of suspicious activity\. For instance type findings, resource role can also be `Actor`, which means that your resource was the actor carrying out suspicious activity\. This topic describes some of the commonly available details for findings\.
 
 ## Finding summary<a name="findings-summary-section"></a>
 
@@ -39,7 +39,7 @@ Some instance details may be missing if the instance has already been terminated
 + **Instance ID** – the ID of the EC2 instance involved in the activity that prompted GuardDuty to generate the finding\.
 + **Instance Type** – the type of the EC2 instance involved in the finding\.
 + **Launch Time** – the time and date the instance was launched\.
-+ **Outpost ARN** – The Amazon Resource Name \(ARN\) of the AWS Outposts\. Only applicable to AWS Outpostss instances\. For more information, see [What is AWS Outposts?](https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html)
++ **Outpost ARN** – The Amazon Resource Name \(ARN\) of the AWS Outposts\. Only applicable to AWS Outposts instances\. For more information, see [What is AWS Outposts?](https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html)
 + **Security Group Name** – The name of the Security Group attached to the involved instance\.
 + **Security Group ID** – The ID of the Security Group attached to the involved instance\.
 + **Instance state** – The current state of the targeted instance\.
@@ -93,6 +93,7 @@ A finding's **Action** gives details on the type of activity that triggered the 
     + **API** – the name of the API operation that was invoked and thus prompted GuardDuty to generate this finding\. 
 **Note**  
 These operations can also include non\-API events captured by AWS CloudTrail\. For more information, see [Non\-API events captured by CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-non-api-events.html)\.
+    + **User Agent** – The user agent that made the API request\. This value tells you whether the call was made from the AWS Management Console, an AWS service, the AWS SDKs or the AWS CLI\.
     + **ERROR CODE** – if the finding was triggered by a failed API call this displays the error code for that call\.
     + **Service name** – the DNS name of the service that attempted to make the API call that triggered the finding\. 
 
