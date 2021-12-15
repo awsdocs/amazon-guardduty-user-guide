@@ -250,7 +250,7 @@ When you de\-register a delegated administrator from the API you must do so in e
 1. Run the [DisableOrganizationAdminAccount](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisableOrganizationAdminAccount.html) API operation using the credentials of the Organizations management account\.
 
    ```
-   aws guardduty disable-organization-admin-account ‐‐admin-account-id "123456789012"
+   aws guardduty disable-organization-admin-account --admin-account-id "123456789012"
    ```
 
 1. Repeat in each Region managed by that delegated administrator\.
