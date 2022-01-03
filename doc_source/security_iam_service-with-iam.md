@@ -21,7 +21,7 @@ Before you use IAM to manage access to GuardDuty, learn what IAM features are av
 |  [Temporary credentials](#security_iam_service-with-iam-roles-tempcreds)  |  Yes  | 
 |  [Principal permissions](#security_iam_service-with-iam-principal-permissions)  |  Yes  | 
 |  [Service roles](#security_iam_service-with-iam-roles-service)  |  Yes  | 
-|  [Service\-linked roles](#security_iam_service-with-iam-roles-service-linked)  |  No   | 
+|  [Service\-linked roles](#security_iam_service-with-iam-roles-service-linked)  |  Yes  | 
 
 To get a high\-level view of how GuardDuty and other AWS services work with most IAM features, see [AWS services that work with IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html) in the *IAM User Guide*\.
 
@@ -200,7 +200,7 @@ Changing the permissions for a service role might break GuardDuty functionality\
 
 |  |  | 
 | --- |--- |
-|  Supports service\-linked roles  |  No   | 
+|  Supports service\-linked roles  |  Yes  | 
 
   A service\-linked role is a type of service role that is linked to an AWS service\. The service can assume the role to perform an action on your behalf\. Service\-linked roles appear in your IAM account and are owned by the service\. An IAM administrator can view, but not edit the permissions for service\-linked roles\. 
 
