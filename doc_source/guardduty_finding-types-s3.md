@@ -123,7 +123,7 @@ If this activity is unexpected for the associated principal it may indicate the 
 This finding's default severity is Medium\. However, if the API is invoked using temporary AWS credentials that are created on an instance, the finding's severity is High\.
 
 #### <a name="exfiltration-s3-objectreadunusual_datasource"></a>
-+ **Data source: **S3 CloudTraildata events
++ **Data source: **S3 CloudTrail data events
 
 #### <a name="exfiltration-s3-objectreadunusual_full"></a>
 
