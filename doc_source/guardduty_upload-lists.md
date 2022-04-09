@@ -87,7 +87,7 @@ The following procedure describes how you can upload trusted IP lists and threat
 1. On the **List management** page, choose **Add a trusted IP list** or **Add a threat list**\.
 
 1. In the dialog box, do the following:
-   + For **List name**, enter` a name for the list\.
+   + For **List name**, enter a name for the list\.
    + For **Location**, specify the location of the list \- this is the S3 bucket where you store your trusted IP list or threat list and the file that contains your list\. 
 **Note**  
 You can specify the location URL in the following formats:  
