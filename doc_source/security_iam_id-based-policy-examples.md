@@ -51,10 +51,16 @@ To grant permissions required to enable GuardDuty, attach the following policy t
             "Action": [
                 "iam:CreateServiceLinkedRole"
             ],
-            "Resource": "arn:aws:iam::123456789012:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty",
+            "Resource": [
+                "arn:aws:iam::123456789012:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty",
+                "arn:aws:iam::123456789012:role/aws-service-role/malware-protection.guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDutyMalwareProtection"
+            ],
             "Condition": {
                 "StringLike": {
-                    "iam:AWSServiceName": "guardduty.amazonaws.com"
+                    "iam:AWSServiceName": [
+                        "guardduty.amazonaws.com",
+                        "malware-protection.guardduty.amazonaws.com"
+                    ]
                 }
             }
         },
@@ -64,7 +70,17 @@ To grant permissions required to enable GuardDuty, attach the following policy t
                 "iam:PutRolePolicy",
                 "iam:DeleteRolePolicy"
             ],
-            "Resource": "arn:aws:iam::1234567890123:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
+            "Resource": [
+                "arn:aws:iam::123456789012:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty",
+                "arn:aws:iam::123456789012:role/aws-service-role/malware-protection.guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDutyMalwareProtection"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetRole"
+            ],
+            "Resource": "arn:aws:iam::123456789012:role/aws-service-role/malware-protection.guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDutyMalwareProtection"
         }
     ]
 }
